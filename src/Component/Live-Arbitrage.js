@@ -40,7 +40,7 @@ class Live_Arbitrage extends React.Component{
             this.setState({
                 Arbitrage: res.data['Arbitrage in $'],
                 Spread: res.data['ETF Trading Spread in $'],
-                Symbol: res.data.Symbol,
+                symbol: res.data.symbol,
                 VWPrice: res.data.VWPrice,
                 TickVolume: res.data.TickVolume,
                 NAVChange_pct: res.data['Net Asset Value Change%'],
@@ -62,7 +62,7 @@ class Live_Arbitrage extends React.Component{
                 <p>{this.state.time}</p>
                     <div className="LiveArbitrageTable pt-1">
                         {
-                            (this.state.Symbol != null) ? <LiveTable data={this.state} /> : ""
+                            (this.state.symbol != null) ? <LiveTable data={this.state} /> : ""
                         }
                     </div>
                 </Col>
@@ -86,9 +86,9 @@ const LiveTable = (props) => {
     }
 
     const getRowsData = () => {
-        var Symbols = getKeys(props.data.Symbol)
+        var symbols = getKeys(props.data.symbol)
 
-        return Symbols.map((key, index) => {
+        return symbols.map((key, index) => {
             // console.log(key);
             let cls = "";
             if (props.data.Arbitrage[key] < 0){
@@ -102,7 +102,7 @@ const LiveTable = (props) => {
             }
             return (
                 <tr key={index}>
-                    <td className={cls}>{props.data.Symbol[key]}</td>
+                    <td className={cls}>{props.data.symbol[key]}</td>
                     <td className={cls}>{props.data.Arbitrage[key]}</td>
                     <td>{props.data.Spread[key]}</td>
                     <td>{props.data.NAVChange_pct[key]}</td>
