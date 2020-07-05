@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect, Switch } from "react-router-dom";
+import { Switch } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 import { HistoricalArbitrage } from "../Pages/Historical_Arbitrage";
 

@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { Redirect, Switch } from "react-router-dom";
+import React from "react";
+import { Switch } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 import { Live_Arbitrage_Single } from "../Pages/Live_Arbitrage_Single";
 

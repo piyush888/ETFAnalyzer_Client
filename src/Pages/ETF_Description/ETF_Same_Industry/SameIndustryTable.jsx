@@ -17,11 +17,8 @@ const SameIndustryTable = (props) => {
 
   useEffect(() => {
     if (EtfDbCategory) {
-      Axios.get(
-        `/ETfDescription/getETFsWithSameETFdbCategory/${EtfDbCategory}`
-      )
+      Axios.get(`/ETfDescription/getETFsWithSameETFdbCategory/${EtfDbCategory}`)
         .then(({ data }) => {
-          console.log(data);
           setTableData(data);
           setFilterData(data);
         })

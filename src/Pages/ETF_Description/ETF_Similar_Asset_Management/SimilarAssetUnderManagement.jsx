@@ -26,7 +26,7 @@ const SimilarAssetUnderManagement = (props) => {
         ["etfTicker"],
         ["asc"]
       );
-      console.log(sortedData);
+
       setOrderType("DSC");
       setTableData(sortedData);
     }
@@ -41,30 +41,10 @@ const SimilarAssetUnderManagement = (props) => {
     }
   };
 
-  const handleSearch = (e) => {
-    const value = e.target.value;
-    setSearchValue(value);
-    const re = new RegExp(escapeRegExp(searchValue), "i");
-    setTimeout(() => {
-      console.log(searchValue);
-    }, 5000);
-  };
-
   return (
     <Card>
       <Card.Header className="text-white bg-color-dark">
         Similar Asset under Management
-        {/* <InputGroup size="sm">
-          <InputGroup.Prepend>
-            <InputGroup.Text id="inputGroup-sizing-sm">Search</InputGroup.Text>
-          </InputGroup.Prepend>
-          <FormControl
-            value={searchValue}
-            onChange={handleSearch}
-            aria-label="Small"
-            aria-describedby="inputGroup-sizing-sm"
-          />
-        </InputGroup> */}
       </Card.Header>
       <Card.Body className="padding-0 bg-color-dark overflow-auto height-50vh font-size-sm">
         <Table size="sm" striped bordered hover variant="dark">

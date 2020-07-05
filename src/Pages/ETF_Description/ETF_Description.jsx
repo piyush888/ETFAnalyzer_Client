@@ -58,7 +58,7 @@ class ETF_Description extends React.Component {
       SimilarTotalAsstUndMgmt,
       EtfDbCategory,
     } = this.state;
-    console.log(this.props);
+
     const { startDate, ETF } = this.props;
     return (
       <Row>
