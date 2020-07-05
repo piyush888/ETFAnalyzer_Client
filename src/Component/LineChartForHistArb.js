@@ -1,21 +1,23 @@
 import React, { useState } from "react";
-import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer} from 'recharts';
+import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Brush, Legend, ResponsiveContainer} from 'recharts';
 
 
-const LineChartForHistArbJs = (props) => {
+const LineChartForHistArb = (props) => {
   const { data } = props;
-  
+  console.log("Kshitiz");
+  console.log(props);
   return (
-    <ResponsiveContainer width="100%" height={250} padding={{ top: 0, right: 0, left: 0, bottom: 0 }}>
+    <ResponsiveContainer width="100%" height={280} padding={{ top: 0, right: 0, left: 0, bottom: 0 }}>
       <LineChart data={data}>
         <XAxis className="recharts-cartesian-axis-tick" dataKey="Time" />
         <YAxis className="recharts-cartesian-axis-tick" />
         <Tooltip />
         <Legend />
-        <Line type="monotone" dataKey="$Arbitrage" stroke="#8884d8" dot={false} />
+        <Brush dataKey='Time' height={30} stroke="#8884d8"/>
+        <Line type="monotone" dataKey="Arbitrage in $" stroke="#8884d8" dot={false} />
       </LineChart>
     </ResponsiveContainer>
   );
 };
 
-export default LineChartForHistArbJs;
+export default LineChartForHistArb;

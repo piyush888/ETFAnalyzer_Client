@@ -9,7 +9,7 @@ class ScatterPlot extends React.Component {
 
   render() {
     return (
-        <ScatterChart width={400} height={220}>
+        <ScatterChart width={550} height={260}>
           <CartesianGrid />
           <XAxis stroke="#58FF33" dataKey={'Net Asset Value Change%'} type="number" name='Net Asset Value Chage %' unit='%'/>
           <YAxis stroke="#58FF33" dataKey={'ETF Change Price %'} type="number" name='ETF Change Price %' unit='%'/>

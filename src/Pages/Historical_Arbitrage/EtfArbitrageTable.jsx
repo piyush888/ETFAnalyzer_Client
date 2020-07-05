@@ -28,7 +28,7 @@ const EtfArbitrageTable = (props) => {
       return (
         <tr key={index}>
           <td className={cls}>{props.data["Time"][key]}</td>
-          <td className={cls}>{props.data["$Arbitrage"][key]}</td>
+          <td className={cls}>{props.data["Arbitrage in $"][key]}</td>
           <td className={cls}>{props.data["$Spread"][key]}</td>
           <td className={cls}>{props.data["Absolute Arbitrage"][key]}</td>
           <td className={cls}>{props.data["Over Bought/Sold"][key]}</td>
@@ -55,7 +55,7 @@ const EtfArbitrageTable = (props) => {
           <th>Time</th>
           <th>$Arbitrage</th>
           <th>$Spread</th>
-          <th>Absolute Arbitrage</th>
+          <th>$Absolute Arbitrage</th>
           <th>Over Bought/Sold</th>
           <th>Etf Mover</th>
           <th>Most Change%</th>

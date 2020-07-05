@@ -12,10 +12,11 @@ import { timeParse } from "d3-time-format";
 import "./Styles/arbitrage.css";
 import CombinedPieCharts from "./CombinedPieCharts";
 import EtfArbitrageTable from "./EtfArbitrageTable";
-import HisArbLineChart from "./HisArbLineChart";
+
+import LineChartForHistArb from "../../Component/LineChartForHistArb";
 import ChartComponent from "../../Component/StockPriceChart";
 import AppTable from "../../Component/Table";
-import ScatterPlot from "../../Component/scatterplot";
+import ScatterPlot from "../../Component/ScatterPlot";
 import { connect } from "react-redux";
 
 class HistoricalArbitrage extends React.Component {
@@ -85,7 +86,7 @@ class HistoricalArbitrage extends React.Component {
             <Card>
               <Card.Header className=" text-white bg-color-dark flex-row">
                 <span>
-                  {ETF} {startDate}
+                  Histortical Data   {this.props.ETF}   {this.props.startDate}
                 </span>
 
                 <div className="margin-left-auto">
@@ -105,12 +106,24 @@ class HistoricalArbitrage extends React.Component {
 
           <Col xs={12} md={7}>
             <Row>
-              <Col xs={12} md={4}>
+              <Col xs={12} md={5}>
                 <Row>
+
                   <Col xs={12} md={12}>
                     <Card className="CustomCard">
                       <Card.Header className="CustomCardHeader text-white">
-                        PNL
+                        Arb Time Series
+                      </Card.Header>
+                      <Card.Body className="CustomCardBody text-white">
+                        <LineChartForHistArb data={this.state.ArbitrageCumSum} />
+                      </Card.Body>
+                    </Card>
+                  </Col>
+
+                  <Col xs={12} md={12}>
+                    <Card className="CustomCard">
+                      <Card.Header className="CustomCardHeader text-white">
+                        Signal Performance
                       </Card.Header>
                       <Card.Body className="CustomCardBody text-white">
                         <Table
@@ -141,18 +154,7 @@ class HistoricalArbitrage extends React.Component {
                   <Col xs={12} md={12}>
                     <Card className="CustomCard">
                       <Card.Header className="CustomCardHeader text-white">
-                        Arb Time Series
-                      </Card.Header>
-                      <Card.Body className="CustomCardBody text-white">
-                        <HisArbLineChart data={this.state.ArbitrageCumSum} />
-                      </Card.Body>
-                    </Card>
-                  </Col>
-
-                  <Col xs={12} md={12}>
-                    <Card className="CustomCard">
-                      <Card.Header className="CustomCardHeader text-white">
-                        Signal Status
+                        Signal Stats
                       </Card.Header>
                       <Card.Body className="CustomCardBody text-white">
                         {this.state.SignalCategorization}
@@ -162,7 +164,7 @@ class HistoricalArbitrage extends React.Component {
                 </Row>
               </Col>
 
-              <Col xs={12} md={8}>
+              <Col xs={12} md={7}>
                 <Row>
                   <Col xs={12} md={12}>
                     <Card>
