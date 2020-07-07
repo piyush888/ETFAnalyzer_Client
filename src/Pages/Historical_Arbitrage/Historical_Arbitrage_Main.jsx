@@ -10,11 +10,13 @@ import Table from "react-bootstrap/Table";
 import { tsvParse } from "d3-dsv";
 import { timeParse } from "d3-time-format";
 import "./Styles/arbitrage.css";
-import CombinedPieCharts from "./CombinedPieCharts";
 import EtfArbitrageTable from "./EtfArbitrageTable";
+
+import DailyChangeUnderlyingFunc from "./DailyChangeUnderlying";
 
 import LineChartForHistArb from "../../Component/LineChartForHistArb";
 import ChartComponent from "../../Component/StockPriceChart";
+import CombinedPieCharts from "../../Component/CombinedPieCharts";
 import AppTable from "../../Component/Table";
 import ScatterPlot from "../../Component/ScatterPlot";
 import { connect } from "react-redux";
@@ -65,16 +67,29 @@ class HistoricalArbitrage extends React.Component {
       .then((err) => console.log(err));
   };
 
+
+  etfUnderlyingPerformance = (ETF,startDate) =>{
+    Axios.get(`/PastArbitrageData/DailyChange/${ETF}/${startDate}`).then(( res ) =>{
+        console.log(res);
+        this.setState({
+         underlyingPerformance : res
+        });
+    });
+  }
+
+
   componentDidUpdate(prevProps) {
     const { startDate, ETF } = this.props;
     if (prevProps.ETF !== ETF || prevProps.startDate !== startDate) {
       this.fetchData(ETF, startDate);
+      this.etfUnderlyingPerformance(ETF, startDate);
     }
   }
 
   componentDidMount() {
     const { ETF, startDate } = this.props;
     this.fetchData(ETF, startDate);
+    this.etfUnderlyingPerformance(ETF, startDate);
   }
 
   render() {
@@ -161,6 +176,11 @@ class HistoricalArbitrage extends React.Component {
                       </Card.Body>
                     </Card>
                   </Col>
+
+                  <Col xs={12} md={12}>
+                    <DailyChangeUnderlyingFunc data={this.state.underlyingPerformance}/>
+                  </Col>
+
                 </Row>
               </Col>
 

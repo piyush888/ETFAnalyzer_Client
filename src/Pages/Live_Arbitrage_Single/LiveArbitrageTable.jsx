@@ -17,8 +17,9 @@ const LiveArbitrageTable = (props) => {
   };
 
   const getRowsData = () => {
-    var Time = getKeys(props.data.Time);
-
+    var Time = getKeys(props.data.Time).reverse();
+    console.log("Time");
+    console.log(Time);
     return Time.map((key, index) => {
       // console.log(key);
       let cls = "";
@@ -41,6 +42,8 @@ const LiveArbitrageTable = (props) => {
           <td>{props.data['Price'][key]}</td>
           <td>{props.data['ETF Change Price %'][key]}</td>
           <td>{props.data["TickVolume"][key]}</td>
+          <td>{props.data["ETFMover%1_ticker"][key]}</td>
+          <td>{props.data["Change%1_ticker"][key]}</td>
         </tr>
       );
     });
@@ -66,6 +69,8 @@ const LiveArbitrageTable = (props) => {
             <td>Price</td>
             <td>T</td>
             <td>TickVolume</td>
+            <th>Etf Mover</th>
+            <th>Most Change%</th>
           </tr>
         </thead>
         <tbody>{getRowsData()}</tbody>

@@ -6,3 +6,28 @@
   display: grid;
   
 }
+
+.BlackHeaderForModal {
+  background-color: #292b2c;
+}
+
+.CustomCardHeader {
+  padding-top: 0;
+  padding-bottom: 1;
+  font-size: 15px;
+  background-color: #292b2c;
+}
+
+.CustomCardBody {
+  padding-top: 0;
+  padding-bottom: 0;
+  background-color: #292b2c;
+}
+
+.CustomCard {
+  margin-top: 1%;
+}
+
+.smallHeightTable{
+  height:250px;
+}

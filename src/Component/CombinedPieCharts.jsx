@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Modal, Row, Card, Col } from "react-bootstrap";
-import { CommonPieChart } from "../../Common_Components/PieChart";
+import { CommonPieChart } from "../Common_Components/PieChart";
 
 const CombinedPieCharts = (props) => {
   const [show, setShow] = useState(false);
@@ -54,9 +54,6 @@ const CombinedPieCharts = (props) => {
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
           </Button>
         </Modal.Footer>
       </Modal>

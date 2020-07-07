@@ -13,6 +13,7 @@ import LiveStatusWindow from "./LiveStatusWindow";
 import "../../static/css/Live_Arbitrage.css";
 import { connect } from "react-redux";
 
+import CombinedPieCharts from "../../Component/CombinedPieCharts";
 import LiveArbitrageTable from "./LiveArbitrageTable";
 import LineChartForHistArb from "../../Component/LineChartForHistArb";
 
@@ -37,7 +38,9 @@ class Live_Arbitrage_Single extends React.Component {
     SignalStrength: "",
     pnlstatementforday: "",
     LiveColor: "",
-    ArbitrageLineChart:""
+    ArbitrageLineChart:"",
+    etfmoversDictCount: "",
+    highestChangeDictCount: "",
   };
 
   componentDidMount() {
@@ -63,6 +66,7 @@ class Live_Arbitrage_Single extends React.Component {
     setInterval(() => {
       if (new Date().getSeconds() == 8) {
         this.UpdateArbitragDataTables(true);
+        this.fetchETFLiveData();
       }
     }, 1000);
 
@@ -84,7 +88,9 @@ class Live_Arbitrage_Single extends React.Component {
         scatterPlotData: (
           <ScatterPlot data={JSON.parse(res.data.scatterPlotData)} />
         ),
-        ArbitrageLineChart: res.data.ArbitrageLineChart
+        ArbitrageLineChart: res.data.ArbitrageLineChart,
+        etfmoversDictCount: JSON.parse(res.data.etfmoversDictCount),
+        highestChangeDictCount: JSON.parse(res.data.highestChangeDictCount)
       });
     });
   }
@@ -126,6 +132,13 @@ class Live_Arbitrage_Single extends React.Component {
             <Card>
               <Card.Header className="text-white bg-color-dark flex-row">
                 Live Arbitrage   {this.props.ETF}
+
+                <div className="margin-left-auto">
+                  <CombinedPieCharts
+                    etfmoversDictCount={this.state.etfmoversDictCount}
+                    highestChangeDictCount={this.state.highestChangeDictCount}
+                  />
+                </div>
               </Card.Header>
               <Card.Body className="BlackHeaderForModal">
                 <div className="FullPageDiv">
