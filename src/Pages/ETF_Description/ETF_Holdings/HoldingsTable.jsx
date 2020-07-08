@@ -17,30 +17,27 @@ const HoldingsTable = (props) => {
   const [filterData, setFilterData] = useState([]);
 
   useEffect(() => {
-    Axios.get(
-      `/ETfDescription/getHoldingsData/${ETF}/${startDate}`
-    )
+    Axios.get(`/ETfDescription/getHoldingsData/${ETF}/${startDate}`)
       .then(({ data }) => {
-        setTableData(data);
-        setFilterData(data);
+        setTableData([...data]);
+        setFilterData([...data]);
       })
       .catch((err) => console.log(err));
   }, [ETF, startDate]);
 
-
-
   useEffect(() => {
     setTimeout(() => {
-      if (searchString.length < 1) {
+      if (searchString.length < 1 && tableData.length !== 0) {
         return setFilterData(tableData);
       }
 
-      const re = new RegExp(escapeRegExp(searchString), "i");
-      const isMatch = (result) => re.test(result.TickerSymbol);
-      setFilterData(filter(tableData, isMatch));
+      if (tableData.length !== 0) {
+        const re = new RegExp(escapeRegExp(searchString), "i");
+        const isMatch = (result) => re.test(result.TickerSymbol);
+        setFilterData(filter(tableData, isMatch));
+      }
     }, 300);
   }, [searchString]);
-
 
   const changeOrder = () => {
     if (orderType === "ASC") {

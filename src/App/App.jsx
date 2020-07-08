@@ -5,9 +5,12 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import { LoginForm } from "../Common_Components/LoginForm";
+import { SignInForm } from "../Common_Components/SignIn";
 import AuthenticatedRoutes from "../Routes/AuthenticatedRoutes";
 import ProtectedRoute from "../Routes/ProtectedRoute";
+import SignUpForm from "../Common_Components/SignUp/SignUpForm";
+import "./App.css";
+import AuthProvider from "../Utilities/AuthProvider";
 
 const LoginRoute = ({ component: Component, exp, ...rest }) => {
   return (
@@ -32,14 +35,17 @@ const LoginRoute = ({ component: Component, exp, ...rest }) => {
 class App extends React.Component {
   render() {
     return (
-      <div className="bg-color-dark">
-        <Router>
-        <Switch>
-          <LoginRoute exact path="/login" component={LoginForm} />
-          <ProtectedRoute path="/" component={AuthenticatedRoutes} />
-        </Switch>
-      </Router>
-      </div>
+      <AuthProvider>
+        <div className="bg-color-dark">
+          <Router>
+            <Switch>
+              <Route exact path="/signup" component={SignUpForm} />
+              <LoginRoute exact path="/login" component={SignInForm} />
+              <ProtectedRoute path="/" component={AuthenticatedRoutes} />
+            </Switch>
+          </Router>
+        </div>
+      </AuthProvider>
     );
   }
 }
