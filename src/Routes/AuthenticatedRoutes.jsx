@@ -2,10 +2,10 @@ import React from "react";
 import { Route } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 import EtfDescRoutes from "./EtfDescRoutes";
-import Live_Arbitrage from "../Component/Live-Arbitrage";
 import { CommonNavBar } from "../Common_Components/NavBar";
 import HistArbiageRoutes from "./HistArbiageRoutes";
 import LiveArbitrageSingleRoutes from "./LiveArbitrageSingleRoutes";
+import LiveArbitrageAllRoutes from "./Live_Arbitrage_All";
 
 const AuthenticatedRoutes = () => {
   return (
@@ -16,7 +16,7 @@ const AuthenticatedRoutes = () => {
         path="/live-arbitrage-single"
         component={LiveArbitrageSingleRoutes}
       />
-      <ProtectedRoute path="/Live-Arbitrage" component={Live_Arbitrage} />
+      <Route path="/Live-Arbitrage" component={LiveArbitrageAllRoutes}/>
       <Route path="/historical-arbitrage" component={HistArbiageRoutes} />
     </>
   );
