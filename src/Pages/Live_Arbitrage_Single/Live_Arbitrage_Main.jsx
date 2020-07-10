@@ -7,7 +7,7 @@ import { tsvParse, csvParse } from "d3-dsv";
 import { timeParse } from "d3-time-format";
 import Card from "react-bootstrap/Card";
 import ChartComponent from "../../Component/StockPriceChart";
-import ScatterPlot from "../../Component/ScatterPlot";
+import ScatterPlot from "../../Component/scatterplot";
 import AppTable from "../../Component/Table.js";
 import LiveStatusWindow from "./LiveStatusWindow";
 import "../../static/css/Live_Arbitrage.css";
