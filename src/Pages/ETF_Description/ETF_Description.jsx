@@ -8,6 +8,8 @@ import { EtfSameIssuer } from "./ETF_Same_Issuer";
 import { SimilarAssetUnderManagement } from "./ETF_Similar_Asset_Management";
 import { EtfSameIndustry } from "./ETF_Same_Industry";
 import { connect } from "react-redux";
+import { compose } from "recompose";
+import { Loader } from "../../Common_Components/Loader";
 
 class ETF_Description extends React.Component {
   state = {
@@ -40,6 +42,7 @@ class ETF_Description extends React.Component {
   };
 
   componentDidMount() {
+    console.log(this.props);
     const { startDate, ETF } = this.props;
     this.fetchEtfdesc(ETF, startDate);
   }
@@ -65,8 +68,10 @@ class ETF_Description extends React.Component {
         <Col xs={12} md={12}>
           <Row>
             <Col xs={12} md={3}>
-              {DescriptionData && (
+              {DescriptionData ? (
                 <DescriptionTable DescriptionData={DescriptionData} />
+              ) : (
+                <Loader />
               )}
             </Col>
 
@@ -124,4 +129,4 @@ const mapDispatchToProps = (dispatch) => {
   return {};
 };
 
-export default connect(mapStateToProps, null)(ETF_Description);
+export default compose(connect(mapStateToProps, null))(ETF_Description);

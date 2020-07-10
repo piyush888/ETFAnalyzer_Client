@@ -1,14 +1,20 @@
 import React from "react";
-import { Switch } from "react-router-dom";
+import { Switch, Redirect } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 import { HistoricalArbitrage } from "../Pages/Historical_Arbitrage";
+import { useSelector } from "react-redux";
 
 const HistArbiageRoutes = () => {
+  const { ETF, startDate } = useSelector((state) => state.navbar);
   return (
     <Switch>
       <ProtectedRoute
-        path="/historical-arbitrage"
+        path="/historical-arbitrage/:ETF/:startDate"
         component={HistoricalArbitrage}
+      />
+      <Redirect
+        from="/historical-arbitrage"
+        to={`/historical-arbitrage/${ETF}/${startDate}`}
       />
     </Switch>
   );
