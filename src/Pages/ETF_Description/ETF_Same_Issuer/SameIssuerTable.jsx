@@ -7,6 +7,7 @@ import orderBy from "lodash/orderBy";
 import escapeRegExp from "lodash/escapeRegExp";
 import filter from "lodash/filter";
 import debounce from "lodash/debounce";
+import { Loader } from "../../../Common_Components/Loader";
 
 const SameIssuerTable = (props) => {
   const { IssuerName } = props;
@@ -14,6 +15,7 @@ const SameIssuerTable = (props) => {
   const [orderType, setOrderType] = useState("ASC");
   const [searchString, setSearchString] = useState("");
   const [filterData, setFilterData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (IssuerName) {
@@ -21,6 +23,7 @@ const SameIssuerTable = (props) => {
         .then(({ data }) => {
           setTableData(data);
           setFilterData(data);
+          setIsLoading(false);
         })
         .catch((err) => {
           console.log(err);
@@ -44,13 +47,15 @@ const SameIssuerTable = (props) => {
 
   useEffect(() => {
     setTimeout(() => {
-      if (searchString < 1) {
+      if (searchString.length < 1 && tableData.length !== 0) {
         return setFilterData(tableData);
       }
 
-      const re = new RegExp(escapeRegExp(searchString), "i");
-      const isMatch = (result) => re.test(result.etfTicker);
-      setFilterData(filter(tableData, isMatch));
+      if (tableData.length !== 0) {
+        const re = new RegExp(escapeRegExp(searchString), "i");
+        const isMatch = (result) => re.test(result.etfTicker);
+        setFilterData(filter(tableData, isMatch));
+      }
     }, 300);
   }, [searchString]);
 
@@ -69,28 +74,35 @@ const SameIssuerTable = (props) => {
           value={searchString}
         />
       </Card.Header>
+
       <Card.Body className="padding-0 bg-color-dark overflow-auto height-50vh font-size-sm">
-        <Table size="sm" striped bordered hover variant="dark">
-          <thead>
-            <tr>
-              <th className="cursor-pointer" onClick={changeOrder}>
-                Symbol
-              </th>
-              <th>ETF Name</th>
-              <th>TotalAssetsUnderMgmt</th>
-            </tr>
-          </thead>
-          <tbody>
-            {Array.isArray(filterData) &&
-              filterData.map(({ ETFName, TotalAssetsUnderMgmt, etfTicker }) => (
-                <tr key={etfTicker}>
-                  <td>{etfTicker && etfTicker}</td>
-                  <td>{ETFName && ETFName}</td>
-                  <td>{TotalAssetsUnderMgmt && TotalAssetsUnderMgmt}</td>
-                </tr>
-              ))}
-          </tbody>
-        </Table>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <Table size="sm" striped bordered hover variant="dark">
+            <thead>
+              <tr>
+                <th className="cursor-pointer" onClick={changeOrder}>
+                  Symbol
+                </th>
+                <th>ETF Name</th>
+                <th>TotalAssetsUnderMgmt</th>
+              </tr>
+            </thead>
+            <tbody>
+              {Array.isArray(filterData) &&
+                filterData.map(
+                  ({ ETFName, TotalAssetsUnderMgmt, etfTicker }) => (
+                    <tr key={etfTicker}>
+                      <td>{etfTicker && etfTicker}</td>
+                      <td>{ETFName && ETFName}</td>
+                      <td>{TotalAssetsUnderMgmt && TotalAssetsUnderMgmt}</td>
+                    </tr>
+                  )
+                )}
+            </tbody>
+          </Table>
+        )}
       </Card.Body>
     </Card>
   );

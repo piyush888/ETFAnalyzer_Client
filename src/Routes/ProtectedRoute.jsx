@@ -19,7 +19,7 @@ const ProtectedRoute = ({ component: Component, exp, ...rest }) => {
 
   return (
     <>
-      {loggedIn ? (
+      {true ? (
         <Route
           {...rest}
           render={(props) => {

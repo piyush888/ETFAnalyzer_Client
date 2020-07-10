@@ -8,6 +8,8 @@ import orderBy from "lodash/orderBy";
 import escapeRegExp from "lodash/escapeRegExp";
 import filter from "lodash/filter";
 import debounce from "lodash/debounce";
+import { Spinner } from "react-bootstrap";
+import { Loader } from "../../../Common_Components/Loader";
 
 const HoldingsTable = (props) => {
   const { ETF, startDate } = props;
@@ -15,12 +17,14 @@ const HoldingsTable = (props) => {
   const [orderType, setOrderType] = useState("ASC");
   const [searchString, setSearchString] = useState("");
   const [filterData, setFilterData] = useState([]);
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     Axios.get(`/ETfDescription/getHoldingsData/${ETF}/${startDate}`)
       .then(({ data }) => {
         setTableData([...data]);
         setFilterData([...data]);
+        setLoading(false);
       })
       .catch((err) => console.log(err));
   }, [ETF, startDate]);
@@ -58,41 +62,48 @@ const HoldingsTable = (props) => {
   };
 
   return (
-    <Card>
-      <Card.Header className="text-white bg-color-dark flex-row">
-        ETF Holdings
-        <input
-          className="margin-left-auto d-inline-block"
-          name="search"
-          onChange={debounce(handleSearchChange, 500, { leading: true })}
-          value={searchString}
-        />
-        <PieChartModal data={tableData} element={"TickerWeight"} />
-      </Card.Header>
-      <Card.Body className="padding-0 bg-color-dark overflow-auto height-50vh font-size-sm">
-        <Table size="sm" striped bordered hover variant="dark">
-          <thead>
-            <tr>
-              <th className="cursor-pointer" onClick={changeOrder}>
-                Symbol
-              </th>
-              <th>TickerName</th>
-              <th>TickerWeight</th>
-            </tr>
-          </thead>
-          <tbody>
-            {Array.isArray(filterData) &&
-              filterData.map((data) => (
-                <tr key={data.TickerSymbol}>
-                  <td>{data.TickerSymbol}</td>
-                  <td>{data.TickerName && data.TickerName}</td>
-                  <td> {data.TickerWeight && data.TickerWeight} </td>
+    <>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <Card>
+          <Card.Header className="text-white bg-color-dark flex-row">
+            ETF Holdings
+            <input
+              className="margin-left-auto d-inline-block"
+              name="search"
+              onChange={debounce(handleSearchChange, 500, { leading: true })}
+              value={searchString}
+            />
+            <PieChartModal data={tableData} element={"TickerWeight"} />
+          </Card.Header>
+
+          <Card.Body className="padding-0 bg-color-dark overflow-auto height-50vh font-size-sm">
+            <Table size="sm" striped bordered hover variant="dark">
+              <thead>
+                <tr>
+                  <th className="cursor-pointer" onClick={changeOrder}>
+                    Symbol
+                  </th>
+                  <th>TickerName</th>
+                  <th>TickerWeight</th>
                 </tr>
-              ))}
-          </tbody>
-        </Table>
-      </Card.Body>
-    </Card>
+              </thead>
+              <tbody>
+                {Array.isArray(filterData) &&
+                  filterData.map((data) => (
+                    <tr key={data.TickerSymbol}>
+                      <td>{data.TickerSymbol}</td>
+                      <td>{data.TickerName && data.TickerName}</td>
+                      <td> {data.TickerWeight && data.TickerWeight} </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </Table>
+          </Card.Body>
+        </Card>
+      )}
+    </>
   );
 };
 

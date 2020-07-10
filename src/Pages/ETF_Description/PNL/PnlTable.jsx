@@ -17,7 +17,7 @@ const PnlTable = (props) => {
   }, [ETF]);
 
   return (
-    <Card>
+    <Card style={{width:"100%"}}>
       <Card.Header className="text-white bg-color-dark">PNL Table</Card.Header>
       <Card.Body className="padding-0 bg-color-dark overflow-auto height-50vh font-size-sm">
         <Table size="sm" striped bordered hover variant="dark">

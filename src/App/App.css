@@ -21,4 +21,18 @@
   .width-30em {
   width: 30em;
   }
-  
+  .center {
+    margin: auto;
+    width: 100%;
+    max-width: 400px;
+    min-width: 150px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+  }
+  .loader {
+    color:white;
+    font-size: 3em;
+  }
