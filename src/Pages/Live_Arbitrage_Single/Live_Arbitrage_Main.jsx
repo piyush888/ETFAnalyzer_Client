@@ -7,7 +7,7 @@ import { tsvParse, csvParse } from "d3-dsv";
 import { timeParse } from "d3-time-format";
 import Card from "react-bootstrap/Card";
 import ChartComponent from "../../Component/StockPriceChart";
-import ScatterPlot from "../../Component/scatterplot";
+import ScatterPlot from "../../Component/ScatterPlot";
 import AppTable from "../../Component/Table.js";
 import LiveStatusWindow from "./LiveStatusWindow";
 import "../../static/css/Live_Arbitrage.css";
@@ -16,6 +16,7 @@ import { connect } from "react-redux";
 import CombinedPieCharts from "../../Component/CombinedPieCharts";
 import LiveArbitrageTable from "./LiveArbitrageTable";
 import LineChartForHistArb from "../../Component/LineChartForHistArb";
+import { Loader } from "../../Common_Components/Loader";
 
 class Live_Arbitrage_Single extends React.Component {
   state = {
@@ -41,9 +42,11 @@ class Live_Arbitrage_Single extends React.Component {
     ArbitrageLineChart:"",
     etfmoversDictCount: "",
     highestChangeDictCount: "",
+    isLoading :true
   };
 
   componentDidMount() {
+    this.state.isLoading=true;
     this.fetchETFLiveData();
     this.UpdateArbitragDataTables(false);
     this.intervalId = this.dataFetchInterval();
@@ -51,6 +54,7 @@ class Live_Arbitrage_Single extends React.Component {
 
   componentWillUpdate(prevProps) {
     if (prevProps.ETF !== this.props.ETF) {
+      this.state.isLoading=true;
       clearInterval(this.intervalId);
       this.fetchETFLiveData();
       this.UpdateArbitragDataTables(false);
@@ -90,7 +94,8 @@ class Live_Arbitrage_Single extends React.Component {
         ),
         ArbitrageLineChart: res.data.ArbitrageLineChart,
         etfmoversDictCount: JSON.parse(res.data.etfmoversDictCount),
-        highestChangeDictCount: JSON.parse(res.data.highestChangeDictCount)
+        highestChangeDictCount: JSON.parse(res.data.highestChangeDictCount),
+        isLoading:false
       });
     });
   }
@@ -98,7 +103,6 @@ class Live_Arbitrage_Single extends React.Component {
   UpdateArbitragDataTables(appendToPreviousTable) {
     const { ETF } = this.props;
     axios.get(`/ETfLiveArbitrage/Single/UpdateTable/${ETF}`).then((res) => {
-      //console.log(res);
       if (appendToPreviousTable) {
         console.log("Append To Previous table");
       } else {
@@ -141,9 +145,14 @@ class Live_Arbitrage_Single extends React.Component {
                 </div>
               </Card.Header>
               <Card.Body className="BlackHeaderForModal">
-                <div className="FullPageDiv">
-                  <LiveArbitrageTable data={this.state.Full_Day_Arbitrage_Data} />
-                </div>
+
+                {this.state.isLoading ? (
+                  <Loader />
+                  ) : (
+                  <div className="FullPageDiv">
+                    <LiveArbitrageTable data={this.state.Full_Day_Arbitrage_Data} />
+                  </div>
+                  )}
               </Card.Body>
             </Card>
         </Col>
@@ -172,9 +181,13 @@ class Live_Arbitrage_Single extends React.Component {
                 <Card.Header className="CustomCardHeader text-white">
                   Arb Time Series
                 </Card.Header>
-                <Card.Body className="CustomCardBody text-white">
-                  <LineChartForHistArb data={this.state.ArbitrageLineChart} />
-                </Card.Body>
+                {this.state.isLoading ? (
+                  <Loader />
+                  ) : (
+                    <Card.Body className="CustomCardBody text-white">
+                      <LineChartForHistArb data={this.state.ArbitrageLineChart} />
+                    </Card.Body>
+                  )}
               </Card>
             </Col>
 
@@ -183,9 +196,13 @@ class Live_Arbitrage_Single extends React.Component {
                 <Card.Header className="CustomCardHeader text-white">
                   Signal Performace
                 </Card.Header>
-                <Card.Body className="CustomCardBody text-white">
-                  {this.state.pnlstatementforday}
-                </Card.Body>
+                {this.state.isLoading ? (
+                  <Loader />
+                  ) : (
+                    <Card.Body className="CustomCardBody text-white">
+                      {this.state.pnlstatementforday}
+                    </Card.Body>
+                  )}
               </Card>
             </Col>
 
@@ -194,9 +211,13 @@ class Live_Arbitrage_Single extends React.Component {
                 <Card.Header className="CustomCardHeader text-white">
                   Signal Stats
                 </Card.Header>
-                <Card.Body className="CustomCardBody text-white">
-                  {this.state.SignalCategorization}
-                </Card.Body>
+                {this.state.isLoading ? (
+                  <Loader />
+                  ) : (
+                    <Card.Body className="CustomCardBody text-white">
+                      {this.state.SignalCategorization}
+                    </Card.Body>
+                  )}
               </Card>
             </Col>
 
@@ -209,9 +230,9 @@ class Live_Arbitrage_Single extends React.Component {
                 <Card.Header className="modalCustomHeader text-white CustomBackGroundColor">
                   Price Chart
                 </Card.Header>
-                <Card.Body className="BlackHeaderForModal">
-                  <ChartComponent data={this.state.Full_Day_Prices} />
-                </Card.Body>
+                  <Card.Body className="BlackHeaderForModal">
+                    <ChartComponent data={this.state.Full_Day_Prices} />
+                  </Card.Body>
               </Card>
           </div>
 
@@ -219,9 +240,13 @@ class Live_Arbitrage_Single extends React.Component {
             <Card.Header className="CustomCardHeader text-white">
               ETF Change % Vs NAV change %
             </Card.Header>
-            <Card.Body className="CustomCardBody text-white">
-              {this.state.scatterPlotData}
-            </Card.Body>
+            {this.state.isLoading ? (
+                  <Loader />
+                  ) : (
+                <Card.Body className="CustomCardBody text-white">
+                  {this.state.scatterPlotData}
+                </Card.Body>
+                )}
           </Card>
             
         </Col>
