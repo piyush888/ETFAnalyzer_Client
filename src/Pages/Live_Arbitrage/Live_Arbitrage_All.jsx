@@ -17,39 +17,13 @@ class Live_Arbitrage_All extends React.Component {
     LiveArbitrageAllEtf : ''
   };
 
-  componentDidMount() {
-    this.fetchETFLiveData();
-    this.intervalId = this.dataFetchInterval();
-  }
- 
-  componentWillUnmount() {
-    clearInterval(this.intervalId);
-  }
-
-  dataFetchInterval = () =>
-    setInterval(() => {
-      if (new Date().getSeconds() == 8) {
-        this.fetchETFLiveData();
-      }
-    }, 1000);
-
-  fetchETFLiveData() {
-    const { ETF } = this.props;
-    axios.get(`/ETfLiveArbitrage/AllTickers`).then((res) => {
-      console.log(res);
-      this.setState({
-          LiveArbitrageAllEtf: res,
-      });
-    });
-  }
-
   render() {
     return (
-       <Row>
+        <Row>
           <Col xs={12} md={5}>
             <Live_Arbitrage_All_Table data={this.state.LiveArbitrageAllEtf || []} />
           </Col>
-        </Row>   
+        </Row>
     );
   }
 
