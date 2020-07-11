@@ -16,6 +16,7 @@ const Live_Arbitrage_All_Table = (props) => {
   const [searchString, setSearchString] = useState("");
   const [filterData, setFilterData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isSorted, setSorted] = useState(false);
 
 
   function useInterval(callback, delay) {
@@ -60,7 +61,7 @@ const Live_Arbitrage_All_Table = (props) => {
       }
       if (tableData.length !== 0) {
         const re = new RegExp(escapeRegExp(searchString), "i");
-        const isMatch = (result) => re.test(result.data);
+        const isMatch = (result) => re.test(result.symbol);
         setFilterData(filter(tableData, isMatch));
       }
     }, 300);
@@ -70,17 +71,18 @@ const Live_Arbitrage_All_Table = (props) => {
     setSearchString(e.target.value);
   };
 
-  const changeOrder = () => {
+  const changeOrder = (e) => {
     if (orderType === "ASC") {
-      const sortedData = orderBy(filterData, ["etfTicker"], ["asc"]);
-
+      const sortedData = orderBy(filterData, [e], ["asc"]);
       setOrderType("DSC");
       setFilterData(sortedData);
+      setSorted(true);
     }
-    if (orderType === "DSC") {
-      const sortedData = orderBy(filterData, ["etfTicker"], ["desc"]);
+    else if (orderType === "DSC") {
+      const sortedData = orderBy(filterData, [e], ["desc"]);
       setOrderType("ASC");
       setFilterData(sortedData);
+      setSorted(true);
     }
   };
 
@@ -106,7 +108,7 @@ const Live_Arbitrage_All_Table = (props) => {
       currentExpandedRows.concat(rowId);
     setExpandedRows(newExpandedRows);
   };
-
+  
   function renderItem(data) {
     const clickCallback = () => handleRowClick(data.symbol);
     const itemRows = [
@@ -199,13 +201,57 @@ const Live_Arbitrage_All_Table = (props) => {
         <Table className="overflow-auto" striped bordered hover variant="dark">
           <thead>
             <tr>
-              <th className="cursor-pointer">symbol</th>
-              <th>Arbitrage in $</th>
-              <th>Absolute Arbitrage</th>
-              <th>ETF Price</th>
-              <th>ETF Change Price %</th>
-              <th>ETF Trading Spread in $</th>
-              <th>Net Asset Value Change%</th>
+              <th className="cursor-pointer" onClick={()=>changeOrder("symbol")}>symbol
+                <span>
+                  {isSorted
+                      ? orderType==='DSC'
+                        ? ' 🔼'
+                        : ' 🔽'
+                      : ''}
+                </span>
+              </th>
+              <th className="cursor-pointer" onClick={()=>changeOrder("Arbitrage in $")}>Arbitrage in $<span>
+                  {isSorted
+                      ? orderType==='DSC'
+                        ? ' 🔼'
+                        : ' 🔽'
+                      : ''}
+                </span></th>
+              <th className="cursor-pointer" onClick={()=>changeOrder("Absolute Arbitrage")}>Absolute Arbitrage<span>
+                  {isSorted
+                      ? orderType==='DSC'
+                        ? ' 🔼'
+                        : ' 🔽'
+                      : ''}
+                </span></th>
+              <th className="cursor-pointer" onClick={()=>changeOrder("ETF Price")}>ETF Price<span>
+                  {isSorted
+                      ? orderType==='DSC'
+                        ? ' 🔼'
+                        : ' 🔽'
+                      : ''}
+                </span></th>
+              <th className="cursor-pointer" onClick={()=>changeOrder("ETF Change Price %")}>ETF Change Price %<span>
+                  {isSorted
+                      ? orderType==='DSC'
+                        ? ' 🔼'
+                        : ' 🔽'
+                      : ''}
+                </span></th>
+              <th className="cursor-pointer" onClick={()=>changeOrder("ETF Trading Spread in $")}>ETF Trading Spread in $<span>
+                  {isSorted
+                      ? orderType==='DSC'
+                        ? ' 🔼'
+                        : ' 🔽'
+                      : ''}
+                </span></th>
+              <th className="cursor-pointer" onClick={()=>changeOrder("Net Asset Value Change%")}>Net Asset Value Change%<span>
+                  {isSorted
+                      ? orderType==='DSC'
+                        ? ' 🔼'
+                        : ' 🔽'
+                      : ''}
+                </span></th>
             </tr>
           </thead>
           <tbody>
