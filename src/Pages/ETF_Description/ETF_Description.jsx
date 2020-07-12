@@ -27,18 +27,20 @@ class ETF_Description extends React.Component {
   };
 
   fetchEtfdesc = (ETF, startDate) => {
-    Axios.get(`/ETfDescription/EtfData/${ETF}/${startDate}`)
-      .then((res) => {
-        const { ETFDataObject, SimilarTotalAsstUndMgmt } = res.data;
-        this.setState({
-          ...this.state,
-          DescriptionData: ETFDataObject,
-          SimilarTotalAsstUndMgmt: SimilarTotalAsstUndMgmt,
-          IssuerName: ETFDataObject.Issuer,
-          EtfDbCategory: ETFDataObject.ETFdbCategory,
-        });
-      })
-      .catch((err) => console.log(err));
+    if (ETF && startDate) {
+      Axios.get(`/ETfDescription/EtfData/${ETF}/${startDate}`)
+        .then((res) => {
+          const { ETFDataObject, SimilarTotalAsstUndMgmt } = res.data;
+          this.setState({
+            ...this.state,
+            DescriptionData: ETFDataObject,
+            SimilarTotalAsstUndMgmt: SimilarTotalAsstUndMgmt,
+            IssuerName: ETFDataObject.Issuer,
+            EtfDbCategory: ETFDataObject.ETFdbCategory,
+          });
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   componentDidMount() {

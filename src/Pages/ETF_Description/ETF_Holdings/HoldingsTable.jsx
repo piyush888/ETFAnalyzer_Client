@@ -20,13 +20,15 @@ const HoldingsTable = (props) => {
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    Axios.get(`/ETfDescription/getHoldingsData/${ETF}/${startDate}`)
-      .then(({ data }) => {
-        setTableData([...data]);
-        setFilterData([...data]);
-        setLoading(false);
-      })
-      .catch((err) => console.log(err));
+    if (startDate && ETF) {
+      Axios.get(`/ETfDescription/getHoldingsData/${ETF}/${startDate}`)
+        .then(({ data }) => {
+          setTableData([...data]);
+          setFilterData([...data]);
+          setLoading(false);
+        })
+        .catch((err) => console.log(err));
+    }
   }, [ETF, startDate]);
 
   useEffect(() => {

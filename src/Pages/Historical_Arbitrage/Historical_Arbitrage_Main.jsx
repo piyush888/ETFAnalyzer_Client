@@ -31,7 +31,7 @@ class HistoricalArbitrage extends React.Component {
     etfPriceData: "",
     ArbitrageCumSum: "",
     highestChangeDictCount: null,
-    isLoading :true
+    isLoading: true,
   };
   parseDate = timeParse("%Y-%m-%d %H:%M:%S");
 
@@ -49,42 +49,46 @@ class HistoricalArbitrage extends React.Component {
   }
 
   fetchData = (ETF, startDate) => {
-    Axios.get(`/PastArbitrageData/${ETF}/${startDate}`)
-      .then(({ data }) =>
-        this.setState({
-          etfArbitrageTableData: JSON.parse(data.etfhistoricaldata),
-          PNLStatementForTheDay: JSON.parse(data.PNLStatementForTheDay),
-          etfPriceData: {
-            data: tsvParse(data.etfPrices, this.parseData(this.parseDate)),
-          },
-          scatterPlotData: JSON.parse(data.scatterPlotData),
-          etfmoversDictCount: JSON.parse(data.etfmoversDictCount),
-          highestChangeDictCount: JSON.parse(data.highestChangeDictCount),
-          SignalCategorization: (
-            <AppTable data={JSON.parse(data.SignalCategorization)} />
-          ),
-          ArbitrageCumSum: data.ArbitrageCumSum,
-          isLoading: false
-        })
-      )
-      .then((err) => console.log(err));
+    if (ETF && startDate) {
+      Axios.get(`/PastArbitrageData/${ETF}/${startDate}`)
+        .then(({ data }) =>
+          this.setState({
+            etfArbitrageTableData: JSON.parse(data.etfhistoricaldata),
+            PNLStatementForTheDay: JSON.parse(data.PNLStatementForTheDay),
+            etfPriceData: {
+              data: tsvParse(data.etfPrices, this.parseData(this.parseDate)),
+            },
+            scatterPlotData: JSON.parse(data.scatterPlotData),
+            etfmoversDictCount: JSON.parse(data.etfmoversDictCount),
+            highestChangeDictCount: JSON.parse(data.highestChangeDictCount),
+            SignalCategorization: (
+              <AppTable data={JSON.parse(data.SignalCategorization)} />
+            ),
+            ArbitrageCumSum: data.ArbitrageCumSum,
+            isLoading: false,
+          })
+        )
+        .then((err) => console.log(err));
+    }
   };
 
-
-  etfUnderlyingPerformance = (ETF,startDate) =>{
-    Axios.get(`/PastArbitrageData/DailyChange/${ETF}/${startDate}`).then(( res ) =>{
-        console.log(res);
-        this.setState({
-         underlyingPerformance : res
-        });
-    });
-  }
-
+  etfUnderlyingPerformance = (ETF, startDate) => {
+    if (ETF && startDate) {
+      Axios.get(`/PastArbitrageData/DailyChange/${ETF}/${startDate}`).then(
+        (res) => {
+          console.log(res);
+          this.setState({
+            underlyingPerformance: res,
+          });
+        }
+      );
+    }
+  };
 
   componentDidUpdate(prevProps) {
     const { startDate, ETF } = this.props;
     if (prevProps.ETF !== ETF || prevProps.startDate !== startDate) {
-      this.state.isLoading=true;
+      this.state.isLoading = true;
       this.fetchData(ETF, startDate);
       this.etfUnderlyingPerformance(ETF, startDate);
     }
@@ -92,7 +96,7 @@ class HistoricalArbitrage extends React.Component {
 
   componentDidMount() {
     const { ETF, startDate } = this.props;
-    this.state.isLoading=true;
+    this.state.isLoading = true;
     this.fetchData(ETF, startDate);
     this.etfUnderlyingPerformance(ETF, startDate);
   }
@@ -106,7 +110,7 @@ class HistoricalArbitrage extends React.Component {
             <Card>
               <Card.Header className=" text-white bg-color-dark flex-row">
                 <span>
-                  Histortical Data   {this.props.ETF}   {this.props.startDate}
+                  Histortical Data {this.props.ETF} {this.props.startDate}
                 </span>
 
                 <div className="margin-left-auto">
@@ -117,13 +121,15 @@ class HistoricalArbitrage extends React.Component {
                 </div>
               </Card.Header>
               <Card.Body className="BlackHeaderForModal">
-                  {this.state.isLoading ? (
-                    <Loader />
-                    ) : (
-                    <div className="FullPageDiv">
-                      <EtfArbitrageTable data={this.state.etfArbitrageTableData} />
-                    </div>
-                  )}
+                {this.state.isLoading ? (
+                  <Loader />
+                ) : (
+                  <div className="FullPageDiv">
+                    <EtfArbitrageTable
+                      data={this.state.etfArbitrageTableData}
+                    />
+                  </div>
+                )}
               </Card.Body>
             </Card>
           </Col>
@@ -132,17 +138,18 @@ class HistoricalArbitrage extends React.Component {
             <Row>
               <Col xs={12} md={5}>
                 <Row>
-
                   <Col xs={12} md={12}>
                     <Card className="CustomCard">
                       <Card.Header className="CustomCardHeader text-white">
                         Arb Time Series
                       </Card.Header>
                       <Card.Body className="CustomCardBody text-white">
-                      {this.state.isLoading ? (
+                        {this.state.isLoading ? (
                           <Loader />
-                          ) : (
-                        <LineChartForHistArb data={this.state.ArbitrageCumSum} />
+                        ) : (
+                          <LineChartForHistArb
+                            data={this.state.ArbitrageCumSum}
+                          />
                         )}
                       </Card.Body>
                     </Card>
@@ -156,29 +163,29 @@ class HistoricalArbitrage extends React.Component {
                       <Card.Body className="CustomCardBody text-white">
                         {this.state.isLoading ? (
                           <Loader />
-                          ) : (
-                            <Table
-                              size="sm"
-                              striped
-                              bordered
-                              hover
-                              variant="dark"
-                              className="font-size-sm"
-                            >
-                              <tbody>
-                                {typeof this.state.PNLStatementForTheDay ===
-                                  "object" &&
-                                  Object.entries(
-                                    this.state.PNLStatementForTheDay
-                                  ).map(([key, value]) => (
-                                    <tr key={key}>
-                                      <td>{key}</td>
-                                      <td>{value}</td>
-                                    </tr>
-                                  ))}
-                              </tbody>
-                            </Table>
-                          )}
+                        ) : (
+                          <Table
+                            size="sm"
+                            striped
+                            bordered
+                            hover
+                            variant="dark"
+                            className="font-size-sm"
+                          >
+                            <tbody>
+                              {typeof this.state.PNLStatementForTheDay ===
+                                "object" &&
+                                Object.entries(
+                                  this.state.PNLStatementForTheDay
+                                ).map(([key, value]) => (
+                                  <tr key={key}>
+                                    <td>{key}</td>
+                                    <td>{value}</td>
+                                  </tr>
+                                ))}
+                            </tbody>
+                          </Table>
+                        )}
                       </Card.Body>
                     </Card>
                   </Col>
@@ -191,17 +198,18 @@ class HistoricalArbitrage extends React.Component {
                       <Card.Body className="CustomCardBody text-white">
                         {this.state.isLoading ? (
                           <Loader />
-                          ) : (
+                        ) : (
                           this.state.SignalCategorization
-                          )}
+                        )}
                       </Card.Body>
                     </Card>
                   </Col>
 
                   <Col xs={12} md={12}>
-                      <DailyChangeUnderlyingFunc data={this.state.underlyingPerformance}/>
+                    <DailyChangeUnderlyingFunc
+                      data={this.state.underlyingPerformance}
+                    />
                   </Col>
-
                 </Row>
               </Col>
 
