@@ -36,7 +36,7 @@ class App extends React.Component {
   render() {
     return (
       <AuthProvider>
-        <div className="bg-color-dark">
+        <div>
           <Router>
             <Switch>
               <Route exact path="/signup" component={SignUpForm} />

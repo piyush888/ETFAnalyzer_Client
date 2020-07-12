@@ -74,6 +74,16 @@ const NavBarMain = (props) => {
         });
       }
     }
+    if (routeName[1] === "live-arbitrage-single") {
+      const etfName = routeName[2] ? routeName[2].toUpperCase() : "XLK";
+      if (etfName !== ETF) {
+        dispatch({
+          type: changeNavbarEtfName,
+
+          payload: { value: etfName },
+        });
+      }
+    }
   }, [location]);
 
   const handleDateChange = (e) => {
