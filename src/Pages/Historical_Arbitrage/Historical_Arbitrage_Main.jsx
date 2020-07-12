@@ -18,7 +18,7 @@ import LineChartForHistArb from "../../Component/LineChartForHistArb";
 import ChartComponent from "../../Component/StockPriceChart";
 import CombinedPieCharts from "../../Component/CombinedPieCharts";
 import AppTable from "../../Component/Table";
-import ScatterPlot from "../../Component/ScatterPlot";
+import ScatterPlot from "../../Component/scatterplot";
 import { connect } from "react-redux";
 import { Loader } from "../../Common_Components/Loader";
 
