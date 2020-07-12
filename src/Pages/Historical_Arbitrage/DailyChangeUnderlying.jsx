@@ -13,12 +13,7 @@ const DailyChangeUnderlyingFunc = (props) => {
   const DailyChangeUnderlying = props.data;
   console.log(DailyChangeUnderlying);
   return (
-    <Card className="CustomCard smallHeightTable"> 
-      <Card.Header className="CustomCardHeader text-white CustomBackGroundColor">
-        Underlyings Daily Change
-      </Card.Header>
-      <Card.Body className="CustomCardBody padding-0 bg-color-dark overflow-auto height-50vh font-size-sm">
-        <Table size="sm" striped bordered hover variant="dark">
+      <Table size="sm" striped bordered hover variant="dark">
           <thead>
             <tr>
               <th className="cursor-pointer" >
@@ -41,9 +36,7 @@ const DailyChangeUnderlyingFunc = (props) => {
               )}
           </tbody>
         </Table>
-      </Card.Body>
-    </Card>
-  );
+   );
 };
 
 export default DailyChangeUnderlyingFunc;

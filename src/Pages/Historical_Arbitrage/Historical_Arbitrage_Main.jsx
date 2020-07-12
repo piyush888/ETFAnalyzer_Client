@@ -199,7 +199,18 @@ class HistoricalArbitrage extends React.Component {
                   </Col>
 
                   <Col xs={12} md={12}>
-                      <DailyChangeUnderlyingFunc data={this.state.underlyingPerformance}/>
+                      <Card className="CustomCard smallHeightTable"> 
+                        <Card.Header className="CustomCardHeader text-white CustomBackGroundColor">
+                          Underlyings Daily Change
+                        </Card.Header>
+                        <Card.Body className="CustomCardBody padding-0 bg-color-dark overflow-auto height-50vh font-size-sm">
+                        {this.state.isLoading ? (
+                            <Loader />
+                            ) : (
+                            <DailyChangeUnderlyingFunc data={this.state.underlyingPerformance}/>
+                            )}
+                        </Card.Body>
+                    </Card>
                   </Col>
 
                 </Row>
