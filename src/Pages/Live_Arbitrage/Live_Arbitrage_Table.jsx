@@ -130,7 +130,7 @@ const Live_Arbitrage_All_Table = (props) => {
     if (new Date().getSeconds() === 8) {
       // callDataAPI()
       Axios.get(
-        `/api/api/ETfLiveArbitrage/AllTickers`
+        `/api/ETfLiveArbitrage/AllTickers`
       )
         .then((res) => setTableData(res.data))
         .catch((err) => console.log(err));
