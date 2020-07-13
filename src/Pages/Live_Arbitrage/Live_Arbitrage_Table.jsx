@@ -73,7 +73,7 @@ const Live_Arbitrage_All_Table = (props) => {
         setFilterData(filter(tableData, isMatch));
       }
     }, 300);
-  }, [searchString]);
+  }, [searchString, tableData]);
 
   const handleSearchChange = (e) => {
     setSearchString(e.target.value);
