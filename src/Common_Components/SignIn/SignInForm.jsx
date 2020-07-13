@@ -27,8 +27,9 @@ const SignInForm = () => {
       });
   };
   return (
-    <div className="bg-color-dark padding-top-20vh height-100vh">
+    <div className="bg-color-dark padding-top-20vh height-100vh text-white">
       <div className="margin-left-auto margin-right-auto width-30em">
+      <center><h4>Login</h4></center>
         <Form onSubmit={onSubmit}>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
