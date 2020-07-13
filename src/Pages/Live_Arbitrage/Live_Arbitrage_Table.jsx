@@ -48,7 +48,7 @@ const Live_Arbitrage_All_Table = (props) => {
   useEffect(() => {
     if (tableData.length < 1) {
       Axios.get(
-        `/ETfLiveArbitrage/AllTickers`
+        `/api/ETfLiveArbitrage/AllTickers`
       ).then(({ data }) => {
         setTableData(data);
         setFilterData(data);
