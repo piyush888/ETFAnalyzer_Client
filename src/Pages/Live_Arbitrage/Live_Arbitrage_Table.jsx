@@ -6,7 +6,7 @@ import orderBy from "lodash/orderBy";
 import escapeRegExp from "lodash/escapeRegExp";
 import filter from "lodash/filter";
 import debounce from "lodash/debounce";
-import { Loader } from "../../Common_Components/Loader";
+// import { Loader } from "../../Common_Components/Loader";
 
 const Live_Arbitrage_All_Table = (props) => {
 
@@ -14,15 +14,10 @@ const Live_Arbitrage_All_Table = (props) => {
   const [expandedRows, setExpandedRows] = useState([])
   const [orderType, setOrderType] = useState("ASC");
   const [searchString, setSearchString] = useState("");
-  // const [filterStringArb, setFilterStringArb] = useState();
-  // const [filterStringAbsArb, setFilterStringAbsArb] = useState();
-  // const [filterStringSpread, setFilterStringSpread] = useState();
   const [filterData, setFilterData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
   const [isSortedBy, setSorted] = useState("");
-  // const inputArb = useRef(null);
-  // const inputAbsArb = useRef(null);
-  // const inputSpread = useRef(null);
+
 
 
   function useInterval(callback, delay) {
@@ -46,13 +41,20 @@ const Live_Arbitrage_All_Table = (props) => {
   }
 
   useEffect(() => {
+    // console.log("line 44");
+    // console.log(tableData.length);
+    // console.log(filterData.length);
     if (tableData.length < 1) {
+      // console.log("line 48")
       Axios.get(
         `/api/ETfLiveArbitrage/AllTickers`
       ).then(({ data }) => {
         setTableData(data);
         setFilterData(data);
-        setIsLoading(false)
+        // console.log("line 54");
+        // console.log(tableData.length);
+        // console.log(filterData.length);
+        // console.log("line 57");
       })
         .catch((err) => {
           console.log(err);
@@ -77,24 +79,6 @@ const Live_Arbitrage_All_Table = (props) => {
     setSearchString(e.target.value);
   };
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     if (filterStringArb.length < 1 && tableData.length !== 0) {
-  //       return setFilterData(tableData);
-  //     }
-  //     if (tableData.length !== 0) {
-  //       let values = filterStringArb.split(',')
-  //       const col = values[0]
-  //       const binop = values[1]
-  //       const filval = values[2]
-
-  //     }
-  //   }, 300);
-  // }, [filterStringArb]);
-
-  // const handleFilterChange = (e) => {
-  //   setFilterStringArb(e.target.value);
-  // };
 
   const changeOrder = (e) => {
     if (orderType === "ASC") {
@@ -127,12 +111,22 @@ const Live_Arbitrage_All_Table = (props) => {
 
   useInterval(() => {
     // Your custom logic here
-    if (new Date().getSeconds() === 8) {
+    // console.log("line 114");
+    if(new Date().getSeconds()===8){
       // callDataAPI()
+      // console.log("line 117");
+      // console.log('useInterval executed');
       Axios.get(
         `/api/ETfLiveArbitrage/AllTickers`
-      )
-        .then((res) => setTableData(res.data))
+      ).then(({ data }) => {
+            // console.log("line 122");
+            setTableData(data);
+            setFilterData(data);
+            // console.log(data)
+            // console.log(tableData.length);
+            // console.log(filterData.length);
+            // console.log("line 128");
+          })
         .catch((err) => console.log(err));
     }
   }, 1000);
@@ -169,7 +163,7 @@ const Live_Arbitrage_All_Table = (props) => {
     if (expandedRows.includes(data.symbol)) {
       itemRows.push(
         <tr>
-          <td colspan="7">
+          <td colSpan="7">
             <Table striped hover variant="dark" bsPrefix="innerTable">
               <thead>
                 <tr>
@@ -181,35 +175,35 @@ const Live_Arbitrage_All_Table = (props) => {
                 </tr>
               </thead>
               <tbody>
-                <tr key={"row-expanded-" + data.id}>
+                <tr key={"row-expanded-1-" + data.symbol}>
                   <td> #1 </td>
                   <td>{data["ETFMover%1"][0]}</td>
                   <td className={data["ETFMover%1"][1].toFixed(3) < 0 ? "red" : "green"}>{data["ETFMover%1"][1].toFixed(3)}</td>
                   <td>{data["Change%1"][0]}</td>
                   <td className={data["ETFMover%1"][1].toFixed(3) < 0 ? "red" : "green"}>{data["Change%1"][1].toFixed(3)}</td>
                 </tr>
-                <tr key={"row-expanded-" + data.id}>
+                <tr key={"row-expanded-2-" + data.symbol}>
                   <td> #2 </td>
                   <td>{data["ETFMover%2"][0]}</td>
                   <td className={data["ETFMover%2"][1].toFixed(3) < 0 ? "red" : "green"}>{data["ETFMover%2"][1].toFixed(3)}</td>
                   <td>{data["Change%2"][0]}</td>
                   <td className={data["Change%2"][1].toFixed(3) < 0 ? "red" : "green"}>{data["Change%2"][1].toFixed(3)}</td>
                 </tr>
-                <tr key={"row-expanded-" + data.id}>
+                <tr key={"row-expanded-3-" + data.symbol}>
                   <td> #3 </td>
                   <td>{data["ETFMover%3"][0]}</td>
                   <td className={data["ETFMover%3"][1].toFixed(3) < 0 ? "red" : "green"}>{data["ETFMover%3"][1].toFixed(3)}</td>
                   <td>{data["Change%3"][0]}</td>
                   <td className={data["Change%3"][1].toFixed(3) < 0 ? "red" : "green"}>{data["Change%3"][1].toFixed(3)}</td>
                 </tr>
-                <tr key={"row-expanded-" + data.id}>
+                <tr key={"row-expanded-4-" + data.symbol}>
                   <td> #4 </td>
                   <td>{data["ETFMover%4"][0]}</td>
                   <td className={data["ETFMover%4"][1].toFixed(3) < 0 ? "red" : "green"}>{data["ETFMover%4"][1].toFixed(3)}</td>
                   <td>{data["Change%4"][0]}</td>
                   <td className={data["Change%4"][1].toFixed(3) < 0 ? "red" : "green"}>{data["Change%4"][1].toFixed(3)}</td>
                 </tr>
-                <tr key={"row-expanded-" + data.id}>
+                <tr key={"row-expanded-5-" + data.symbol}>
                   <td> #5 </td>
                   <td>{data["ETFMover%5"][0]}</td>
                   <td className={data["ETFMover%5"][1].toFixed(3) < 0 ? "red" : "green"}>{data["ETFMover%5"][1].toFixed(3)}</td>
@@ -243,86 +237,37 @@ const Live_Arbitrage_All_Table = (props) => {
             <tr>
               <th className="cursor-pointer">symbol
                 <a href="#">
-                  <i className={getClassNameForSortIcon("symbol")} onClick={() => changeOrder("symbol")}></i>
+                  <i className={getClassNameForSortIcon("symbol")} key={"sort-symbol"} onClick={() => changeOrder("symbol")}></i>
                 </a>
               </th>
               <th className="cursor-pointer">Arbitrage in $
                 <a href="#">
-                  <i className={getClassNameForSortIcon("Arbitrage in $")} onClick={() => changeOrder("Arbitrage in $")}></i>
+                  <i className={getClassNameForSortIcon("Arbitrage in $")} key={"sort-$Arbitrage"} onClick={() => changeOrder("Arbitrage in $")}></i>
                 </a>
-                <form className="form-inline">
-                  <div className="input-group mb-1 mr-sm-1">
-                    <select className="custom-select mb-1 mr-sm-2" id="inlineFormCustomSelectPref">
-                      <option selected>Choose...</option>
-                      <option value="=">=</option>
-                      <option value="!=">!=</option>
-                      <option value=">">&gt;</option>
-                      <option value=">=">&gt;=</option>
-                      <option value="<">&lt;</option>
-                      <option value="<=">&lt;=</option>
-                    </select>
-                    <input 
-                    type="text" 
-                    className="form-control mb-1 mr-sm-2" 
-                    id="inlineFormInputGroupUsername2" 
-                    placeholder="Arbitrage Value"
-                    // onChange={debounce(handleFilterChange, 500, { leading: true })}
-                    // value={"Arbitrage in $,"+inputArb.value+","+filterStringArb}
-                    />
-                  </div>
-                </form>
               </th>
               <th className="cursor-pointer">Absolute Arbitrage
                 <a href="#">
-                  <i className={getClassNameForSortIcon("Absolute Arbitrage")} onClick={() => changeOrder("Absolute Arbitrage")}></i>
+                  <i className={getClassNameForSortIcon("Absolute Arbitrage")} key={"sort-AbsArbitrage"} onClick={() => changeOrder("Absolute Arbitrage")}></i>
                 </a>
-                <form className="form-inline">
-                  <div className="input-group mb-1 mr-sm-1">
-                    <select className="custom-select mb-1 mr-sm-2" id="inlineFormCustomSelectPref">
-                      <option selected>Choose...</option>
-                      <option value="=">=</option>
-                      <option value="!=">!=</option>
-                      <option value=">">&gt;</option>
-                      <option value=">=">&gt;=</option>
-                      <option value="<">&lt;</option>
-                      <option value="<=">&lt;=</option>
-                    </select>
-                    <input type="text" className="form-control mb-1 mr-sm-2" id="inlineFormCustomArbitrageAbs" placeholder="Arbitrage Value"/>
-                  </div>
-                </form>
               </th>
               <th className="cursor-pointer">ETF Price
                 <a href="#">
-                  <i className={getClassNameForSortIcon("ETF Price")} onClick={() => changeOrder("ETF Price")}></i>
+                  <i className={getClassNameForSortIcon("ETF Price")} key={"sort-ETFPrice"} onClick={() => changeOrder("ETF Price")}></i>
                 </a>
               </th>
               <th className="cursor-pointer">ETF Change Price %
                 <a href="#">
-                  <i className={getClassNameForSortIcon("ETF Change Price %")} onClick={() => changeOrder("ETF Change Price %")}></i>
+                  <i className={getClassNameForSortIcon("ETF Change Price %")} key={"sort-Change"} onClick={() => changeOrder("ETF Change Price %")}></i>
                 </a>
               </th>
               <th className="cursor-pointer">ETF Trading Spread in $
                 <a href="#">
-                  <i className={getClassNameForSortIcon("ETF Trading Spread in $")} onClick={() => changeOrder("ETF Trading Spread in $")}></i>
+                  <i className={getClassNameForSortIcon("ETF Trading Spread in $")} key={"sort-$Spread"} onClick={() => changeOrder("ETF Trading Spread in $")}></i>
                 </a>
-                <form className="form-inline">
-                  <div className="input-group mb-1 mr-sm-1">
-                    <select className="custom-select mb-1 mr-sm-2" id="inlineFormCustomSelectPref">
-                      <option selected>Choose...</option>
-                      <option value="=">=</option>
-                      <option value="!=">!=</option>
-                      <option value=">">&gt;</option>
-                      <option value=">=">&gt;=</option>
-                      <option value="<">&lt;</option>
-                      <option value="<=">&lt;=</option>
-                    </select>
-                    <input type="text" className="form-control mb-1 mr-sm-2" id="inlineFormInputGroupUsername2" placeholder="Arbitrage Value"/>
-                  </div>
-                </form>
               </th>
               <th className="cursor-pointer">Net Asset Value Change%
                 <a href="#">
-                  <i className={getClassNameForSortIcon("Net Asset Value Change%")} onClick={() => changeOrder("Net Asset Value Change%")}></i>
+                  <i className={getClassNameForSortIcon("Net Asset Value Change%")} key={"sort-NAV"} onClick={() => changeOrder("Net Asset Value Change%")}></i>
                 </a>
               </th>
             </tr>
