@@ -21,7 +21,7 @@ const HoldingsTable = (props) => {
 
   useEffect(() => {
     if (startDate && ETF) {
-      Axios.get(`/ETfDescription/getHoldingsData/${ETF}/${startDate}`)
+      Axios.get(`/api/ETfDescription/getHoldingsData/${ETF}/${startDate}`)
         .then(({ data }) => {
           setTableData([...data]);
           setFilterData([...data]);
