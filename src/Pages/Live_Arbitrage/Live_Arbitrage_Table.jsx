@@ -243,16 +243,16 @@ const Live_Arbitrage_All_Table = (props) => {
             <tr>
               <th className="cursor-pointer">symbol
                 <a href="#">
-                  <i class={getClassNameForSortIcon("symbol")} onClick={() => changeOrder("symbol")}></i>
+                  <i className={getClassNameForSortIcon("symbol")} onClick={() => changeOrder("symbol")}></i>
                 </a>
               </th>
               <th className="cursor-pointer">Arbitrage in $
                 <a href="#">
-                  <i class={getClassNameForSortIcon("Arbitrage in $")} onClick={() => changeOrder("Arbitrage in $")}></i>
+                  <i className={getClassNameForSortIcon("Arbitrage in $")} onClick={() => changeOrder("Arbitrage in $")}></i>
                 </a>
-                <form class="form-inline">
-                  <div class="input-group mb-1 mr-sm-1">
-                    <select class="custom-select mb-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                <form className="form-inline">
+                  <div className="input-group mb-1 mr-sm-1">
+                    <select className="custom-select mb-1 mr-sm-2" id="inlineFormCustomSelectPref">
                       <option selected>Choose...</option>
                       <option value="=">=</option>
                       <option value="!=">!=</option>
@@ -263,7 +263,7 @@ const Live_Arbitrage_All_Table = (props) => {
                     </select>
                     <input 
                     type="text" 
-                    class="form-control mb-1 mr-sm-2" 
+                    className="form-control mb-1 mr-sm-2" 
                     id="inlineFormInputGroupUsername2" 
                     placeholder="Arbitrage Value"
                     // onChange={debounce(handleFilterChange, 500, { leading: true })}
@@ -274,11 +274,11 @@ const Live_Arbitrage_All_Table = (props) => {
               </th>
               <th className="cursor-pointer">Absolute Arbitrage
                 <a href="#">
-                  <i class={getClassNameForSortIcon("Absolute Arbitrage")} onClick={() => changeOrder("Absolute Arbitrage")}></i>
+                  <i className={getClassNameForSortIcon("Absolute Arbitrage")} onClick={() => changeOrder("Absolute Arbitrage")}></i>
                 </a>
-                <form class="form-inline">
-                  <div class="input-group mb-1 mr-sm-1">
-                    <select class="custom-select mb-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                <form className="form-inline">
+                  <div className="input-group mb-1 mr-sm-1">
+                    <select className="custom-select mb-1 mr-sm-2" id="inlineFormCustomSelectPref">
                       <option selected>Choose...</option>
                       <option value="=">=</option>
                       <option value="!=">!=</option>
@@ -287,27 +287,27 @@ const Live_Arbitrage_All_Table = (props) => {
                       <option value="<">&lt;</option>
                       <option value="<=">&lt;=</option>
                     </select>
-                    <input type="text" class="form-control mb-1 mr-sm-2" id="inlineFormCustomArbitrageAbs" placeholder="Arbitrage Value"/>
+                    <input type="text" className="form-control mb-1 mr-sm-2" id="inlineFormCustomArbitrageAbs" placeholder="Arbitrage Value"/>
                   </div>
                 </form>
               </th>
               <th className="cursor-pointer">ETF Price
                 <a href="#">
-                  <i class={getClassNameForSortIcon("ETF Price")} onClick={() => changeOrder("ETF Price")}></i>
+                  <i className={getClassNameForSortIcon("ETF Price")} onClick={() => changeOrder("ETF Price")}></i>
                 </a>
               </th>
               <th className="cursor-pointer">ETF Change Price %
                 <a href="#">
-                  <i class={getClassNameForSortIcon("ETF Change Price %")} onClick={() => changeOrder("ETF Change Price %")}></i>
+                  <i className={getClassNameForSortIcon("ETF Change Price %")} onClick={() => changeOrder("ETF Change Price %")}></i>
                 </a>
               </th>
               <th className="cursor-pointer">ETF Trading Spread in $
                 <a href="#">
-                  <i class={getClassNameForSortIcon("ETF Trading Spread in $")} onClick={() => changeOrder("ETF Trading Spread in $")}></i>
+                  <i className={getClassNameForSortIcon("ETF Trading Spread in $")} onClick={() => changeOrder("ETF Trading Spread in $")}></i>
                 </a>
-                <form class="form-inline">
-                  <div class="input-group mb-1 mr-sm-1">
-                    <select class="custom-select mb-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                <form className="form-inline">
+                  <div className="input-group mb-1 mr-sm-1">
+                    <select className="custom-select mb-1 mr-sm-2" id="inlineFormCustomSelectPref">
                       <option selected>Choose...</option>
                       <option value="=">=</option>
                       <option value="!=">!=</option>
@@ -316,13 +316,13 @@ const Live_Arbitrage_All_Table = (props) => {
                       <option value="<">&lt;</option>
                       <option value="<=">&lt;=</option>
                     </select>
-                    <input type="text" class="form-control mb-1 mr-sm-2" id="inlineFormInputGroupUsername2" placeholder="Arbitrage Value"/>
+                    <input type="text" className="form-control mb-1 mr-sm-2" id="inlineFormInputGroupUsername2" placeholder="Arbitrage Value"/>
                   </div>
                 </form>
               </th>
               <th className="cursor-pointer">Net Asset Value Change%
                 <a href="#">
-                  <i class={getClassNameForSortIcon("Net Asset Value Change%")} onClick={() => changeOrder("Net Asset Value Change%")}></i>
+                  <i className={getClassNameForSortIcon("Net Asset Value Change%")} onClick={() => changeOrder("Net Asset Value Change%")}></i>
                 </a>
               </th>
             </tr>
