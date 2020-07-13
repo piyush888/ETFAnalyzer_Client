@@ -77,7 +77,7 @@ class Live_Arbitrage_Single extends React.Component {
   fetchETFLiveData() {
     const { ETF } = this.props;
     if (ETF) {
-      axios.get(`/ETfLiveArbitrage/Single/${ETF}`).then((res) => {
+      axios.get(`/api/ETfLiveArbitrage/Single/${ETF}`).then((res) => {
         this.setState({
           Full_Day_Arbitrage_Data: JSON.parse(res.data.Arbitrage),
           Full_Day_Prices: {
@@ -107,7 +107,7 @@ class Live_Arbitrage_Single extends React.Component {
   UpdateArbitragDataTables(appendToPreviousTable) {
     const { ETF } = this.props;
     if (ETF) {
-      axios.get(`/ETfLiveArbitrage/Single/UpdateTable/${ETF}`).then((res) => {
+      axios.get(`/api/ETfLiveArbitrage/Single/UpdateTable/${ETF}`).then((res) => {
         if (appendToPreviousTable) {
           console.log("Append To Previous table");
         } else {

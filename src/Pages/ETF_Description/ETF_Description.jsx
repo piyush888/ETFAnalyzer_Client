@@ -28,7 +28,7 @@ class ETF_Description extends React.Component {
 
   fetchEtfdesc = (ETF, startDate) => {
     if (ETF && startDate) {
-      Axios.get(`/ETfDescription/EtfData/${ETF}/${startDate}`)
+      Axios.get(`/api/ETfDescription/EtfData/${ETF}/${startDate}`)
         .then((res) => {
           const { ETFDataObject, SimilarTotalAsstUndMgmt } = res.data;
           this.setState({

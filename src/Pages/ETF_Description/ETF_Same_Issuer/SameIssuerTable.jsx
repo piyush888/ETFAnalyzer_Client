@@ -19,7 +19,7 @@ const SameIssuerTable = (props) => {
 
   useEffect(() => {
     if (IssuerName) {
-      Axios.get(`/ETfDescription/getETFWithSameIssuer/${IssuerName}`)
+      Axios.get(`/api/ETfDescription/getETFWithSameIssuer/${IssuerName}`)
         .then(({ data }) => {
           setTableData(data);
           setFilterData(data);

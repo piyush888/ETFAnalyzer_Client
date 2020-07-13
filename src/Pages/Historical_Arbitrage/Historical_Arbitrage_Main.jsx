@@ -51,7 +51,7 @@ class HistoricalArbitrage extends React.Component {
 
   fetchData = (ETF, startDate) => {
     if (ETF && startDate) {
-      Axios.get(`/PastArbitrageData/${ETF}/${startDate}`)
+      Axios.get(`/api/PastArbitrageData/${ETF}/${startDate}`)
         .then(({ data }) =>
           this.setState({
             etfArbitrageTableData: JSON.parse(data.etfhistoricaldata),
@@ -75,7 +75,7 @@ class HistoricalArbitrage extends React.Component {
 
   etfUnderlyingPerformance = (ETF, startDate) => {
     if (ETF && startDate) {
-      Axios.get(`/PastArbitrageData/DailyChange/${ETF}/${startDate}`).then(
+      Axios.get(`/api/PastArbitrageData/DailyChange/${ETF}/${startDate}`).then(
         (res) => {
           console.log(res);
           this.setState({
