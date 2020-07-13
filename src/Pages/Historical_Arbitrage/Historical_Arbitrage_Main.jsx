@@ -38,6 +38,7 @@ class HistoricalArbitrage extends React.Component {
   parseData(parse) {
     return function (d) {
       d.date = parse(d.date);
+      d['Over Bought/Sold'] = d['Over Bought/Sold'];
       d.open = +parseFloat(d.open);
       d.high = +parseFloat(d.high);
       d.low = +parseFloat(d.low);
@@ -206,9 +207,6 @@ class HistoricalArbitrage extends React.Component {
                   </Col>
 
                   <Col xs={12} md={12}>
-                    <DailyChangeUnderlyingFunc
-                      data={this.state.underlyingPerformance}
-                    />
                       <Card className="CustomCard smallHeightTable"> 
                         <Card.Header className="CustomCardHeader text-white CustomBackGroundColor">
                           Underlyings Daily Change

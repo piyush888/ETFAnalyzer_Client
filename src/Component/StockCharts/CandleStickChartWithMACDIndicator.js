@@ -31,6 +31,8 @@ import {
 import { ema, macd, sma } from "react-stockcharts/lib/indicator";
 import { fitWidth } from "react-stockcharts/lib/helper";
 
+import { LabelAnnotation,Annotate, Label } from "react-stockcharts/lib/annotation";
+
 const macdAppearance = {
 	stroke: {
 		macd: "#FF0000",
@@ -49,6 +51,7 @@ const mouseEdgeAppearance = {
 	arrowWidth: 5,
 	fill: "#BCDEFA",
 };
+
 
 class CandleStickChartWithMACDIndicator extends React.Component {
 	render() {
@@ -92,6 +95,24 @@ class CandleStickChartWithMACDIndicator extends React.Component {
 			xAccessor,
 			displayXAccessor,
 		} = xScaleProvider(calculatedData);
+
+		const longAnnotationProps = {
+			fontFamily: "Glyphicons Halflings",
+			fontSize: 22,
+			fill: "green",
+			opacity: 0.8,
+			text: "\u21D1",
+			y: ({ yScale, datum }) => yScale(datum.low),
+		};
+
+		const shortAnnotationProps = {
+			fontFamily: "Glyphicons Halflings",
+			fontSize: 22,
+			fill: "red",
+			opacity: 0.8,
+			text: "\u21D3",
+			y: ({ yScale, datum }) => yScale(datum.high),
+		};
 
 		return (
 			<ChartCanvas height={600}
@@ -155,6 +176,14 @@ class CandleStickChartWithMACDIndicator extends React.Component {
 							},
 						]}
 					/>
+
+					<Annotate with={LabelAnnotation} 
+						when={d => d['Over Bought/Sold'] === "Over Sold"}
+						usingProps={longAnnotationProps} />
+					
+					<Annotate with={LabelAnnotation} 
+						when={d => d['Over Bought/Sold'] === "Over Bought"}
+						usingProps={shortAnnotationProps} />
 				</Chart>
 				<Chart id={2} height={150}
 					yExtents={[d => d.volume, smaVolume50.accessor()]}

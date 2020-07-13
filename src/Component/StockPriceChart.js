@@ -15,8 +15,7 @@ class ChartComponent extends React.Component {
 	shouldComponentUpdate(nextProps) {
 	  // You don't have to do this check first, but it can help prevent an unneeded render
 	  	if (nextProps.data.data !== this.state.data && nextProps.data.data!==undefined) {
-			console.log("Went insideComponent Update Called");
-	    	var DataCopy =  this.state.date;
+			var DataCopy =  this.state.data;
 	  		DataCopy = nextProps.data.data;
 	  		this.setState({ 
 	  			data:DataCopy,
@@ -32,7 +31,7 @@ class ChartComponent extends React.Component {
 			return <div>Loading...</div>
 		}
 		if (this.state.didupdate){
-			console.log("Rendering New Chart");
+			console.log(this.state.data);
 			return (
 			<CandleStickChartWithMACDIndicator data={this.state.data} />
 			)	
