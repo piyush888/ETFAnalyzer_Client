@@ -8,7 +8,7 @@ import filter from "lodash/filter";
 import debounce from "lodash/debounce";
 // import { Loader } from "../../Common_Components/Loader";
 
-const Live_Arbitrage_All_Table = (props) => {
+const LiveArbitrageAllTable = (props) => {
 
   const [tableData, setTableData] = useState([]);
   const [expandedRows, setExpandedRows] = useState([])
@@ -18,7 +18,17 @@ const Live_Arbitrage_All_Table = (props) => {
   // const [isLoading, setIsLoading] = useState(true);
   const [isSortedBy, setSorted] = useState("");
 
-
+  function getAPIdata() {
+    Axios.get(
+      `/api/ETfLiveArbitrage/AllTickers`
+    ).then(({ data }) => {
+      setTableData(data);
+      setFilterData(data);
+    })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   function useInterval(callback, delay) {
     const savedCallback = useRef();
@@ -41,26 +51,18 @@ const Live_Arbitrage_All_Table = (props) => {
   }
 
   useEffect(() => {
-    // console.log("line 44");
-    // console.log(tableData.length);
-    // console.log(filterData.length);
+    console.log("LINE 76");
     if (tableData.length < 1) {
-      // console.log("line 48")
-      Axios.get(
-        `/api/ETfLiveArbitrage/AllTickers`
-      ).then(({ data }) => {
-        setTableData(data);
-        setFilterData(data);
-        // console.log("line 54");
-        // console.log(tableData.length);
-        // console.log(filterData.length);
-        // console.log("line 57");
-      })
-        .catch((err) => {
-          console.log(err);
-        });
+      getAPIdata();
     }
-  });
+  },[]);
+
+  useInterval(() => {
+    // Your custom logic here
+    if(new Date().getSeconds()===8){
+      getAPIdata()
+    }
+  }, 1000);
 
   useEffect(() => {
     setTimeout(() => {
@@ -73,7 +75,7 @@ const Live_Arbitrage_All_Table = (props) => {
         setFilterData(filter(tableData, isMatch));
       }
     }, 300);
-  }, [searchString, tableData]);
+  }, [searchString]);
 
   const handleSearchChange = (e) => {
     setSearchString(e.target.value);
@@ -109,29 +111,6 @@ const Live_Arbitrage_All_Table = (props) => {
     }
   }
 
-  useInterval(() => {
-    // Your custom logic here
-    // console.log("line 114");
-    if(new Date().getSeconds()===8){
-      // callDataAPI()
-      // console.log("line 117");
-      // console.log('useInterval executed');
-      Axios.get(
-        `/api/ETfLiveArbitrage/AllTickers`
-      ).then(({ data }) => {
-            // console.log("line 122");
-            setTableData(data);
-            setFilterData(data);
-            // console.log(data)
-            // console.log(tableData.length);
-            // console.log(filterData.length);
-            // console.log("line 128");
-          })
-        .catch((err) => console.log(err));
-    }
-  }, 1000);
-
-
   function handleRowClick(rowId) {
     const currentExpandedRows = expandedRows;
     const isRowCurrentlyExpanded = currentExpandedRows.includes(rowId);
@@ -162,7 +141,7 @@ const Live_Arbitrage_All_Table = (props) => {
 
     if (expandedRows.includes(data.symbol)) {
       itemRows.push(
-        <tr>
+        <tr key={"row-expanded-"+data.symbol}>
           <td colSpan="7">
             <Table striped hover variant="dark" bsPrefix="innerTable">
               <thead>
@@ -222,6 +201,7 @@ const Live_Arbitrage_All_Table = (props) => {
 
   return (
     <Card style={{ width: '100vh', height: '94vh' }}>
+      {console.log(tableData, filterData)}
       <Card.Header className="text-white bg-color-dark flex-row">Live Arbitrage All ETFs
         <input
           className="margin-left-auto d-inline-block"
@@ -286,4 +266,4 @@ const Live_Arbitrage_All_Table = (props) => {
   );
 };
 
-export default Live_Arbitrage_All_Table;
+export default LiveArbitrageAllTable;
