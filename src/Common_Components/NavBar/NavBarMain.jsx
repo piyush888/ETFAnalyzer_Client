@@ -164,7 +164,7 @@ const NavBarMain = (props) => {
           type="button"
           onClick={() => {
             logout();
-            history.push("/login");
+            
           }}
         >
           Log Out

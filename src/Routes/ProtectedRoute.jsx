@@ -1,35 +1,21 @@
-import React, { useContext, useState } from "react";
-import { Route, Redirect, useHistory } from "react-router-dom";
-import { useEffect } from "react";
+import React, { useContext } from "react";
+import { Route, Redirect } from "react-router-dom";
 import AuthContext from "../Utilities/AuthContext";
 
 const ProtectedRoute = ({ component: Component, exp, ...rest }) => {
-  const [loggedIn, setLoggedIn] = useState(false);
-  const { getSession } = useContext(AuthContext);
-  const history = useHistory();
-
-  useEffect(() => {
-    getSession()
-      .then((session) => {
-        console.log(session);
-        setLoggedIn(true);
-      })
-      .catch((err) => history.push("/login"));
-  }, []);
+  const { currentUser } = useContext(AuthContext);
 
   return (
-    <>
-      {true ? (
-        <Route
-          {...rest}
-          render={(props) => {
-            return <Component {...props} />;
-          }}
-        />
-      ) : (
-        <div>loading...</div>
-      )}
-    </>
+    <Route
+      {...rest}
+      render={(routeProps) =>
+        !!currentUser ? (
+          <Component {...routeProps} />
+        ) : (
+          <Redirect to={"/login"} />
+        )
+      }
+    />
   );
 };
 

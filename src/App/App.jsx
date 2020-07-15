@@ -12,26 +12,6 @@ import SignUpForm from "../Common_Components/SignUp/SignUpForm";
 import "./App.css";
 import AuthProvider from "../Utilities/AuthProvider";
 
-const LoginRoute = ({ component: Component, exp, ...rest }) => {
-  return (
-    <Route
-      {...rest}
-      render={(props) =>
-        false ? (
-          <Redirect
-            to={{
-              pathname: "/",
-              state: { from: props.location },
-            }}
-          />
-        ) : (
-          <Component {...props} />
-        )
-      }
-    />
-  );
-};
-
 class App extends React.Component {
   render() {
     return (
@@ -40,7 +20,7 @@ class App extends React.Component {
           <Router>
             <Switch>
               <Route exact path="/signup" component={SignUpForm} />
-              <LoginRoute exact path="/login" component={SignInForm} />
+              <Route exact path="/login" component={SignInForm} />
               <ProtectedRoute path="/" component={AuthenticatedRoutes} />
             </Switch>
           </Router>
