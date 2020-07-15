@@ -7,7 +7,8 @@ import Col from "react-bootstrap/Col";
 // import { timeParse } from "d3-time-format";
 
 import './Styles/Live_Arbitrage_All.css';
-import LiveArbitrageAllTable from './Live_Arbitrage_Table';
+// import LiveArbitrageAllTable from './Live_Arbitrage_Table';
+import LiveArbitrageAllTable from './Live_Arb_Table2';
 
 import { connect } from "react-redux";
 
