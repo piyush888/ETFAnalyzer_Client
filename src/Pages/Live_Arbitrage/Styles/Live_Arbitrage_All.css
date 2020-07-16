@@ -34,3 +34,7 @@
 .ReactBootstrapTableCustomClass {
     color: white
 }
+
+.react-bs-table-container {
+    margin: 5px 10px;
+  }

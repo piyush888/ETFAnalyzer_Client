@@ -21,7 +21,7 @@ class Live_Arbitrage_All extends React.Component {
   render() {
     return (
         <Row>
-          <Col xs={12} md={5}>
+          <Col xs={12} md={12} lg={12}>
             <LiveArbitrageAllTable data={this.state.LiveArbitrageAllEtf || []} />
           </Col>
         </Row>

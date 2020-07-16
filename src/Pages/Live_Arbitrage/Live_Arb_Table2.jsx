@@ -16,7 +16,7 @@ const LiveArbitrageAllTable = (props) => {
     // const [expandedRows, setExpandedRows] = useState([])
     // const [orderType, setOrderType] = useState("ASC");
     // const [searchString, setSearchString] = useState("");
-    const [filterData, setFilterData] = useState([]);
+    const [filteredData, setFilteredData] = useState([]);
     // // const [isLoading, setIsLoading] = useState(true);
     // const [isSortedBy, setSorted] = useState("");
     // const [ArbFilterString, setArbFilterString] = useState("");
@@ -30,7 +30,7 @@ const LiveArbitrageAllTable = (props) => {
             `/api/ETfLiveArbitrage/AllTickers`
         ).then(({ data }) => {
             setTableData(data);
-            setFilterData(data);
+            // setFilteredData(data);
         })
             .catch((err) => {
                 console.log(err);
@@ -76,29 +76,55 @@ const LiveArbitrageAllTable = (props) => {
     //     2: 'Over Sold'
     // };
 
+    function priceFormatter(cell, row) {
+        if (cell>0) {
+            return (
+                <span>
+                  <strong style={ { color: 'green' } }>{ cell }</strong>
+                </span>
+              );
+        }
+        else{
+            return (
+              <span>
+                <strong style={ { color: 'red' } }>{ cell }</strong>
+              </span>
+            );
+          }
+      }
+
     const columns = [{
         dataField: 'symbol',
         text: 'Ticker',
         sort: true,
-        filter: textFilter()
+        filter: textFilter({
+        }),
     }, {
         dataField: 'Arbitrage in $',
         text: 'Arbitrage in $',
         sort: true,
-        filter: numberFilter(),
-        style: { width: 'auto' }
+        filter: numberFilter({
+                comparatorStyle: {padding:'5px'},
+                numberStyle: { width: '100px' },
+              }),
+        formatter: priceFormatter,
     }, {
         dataField: 'ETF Trading Spread in $',
         text: 'ETF Trading Spread in $',
         sort: true,
-        filter: numberFilter()
+        filter: numberFilter({
+            comparatorStyle: {padding:'5px'},
+            numberStyle: { width: '100px'},
+          }),
     }, {
         dataField: 'Absolute Arbitrage',
         text: 'Absolute Arbitrage',
         sort: true,
-        filter: numberFilter()
-    }
-        , {
+        filter: numberFilter({
+            comparatorStyle: {padding:'5px'},
+            numberStyle: { width: '100px' },
+          }),
+    }, {
         dataField: 'ETF Price',
         text: 'ETF Price',
         sort: true,
@@ -188,18 +214,31 @@ const LiveArbitrageAllTable = (props) => {
         }
     };
 
+    // const factory = patchFilterFactory(filterFactory, data => {
+    //     setFilteredData(prevData => {
+    //       if (JSON.stringify(prevData) !== JSON.stringify(data)) {
+    //         return data
+    //       }
+    
+    //       return prevData
+    //     })
+    //   })
+
     return (
+        <div style={{ padding: "20px" }}>
         <BootstrapTable
             keyField="symbol"
             data={tableData}
+            bootstrap4={true}
             columns={columns}
             striped
             hover
-            condensed
-            classes="table table-dark padding-0 overflow-auto height-50vh font-size-sm"
+            size="lg"
+            classes="table-dark font-size-sm"
             expandRow={expandRow}
             filter={filterFactory()}
         />
+        </div>
     );
 
 };
