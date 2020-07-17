@@ -9,7 +9,7 @@ const ProtectedRoute = ({ component: Component, exp, ...rest }) => {
     <Route
       {...rest}
       render={(routeProps) =>
-        !!currentUser ? (
+        !!currentUser && currentUser.emailVerified ? (
           <Component {...routeProps} />
         ) : (
           <Redirect to={"/login"} />
