@@ -77,20 +77,23 @@ const LiveArbitrageAllTable = (props) => {
     // };
 
     function priceFormatter(cell, row) {
-        if (cell>0) {
+        if (row['Over Bought/Sold']=='Over Sold') {
             return (
                 <span>
                   <strong style={ { color: 'green' } }>{ cell }</strong>
                 </span>
               );
         }
-        else{
+        else if (row['Over Bought/Sold']=='Over Bought'){
             return (
               <span>
                 <strong style={ { color: 'red' } }>{ cell }</strong>
               </span>
             );
           }
+        else{
+            return (<>{cell}</>)
+        }
       }
 
     const columns = [{
@@ -98,6 +101,7 @@ const LiveArbitrageAllTable = (props) => {
         text: 'Ticker',
         sort: true,
         filter: textFilter({
+            style: {width: '100px', marginLeft:'10px'}
         }),
     }, {
         dataField: 'Arbitrage in $',
@@ -105,7 +109,7 @@ const LiveArbitrageAllTable = (props) => {
         sort: true,
         filter: numberFilter({
                 comparatorStyle: {padding:'5px'},
-                numberStyle: { width: '100px' },
+                numberStyle: { width: '100px', margin:'10px' },
               }),
         formatter: priceFormatter,
     }, {
@@ -114,31 +118,38 @@ const LiveArbitrageAllTable = (props) => {
         sort: true,
         filter: numberFilter({
             comparatorStyle: {padding:'5px'},
-            numberStyle: { width: '100px'},
+            numberStyle: { width: '100px', margin:'10px'},
           }),
+        formatter: priceFormatter
     }, {
         dataField: 'Absolute Arbitrage',
         text: 'Absolute Arbitrage',
         sort: true,
         filter: numberFilter({
             comparatorStyle: {padding:'5px'},
-            numberStyle: { width: '100px' },
+            numberStyle: { width: '100px', margin: '10px'},
           }),
+        formatter: priceFormatter  
     }, {
         dataField: 'ETF Price',
         text: 'ETF Price',
         sort: true,
+        formatter: priceFormatter
     }, {
         dataField: 'ETF Change Price %',
         text: 'ETF Change Price %',
         sort: true,
+        formatter: priceFormatter
     }, {
         dataField: 'Net Asset Value Change%',
         text: 'Net Asset Value Change%',
         sort: true,
+        formatter: priceFormatter
     }, {
         dataField: 'Over Bought/Sold',
         text: 'Over Bought/Sold',
+        sort: true,
+        formatter: priceFormatter
         // formatter: cell => selectOptions[cell],
         // filter: selectFilter({
         //     options: selectOptions
@@ -211,7 +222,23 @@ const LiveArbitrageAllTable = (props) => {
             console.log(isExpandAll);
             console.log(rows);
             console.log(e);
-        }
+        },
+        expandHeaderColumnRenderer: ({ isAnyExpands }) => {
+            if (isAnyExpands) {
+              return <i class="fas fa-caret-down" style={{width : '10px'}}></i>;
+            }
+            return <i class="fas fa-caret-right" style={{width : '10px'}}></i>;
+          },
+        expandColumnRenderer: ({ expanded }) => {
+            if (expanded) {
+              return (
+                <i class="fas fa-caret-down" style={{width : '10px'}}></i>
+              );
+            }
+            return (
+                <i class="fas fa-caret-right" style={{width : '10px'}}></i>
+            );
+          }
     };
 
     // const factory = patchFilterFactory(filterFactory, data => {
