@@ -13,16 +13,13 @@ import debounce from "lodash/debounce";
 const LiveArbitrageAllTable = (props) => {
 
     const [tableData, setTableData] = useState([]);
-    // const [expandedRows, setExpandedRows] = useState([])
-    // const [orderType, setOrderType] = useState("ASC");
-    // const [searchString, setSearchString] = useState("");
     const [filteredData, setFilteredData] = useState([]);
-    // // const [isLoading, setIsLoading] = useState(true);
-    // const [isSortedBy, setSorted] = useState("");
-    // const [ArbFilterString, setArbFilterString] = useState("");
-    // const [ArbFilterRelOp, setArbFilterRelOp] = useState("");
-    // const [SpreadFilterString, setSpreadFilterString] = useState("");
-    // const [SpreadFilterRelOp, setSpreadFilterRelOp] = useState("");
+    // const [isLoading, setIsLoading] = useState(true);
+    const [fetchTime, setfFetchTime] = useState(new Date());
+    const [currentTime, setCurrentTime] = useState(new Date());
+    const [refreshElement, setRefreshElement] = useState([]);
+    // let refreshElement = null;
+    
 
 
     function getAPIdata() {
@@ -34,6 +31,11 @@ const LiveArbitrageAllTable = (props) => {
         })
             .catch((err) => {
                 console.log(err);
+                // if (err){
+                //     if (new Date().getSeconds()<=0 && new Date().getSeconds()>=8){
+                //         setRefreshElement =[(<h3 style={{color:'red', alignContent:'center'}}>DATA FOR THIS MINUTE WILL BE AVAILABLE AT 8TH SECOND OF THIS MINUTE</h3>)]
+                //     }
+                // }
             });
     }
     /* Custom Hook for interval call of API */
@@ -59,22 +61,24 @@ const LiveArbitrageAllTable = (props) => {
 
     useEffect(() => {
         if (tableData.length < 1) {
-            getAPIdata();
+            getAPIdata()
         }
     }, []);
 
     useInterval(() => {
         // Your custom logic here
         if (new Date().getSeconds() === 8) {
-            getAPIdata()
+            getAPIdata();
+            setfFetchTime(new Date());
         }
+        setCurrentTime(new Date());
     }, 1000);
 
-    // const selectOptions = {
-    //     0: 'Over Bought',
-    //     1: 'Balanced',
-    //     2: 'Over Sold'
-    // };
+    const selectOptions = {
+        'Over Bought': 'Over Bought',
+        'Balanced': 'Balanced',
+        'Over Sold': 'Over Sold'
+    };
 
     function priceFormatter(cell, row) {
         if (row['Over Bought/Sold']=='Over Sold') {
@@ -96,6 +100,7 @@ const LiveArbitrageAllTable = (props) => {
         }
       }
 
+
     const columns = [{
         dataField: 'symbol',
         text: 'Ticker',
@@ -103,6 +108,12 @@ const LiveArbitrageAllTable = (props) => {
         filter: textFilter({
             style: {width: '100px', marginLeft:'10px'}
         }),
+        sortCaret: (order, column) => {
+            if (!order) return (<span>&nbsp;&nbsp;<i className="fas fa-sort"></i></span>);
+            else if (order === 'asc') return (<span>&nbsp;&nbsp;<font color="red"><i className="fas fa-sort-down"></i></font></span>);
+            else if (order === 'desc') return (<span>&nbsp;&nbsp;<font color="red"><i className="fas fa-sort-up"></i></font></span>);
+            return null;
+          }
     }, {
         dataField: 'Arbitrage in $',
         text: 'Arbitrage in $',
@@ -112,6 +123,12 @@ const LiveArbitrageAllTable = (props) => {
                 numberStyle: { width: '100px', margin:'10px' },
               }),
         formatter: priceFormatter,
+        sortCaret: (order, column) => {
+            if (!order) return (<span>&nbsp;&nbsp;<i className="fas fa-sort"></i></span>);
+            else if (order === 'asc') return (<span>&nbsp;&nbsp;<font color="red"><i className="fas fa-sort-down"></i></font></span>);
+            else if (order === 'desc') return (<span>&nbsp;&nbsp;<font color="red"><i className="fas fa-sort-up"></i></font></span>);
+            return null;
+          }
     }, {
         dataField: 'ETF Trading Spread in $',
         text: 'ETF Trading Spread in $',
@@ -120,7 +137,13 @@ const LiveArbitrageAllTable = (props) => {
             comparatorStyle: {padding:'5px'},
             numberStyle: { width: '100px', margin:'10px'},
           }),
-        formatter: priceFormatter
+        formatter: priceFormatter,
+        sortCaret: (order, column) => {
+            if (!order) return (<span>&nbsp;&nbsp;<i className="fas fa-sort"></i></span>);
+            else if (order === 'asc') return (<span>&nbsp;&nbsp;<font color="red"><i className="fas fa-sort-down"></i></font></span>);
+            else if (order === 'desc') return (<span>&nbsp;&nbsp;<font color="red"><i className="fas fa-sort-up"></i></font></span>);
+            return null;
+          }
     }, {
         dataField: 'Absolute Arbitrage',
         text: 'Absolute Arbitrage',
@@ -129,31 +152,62 @@ const LiveArbitrageAllTable = (props) => {
             comparatorStyle: {padding:'5px'},
             numberStyle: { width: '100px', margin: '10px'},
           }),
-        formatter: priceFormatter  
+        formatter: priceFormatter,
+        sortCaret: (order, column) => {
+            if (!order) return (<span>&nbsp;&nbsp;<i className="fas fa-sort"></i></span>);
+            else if (order === 'asc') return (<span>&nbsp;&nbsp;<font color="red"><i className="fas fa-sort-down"></i></font></span>);
+            else if (order === 'desc') return (<span>&nbsp;&nbsp;<font color="red"><i className="fas fa-sort-up"></i></font></span>);
+            return null;
+          }  
     }, {
         dataField: 'ETF Price',
         text: 'ETF Price',
         sort: true,
-        formatter: priceFormatter
+        formatter: priceFormatter,
+        sortCaret: (order, column) => {
+            if (!order) return (<span>&nbsp;&nbsp;<i className="fas fa-sort"></i></span>);
+            else if (order === 'asc') return (<span>&nbsp;&nbsp;<font color="red"><i className="fas fa-sort-down"></i></font></span>);
+            else if (order === 'desc') return (<span>&nbsp;&nbsp;<font color="red"><i className="fas fa-sort-up"></i></font></span>);
+            return null;
+          }
     }, {
         dataField: 'ETF Change Price %',
         text: 'ETF Change Price %',
         sort: true,
-        formatter: priceFormatter
+        formatter: priceFormatter,
+        sortCaret: (order, column) => {
+            if (!order) return (<span>&nbsp;&nbsp;<i className="fas fa-sort"></i></span>);
+            else if (order === 'asc') return (<span>&nbsp;&nbsp;<font color="red"><i className="fas fa-sort-down"></i></font></span>);
+            else if (order === 'desc') return (<span>&nbsp;&nbsp;<font color="red"><i className="fas fa-sort-up"></i></font></span>);
+            return null;
+          }
     }, {
         dataField: 'Net Asset Value Change%',
         text: 'Net Asset Value Change%',
         sort: true,
-        formatter: priceFormatter
+        formatter: priceFormatter,
+        sortCaret: (order, column) => {
+            if (!order) return (<span>&nbsp;&nbsp;<i className="fas fa-sort"></i></span>);
+            else if (order === 'asc') return (<span>&nbsp;&nbsp;<font color="red"><i className="fas fa-sort-down"></i></font></span>);
+            else if (order === 'desc') return (<span>&nbsp;&nbsp;<font color="red"><i className="fas fa-sort-up"></i></font></span>);
+            return null;
+          }
     }, {
         dataField: 'Over Bought/Sold',
         text: 'Over Bought/Sold',
         sort: true,
-        formatter: priceFormatter
-        // formatter: cell => selectOptions[cell],
-        // filter: selectFilter({
-        //     options: selectOptions
-        // })
+        formatter: (cell) => selectOptions[cell],
+        filter: selectFilter({
+            options: selectOptions,
+            style: { width: '100px', margin:'10px' }
+        }),
+        formatter: priceFormatter,
+        sortCaret: (order, column) => {
+            if (!order) return (<span>&nbsp;&nbsp;<i className="fas fa-sort"></i></span>);
+            else if (order === 'asc') return (<span>&nbsp;&nbsp;<font color="red"><i className="fas fa-sort-down"></i></font></span>);
+            else if (order === 'desc') return (<span>&nbsp;&nbsp;<font color="red"><i className="fas fa-sort-up"></i></font></span>);
+            return null;
+          }
     }];
 
 
@@ -225,34 +279,44 @@ const LiveArbitrageAllTable = (props) => {
         },
         expandHeaderColumnRenderer: ({ isAnyExpands }) => {
             if (isAnyExpands) {
-              return <i class="fas fa-caret-down" style={{width : '10px'}}></i>;
+              return <i className="fas fa-caret-down" style={{width : '10px'}}></i>;
             }
-            return <i class="fas fa-caret-right" style={{width : '10px'}}></i>;
+            return <i className="fas fa-caret-right" style={{width : '10px'}}></i>;
           },
         expandColumnRenderer: ({ expanded }) => {
             if (expanded) {
               return (
-                <i class="fas fa-caret-down" style={{width : '10px'}}></i>
+                <i className="fas fa-caret-down" style={{width : '10px'}}></i>
               );
             }
             return (
-                <i class="fas fa-caret-right" style={{width : '10px'}}></i>
+                <i className="fas fa-caret-right" style={{width : '10px'}}></i>
             );
           }
     };
 
-    // const factory = patchFilterFactory(filterFactory, data => {
-    //     setFilteredData(prevData => {
-    //       if (JSON.stringify(prevData) !== JSON.stringify(data)) {
-    //         return data
-    //       }
-    
-    //       return prevData
-    //     })
-    //   })
+    // if (refreshElement.length!= 0){
+    //     console.log(refreshElement);
+    //     return(
+    //         {refreshElement}
+    //     )
+    // }
 
     return (
         <div style={{ padding: "20px" }}>
+        <form>
+            <div className="form-row">
+                <div className="col-md-4 mb-3">
+                    <strong className="App-clock text-white">Showing Data for : </strong><strong style={ { color: 'red' }}>{fetchTime.toLocaleTimeString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute:'2-digit'})}</strong>
+                </div>
+                <div className="col-md-4 mb-3">
+                    <strong className="App-clock text-white">Data Fetched at: </strong><strong style={ { color: 'red' }}>{fetchTime.toLocaleString()}</strong>
+                </div>
+                <div className="col-md-4 mb-3">
+                    <strong className="App-clock text-white">Current Local time: </strong><strong style={ { color: 'red' }}>{currentTime.toLocaleString()}</strong>
+                </div>
+            </div>
+        </form>
         <BootstrapTable
             keyField="symbol"
             data={tableData}
