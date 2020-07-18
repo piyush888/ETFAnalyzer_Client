@@ -17,14 +17,14 @@ const SignUpForm = (props) => {
     }
   };
   return (
-    <div className="bg-color-dark padding-top-20vh height-100vh text-white">
+    <div className="white-background padding-top-20vh height-100vh">
       <div className="margin-left-auto margin-right-auto width-30em">
         <center>
-          <h4>Signup</h4>
+          <h4 className="text-primary">Signup</h4>
         </center>
         <Form onSubmit={onSubmit}>
           <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
+            <Form.Label className="text-primary">Email address</Form.Label>
             <Form.Control
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -37,7 +37,7 @@ const SignUpForm = (props) => {
           </Form.Group>
 
           <Form.Group controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
+            <Form.Label className="text-primary">Password</Form.Label>
             <Form.Control
               value={password}
               onChange={(e) => setPassword(e.target.value)}
