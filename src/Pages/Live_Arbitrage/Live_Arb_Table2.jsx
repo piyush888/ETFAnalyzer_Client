@@ -17,7 +17,9 @@ const LiveArbitrageAllTable = (props) => {
     // const [isLoading, setIsLoading] = useState(true);
     const [fetchTime, setfFetchTime] = useState(new Date());
     const [currentTime, setCurrentTime] = useState(new Date());
-    const [refreshElement, setRefreshElement] = useState([]);
+    const [dataForTime, setDataForTime] = useState(new Date());
+    // const [refreshElement, setRefreshElement] = useState([]);
+    const [errorCode, setErrorCode] = useState(null);
     // let refreshElement = null;
     
 
@@ -30,12 +32,9 @@ const LiveArbitrageAllTable = (props) => {
             // setFilteredData(data);
         })
             .catch((err) => {
+                console.log(err.response.status);
+                setErrorCode(err.response.status);
                 console.log(err);
-                // if (err){
-                //     if (new Date().getSeconds()<=0 && new Date().getSeconds()>=8){
-                //         setRefreshElement =[(<h3 style={{color:'red', alignContent:'center'}}>DATA FOR THIS MINUTE WILL BE AVAILABLE AT 8TH SECOND OF THIS MINUTE</h3>)]
-                //     }
-                // }
             });
     }
     /* Custom Hook for interval call of API */
@@ -295,12 +294,12 @@ const LiveArbitrageAllTable = (props) => {
           }
     };
 
-    // if (refreshElement.length!= 0){
-    //     console.log(refreshElement);
-    //     return(
-    //         {refreshElement}
-    //     )
-    // }
+    if (errorCode >= 500){
+        // console.log(refreshElement);
+        return(
+            <h3 style={{color:'red', alignContent:'center'}}>DATA FOR THIS MINUTE WILL BE AVAILABLE AT 8TH SECOND OF THIS MINUTE</h3>
+        )
+    }
 
     return (
         <div style={{ padding: "20px" }}>
