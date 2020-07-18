@@ -29,6 +29,7 @@ const LiveArbitrageAllTable = (props) => {
             `/api/ETfLiveArbitrage/AllTickers`
         ).then(({ data }) => {
             setTableData(data);
+            setDataForTime(data[0]['Timestamp']);
             // setFilteredData(data);
         })
             .catch((err) => {
@@ -57,6 +58,14 @@ const LiveArbitrageAllTable = (props) => {
             }
         }, [delay]);
     }
+
+    // function getTS() {
+    //     if (tableData.length>0) {
+    //         setDataForTime(tableData[0]['Timestamp'])
+    //         console.log(tableData[0]['Timestamp'])
+    //     }
+    //     console.log("Timestamp func");
+    // }
 
     useEffect(() => {
         if (tableData.length < 1) {
@@ -306,13 +315,13 @@ const LiveArbitrageAllTable = (props) => {
         <form>
             <div className="form-row">
                 <div className="col-md-4 mb-3">
-                    <strong className="App-clock text-white">Showing Data for : </strong><strong style={ { color: 'red' }}>{fetchTime.toLocaleTimeString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute:'2-digit'})}</strong>
+                    <strong className="App-clock text-white">Showing Data for : </strong><strong style={ { color: 'red' }}>{new Date(dataForTime).toLocaleTimeString([], {year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute:'2-digit'})}</strong><strong className='text-white'> Local Time</strong>
                 </div>
                 <div className="col-md-4 mb-3">
-                    <strong className="App-clock text-white">Data Fetched at: </strong><strong style={ { color: 'red' }}>{fetchTime.toLocaleString()}</strong>
+                    <strong className="App-clock text-white">Data Fetched at: </strong><strong style={ { color: 'red' }}>{fetchTime.toLocaleString()}</strong><strong className='text-white'> Local Time</strong>
                 </div>
                 <div className="col-md-4 mb-3">
-                    <strong className="App-clock text-white">Current Local time: </strong><strong style={ { color: 'red' }}>{currentTime.toLocaleString()}</strong>
+                    <strong className="App-clock text-white">Current Local time: </strong><strong style={ { color: 'red' }}>{currentTime.toLocaleString()}</strong><strong className='text-white'> Local Time</strong>
                 </div>
             </div>
         </form>
