@@ -25,8 +25,11 @@ const SignInForm = (props) => {
     if (currentUser) {
       currentUser
         .sendEmailVerification()
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
+        .then((res) => {
+          alert("Verification Link Sent");
+          logout();
+        })
+        .catch((err) => alert(err.message));
     }
   };
 
@@ -61,11 +64,7 @@ const SignInForm = (props) => {
                   Send Verification Link
                 </Button>
               </Col>
-              <Col>
-                <Button as={NavLink} to="/login" variant="primary">
-                  Login
-                </Button>
-              </Col>
+
               <Col>
                 <Button
                   type="button"

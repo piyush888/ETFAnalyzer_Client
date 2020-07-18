@@ -12,7 +12,9 @@ const AuthProvider = (props) => {
 
   useEffect(() => {
     firebaseAuth.onAuthStateChanged((user) => {
+      
       setCurrentUser(user);
+     
       if (user && user.emailVerified) {
         user.getIdToken().then((token) => setAxiosDefaultToken(token));
         setPending(false);

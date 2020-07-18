@@ -13,7 +13,7 @@ const SignUpForm = (props) => {
       await firebaseAuth.createUserWithEmailAndPassword(email, password);
       props.history.push("/");
     } catch (err) {
-      console.log(err);
+      alert(err.code)
     }
   };
   return (
