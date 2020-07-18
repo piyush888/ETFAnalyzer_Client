@@ -15,7 +15,7 @@ const SignInForm = (props) => {
 
     try {
       await firebaseAuth.signInWithEmailAndPassword(email, password);
-      props.history.push("/");
+      props.history.push("/live-arbitrage-single");
     } catch (error) {
       alert(error);
     }

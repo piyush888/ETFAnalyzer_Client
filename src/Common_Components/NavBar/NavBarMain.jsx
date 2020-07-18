@@ -8,7 +8,7 @@ import {
   Button,
   Dropdown,
 } from "react-bootstrap";
-import { Link, useHistory, useLocation, useParams } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import moment from "moment";
 import { useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,9 +18,8 @@ import { etfSelectOptions } from "./etfSelectOptions";
 import AuthContext from "../../Utilities/AuthContext";
 
 const NavBarMain = (props) => {
-  const { logout } = useContext(AuthContext);
-  const params = useParams();
-  const history = useHistory();
+  const { logout, currentUser } = useContext(AuthContext);
+
   const location = useLocation();
   const dispatch = useDispatch();
   const { ETF, startDate } = useSelector((state) => state.navbar);
@@ -100,6 +99,9 @@ const NavBarMain = (props) => {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
+          <Nav.Link style={{ color: "white" }} as={Link} to="/" eventKey="">
+            Home
+          </Nav.Link>
           <Nav.Link
             style={{ color: "white" }}
             as={Link}
@@ -159,16 +161,29 @@ const NavBarMain = (props) => {
             onChange={handleDateChange}
           />
         </Form>
-        <Button
-          variant="primary"
-          type="button"
-          onClick={() => {
-            logout();
-            
-          }}
-        >
-          Log Out
-        </Button>
+        {currentUser && currentUser.emailVerified ? (
+          <Button
+            variant="primary"
+            type="button"
+            onClick={() => {
+              logout();
+            }}
+          >
+            Log Out
+          </Button>
+        ) : (
+          <Button
+            as={Link}
+            to="/login"
+            variant="primary"
+            type="button"
+            onClick={() => {
+              logout();
+            }}
+          >
+            Log In
+          </Button>
+        )}
       </Navbar.Collapse>
     </Navbar>
   );

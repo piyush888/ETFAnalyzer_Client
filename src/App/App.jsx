@@ -3,15 +3,13 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect,
 } from "react-router-dom";
 import { SignInForm } from "../Common_Components/SignIn";
 import AuthenticatedRoutes from "../Routes/AuthenticatedRoutes";
-import ProtectedRoute from "../Routes/ProtectedRoute";
 import SignUpForm from "../Common_Components/SignUp/SignUpForm";
-import LandingPage from "../Common_Components/LandingPage/LandingPage";
 import "./App.css";
 import AuthProvider from "../Utilities/AuthProvider";
+import { CommonNavBar } from "../Common_Components/NavBar";
 
 class App extends React.Component {
   render() {
@@ -19,11 +17,11 @@ class App extends React.Component {
       <AuthProvider>
         <div>
           <Router>
+            <CommonNavBar />
             <Switch>
               <Route exact path="/signup" component={SignUpForm} />
               <Route exact path="/login" component={SignInForm} />
-              <Route exact path="/landingpage" component={LandingPage} />
-              <ProtectedRoute path="/" component={AuthenticatedRoutes} />
+              <Route path="/" component={AuthenticatedRoutes} />
             </Switch>
           </Router>
         </div>

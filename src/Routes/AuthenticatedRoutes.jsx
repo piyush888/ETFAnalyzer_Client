@@ -1,23 +1,25 @@
 import React from "react";
-import { Route } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 import EtfDescRoutes from "./EtfDescRoutes";
-import { CommonNavBar } from "../Common_Components/NavBar";
 import HistArbiageRoutes from "./HistArbiageRoutes";
 import LiveArbitrageSingleRoutes from "./LiveArbitrageSingleRoutes";
 import LiveArbitrageAllRoutes from "./Live_Arbitrage_All";
+import LandingPage from "../Pages/LandingPage/LandingPage";
+import { Route } from "react-router-dom";
 
 const AuthenticatedRoutes = () => {
   return (
     <>
-      <CommonNavBar />
-      <Route path="/ETF-Description" component={EtfDescRoutes} />
-      <Route
+   
+      <Route exact path={"/"} component={LandingPage}/>
+      <ProtectedRoute path="/ETF-Description" component={EtfDescRoutes} />
+      <ProtectedRoute
         path="/live-arbitrage-single"
         component={LiveArbitrageSingleRoutes}
       />
-      <Route path="/Live-Arbitrage" component={LiveArbitrageAllRoutes}/>
-      <Route path="/historical-arbitrage" component={HistArbiageRoutes} />
+      <ProtectedRoute path="/Live-Arbitrage" component={LiveArbitrageAllRoutes}/>
+      <ProtectedRoute path="/historical-arbitrage" component={HistArbiageRoutes} />
+
     </>
   );
 };
