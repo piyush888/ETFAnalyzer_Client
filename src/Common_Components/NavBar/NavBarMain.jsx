@@ -24,24 +24,6 @@ const NavBarMain = (props) => {
   const dispatch = useDispatch();
   const { ETF, startDate } = useSelector((state) => state.navbar);
 
-  // useEffect(() => {
-  //   const routeName = location.pathname.split("/");
-  //   console.log(ETF)
-  //   if (routeName[1] === "ETF-Description") {
-  //     const etfName = routeName[2] ? routeName[2].toUpperCase() : "XLK";
-  //     if (etfName !== ETF || routeName[3] !== startDate) {
-  //       console.log(etfName, ETF)
-  //       history.push(`/ETF-Description/${ETF}/${startDate}`);
-  //     }
-  //   }
-  //   if (routeName[1] === "historical-arbitrage") {
-  //     const etfName = routeName[2] ? routeName[2].toUpperCase() : "XLK";
-  //     if (etfName !== ETF || routeName[3] !== startDate) {
-  //       // history.push(`/historical-arbitrage/${ETF}/${startDate}`);
-  //     }
-  //   }
-  // }, [ETF, startDate]);
-
   useEffect(() => {
     const routeName = location.pathname.split("/");
 
@@ -93,9 +75,13 @@ const NavBarMain = (props) => {
   const handleEtfChange = (ETF) =>
     dispatch({ type: changeNavbarEtfName, payload: { value: ETF[0].element } });
 
+  const navbarColor = currentUser && currentUser.emailVerified ? ("bg-color-dark"
+      ) : (
+        "bg-primary"
+      );
+
   return (
-    <Navbar className="bg-color-dark" variant="dark" expand="lg">
-      {/* <Navbar.Brand href="#home">Etf-Analyzer</Navbar.Brand> */}
+      <Navbar className={navbarColor} variant="dark" expand="lg">
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
@@ -162,28 +148,23 @@ const NavBarMain = (props) => {
           />
         </Form>
         {currentUser && currentUser.emailVerified ? (
-          <Button
-            variant="primary"
-            type="button"
-            onClick={() => {
-              logout();
-            }}
-          >
+          <button type="button" class="btn btn-link text-white" onClick={() => {logout();}}>
             Log Out
-          </Button>
+          </button>
         ) : (
-          <Button
-            as={Link}
-            to="/login"
-            variant="primary"
-            type="button"
-            onClick={() => {
-              logout();
-            }}
-          >
-            Log In
-          </Button>
-        )}
+          <ul class="navbar-nav">
+              <li class="nav-item active">
+                <a class="nav-link" type="button" href="/login" onClick={() => {logout();}}>
+                  Sign In
+                </a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="/signup">
+                  Sign Up
+                </a>
+              </li>
+            </ul>
+          )}
       </Navbar.Collapse>
     </Navbar>
   );
