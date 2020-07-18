@@ -1,0 +1,13 @@
+.LandingPage{
+	background-color: white;
+	min-height: 100vh;
+	height: 100vh;
+}
+
+.container-fluid{
+	padding-bottom: 0vh;
+}
+
+.navbar a{
+    font-family:  Geneva !important;
+}
