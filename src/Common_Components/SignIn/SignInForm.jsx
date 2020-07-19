@@ -37,15 +37,15 @@ const SignInForm = (props) => {
     return <Redirect to="/" />;
   }
   return (
-    <div className="bg-color-dark padding-top-20vh height-100vh text-white">
+    <div className="white-background padding-top-20vh height-100vh">
       {currentUser && !currentUser.emailVerified ? (
         <div className="margin-left-auto margin-right-auto width-30em">
           <center>
-            <h4>Verify email address</h4>
+            <h4 className="text-primary">Verify email address</h4>
           </center>
           <Form>
             <Form.Group controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
+              <Form.Label className="text-primary">Email address</Form.Label>
               <Form.Control
                 readOnly
                 value={currentUser.email}
@@ -64,29 +64,17 @@ const SignInForm = (props) => {
                   Send Verification Link
                 </Button>
               </Col>
-
-              <Col>
-                <Button
-                  type="button"
-                  onClick={() => {
-                    logout();
-                  }}
-                  variant="primary"
-                >
-                  Logout
-                </Button>
-              </Col>
             </Form.Row>
           </Form>
         </div>
       ) : (
         <div className="margin-left-auto margin-right-auto width-30em">
           <center>
-            <h4>Login</h4>
+            <h4 className="text-primary">Login</h4>
           </center>
           <Form onSubmit={onSubmit}>
             <Form.Group controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
+              <Form.Label className="text-primary">Email address</Form.Label>
               <Form.Control
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -99,7 +87,7 @@ const SignInForm = (props) => {
             </Form.Group>
 
             <Form.Group controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
+              <Form.Label className="text-primary">Password</Form.Label>
               <Form.Control
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -112,11 +100,6 @@ const SignInForm = (props) => {
               <Col>
                 <Button variant="primary" type="submit">
                   Login
-                </Button>
-              </Col>
-              <Col>
-                <Button as={NavLink} to="/signup" variant="primary">
-                  Signup
                 </Button>
               </Col>
             </Form.Row>

@@ -11,7 +11,7 @@ const SignUpForm = (props) => {
 
     try {
       await firebaseAuth.createUserWithEmailAndPassword(email, password);
-      props.history.push("/");
+      props.history.push("/login");
     } catch (err) {
       alert(err.code)
     }

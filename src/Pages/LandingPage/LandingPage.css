@@ -1,7 +1,8 @@
 .LandingPage{
 	background-color: white;
-	min-height: 100vh;
-	height: 100vh;
+	min-height: 100%;
+	height: 100%;
+	font-family:  Geneva !important;
 }
 
 .container-fluid{
@@ -10,4 +11,24 @@
 
 .navbar a{
     font-family:  Geneva !important;
+}
+
+.custom-bullet li {
+    display: block;
+    font-size:20px;
+}
+
+.custom-bullet li:before
+{
+    left:-5px;
+    position:absolute;
+    top:0;
+}
+
+.FeatureBox{
+    padding-bottom: 2%;
+}
+
+
+.jumbotronBlack{
 }

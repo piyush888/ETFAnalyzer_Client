@@ -154,7 +154,7 @@ const NavBarMain = (props) => {
         ) : (
           <ul class="navbar-nav">
               <li class="nav-item active">
-                <a class="nav-link" type="button" href="/login" onClick={() => {logout();}}>
+                <a class="nav-link" href="/login" onClick={() => {logout();}}>
                   Sign In
                 </a>
               </li>
