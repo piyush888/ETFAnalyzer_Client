@@ -31,13 +31,13 @@ const LandingPage = (props) => {
     <div className="LandingPage">
         <div className="jumbotron">
           <div className="container">
-                <h3 className="">ETF Trace solves all major problem in ETF industry</h3>
+                <h3 className="">ETF Trace solves all major problems in ETF industry</h3>
                 <ul class="custom-bullet">
                   <li><i class="fa fa-check-square text-primary"></i> ETF mispricing & divergence from underlying NAV</li>
                   <li><i class="fa fa-check-square text-primary"></i> Be informed on tracking error, spread & absolute error </li>
                   <li><i class="fa fa-check-square text-primary"></i> Understand ETF underlyings which are moving the ETF</li>
-                  <li><i class="fa fa-check-square text-primary"></i> Over Bought, Over Sold or Balanced Signal for ETF</li>
-                  <li><i class="fa fa-check-square text-primary"></i> Compare multiple etfs in industry, simiar AUM</li>
+                  <li><i class="fa fa-check-square text-primary"></i> Over Bought, Over Sold or Balanced Signals for ETF</li>
+                  <li><i class="fa fa-check-square text-primary"></i> Compare multiple ETFs in industry, similar Assets Under Management</li>
                 </ul>
           </div>
         </div>
@@ -47,9 +47,9 @@ const LandingPage = (props) => {
             <div className="col-md-6 col-lg-6 col-xs-12 FeatureBox">
               <h4>Live Arbitrage</h4>
               <ul>
-                <li>Tracking error on Etf updates every minute.</li>
+                <li>Tracking error on ETF updates every minute.</li>
                 <li>Over Sold/Bought or Balanced Signal</li>
-                <li>Arbitrage, spread & volume traded info</li>
+                <li>Arbitrage, Spread & Volume traded info</li>
                 <li>Quantitative Analysis of deviation of current arbitrage</li>
               </ul>
               <Image src={LiveArbitrage} fluid rounded />
@@ -58,10 +58,10 @@ const LandingPage = (props) => {
              <div className="col-md-6 col-lg-6 col-xs-12 FeatureBox">
               <h4>All ETF Live Arbitrage</h4>
               <ul>
-                <li>Live tracking error on all major etf above $ 1 Billion</li>
-                <li>Compare arbitrage on Etf universe</li>
-                <li>Set filters on Etf, $ arbitrage or over bough/sell signal</li>
-                <li>Arbitrage, spread & last etf price trade</li>
+                <li>Live tracking error on all major ETF above $ 1 Billion</li>
+                <li>Compare arbitrage on ETF universe</li>
+                <li>Set filters on ETF, $ Arbitrage or Over Bought/Sell signals</li>
+                <li>Arbitrage, Spread & last ETF Trade Price</li>
               </ul>
               <Image src={AllETFLiveArbitrage} fluid rounded />
             </div>
@@ -69,8 +69,8 @@ const LandingPage = (props) => {
             <div className="col-md-6 col-lg-6 col-xs-12 FeatureBox">
               <h4>ETF Description</h4>
               <ul>
-                <li>Look into fundamentals of an ETF</li>
-                <li>See past historical arbitrage for the ETF</li>
+                <li>Look into the fundamentals of an ETF</li>
+                <li>See Historical Arbitrage for the ETF</li>
                 <li>Compare ETFs similar ETFs</li>
                 <li>Compare Buy/Sell Signals for ETFs</li>
               </ul>
@@ -80,10 +80,10 @@ const LandingPage = (props) => {
             <div className="col-md-6 col-lg-6 col-xs-12">
               <h4>Historical Arbitrage</h4>
               <ul>
-                <li>Quantitaive analysis of Historical analysis for past ETFs</li>
+                <li>Quantitaive analysis of Historical Arbitrage for past ETFs</li>
                 <li>Study ETF arbitrage for past dates</li>
                 <li>Study stock chart and signals generated at maxima/minima</li>
-                <li>Compare historical performance of etfs in same industry</li>
+                <li>Compare historical performance of ETFs in the same industry</li>
               </ul>
               <Image src={HistoricalArbitrage} fluid rounded />
             </div>
@@ -152,17 +152,17 @@ const LandingPage = (props) => {
           <div className="container">
             <center><h4 className="">Team</h4></center>
              <ul class="custom-bullet">
-                  <li><a href="https://www.linkedin.com/in/piyush888/" target="_blank">Piyush Garg</a>  - Lead tech architect & Business development</li>
-                  <li><a href="https://www.linkedin.com/in/adityanaik94/" target="_blank">Aditya Naik</a> - UI design & developer</li>
-                  <li><a href="https://www.linkedin.com/in/kshitiz-sharma/" target="_blank">Kshitiz Sharma</a> - Developer & Business development</li>
-                </ul>
+                <li><a href="https://www.linkedin.com/in/kshitiz-sharma/" target="_blank">Kshitiz Sharma</a> - Developer & Business development</li>
+                <li><a href="https://www.linkedin.com/in/piyush888/" target="_blank">Piyush Garg</a>  - Lead tech architect & Business development</li>
+                <li><a href="https://www.linkedin.com/in/adityanaik94/" target="_blank">Aditya Naik</a> - UI design & developer</li>
+              </ul>
           </div>
   
           <br/>        
          <div className="container mb-3">
           <center><h4 className="">Contact Us</h4></center>
              <ul class="custom-bullet">
-                <li><h5>Email Id : Piyush888@gmail.com, Kshitizsharmav@gmail.com</h5></li>
+                <li><h5>Email Id : kshitizsharmav@gmail.com, piyush888@gmail.com</h5></li>
                 <li><h5>Phone : +1 551-697-1888</h5></li>
                 
             </ul>
