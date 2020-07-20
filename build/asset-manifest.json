@@ -1,22 +1,34 @@
 {
   "files": {
-    "main.css": "/static/css/main.356403a8.chunk.css",
-    "main.js": "/static/js/main.41a565da.chunk.js",
-    "main.js.map": "/static/js/main.41a565da.chunk.js.map",
+    "main.css": "/static/css/main.5d0fa07d.chunk.css",
+    "main.js": "/static/js/main.388effc5.chunk.js",
+    "main.js.map": "/static/js/main.388effc5.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.36dc832c.js",
     "runtime-main.js.map": "/static/js/runtime-main.36dc832c.js.map",
-    "static/js/2.ff1c7951.chunk.js": "/static/js/2.ff1c7951.chunk.js",
-    "static/js/2.ff1c7951.chunk.js.map": "/static/js/2.ff1c7951.chunk.js.map",
+    "static/js/2.ac5e4b16.chunk.js": "/static/js/2.ac5e4b16.chunk.js",
+    "static/js/2.ac5e4b16.chunk.js.map": "/static/js/2.ac5e4b16.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.04940e42e20c39d8a8e1dc21a27c413a.js": "/precache-manifest.04940e42e20c39d8a8e1dc21a27c413a.js",
+    "precache-manifest.91122e39ae3d557f4ee13b5c6aadc669.js": "/precache-manifest.91122e39ae3d557f4ee13b5c6aadc669.js",
     "service-worker.js": "/service-worker.js",
-    "static/css/main.356403a8.chunk.css.map": "/static/css/main.356403a8.chunk.css.map",
-    "static/js/2.ff1c7951.chunk.js.LICENSE.txt": "/static/js/2.ff1c7951.chunk.js.LICENSE.txt"
+    "static/css/main.5d0fa07d.chunk.css.map": "/static/css/main.5d0fa07d.chunk.css.map",
+    "static/js/2.ac5e4b16.chunk.js.LICENSE.txt": "/static/js/2.ac5e4b16.chunk.js.LICENSE.txt",
+    "static/media/AWS.png": "/static/media/AWS.b4597ef3.png",
+    "static/media/AllETFLiveArbitrage.png": "/static/media/AllETFLiveArbitrage.144daf09.png",
+    "static/media/BofaSymbol.jpg": "/static/media/BofaSymbol.f54f397f.jpg",
+    "static/media/CNBC.png": "/static/media/CNBC.faf1754e.png",
+    "static/media/ETFDescription.png": "/static/media/ETFDescription.de8aa270.png",
+    "static/media/Fidelity.png": "/static/media/Fidelity.8b02f389.png",
+    "static/media/HistoricalArbitrage.png": "/static/media/HistoricalArbitrage.7c8def32.png",
+    "static/media/LiveArbitrage.png": "/static/media/LiveArbitrage.f88c936e.png",
+    "static/media/MongoDb.png": "/static/media/MongoDb.09ed2051.png",
+    "static/media/NYTimes.png": "/static/media/NYTimes.9348e128.png",
+    "static/media/Python.png": "/static/media/Python.d3673556.png",
+    "static/media/React.png": "/static/media/React.580ffd26.png"
   },
   "entrypoints": [
     "static/js/runtime-main.36dc832c.js",
-    "static/js/2.ff1c7951.chunk.js",
-    "static/css/main.356403a8.chunk.css",
-    "static/js/main.41a565da.chunk.js"
+    "static/js/2.ac5e4b16.chunk.js",
+    "static/css/main.5d0fa07d.chunk.css",
+    "static/js/main.388effc5.chunk.js"
   ]
 }
