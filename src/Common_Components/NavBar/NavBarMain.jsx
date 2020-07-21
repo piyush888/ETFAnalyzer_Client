@@ -42,7 +42,6 @@ const NavBarMain = (props) => {
   const { logout, currentUser } = useContext(AuthContext);
   const history = useHistory();
   const location = useLocation();
-  const params = useParams();
   const dispatch = useDispatch();
   const { ETF, startDate } = useSelector((state) => state.navbar);
 
@@ -154,6 +153,7 @@ const NavBarMain = (props) => {
             Live-Arbitrage
           </Nav.Link>
         </Nav>
+        
         <Select
           style={{
             color: "black",

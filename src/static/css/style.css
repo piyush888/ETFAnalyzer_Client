@@ -118,3 +118,7 @@ p {
   font-family: Roboto, sans-serif;
   color: white;
 }
+
+.z-index-999{
+  z-index: 999;
+}
