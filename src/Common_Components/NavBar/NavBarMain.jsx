@@ -8,7 +8,7 @@ import {
   Button,
   Dropdown,
 } from "react-bootstrap";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useHistory, useParams } from "react-router-dom";
 import moment from "moment";
 import { useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,81 +17,101 @@ import Select from "react-dropdown-select";
 import { etfSelectOptions } from "./etfSelectOptions";
 import AuthContext from "../../Utilities/AuthContext";
 
+const generatePath = (pathname = "/", ETF = "XLK", startDate = "20200608") => {
+  console.log(pathname,ETF, startDate)
+  const page = pathname.split("/")[1];
+  switch (page) {
+    case "ETF-Description": {
+      return `/ETF-Description/${ETF}/${startDate}`;
+    }
+
+    case "historical-arbitrage": {
+      return `/historical-arbitrage/${ETF}/${startDate}`;
+    }
+
+    case "live-arbitrage-single": {
+      return `/live-arbitrage-single/${ETF}`;
+    }
+
+    default:
+      return "/";
+  }
+};
+
 const NavBarMain = (props) => {
   const { logout, currentUser } = useContext(AuthContext);
-
+  const history = useHistory();
   const location = useLocation();
+  const params = useParams();
   const dispatch = useDispatch();
   const { ETF, startDate } = useSelector((state) => state.navbar);
 
-  // useEffect(() => {
-  //   const routeName = location.pathname.split("/");
-  //   console.log(ETF)
-  //   if (routeName[1] === "ETF-Description") {
-  //     const etfName = routeName[2] ? routeName[2].toUpperCase() : "XLK";
-  //     if (etfName !== ETF || routeName[3] !== startDate) {
-  //       console.log(etfName, ETF)
-  //       history.push(`/ETF-Description/${ETF}/${startDate}`);
-  //     }
-  //   }
-  //   if (routeName[1] === "historical-arbitrage") {
-  //     const etfName = routeName[2] ? routeName[2].toUpperCase() : "XLK";
-  //     if (etfName !== ETF || routeName[3] !== startDate) {
-  //       // history.push(`/historical-arbitrage/${ETF}/${startDate}`);
-  //     }
-  //   }
-  // }, [ETF, startDate]);
-
   useEffect(() => {
-    const routeName = location.pathname.split("/");
+    
+    const pathName = location.pathname.split("/");
+    const page = pathName[1];
 
-    if (routeName[1] === "ETF-Description") {
-      const etfName = routeName[2] ? routeName[2].toUpperCase() : "XLK";
-      if (etfName !== ETF || routeName[3] !== startDate) {
-        dispatch({
-          type: changeNavbarEtfName,
+    switch (page) {
+      case "ETF-Description": {
+        if (pathName.length === 4) {
+          dispatch({
+            type: changeNavbarEtfName,
 
-          payload: { value: etfName },
-        });
-        dispatch({
-          type: changeNavbarStartDate,
-          payload: { value: routeName[3] },
-        });
+            payload: { value: pathName[2].toUpperCase() },
+          });
+          dispatch({
+            type: changeNavbarStartDate,
+            payload: { value: pathName[3] },
+          });
+        }
+
+        break;
       }
-    }
-    if (routeName[1] === "historical-arbitrage") {
-      const etfName = routeName[2] ? routeName[2].toUpperCase() : "XLK";
-      if (etfName !== ETF || routeName[3] !== startDate) {
-        dispatch({
-          type: changeNavbarEtfName,
 
-          payload: { value: etfName },
-        });
-        dispatch({
-          type: changeNavbarStartDate,
-          payload: { value: routeName[3] },
-        });
-      }
-    }
-    if (routeName[1] === "live-arbitrage-single") {
-      const etfName = routeName[2] ? routeName[2].toUpperCase() : "XLK";
-      if (etfName !== ETF) {
-        dispatch({
-          type: changeNavbarEtfName,
+      case "historical-arbitrage": {
+        if (pathName.length === 4) {
+          dispatch({
+            type: changeNavbarEtfName,
 
-          payload: { value: etfName },
-        });
+            payload: { value: pathName[2].toUpperCase() },
+          });
+          dispatch({
+            type: changeNavbarStartDate,
+            payload: { value: pathName[3] },
+          });
+        }
+
+        break;
       }
+
+      case "live-arbitrage-single": {
+        if (pathName.length === 3) {
+          dispatch({
+            type: changeNavbarEtfName,
+
+            payload: { value: pathName[2].toUpperCase() },
+          });
+        }
+
+        break;
+      }
+
+      default:
+        break;
     }
   }, [location]);
 
   const handleDateChange = (e) => {
     const date = moment(e.target.value, "YYYY-MM-DD").format("YYYYMMDD");
     dispatch({ type: changeNavbarStartDate, payload: { value: date } });
+    console.log(generatePath(location.pathname, ETF, date))
+    history.push(generatePath(location.pathname, ETF, date));
   };
 
-  const handleEtfChange = (ETF) =>
+  const handleEtfChange = (ETF) => {
     dispatch({ type: changeNavbarEtfName, payload: { value: ETF[0].element } });
+    history.push(generatePath(location.pathname, ETF[0].element, startDate));
+  };
 
   return (
     <Navbar className="bg-color-dark" variant="dark" expand="lg">

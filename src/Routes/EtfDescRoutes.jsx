@@ -13,6 +13,12 @@ const EtfDescRoutes = () => {
         component={ETF_Description}
       />
       <Redirect
+      
+      from="/ETF-Description/:ETF"
+      to={`/ETF-Description/:ETF/${startDate}`}
+    />
+      <Redirect
+      
         from="/ETF-Description"
         to={`/ETF-Description/${ETF}/${startDate}`}
       />
