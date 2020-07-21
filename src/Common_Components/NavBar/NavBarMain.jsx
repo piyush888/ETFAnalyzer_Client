@@ -17,8 +17,8 @@ import Select from "react-dropdown-select";
 import { etfSelectOptions } from "./etfSelectOptions";
 import AuthContext from "../../Utilities/AuthContext";
 
+
 const generatePath = (pathname = "/", ETF = "XLK", startDate = "20200608") => {
-  console.log(pathname,ETF, startDate)
   const page = pathname.split("/")[1];
   switch (page) {
     case "ETF-Description": {
@@ -104,7 +104,6 @@ const NavBarMain = (props) => {
   const handleDateChange = (e) => {
     const date = moment(e.target.value, "YYYY-MM-DD").format("YYYYMMDD");
     dispatch({ type: changeNavbarStartDate, payload: { value: date } });
-    console.log(generatePath(location.pathname, ETF, date))
     history.push(generatePath(location.pathname, ETF, date));
   };
 
