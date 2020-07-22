@@ -17,6 +17,8 @@ import Select from "react-dropdown-select";
 import { etfSelectOptions } from "./etfSelectOptions";
 import AuthContext from "../../Utilities/AuthContext";
 import Axios from "axios";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const generatePath = (pathname = "/", ETF = "XLK", startDate = "20200608") => {
   const page = pathname.split("/")[1];
@@ -106,9 +108,9 @@ const NavBarMain = (props) => {
   }, [location]);
 
   const handleDateChange = (value) => {
-    const date = moment(value, "YYYY-MM-DD").format("YYYYMMDD");
-    dispatch({ type: changeNavbarStartDate, payload: { value: date } });
-    history.push(generatePath(location.pathname, ETF, date));
+    // const date = moment(value, "YYYY-MM-DD").format("YYYYMMDD");
+    dispatch({ type: changeNavbarStartDate, payload: { value } });
+    history.push(generatePath(location.pathname, ETF, value));
   };
 
   const handleEtfChange = (ETF) => {
@@ -127,38 +129,40 @@ const NavBarMain = (props) => {
           <Nav.Link style={{ color: "white" }} as={Link} to="/" eventKey="">
             Home
           </Nav.Link>
-         <Select
-         style={{
-          color: "black",
-          width: "100px",
-          marginRight: "10px",
-          backgroundColor: "white",
-          height:"39px",
-        }}
-        values={[{ element: `${ETF}`, index: 0 }]}
-        placeholder="Select ETFs"
-        labelField={"element"}
-        valueField={"element"}
-        options={etfSelectOptions}
-        onChange={handleEtfChange}
-        noDataLabel="No matches found"
-        />
-
-        <span>&nbsp;&nbsp;</span>
-        <Form inline>
-          <FormControl
-            value={moment(startDate, "YYYYMMDD").format("YYYY-MM-DD")}
-            type="date"
-            placeholder="Start Date"
-            className="mr-sm-2"
-            onChange={(e) => handleDateChange(e.target.value)}
+          <Select
+            style={{
+              color: "black",
+              width: "100px",
+              marginRight: "10px",
+              backgroundColor: "white",
+              height: "39px",
+            }}
+            values={[{ element: `${ETF}`, index: 0 }]}
+            placeholder="Select ETFs"
+            labelField={"element"}
+            valueField={"element"}
+            options={etfSelectOptions}
+            onChange={handleEtfChange}
+            noDataLabel="No matches found"
           />
-        </Form>
+
+          <span>&nbsp;&nbsp;</span>
+          <Form inline>
+            <DatePicker
+              selected={moment.utc(startDate, "YYYYMMDD").toDate()}
+              onChange={(e) => handleDateChange(moment(e).format("YYYYMMDD"))}
+            />
+            {/* <FormControl
+              value={moment(startDate, "YYYYMMDD").format("YYYY-MM-DD")}
+              type="date"
+              placeholder="Start Date"
+              className="mr-sm-2"
+              onChange={(e) => handleDateChange(e.target.value)}
+            /> */}
+          </Form>
         </Nav>
 
-        
-
-         <Nav className="">
+        <Nav className="">
           <Nav.Link
             style={{ color: "white" }}
             as={Link}
@@ -193,7 +197,6 @@ const NavBarMain = (props) => {
           </Nav.Link>
         </Nav>
 
-
         {currentUser && currentUser.emailVerified ? (
           <button
             type="button"
@@ -214,7 +217,7 @@ const NavBarMain = (props) => {
                   logout();
                 }}
               >
-               | Sign In
+                | Sign In
               </a>
             </li>
             <li class="nav-item active">
