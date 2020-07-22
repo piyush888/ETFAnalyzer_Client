@@ -34,7 +34,7 @@ const generatePath = (pathname = "/", ETF = "XLK", startDate = "20200608") => {
     }
 
     default:
-      return "/";
+      return pathname;
   }
 };
 
