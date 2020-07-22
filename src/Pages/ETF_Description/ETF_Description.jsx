@@ -44,14 +44,18 @@ class ETF_Description extends React.Component {
   };
 
   componentDidMount() {
-    console.log(this.props);
-    const { startDate, ETF } = this.props;
+    const { startDate, ETF } = this.props.match.params;
     this.fetchEtfdesc(ETF, startDate);
   }
 
   componentDidUpdate(prevProps) {
-    const { startDate, ETF } = this.props;
-    if (prevProps.ETF !== ETF || prevProps.startDate !== startDate) {
+    const {
+      ETF: prevPropsETF,
+      startDate: prevPropsStartDate,
+    } = prevProps.match.params;
+    const { ETF, startDate } = this.props.match.params;
+
+    if (prevPropsETF !== ETF || prevPropsStartDate !== startDate) {
       this.fetchEtfdesc(ETF, startDate);
     }
   }
@@ -64,7 +68,7 @@ class ETF_Description extends React.Component {
       EtfDbCategory,
     } = this.state;
 
-    const { startDate, ETF } = this.props;
+    const { startDate, ETF } = this.props.match.params;
     return (
       <Row>
         <Col xs={12} md={12}>
@@ -120,15 +124,4 @@ class ETF_Description extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    ETF: state.navbar.ETF,
-    startDate: state.navbar.startDate,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {};
-};
-
-export default compose(connect(mapStateToProps, null))(ETF_Description);
+export default compose(connect(null, null))(ETF_Description);

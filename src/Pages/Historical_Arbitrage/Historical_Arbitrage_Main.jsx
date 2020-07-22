@@ -39,7 +39,7 @@ class HistoricalArbitrage extends React.Component {
   parseData(parse) {
     return function (d) {
       d.date = parse(d.date);
-      d['Over Bought/Sold'] = d['Over Bought/Sold'];
+      d["Over Bought/Sold"] = d["Over Bought/Sold"];
       d.open = +parseFloat(d.open);
       d.high = +parseFloat(d.high);
       d.low = +parseFloat(d.low);
@@ -52,6 +52,7 @@ class HistoricalArbitrage extends React.Component {
 
   fetchData = (ETF, startDate) => {
     if (ETF && startDate) {
+      this.setState({ ...this.state, isLoading: true });
       Axios.get(`/api/PastArbitrageData/${ETF}/${startDate}`)
         .then(({ data }) =>
           this.setState({
@@ -70,37 +71,44 @@ class HistoricalArbitrage extends React.Component {
             isLoading: false,
           })
         )
-        .then((err) => console.log(err));
+        .catch((err) => console.log(err));
     }
   };
 
   etfUnderlyingPerformance = (ETF, startDate) => {
     if (ETF && startDate) {
+      this.setState({ ...this.state, isLoading: true });
       Axios.get(`/api/PastArbitrageData/DailyChange/${ETF}/${startDate}`).then(
         (res) => {
           console.log(res);
           this.setState({
+            ...this.state,
             underlyingPerformance: res,
+            isLoading: false,
           });
         }
       );
     }
   };
 
+  componentDidMount() {
+    const { ETF, startDate } = this.props.match.params;
+
+    this.fetchData(ETF, startDate);
+    this.etfUnderlyingPerformance(ETF, startDate);
+  }
+
   componentDidUpdate(prevProps) {
-    const { startDate, ETF } = this.props;
-    if (prevProps.ETF !== ETF || prevProps.startDate !== startDate) {
-      this.state.isLoading = true;
+    const {
+      ETF: prevPropsETF,
+      startDate: prevPropsStartDate,
+    } = prevProps.match.params;
+    const { ETF, startDate } = this.props.match.params;
+
+    if (prevPropsETF !== ETF || prevPropsStartDate !== startDate) {
       this.fetchData(ETF, startDate);
       this.etfUnderlyingPerformance(ETF, startDate);
     }
-  }
-
-  componentDidMount() {
-    const { ETF, startDate } = this.props;
-    this.state.isLoading = true;
-    this.fetchData(ETF, startDate);
-    this.etfUnderlyingPerformance(ETF, startDate);
   }
 
   render() {
@@ -112,7 +120,7 @@ class HistoricalArbitrage extends React.Component {
             <Card>
               <Card.Header className=" text-white bg-color-dark flex-row">
                 <span>
-                  Histortical Data {this.props.ETF} {this.props.startDate}
+                  Histortical Data {ETF} {startDate}
                 </span>
 
                 <div className="margin-left-auto">
@@ -208,17 +216,19 @@ class HistoricalArbitrage extends React.Component {
                   </Col>
 
                   <Col xs={12} md={12}>
-                      <Card className="CustomCard smallHeightTable"> 
-                        <Card.Header className="CustomCardHeader text-white CustomBackGroundColor">
-                          Underlyings Daily Change
-                        </Card.Header>
-                        <Card.Body className="CustomCardBody padding-0 bg-color-dark overflow-auto height-50vh font-size-sm">
+                    <Card className="CustomCard smallHeightTable">
+                      <Card.Header className="CustomCardHeader text-white CustomBackGroundColor">
+                        Underlyings Daily Change
+                      </Card.Header>
+                      <Card.Body className="CustomCardBody padding-0 bg-color-dark overflow-auto height-50vh font-size-sm">
                         {this.state.isLoading ? (
-                            <Loader />
-                            ) : (
-                            <DailyChangeUnderlyingFunc data={this.state.underlyingPerformance}/>
-                            )}
-                        </Card.Body>
+                          <Loader />
+                        ) : (
+                          <DailyChangeUnderlyingFunc
+                            data={this.state.underlyingPerformance}
+                          />
+                        )}
+                      </Card.Body>
                     </Card>
                   </Col>
                 </Row>
