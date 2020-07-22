@@ -16,7 +16,7 @@ import { changeNavbarStartDate, changeNavbarEtfName } from "./NavBarActions";
 import Select from "react-dropdown-select";
 import { etfSelectOptions } from "./etfSelectOptions";
 import AuthContext from "../../Utilities/AuthContext";
-
+import Axios from "axios";
 
 const generatePath = (pathname = "/", ETF = "XLK", startDate = "20200608") => {
   const page = pathname.split("/")[1];
@@ -46,7 +46,12 @@ const NavBarMain = (props) => {
   const { ETF, startDate } = useSelector((state) => state.navbar);
 
   useEffect(() => {
-    
+    Axios.get("/api/LastWorkingDate")
+      .then((res) => handleDateChange(res.data))
+      .then((err) => console.log(err));
+  }, []);
+
+  useEffect(() => {
     const pathName = location.pathname.split("/");
     const page = pathName[1];
 
@@ -100,8 +105,8 @@ const NavBarMain = (props) => {
     }
   }, [location]);
 
-  const handleDateChange = (e) => {
-    const date = moment(e.target.value, "YYYY-MM-DD").format("YYYYMMDD");
+  const handleDateChange = (value) => {
+    const date = moment(value, "YYYY-MM-DD").format("YYYYMMDD");
     dispatch({ type: changeNavbarStartDate, payload: { value: date } });
     history.push(generatePath(location.pathname, ETF, date));
   };
@@ -111,13 +116,11 @@ const NavBarMain = (props) => {
     history.push(generatePath(location.pathname, ETF[0].element, startDate));
   };
 
-  const navbarColor = currentUser && currentUser.emailVerified ? ("bg-color-dark"
-      ) : (
-        "bg-primary"
-      );
+  const navbarColor =
+    currentUser && currentUser.emailVerified ? "bg-color-dark" : "bg-primary";
 
   return (
-      <Navbar className={navbarColor} variant="dark" expand="lg">
+    <Navbar className={navbarColor} variant="dark" expand="lg">
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
@@ -157,7 +160,7 @@ const NavBarMain = (props) => {
             Live-Arbitrage
           </Nav.Link>
         </Nav>
-        
+
         <Select
           style={{
             color: "black",
@@ -181,27 +184,39 @@ const NavBarMain = (props) => {
             type="date"
             placeholder="Start Date"
             className="mr-sm-2"
-            onChange={handleDateChange}
+            onChange={(e) => handleDateChange(e.target.value)}
           />
         </Form>
         {currentUser && currentUser.emailVerified ? (
-          <button type="button" class="btn btn-link text-white" onClick={() => {logout();}}>
+          <button
+            type="button"
+            class="btn btn-link text-white"
+            onClick={() => {
+              logout();
+            }}
+          >
             Log Out
           </button>
         ) : (
           <ul class="navbar-nav">
-              <li class="nav-item active">
-                <a class="nav-link" href="/login" onClick={() => {logout();}}>
-                  Sign In
-                </a>
-              </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="/signup">
-                  Sign Up
-                </a>
-              </li>
-            </ul>
-          )}
+            <li class="nav-item active">
+              <a
+                class="nav-link"
+                href="/login"
+                onClick={() => {
+                  logout();
+                }}
+              >
+                Sign In
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/signup">
+                Sign Up
+              </a>
+            </li>
+          </ul>
+        )}
       </Navbar.Collapse>
     </Navbar>
   );
