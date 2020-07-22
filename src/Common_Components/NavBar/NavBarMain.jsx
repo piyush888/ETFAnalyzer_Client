@@ -127,6 +127,38 @@ const NavBarMain = (props) => {
           <Nav.Link style={{ color: "white" }} as={Link} to="/" eventKey="">
             Home
           </Nav.Link>
+         <Select
+         style={{
+          color: "black",
+          width: "100px",
+          marginRight: "10px",
+          backgroundColor: "white",
+          height:"39px",
+        }}
+        values={[{ element: `${ETF}`, index: 0 }]}
+        placeholder="Select ETFs"
+        labelField={"element"}
+        valueField={"element"}
+        options={etfSelectOptions}
+        onChange={handleEtfChange}
+        noDataLabel="No matches found"
+        />
+
+        <span>&nbsp;&nbsp;</span>
+        <Form inline>
+          <FormControl
+            value={moment(startDate, "YYYYMMDD").format("YYYY-MM-DD")}
+            type="date"
+            placeholder="Start Date"
+            className="mr-sm-2"
+            onChange={(e) => handleDateChange(e.target.value)}
+          />
+        </Form>
+        </Nav>
+
+        
+
+         <Nav className="">
           <Nav.Link
             style={{ color: "white" }}
             as={Link}
@@ -161,41 +193,16 @@ const NavBarMain = (props) => {
           </Nav.Link>
         </Nav>
 
-        <Select
-          style={{
-            color: "black",
-            width: "150px",
-            marginRight: "20px",
-            backgroundColor: "white",
-          }}
-          values={[{ element: `${ETF}`, index: 0 }]}
-          placeholder="Select ETFs"
-          labelField={"element"}
-          valueField={"element"}
-          options={etfSelectOptions}
-          onChange={handleEtfChange}
-          noDataLabel="No matches found"
-        />
 
-        <span>&nbsp;&nbsp;</span>
-        <Form inline>
-          <FormControl
-            value={moment(startDate, "YYYYMMDD").format("YYYY-MM-DD")}
-            type="date"
-            placeholder="Start Date"
-            className="mr-sm-2"
-            onChange={(e) => handleDateChange(e.target.value)}
-          />
-        </Form>
         {currentUser && currentUser.emailVerified ? (
           <button
             type="button"
-            class="btn btn-link text-white"
+            class="btn btn-link"
             onClick={() => {
               logout();
             }}
           >
-            Log Out
+            | Log Out
           </button>
         ) : (
           <ul class="navbar-nav">
@@ -207,7 +214,7 @@ const NavBarMain = (props) => {
                   logout();
                 }}
               >
-                Sign In
+               | Sign In
               </a>
             </li>
             <li class="nav-item active">
