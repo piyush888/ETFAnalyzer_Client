@@ -135,7 +135,7 @@ const NavBarMain = (props) => {
               width: "100px",
               marginRight: "10px",
               backgroundColor: "white",
-              height: "39px",
+              height: "0px"
             }}
             values={[{ element: `${ETF}`, index: 0 }]}
             placeholder="Select ETFs"
@@ -149,7 +149,8 @@ const NavBarMain = (props) => {
           <span>&nbsp;&nbsp;</span>
           <Form inline>
             <DatePicker
-              selected={moment.utc(startDate, "YYYYMMDD").toDate()}
+              utcOffset={0}
+              selected={moment(startDate, "YYYYMMDD").toDate()}
               onChange={(e) => handleDateChange(moment(e).format("YYYYMMDD"))}
             />
             {/* <FormControl
