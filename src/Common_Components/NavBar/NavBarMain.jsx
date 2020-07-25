@@ -10,13 +10,14 @@ import {
 } from "react-bootstrap";
 import { Link, useLocation, useHistory, useParams } from "react-router-dom";
 import moment from "moment";
-import { useContext } from "react";
+import { useContext,useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { changeNavbarStartDate, changeNavbarEtfName } from "./NavBarActions";
 import Select from "react-dropdown-select";
 import { etfSelectOptions } from "./etfSelectOptions";
 import AuthContext from "../../Utilities/AuthContext";
 import Axios from "axios";
+import parseISO from 'date-fns/esm/fp/parseISO'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -40,17 +41,31 @@ const generatePath = (pathname = "/", ETF = "XLK", startDate = "20200608") => {
   }
 };
 
+
 const NavBarMain = (props) => {
   const { logout, currentUser } = useContext(AuthContext);
   const history = useHistory();
   const location = useLocation();
   const dispatch = useDispatch();
   const { ETF, startDate } = useSelector((state) => state.navbar);
+  const [holidaysList, setholidaysList] = useState([]);
 
   useEffect(() => {
     Axios.get("/api/LastWorkingDate")
       .then((res) => handleDateChange(res.data))
-      .then((err) => console.log(err));
+      .catch((err) => console.log(err));
+  }, []);
+
+
+  useEffect(() => {
+    Axios.get("/api/ListOfHolidays")
+      .then((res) => {
+        const temp=[...res.data.HolidayList]
+        const tempX =[]
+        temp.map((data) => tempX.push(moment(data,"YYYY-MM-DD").toDate()))
+        setholidaysList(tempX)
+      })
+      .catch((err) => console.log(err));
   }, []);
 
   useEffect(() => {
@@ -121,6 +136,8 @@ const NavBarMain = (props) => {
   const navbarColor =
     currentUser && currentUser.emailVerified ? "bg-color-dark" : "bg-primary";
 
+
+
   return (
     <Navbar className={navbarColor} variant="dark" expand="lg">
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -151,15 +168,11 @@ const NavBarMain = (props) => {
             <DatePicker
               utcOffset={0}
               selected={moment(startDate, "YYYYMMDD").toDate()}
+              minDate={new Date("06-05-2020")}
+              maxDate={new Date()}
               onChange={(e) => handleDateChange(moment(e).format("YYYYMMDD"))}
+              excludeDates ={holidaysList}
             />
-            {/* <FormControl
-              value={moment(startDate, "YYYYMMDD").format("YYYY-MM-DD")}
-              type="date"
-              placeholder="Start Date"
-              className="mr-sm-2"
-              onChange={(e) => handleDateChange(e.target.value)}
-            /> */}
           </Form>
         </Nav>
 

@@ -71,7 +71,10 @@ class HistoricalArbitrage extends React.Component {
             isLoading: false,
           })
         )
-        .catch((err) => console.log(err));
+        .catch((err) => {
+                alert(err.response.data.message);
+                console.log(err.response);
+            });
     }
   };
 
