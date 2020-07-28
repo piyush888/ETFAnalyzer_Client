@@ -1,13 +1,5 @@
 import React, { useEffect } from "react";
-import {
-  Nav,
-  Navbar,
-  Form,
-  NavDropdown,
-  FormControl,
-  Button,
-  Dropdown,
-} from "react-bootstrap";
+import { Nav, Navbar, Form } from "react-bootstrap";
 import { Link, useLocation, useHistory, useParams } from "react-router-dom";
 import moment from "moment";
 import { useContext, useState } from "react";
@@ -17,7 +9,6 @@ import Select from "react-dropdown-select";
 import { etfSelectOptions } from "./etfSelectOptions";
 import AuthContext from "../../Utilities/AuthContext";
 import Axios from "axios";
-import parseISO from "date-fns/esm/fp/parseISO";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { getPageName } from "../../Utilities/utilFunc";
@@ -166,19 +157,18 @@ const NavBarMain = (props) => {
     if (startDate) {
       dispatch({ type: changeNavbarStartDate, payload: { value: startDate } });
     }
+    if (!startDate) {
+      Axios.get("/api/ListOfHolidays")
+        .then((res) => {
+          const temp = [...res.data.HolidayList];
+          const tempX = [];
+          temp.map((data) => tempX.push(moment(data, "YYYY-MM-DD").toDate()));
+          setholidaysList(tempX);
+        })
+        .catch((err) => console.log(err));
+    }
     Axios.get("/api/LastWorkingDate")
       .then((res) => handleDateChange(res.data))
-      .catch((err) => console.log(err));
-  }, []);
-
-  useEffect(() => {
-    Axios.get("/api/ListOfHolidays")
-      .then((res) => {
-        const temp = [...res.data.HolidayList];
-        const tempX = [];
-        temp.map((data) => tempX.push(moment(data, "YYYY-MM-DD").toDate()));
-        setholidaysList(tempX);
-      })
       .catch((err) => console.log(err));
   }, []);
 
