@@ -22,6 +22,7 @@ import AppTable from "../../Component/Table";
 import { connect } from "react-redux";
 import { Loader } from "../../Common_Components/Loader";
 import ScatterPlot from "../../Component/ScatterPlott";
+import { CommonNavBar } from "../../Common_Components/NavBar";
 
 class HistoricalArbitrage extends React.Component {
   state = {
@@ -118,6 +119,7 @@ class HistoricalArbitrage extends React.Component {
     const { ETF, startDate } = this.props.match.params;
     return (
       <div>
+          <CommonNavBar />
         <Row>
           <Col className="etfArbitrageTable" xs={12} md={5}>
             <Card>

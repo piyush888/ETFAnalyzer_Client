@@ -10,6 +10,7 @@ import { EtfSameIndustry } from "./ETF_Same_Industry";
 import { connect } from "react-redux";
 import { compose } from "recompose";
 import { Loader } from "../../Common_Components/Loader";
+import { CommonNavBar } from "../../Common_Components/NavBar";
 
 class ETF_Description extends React.Component {
   state = {
@@ -70,18 +71,20 @@ class ETF_Description extends React.Component {
 
     const { startDate, ETF } = this.props.match.params;
     return (
-      <Row>
-        <Col xs={12} md={12}>
-          <Row>
-            <Col xs={12} md={3}>
-              {DescriptionData ? (
-                <DescriptionTable DescriptionData={DescriptionData} />
-              ) : (
-                <Loader />
-              )}
-            </Col>
+      <>
+        <CommonNavBar />
+        <Row>
+          <Col xs={12} md={12}>
+            <Row>
+              <Col xs={12} md={3}>
+                {DescriptionData ? (
+                  <DescriptionTable DescriptionData={DescriptionData} />
+                ) : (
+                  <Loader />
+                )}
+              </Col>
 
-            {/*
+              {/*
         <Col xs={12} md={8}>
           <Card>
             <Card.Header className="text-white BlackHeaderForModal">Price Chart</Card.Header>
@@ -92,34 +95,35 @@ class ETF_Description extends React.Component {
         </Col>
       */}
 
-            <Col xs={12} md={3}>
-              <ETFHoldings ETF={ETF} startDate={startDate} />
-            </Col>
+              <Col xs={12} md={3}>
+                <ETFHoldings ETF={ETF} startDate={startDate} />
+              </Col>
 
-            <Col xs={12} md={6}>
-              <PNL ETF={ETF} />
-            </Col>
+              <Col xs={12} md={6}>
+                <PNL ETF={ETF} />
+              </Col>
 
-            <Col xs={12} md={4}>
-              <EtfSameIssuer IssuerName={IssuerName} />
-            </Col>
+              <Col xs={12} md={4}>
+                <EtfSameIssuer IssuerName={IssuerName} />
+              </Col>
 
-            <Col xs={12} md={4}>
-              {SimilarTotalAsstUndMgmt && (
-                <SimilarAssetUnderManagement
-                  SimilarTotalAsstUndMgmt={SimilarTotalAsstUndMgmt}
-                />
-              )}
-            </Col>
+              <Col xs={12} md={4}>
+                {SimilarTotalAsstUndMgmt && (
+                  <SimilarAssetUnderManagement
+                    SimilarTotalAsstUndMgmt={SimilarTotalAsstUndMgmt}
+                  />
+                )}
+              </Col>
 
-            <Col xs={12} md={4}>
-              {EtfDbCategory && (
-                <EtfSameIndustry EtfDbCategory={EtfDbCategory} />
-              )}
-            </Col>
-          </Row>
-        </Col>
-      </Row>
+              <Col xs={12} md={4}>
+                {EtfDbCategory && (
+                  <EtfSameIndustry EtfDbCategory={EtfDbCategory} />
+                )}
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      </>
     );
   }
 }

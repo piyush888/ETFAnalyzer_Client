@@ -6,28 +6,32 @@ import Col from "react-bootstrap/Col";
 // import { tsvParse, csvParse } from "d3-dsv";
 // import { timeParse } from "d3-time-format";
 
-import './Styles/Live_Arbitrage_All.css';
+import "./Styles/Live_Arbitrage_All.css";
 // import LiveArbitrageAllTable from './Live_Arbitrage_Table';
-import LiveArbitrageAllTable from './Live_Arb_Table2';
+import LiveArbitrageAllTable from "./Live_Arb_Table2";
 
 import { connect } from "react-redux";
-
+import { CommonNavBar } from "../../Common_Components/NavBar";
 
 class Live_Arbitrage_All extends React.Component {
   state = {
-    LiveArbitrageAllEtf : ''
+    LiveArbitrageAllEtf: "",
   };
 
   render() {
     return (
+      <>
+        <CommonNavBar />
         <Row>
           <Col xs={12} md={12} lg={12}>
-            <LiveArbitrageAllTable data={this.state.LiveArbitrageAllEtf || []} />
+            <LiveArbitrageAllTable
+              data={this.state.LiveArbitrageAllEtf || []}
+            />
           </Col>
         </Row>
+      </>
     );
   }
-
 }
 
 const mapStateToProps = (state) => {

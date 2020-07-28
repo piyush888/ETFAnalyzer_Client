@@ -18,6 +18,7 @@ import LiveArbitrageTable from "./LiveArbitrageTable";
 import LineChartForHistArb from "../../Component/LineChartForHistArb";
 import { Loader } from "../../Common_Components/Loader";
 import ScatterPlot from "../../Component/ScatterPlott";
+import { CommonNavBar } from "../../Common_Components/NavBar";
 
 class Live_Arbitrage_Single extends React.Component {
   state = {
@@ -108,153 +109,160 @@ class Live_Arbitrage_Single extends React.Component {
   UpdateArbitragDataTables(appendToPreviousTable) {
     const { ETF } = this.props;
     if (ETF) {
-      axios.get(`/api/ETfLiveArbitrage/Single/UpdateTable/${ETF}`).then((res) => {
-        if (appendToPreviousTable) {
-          console.log("Append To Previous table");
-        } else {
-          this.setState({
-            LiveArbitrage: res.data.Arbitrage["Arbitrage in $"][0],
-            LiveSpread: res.data.Arbitrage["ETF Trading Spread in $"][0],
-            CurrentTime: res.data.Arbitrage["Time"][0],
-            LiveVWPrice: res.data.Prices["VWPrice"][0],
-            OpenPrice: res.data.Prices["open"][0],
-            ClosePrice: res.data.Prices["close"][0],
-            HighPrice: res.data.Prices["high"][0],
-            LowPrice: res.data.Prices["low"][0],
-            ETFStatus: res.data.SignalInfo.ETFStatus,
-            Signal: res.data.SignalInfo.Signal,
-            SignalStrength: res.data.SignalInfo.Strength,
-            LiveColor:
-              res.data.Arbitrage["Arbitrage in $"][0] < 0
-                ? "text-success"
-                : res.data.Arbitrage["Arbitrage in $"][0] == 0
-                ? "text-muted"
-                : "text-danger",
-          });
-        }
-      });
+      axios
+        .get(`/api/ETfLiveArbitrage/Single/UpdateTable/${ETF}`)
+        .then((res) => {
+          if (appendToPreviousTable) {
+            console.log("Append To Previous table");
+          } else {
+            this.setState({
+              LiveArbitrage: res.data.Arbitrage["Arbitrage in $"][0],
+              LiveSpread: res.data.Arbitrage["ETF Trading Spread in $"][0],
+              CurrentTime: res.data.Arbitrage["Time"][0],
+              LiveVWPrice: res.data.Prices["VWPrice"][0],
+              OpenPrice: res.data.Prices["open"][0],
+              ClosePrice: res.data.Prices["close"][0],
+              HighPrice: res.data.Prices["high"][0],
+              LowPrice: res.data.Prices["low"][0],
+              ETFStatus: res.data.SignalInfo.ETFStatus,
+              Signal: res.data.SignalInfo.Signal,
+              SignalStrength: res.data.SignalInfo.Strength,
+              LiveColor:
+                res.data.Arbitrage["Arbitrage in $"][0] < 0
+                  ? "text-success"
+                  : res.data.Arbitrage["Arbitrage in $"][0] == 0
+                  ? "text-muted"
+                  : "text-danger",
+            });
+          }
+        });
     }
   }
 
   render() {
     return (
-      <Row>
-        <Col xs={12} md={5}>
-          <Card>
-            <Card.Header className="text-white bg-color-dark flex-row">
-              Live Arbitrage {this.props.ETF}
-              <div className="margin-left-auto">
-                <CombinedPieCharts
-                  etfmoversDictCount={this.state.etfmoversDictCount}
-                  highestChangeDictCount={this.state.highestChangeDictCount}
+      <>
+        <CommonNavBar />
+        <Row>
+          <Col xs={12} md={5}>
+            <Card>
+              <Card.Header className="text-white bg-color-dark flex-row">
+                Live Arbitrage {this.props.ETF}
+                <div className="margin-left-auto">
+                  <CombinedPieCharts
+                    etfmoversDictCount={this.state.etfmoversDictCount}
+                    highestChangeDictCount={this.state.highestChangeDictCount}
+                  />
+                </div>
+              </Card.Header>
+              <Card.Body className="BlackHeaderForModal">
+                {this.state.isLoading ? (
+                  <Loader />
+                ) : (
+                  <div className="FullPageDiv">
+                    <LiveArbitrageTable
+                      data={this.state.Full_Day_Arbitrage_Data}
+                    />
+                  </div>
+                )}
+              </Card.Body>
+            </Card>
+          </Col>
+
+          <Col xs={12} md={3}>
+            <Row>
+              <Col xs={12} md={12}>
+                <LiveStatusWindow
+                  HighPrice={this.state.HighPrice}
+                  OpenPrice={this.state.OpenPrice}
+                  ClosePrice={this.state.ClosePrice}
+                  LowPrice={this.state.LowPrice}
+                  SignalStrength={this.state.SignalStrength}
+                  CurrentTime={this.state.CurrentTime}
+                  ETFStatus={this.state.ETFStatus}
+                  Signal={this.state.Signal}
+                  LiveArbitrage={this.state.LiveArbitrage}
+                  LiveSpread={this.state.LiveSpread}
+                  LiveColor={this.state.LiveColor}
                 />
-              </div>
-            </Card.Header>
-            <Card.Body className="BlackHeaderForModal">
+              </Col>
+
+              <Col xs={12} md={12}>
+                <Card className="CustomCard">
+                  <Card.Header className="CustomCardHeader text-white">
+                    Arb Time Series
+                  </Card.Header>
+                  {this.state.isLoading ? (
+                    <Loader />
+                  ) : (
+                    <Card.Body className="CustomCardBody text-white">
+                      <LineChartForHistArb
+                        data={this.state.ArbitrageLineChart}
+                      />
+                    </Card.Body>
+                  )}
+                </Card>
+              </Col>
+
+              <Col xs={12} md={12}>
+                <Card className="CustomCard">
+                  <Card.Header className="CustomCardHeader text-white">
+                    Signal Performace
+                  </Card.Header>
+                  {this.state.isLoading ? (
+                    <Loader />
+                  ) : (
+                    <Card.Body className="CustomCardBody text-white">
+                      {this.state.pnlstatementforday}
+                    </Card.Body>
+                  )}
+                </Card>
+              </Col>
+
+              <Col xs={12} md={12}>
+                <Card className="CustomCard">
+                  <Card.Header className="CustomCardHeader text-white">
+                    Signal Stats
+                  </Card.Header>
+                  {this.state.isLoading ? (
+                    <Loader />
+                  ) : (
+                    <Card.Body className="CustomCardBody text-white">
+                      {this.state.SignalCategorization}
+                    </Card.Body>
+                  )}
+                </Card>
+              </Col>
+            </Row>
+          </Col>
+
+          <Col xs={12} md={4}>
+            <div className="DescriptionTable3">
+              <Card>
+                <Card.Header className="modalCustomHeader text-white CustomBackGroundColor">
+                  Price Chart
+                </Card.Header>
+                <Card.Body className="BlackHeaderForModal">
+                  <ChartComponent data={this.state.Full_Day_Prices} />
+                </Card.Body>
+              </Card>
+            </div>
+
+            <Card className="CustomCard">
+              <Card.Header className="CustomCardHeader text-white">
+                ETF Change % Vs NAV change %
+              </Card.Header>
               {this.state.isLoading ? (
                 <Loader />
               ) : (
-                <div className="FullPageDiv">
-                  <LiveArbitrageTable
-                    data={this.state.Full_Day_Arbitrage_Data}
-                  />
-                </div>
+                <Card.Body className="CustomCardBody text-white">
+                  {this.state.scatterPlotData}
+                </Card.Body>
               )}
-            </Card.Body>
-          </Card>
-        </Col>
-
-        <Col xs={12} md={3}>
-          <Row>
-            <Col xs={12} md={12}>
-              <LiveStatusWindow
-                HighPrice={this.state.HighPrice}
-                OpenPrice={this.state.OpenPrice}
-                ClosePrice={this.state.ClosePrice}
-                LowPrice={this.state.LowPrice}
-                SignalStrength={this.state.SignalStrength}
-                CurrentTime={this.state.CurrentTime}
-                ETFStatus={this.state.ETFStatus}
-                Signal={this.state.Signal}
-                LiveArbitrage={this.state.LiveArbitrage}
-                LiveSpread={this.state.LiveSpread}
-                LiveColor={this.state.LiveColor}
-              />
-            </Col>
-
-            <Col xs={12} md={12}>
-              <Card className="CustomCard">
-                <Card.Header className="CustomCardHeader text-white">
-                  Arb Time Series
-                </Card.Header>
-                {this.state.isLoading ? (
-                  <Loader />
-                ) : (
-                  <Card.Body className="CustomCardBody text-white">
-                    <LineChartForHistArb data={this.state.ArbitrageLineChart} />
-                  </Card.Body>
-                )}
-              </Card>
-            </Col>
-
-            <Col xs={12} md={12}>
-              <Card className="CustomCard">
-                <Card.Header className="CustomCardHeader text-white">
-                  Signal Performace
-                </Card.Header>
-                {this.state.isLoading ? (
-                  <Loader />
-                ) : (
-                  <Card.Body className="CustomCardBody text-white">
-                    {this.state.pnlstatementforday}
-                  </Card.Body>
-                )}
-              </Card>
-            </Col>
-
-            <Col xs={12} md={12}>
-              <Card className="CustomCard">
-                <Card.Header className="CustomCardHeader text-white">
-                  Signal Stats
-                </Card.Header>
-                {this.state.isLoading ? (
-                  <Loader />
-                ) : (
-                  <Card.Body className="CustomCardBody text-white">
-                    {this.state.SignalCategorization}
-                  </Card.Body>
-                )}
-              </Card>
-            </Col>
-          </Row>
-        </Col>
-
-        <Col xs={12} md={4}>
-          <div className="DescriptionTable3">
-            <Card>
-              <Card.Header className="modalCustomHeader text-white CustomBackGroundColor">
-                Price Chart
-              </Card.Header>
-              <Card.Body className="BlackHeaderForModal">
-                <ChartComponent data={this.state.Full_Day_Prices} />
-              </Card.Body>
             </Card>
-          </div>
-
-          <Card className="CustomCard">
-            <Card.Header className="CustomCardHeader text-white">
-              ETF Change % Vs NAV change %
-            </Card.Header>
-            {this.state.isLoading ? (
-              <Loader />
-            ) : (
-              <Card.Body className="CustomCardBody text-white">
-                {this.state.scatterPlotData}
-              </Card.Body>
-            )}
-          </Card>
-        </Col>
-      </Row>
+          </Col>
+        </Row>
+      </>
     );
   }
 
