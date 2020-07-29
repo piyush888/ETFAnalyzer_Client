@@ -79,30 +79,33 @@ class Live_Arbitrage_Single extends React.Component {
   fetchETFLiveData() {
     const { ETF } = this.props;
     if (ETF) {
-      axios.get(`/api/ETfLiveArbitrage/Single/${ETF}`).then((res) => {
-        this.setState({
-          Full_Day_Arbitrage_Data: JSON.parse(res.data.Arbitrage),
-          Full_Day_Prices: {
-            data: tsvParse(
-              res.data.Prices,
-              this.parseData(this.state.parseDate)
+      axios
+        .get(`/api/ETfLiveArbitrage/Single/${ETF}`)
+        .then((res) => {
+          this.setState({
+            Full_Day_Arbitrage_Data: JSON.parse(res.data.Arbitrage),
+            Full_Day_Prices: {
+              data: tsvParse(
+                res.data.Prices,
+                this.parseData(this.state.parseDate)
+              ),
+            },
+            pnlstatementforday: (
+              <AppTable data={JSON.parse(res.data.pnlstatementforday)} />
             ),
-          },
-          pnlstatementforday: (
-            <AppTable data={JSON.parse(res.data.pnlstatementforday)} />
-          ),
-          SignalCategorization: (
-            <AppTable data={JSON.parse(res.data.SignalCategorization)} />
-          ),
-          scatterPlotData: (
-            <ScatterPlot data={JSON.parse(res.data.scatterPlotData)} />
-          ),
-          ArbitrageLineChart: res.data.ArbitrageLineChart,
-          etfmoversDictCount: JSON.parse(res.data.etfmoversDictCount),
-          highestChangeDictCount: JSON.parse(res.data.highestChangeDictCount),
-          isLoading: false,
-        });
-      });
+            SignalCategorization: (
+              <AppTable data={JSON.parse(res.data.SignalCategorization)} />
+            ),
+            scatterPlotData: (
+              <ScatterPlot data={JSON.parse(res.data.scatterPlotData)} />
+            ),
+            ArbitrageLineChart: res.data.ArbitrageLineChart,
+            etfmoversDictCount: JSON.parse(res.data.etfmoversDictCount),
+            highestChangeDictCount: JSON.parse(res.data.highestChangeDictCount),
+            isLoading: false,
+          });
+        })
+        .catch((err) => console.log(err));
     }
   }
 
@@ -135,7 +138,7 @@ class Live_Arbitrage_Single extends React.Component {
                   : "text-danger",
             });
           }
-        });
+        }).catch(err => console.log(err));
     }
   }
 

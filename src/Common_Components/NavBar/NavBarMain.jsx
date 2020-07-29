@@ -167,13 +167,10 @@ const NavBarMain = (props) => {
         })
         .catch((err) => console.log(err));
     }
-    Axios.get("/api/LastWorkingDate")
-      .then((res) => handleDateChange(res.data))
-      .catch((err) => console.log(err));
+    
   }, []);
 
   const handleDateChange = (value) => {
-    // const date = moment(value, "YYYY-MM-DD").format("YYYYMMDD");
     dispatch({ type: changeNavbarStartDate, payload: { value } });
     history.push(generatePath(location.pathname, ETF, value));
   };
