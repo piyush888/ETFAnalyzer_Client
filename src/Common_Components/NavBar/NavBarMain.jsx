@@ -73,6 +73,10 @@ const generateDateAndEtf = (
               maxDate={new Date()}
               onChange={(e) => handleDateChange(moment(e).format("YYYYMMDD"))}
               excludeDates={holidaysList}
+              filterDate={(date) => {
+                const day = new Date(date).getDay();
+                return day !== 0 && day !== 6;
+              }}
             />
           </Form>
         </>
@@ -108,6 +112,10 @@ const generateDateAndEtf = (
               maxDate={new Date()}
               onChange={(e) => handleDateChange(moment(e).format("YYYYMMDD"))}
               excludeDates={holidaysList}
+              filterDate={(date) => {
+                const day = new Date(date).getDay();
+                return day !== 0 && day !== 6;
+              }}
             />
           </Form>
         </>
@@ -160,14 +168,14 @@ const NavBarMain = (props) => {
     if (!startDate) {
       Axios.get("/api/ListOfHolidays")
         .then((res) => {
-          const temp = [...res.data.HolidayList];
           const tempX = [];
-          temp.map((data) => tempX.push(moment(data, "YYYY-MM-DD").toDate()));
+          res.data.HolidayList.forEach((data) =>
+            tempX.push(moment(data, "YYYY-MM-DD").toDate())
+          );
           setholidaysList(tempX);
         })
         .catch((err) => console.log(err));
     }
-    
   }, []);
 
   const handleDateChange = (value) => {
