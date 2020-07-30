@@ -9,9 +9,7 @@ import orderBy from "lodash/orderBy";
 import "./Styles/arbitrage.css";
 
 const DailyChangeUnderlyingFunc = (props) => {
-  console.log(props);
   const DailyChangeUnderlying = props.data;
-  console.log(DailyChangeUnderlying);
   return (
       <Table size="sm" striped bordered hover variant="dark">
           <thead>

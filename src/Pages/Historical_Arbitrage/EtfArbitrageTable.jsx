@@ -13,15 +13,14 @@ const EtfArbitrageTable = (props) => {
   };
 
   const getRowsData = () => {
-    var Time = getKeys(props.data.Time);
+    const Time = getKeys(props.data.Time);
 
     return Time.map((key, index) => {
-      //console.log(key);
       let cls = "";
       if (props.data["Over Bought/Sold"][key] == "Over Bought") {
-        cls = "Green";
+        cls = "green";
       } else if (props.data["Over Bought/Sold"][key] == "Over Sold") {
-        cls = "Red";
+        cls = "red";
       } else {
         cls = "";
       }
