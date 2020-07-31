@@ -9,7 +9,6 @@ const TableStyling = {
 const LiveArbitrageTable = (props) => {
   
   if (props.data["Arbitrage in $"] == undefined) {
-    console.log(props.data);
     return "Loading";
   }
   const getKeys = function (someJSON) {
@@ -17,17 +16,14 @@ const LiveArbitrageTable = (props) => {
   };
 
   const getRowsData = () => {
-    var Time = getKeys(props.data.Time).reverse();
-    console.log("Time");
-    console.log(Time);
+    const Time = getKeys(props.data.Time).reverse();
     return Time.map((key, index) => {
-      // console.log(key);
       let cls = "";
 
       if (props.data["Over Bought/Sold"][key] == "Over Bought") {
-        cls = "Green";
+        cls = "green";
       } else if (props.data["Over Bought/Sold"][key] == "Over Sold") {
-        cls = "Red";
+        cls = "red";
       } else {
         cls = "";
       }

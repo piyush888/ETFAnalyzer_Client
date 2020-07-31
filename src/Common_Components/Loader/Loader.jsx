@@ -1,7 +1,8 @@
 import React from "react";
 
 const spinnerStyle = {
-	fontSize:'14px'
+  fontSize:'14px',
+  
 };
 
 const Loader = () => {

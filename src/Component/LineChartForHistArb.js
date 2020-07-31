@@ -4,8 +4,7 @@ import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Brush, Legend, Re
 
 const LineChartForHistArb = (props) => {
   const { data } = props;
-  console.log("Kshitiz");
-  console.log(props);
+
   return (
     <ResponsiveContainer width="100%" height={280} padding={{ top: 0, right: 0, left: 0, bottom: 0 }}>
       <LineChart data={data}>

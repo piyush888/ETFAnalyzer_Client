@@ -33,9 +33,9 @@ const LiveArbitrageAllTable = (props) => {
             // setFilteredData(data);
         })
             .catch((err) => {
-                console.log(err.response.status);
+              
                 setErrorCode(err.response.status);
-                console.log(err);
+              
             });
     }
     /* Custom Hook for interval call of API */
@@ -275,15 +275,10 @@ const LiveArbitrageAllTable = (props) => {
         ),
         showExpandColumn: true,
         onExpand: (row, isExpand, rowIndex, e) => {
-            console.log(row.id);
-            console.log(isExpand);
-            console.log(rowIndex);
-            console.log(e);
+         
         },
         onExpandAll: (isExpandAll, rows, e) => {
-            console.log(isExpandAll);
-            console.log(rows);
-            console.log(e);
+           
         },
         expandHeaderColumnRenderer: ({ isAnyExpands }) => {
             if (isAnyExpands) {
@@ -304,7 +299,6 @@ const LiveArbitrageAllTable = (props) => {
     };
 
     if (errorCode >= 500){
-        // console.log(refreshElement);
         return(
             <h3 style={{color:'red', alignContent:'center'}}>DATA FOR THIS MINUTE WILL BE AVAILABLE AT 8TH SECOND OF THIS MINUTE</h3>
         )

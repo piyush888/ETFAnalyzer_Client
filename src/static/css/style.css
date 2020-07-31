@@ -50,7 +50,9 @@ p {
 .d-block {
   display: block;
 }
-
+.overflow-auto {
+  overflow: auto;
+}
 .margin-left-auto {
   margin-left: auto;
 }
@@ -89,6 +91,9 @@ p {
 .height-50vh {
   height: 50vh;
 }
+.height-90vh {
+  height: 90vh;
+}
 
 .font-size-sm {
   font-size: 13px;
@@ -119,16 +124,16 @@ p {
   color: white;
 }
 
-.white-background{
+.white-background {
   background-color: white;
   min-height: 100vh;
   height: 100vh;
 }
 
-.blue-color{
-  color:blue;
+.blue-color {
+  color: blue;
 }
 
-.z-index-999{
+.z-index-999 {
   z-index: 999;
 }

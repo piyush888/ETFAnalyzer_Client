@@ -73,9 +73,9 @@ class HistoricalArbitrage extends React.Component {
           })
         )
         .catch((err) => {
-                alert(err.response.data.message);
-                console.log(err.response);
-            });
+          alert(err.response.data.message);
+          console.log(err.response);
+        });
     }
   };
 
@@ -84,7 +84,7 @@ class HistoricalArbitrage extends React.Component {
       this.setState({ ...this.state, isLoading: true });
       Axios.get(`/api/PastArbitrageData/DailyChange/${ETF}/${startDate}`).then(
         (res) => {
-          console.log(res);
+        
           this.setState({
             ...this.state,
             underlyingPerformance: res,
@@ -119,7 +119,7 @@ class HistoricalArbitrage extends React.Component {
     const { ETF, startDate } = this.props.match.params;
     return (
       <div>
-          <CommonNavBar />
+        <CommonNavBar />
         <Row>
           <Col className="etfArbitrageTable" xs={12} md={5}>
             <Card>
@@ -135,15 +135,11 @@ class HistoricalArbitrage extends React.Component {
                   />
                 </div>
               </Card.Header>
-              <Card.Body className="BlackHeaderForModal">
+              <Card.Body className="BlackHeaderForModal height-90vh overflow-auto">
                 {this.state.isLoading ? (
                   <Loader />
                 ) : (
-                  <div className="FullPageDiv">
-                    <EtfArbitrageTable
-                      data={this.state.etfArbitrageTableData}
-                    />
-                  </div>
+                  <EtfArbitrageTable data={this.state.etfArbitrageTableData} />
                 )}
               </Card.Body>
             </Card>

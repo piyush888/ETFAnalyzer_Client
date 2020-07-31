@@ -1,5 +1,4 @@
 import React from "react";
-import Table from "react-bootstrap/Table";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import axios from "axios";
@@ -7,12 +6,9 @@ import { tsvParse, csvParse } from "d3-dsv";
 import { timeParse } from "d3-time-format";
 import Card from "react-bootstrap/Card";
 import ChartComponent from "../../Component/StockPriceChart";
-
 import AppTable from "../../Component/Table.js";
 import LiveStatusWindow from "./LiveStatusWindow";
 import "../../static/css/Live_Arbitrage.css";
-import { connect } from "react-redux";
-
 import CombinedPieCharts from "../../Component/CombinedPieCharts";
 import LiveArbitrageTable from "./LiveArbitrageTable";
 import LineChartForHistArb from "../../Component/LineChartForHistArb";
@@ -55,7 +51,7 @@ class Live_Arbitrage_Single extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.ETF !== this.props.ETF) {
+    if (prevProps.match.params.ETF !== this.props.match.params.ETF) {
       this.state.isLoading = true;
       clearInterval(this.intervalId);
       this.fetchETFLiveData();
@@ -77,7 +73,7 @@ class Live_Arbitrage_Single extends React.Component {
     }, 1000);
 
   fetchETFLiveData() {
-    const { ETF } = this.props;
+    const { ETF } = this.props.match.params;
     if (ETF) {
       axios
         .get(`/api/ETfLiveArbitrage/Single/${ETF}`)
@@ -110,7 +106,7 @@ class Live_Arbitrage_Single extends React.Component {
   }
 
   UpdateArbitragDataTables(appendToPreviousTable) {
-    const { ETF } = this.props;
+    const { ETF } = this.props.match.params;
     if (ETF) {
       axios
         .get(`/api/ETfLiveArbitrage/Single/UpdateTable/${ETF}`)
@@ -138,11 +134,13 @@ class Live_Arbitrage_Single extends React.Component {
                   : "text-danger",
             });
           }
-        }).catch(err => console.log(err));
+        })
+        .catch((err) => console.log(err));
     }
   }
 
   render() {
+    const { ETF } = this.props.match.params;
     return (
       <>
         <CommonNavBar />
@@ -150,7 +148,7 @@ class Live_Arbitrage_Single extends React.Component {
           <Col xs={12} md={5}>
             <Card>
               <Card.Header className="text-white bg-color-dark flex-row">
-                Live Arbitrage {this.props.ETF}
+                Live Arbitrage {ETF}
                 <div className="margin-left-auto">
                   <CombinedPieCharts
                     etfmoversDictCount={this.state.etfmoversDictCount}
@@ -284,10 +282,4 @@ class Live_Arbitrage_Single extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    ETF: state.navbar.ETF,
-  };
-};
-
-export default connect(mapStateToProps, null)(Live_Arbitrage_Single);
+export default Live_Arbitrage_Single;
