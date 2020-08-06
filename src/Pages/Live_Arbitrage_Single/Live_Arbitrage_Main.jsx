@@ -79,6 +79,7 @@ class Live_Arbitrage_Single extends React.Component {
         .get(`/api/ETfLiveArbitrage/Single/${ETF}`)
         .then((res) => {
           this.setState({
+            ...this.state,
             Full_Day_Arbitrage_Data: JSON.parse(res.data.Arbitrage),
             Full_Day_Prices: {
               data: tsvParse(
@@ -105,35 +106,32 @@ class Live_Arbitrage_Single extends React.Component {
     }
   }
 
-  UpdateArbitragDataTables(appendToPreviousTable) {
+  UpdateArbitragDataTables() {
     const { ETF } = this.props.match.params;
     if (ETF) {
       axios
         .get(`/api/ETfLiveArbitrage/Single/UpdateTable/${ETF}`)
         .then((res) => {
-          if (appendToPreviousTable) {
-            console.log("Append To Previous table");
-          } else {
-            this.setState({
-              LiveArbitrage: res.data.Arbitrage["Arbitrage in $"][0],
-              LiveSpread: res.data.Arbitrage["ETF Trading Spread in $"][0],
-              CurrentTime: res.data.Arbitrage["Time"][0],
-              LiveVWPrice: res.data.Prices["VWPrice"][0],
-              OpenPrice: res.data.Prices["open"][0],
-              ClosePrice: res.data.Prices["close"][0],
-              HighPrice: res.data.Prices["high"][0],
-              LowPrice: res.data.Prices["low"][0],
-              ETFStatus: res.data.SignalInfo.ETFStatus,
-              Signal: res.data.SignalInfo.Signal,
-              SignalStrength: res.data.SignalInfo.Strength,
-              LiveColor:
-                res.data.Arbitrage["Arbitrage in $"][0] < 0
-                  ? "text-success"
-                  : res.data.Arbitrage["Arbitrage in $"][0] == 0
-                  ? "text-muted"
-                  : "text-danger",
-            });
-          }
+          this.setState({
+            ...this.state,
+            LiveArbitrage: res.data.Arbitrage["Arbitrage in $"][0],
+            LiveSpread: res.data.Arbitrage["ETF Trading Spread in $"][0],
+            CurrentTime: res.data.Arbitrage["Time"][0],
+            LiveVWPrice: res.data.Prices["VWPrice"][0],
+            OpenPrice: res.data.Prices["open"][0],
+            ClosePrice: res.data.Prices["close"][0],
+            HighPrice: res.data.Prices["high"][0],
+            LowPrice: res.data.Prices["low"][0],
+            ETFStatus: res.data.SignalInfo.ETFStatus,
+            Signal: res.data.SignalInfo.Signal,
+            SignalStrength: res.data.SignalInfo.Strength,
+            LiveColor:
+              res.data.Arbitrage["Arbitrage in $"][0] < 0
+                ? "text-success"
+                : res.data.Arbitrage["Arbitrage in $"][0] == 0
+                ? "text-muted"
+                : "text-danger",
+          });
         })
         .catch((err) => console.log(err));
     }
@@ -141,6 +139,20 @@ class Live_Arbitrage_Single extends React.Component {
 
   render() {
     const { ETF } = this.props.match.params;
+    const {
+      HighPrice,
+      OpenPrice,
+      ClosePrice,
+      LowPrice,
+      SignalStrength,
+      CurrentTime,
+      ETFStatus,
+      Signal,
+      LiveArbitrage,
+      LiveSpread,
+      LiveColor,
+    } = this.state;
+
     return (
       <>
         <CommonNavBar />
@@ -174,17 +186,17 @@ class Live_Arbitrage_Single extends React.Component {
             <Row>
               <Col xs={12} md={12}>
                 <LiveStatusWindow
-                  HighPrice={this.state.HighPrice}
-                  OpenPrice={this.state.OpenPrice}
-                  ClosePrice={this.state.ClosePrice}
-                  LowPrice={this.state.LowPrice}
-                  SignalStrength={this.state.SignalStrength}
-                  CurrentTime={this.state.CurrentTime}
-                  ETFStatus={this.state.ETFStatus}
-                  Signal={this.state.Signal}
-                  LiveArbitrage={this.state.LiveArbitrage}
-                  LiveSpread={this.state.LiveSpread}
-                  LiveColor={this.state.LiveColor}
+                  HighPrice={HighPrice}
+                  OpenPrice={OpenPrice}
+                  ClosePrice={ClosePrice}
+                  LowPrice={LowPrice}
+                  SignalStrength={SignalStrength}
+                  CurrentTime={CurrentTime}
+                  ETFStatus={ETFStatus}
+                  Signal={Signal}
+                  LiveArbitrage={LiveArbitrage}
+                  LiveSpread={LiveSpread}
+                  LiveColor={LiveColor}
                 />
               </Col>
 
