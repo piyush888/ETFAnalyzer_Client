@@ -208,8 +208,6 @@ const NavBarMain = (props) => {
             holidaysList,
             startDate
           )}
-
-          {console.log(ETF, startDate)}
         </Nav>
 
         <Nav className="">

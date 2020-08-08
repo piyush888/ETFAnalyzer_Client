@@ -8,37 +8,7 @@ const EtfArbitrageTable = (props) => {
 
   const { data } = props;
 
-  const getKeys = function (someJSON) {
-    return Object.keys(someJSON);
-  };
-
-  const getRowsData = () => {
-    const Time = getKeys(props.data.Time);
-
-    return Time.map((key, index) => {
-      let cls = "";
-      if (props.data["Over Bought/Sold"][key] == "Over Bought") {
-        cls = "green";
-      } else if (props.data["Over Bought/Sold"][key] == "Over Sold") {
-        cls = "red";
-      } else {
-        cls = "";
-      }
-      return (
-        <tr key={index}>
-          <td className={cls}>{props.data["Time"][key]}</td>
-          <td className={cls}>{props.data["Arbitrage in $"][key]}</td>
-          <td className={cls}>{props.data["$Spread"][key]}</td>
-          <td className={cls}>{props.data["Absolute Arbitrage"][key]}</td>
-          <td className={cls}>{props.data["Over Bought/Sold"][key]}</td>
-          <td>{props.data["ETF Price"][key]}</td>
-          <td>{props.data["T"][key]}</td>
-          <td>{props.data["ETFMover%1_ticker"][key]}</td>
-          <td>{props.data["Change%1_ticker"][key]}</td>
-        </tr>
-      );
-    });
-  };
+  
 
   return (
     <Table
@@ -62,7 +32,32 @@ const EtfArbitrageTable = (props) => {
           <th>Most Change%</th>
         </tr>
       </thead>
-      <tbody>{getRowsData()}</tbody>
+      <tbody>
+        {Array.isArray(data) &&
+          data.map((data, index) => {
+            let cls = "";
+            if (data["Over Bought/Sold"] == "Over Bought") {
+              cls = "green";
+            } else if (data["Over Bought/Sold"] == "Over Sold") {
+              cls = "red";
+            } else {
+              cls = "";
+            }
+            return (
+              <tr key={index}>
+                <td className={cls}>{data["Time"]}</td>
+                <td className={cls}>{data["Arbitrage in $"]}</td>
+                <td className={cls}>{data["$Spread"]}</td>
+                <td className={cls}>{data["Absolute Arbitrage"]}</td>
+                <td className={cls}>{data["Over Bought/Sold"]}</td>
+                <td>{data["ETF Price"]}</td>
+                <td>{data["T"]}</td>
+                <td>{data["ETFMover%1_ticker"]}</td>
+                <td>{data["Change%1_ticker"]}</td>
+              </tr>
+            );
+          })}
+      </tbody>
     </Table>
   );
 };

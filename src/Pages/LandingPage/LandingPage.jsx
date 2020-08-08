@@ -35,25 +35,25 @@ const LandingPage = (props) => {
             <h3 className="">
               ETF Trace solves all major problems in ETF industry
             </h3>
-            <ul class="custom-bullet">
+            <ul className="custom-bullet">
               <li>
-                <i class="fa fa-check-square text-primary"></i> ETF mispricing &
+                <i className="fa fa-check-square text-primary"></i> ETF mispricing &
                 divergence from underlying NAV
               </li>
               <li>
-                <i class="fa fa-check-square text-primary"></i> Be informed on
+                <i className="fa fa-check-square text-primary"></i> Be informed on
                 tracking error, spread & absolute error{" "}
               </li>
               <li>
-                <i class="fa fa-check-square text-primary"></i> Understand ETF
+                <i className="fa fa-check-square text-primary"></i> Understand ETF
                 underlyings which are moving the ETF
               </li>
               <li>
-                <i class="fa fa-check-square text-primary"></i> Over Bought,
+                <i className="fa fa-check-square text-primary"></i> Over Bought,
                 Over Sold or Balanced Signals for ETF
               </li>
               <li>
-                <i class="fa fa-check-square text-primary"></i> Compare multiple
+                <i className="fa fa-check-square text-primary"></i> Compare multiple
                 ETFs in industry, similar Assets Under Management
               </li>
             </ul>
@@ -191,19 +191,19 @@ const LandingPage = (props) => {
             <h4 className="">Powered By</h4>
           </center>
           <div className="row">
-            <div class="col-md-3">
+            <div className="col-md-3">
               <Image src={AWS} fluid style={{ height: "90px" }} />
             </div>
 
-            <div class="col-md-2">
+            <div className="col-md-2">
               <Image src={Python} fluid style={{ height: "100px" }} />
             </div>
 
-            <div class="col-md-2">
+            <div className="col-md-2">
               <Image src={ReactSymbol} fluid style={{ height: "100px" }} />
             </div>
 
-            <div class="col-md-3">
+            <div className="col-md-3">
               <Image src={MongoDb} fluid style={{ height: "90px" }} />
             </div>
           </div>
@@ -215,7 +215,7 @@ const LandingPage = (props) => {
           <center>
             <h4 className="">Team</h4>
           </center>
-          <ul class="custom-bullet">
+          <ul className="custom-bullet">
             <li>
               <a
                 href="https://www.linkedin.com/in/kshitiz-sharma/"
@@ -248,7 +248,7 @@ const LandingPage = (props) => {
           <center>
             <h4 className="">Contact Us</h4>
           </center>
-          <ul class="custom-bullet">
+          <ul className="custom-bullet">
             <li>
               <h5>Email Id : kshitizsharmav@gmail.com, piyush888@gmail.com</h5>
             </li>
@@ -260,7 +260,7 @@ const LandingPage = (props) => {
 
         <br />
         <div className="">
-          <p class="pull-left">&copy; EtfTrace @2020 All Rights Reserved</p>
+          <p className="pull-left">&copy; EtfTrace @2020 All Rights Reserved</p>
         </div>
       </div>
     </>

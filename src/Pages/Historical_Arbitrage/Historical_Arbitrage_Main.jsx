@@ -31,7 +31,7 @@ class HistoricalArbitrage extends React.Component {
     scatterPlotData: "",
     etfmoversDictCount: null,
     etfPriceData: "",
-    ArbitrageCumSum: "",
+    ArbitrageCumSum: [],
     highestChangeDictCount: null,
     isLoading: true,
   };
@@ -57,24 +57,23 @@ class HistoricalArbitrage extends React.Component {
       Axios.get(`/api/PastArbitrageData/${ETF}/${startDate}`)
         .then(({ data }) =>
           this.setState({
-            etfArbitrageTableData: JSON.parse(data.etfhistoricaldata),
-            PNLStatementForTheDay: JSON.parse(data.PNLStatementForTheDay),
+            etfArbitrageTableData: data.etfhistoricaldata,
+            PNLStatementForTheDay: data.PNLStatementForTheDay,
             etfPriceData: {
               data: tsvParse(data.etfPrices, this.parseData(this.parseDate)),
             },
-            scatterPlotData: JSON.parse(data.scatterPlotData),
-            etfmoversDictCount: JSON.parse(data.etfmoversDictCount),
-            highestChangeDictCount: JSON.parse(data.highestChangeDictCount),
+            scatterPlotData: data.scatterPlotData,
+            etfmoversDictCount: data.etfmoversDictCount,
+            highestChangeDictCount: data.highestChangeDictCount,
             SignalCategorization: (
-              <AppTable data={JSON.parse(data.SignalCategorization)} />
+              <AppTable data={data.SignalCategorization} />
             ),
             ArbitrageCumSum: data.ArbitrageCumSum,
             isLoading: false,
           })
         )
         .catch((err) => {
-          alert(err.response.data.message);
-          console.log(err.response);
+          console.log(err);
         });
     }
   };
@@ -91,7 +90,7 @@ class HistoricalArbitrage extends React.Component {
             isLoading: false,
           });
         }
-      );
+      ).catch(err => console.log(err));
     }
   };
 
