@@ -9,7 +9,7 @@ const EtfArbitrageTable = (props) => {
   const { data } = props;
 
   
-
+console.log(data)
   return (
     <Table
       size="sm"
@@ -45,15 +45,15 @@ const EtfArbitrageTable = (props) => {
             }
             return (
               <tr key={index}>
-                <td className={cls}>{data["Time"]}</td>
-                <td className={cls}>{data["Arbitrage in $"]}</td>
-                <td className={cls}>{data["$Spread"]}</td>
-                <td className={cls}>{data["Absolute Arbitrage"]}</td>
-                <td className={cls}>{data["Over Bought/Sold"]}</td>
-                <td>{data["ETF Price"]}</td>
-                <td>{data["T"]}</td>
-                <td>{data["ETFMover%1_ticker"]}</td>
-                <td>{data["Change%1_ticker"]}</td>
+                <td className={cls}>{data["Time"] || ""}</td>
+                <td className={cls}>{data["Arbitrage in $"] || ""}</td>
+                <td className={cls}>{data["$Spread"] || ""}</td>
+                <td className={cls}>{data["Absolute Arbitrage"] || ""}</td>
+                <td className={cls}>{data["Over Bought/Sold"] || ""}</td>
+                <td>{data["ETF Price"] || ""}</td>
+                <td>{data["T"] || ""}</td>
+                <td>{data["ETFMover%1_ticker"] || ""}</td>
+                <td>{data["Change%1_ticker"] || ""}</td>
               </tr>
             );
           })}

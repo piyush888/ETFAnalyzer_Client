@@ -4,9 +4,7 @@ import Axios from "axios";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
-import Modal from "react-bootstrap/Modal";
 import Table from "react-bootstrap/Table";
-// Code to display chaer
 import { tsvParse } from "d3-dsv";
 import { timeParse } from "d3-time-format";
 import "./Styles/arbitrage.css";
@@ -55,8 +53,9 @@ class HistoricalArbitrage extends React.Component {
     if (ETF && startDate) {
       this.setState({ ...this.state, isLoading: true });
       Axios.get(`/api/PastArbitrageData/${ETF}/${startDate}`)
-        .then(({ data }) =>
+        .then(({ data }) => {
           this.setState({
+            ...this.state,
             etfArbitrageTableData: data.etfhistoricaldata,
             PNLStatementForTheDay: data.PNLStatementForTheDay,
             etfPriceData: {
@@ -65,13 +64,11 @@ class HistoricalArbitrage extends React.Component {
             scatterPlotData: data.scatterPlotData,
             etfmoversDictCount: data.etfmoversDictCount,
             highestChangeDictCount: data.highestChangeDictCount,
-            SignalCategorization: (
-              <AppTable data={data.SignalCategorization} />
-            ),
+            SignalCategorization: <AppTable data={data.SignalCategorization} />,
             ArbitrageCumSum: data.ArbitrageCumSum,
             isLoading: false,
-          })
-        )
+          });
+        })
         .catch((err) => {
           console.log(err);
         });
@@ -81,16 +78,15 @@ class HistoricalArbitrage extends React.Component {
   etfUnderlyingPerformance = (ETF, startDate) => {
     if (ETF && startDate) {
       this.setState({ ...this.state, isLoading: true });
-      Axios.get(`/api/PastArbitrageData/DailyChange/${ETF}/${startDate}`).then(
-        (res) => {
-        
+      Axios.get(`/api/PastArbitrageData/DailyChange/${ETF}/${startDate}`)
+        .then((res) => {
           this.setState({
             ...this.state,
             underlyingPerformance: res,
             isLoading: false,
           });
-        }
-      ).catch(err => console.log(err));
+        })
+        .catch((err) => console.log(err));
     }
   };
 
@@ -116,29 +112,41 @@ class HistoricalArbitrage extends React.Component {
 
   render() {
     const { ETF, startDate } = this.props.match.params;
+    const {
+      isLoading,
+      etfArbitrageTableData,
+      ArbitrageCumSum,
+      etfmoversDictCount,
+      highestChangeDictCount,
+      PNLStatementForTheDay,
+      SignalCategorization,
+      underlyingPerformance,
+      etfPriceData,
+      scatterPlotData,
+    } = this.state;
     return (
       <div>
         <CommonNavBar />
         <Row>
           <Col className="etfArbitrageTable" xs={12} md={5}>
             <Card>
-              <Card.Header className=" text-white bg-color-dark flex-row">
+              <Card.Header className="text-white bg-color-dark flex-row">
                 <span>
                   Histortical Data {ETF} {startDate}
                 </span>
 
                 <div className="margin-left-auto">
                   <CombinedPieCharts
-                    etfmoversDictCount={this.state.etfmoversDictCount}
-                    highestChangeDictCount={this.state.highestChangeDictCount}
+                    etfmoversDictCount={etfmoversDictCount}
+                    highestChangeDictCount={highestChangeDictCount}
                   />
                 </div>
               </Card.Header>
               <Card.Body className="BlackHeaderForModal height-90vh overflow-auto">
-                {this.state.isLoading ? (
+                {isLoading ? (
                   <Loader />
                 ) : (
-                  <EtfArbitrageTable data={this.state.etfArbitrageTableData} />
+                  <EtfArbitrageTable data={etfArbitrageTableData} />
                 )}
               </Card.Body>
             </Card>
@@ -154,12 +162,10 @@ class HistoricalArbitrage extends React.Component {
                         Arb Time Series
                       </Card.Header>
                       <Card.Body className="CustomCardBody text-white">
-                        {this.state.isLoading ? (
+                        {isLoading ? (
                           <Loader />
                         ) : (
-                          <LineChartForHistArb
-                            data={this.state.ArbitrageCumSum}
-                          />
+                          <LineChartForHistArb data={ArbitrageCumSum} />
                         )}
                       </Card.Body>
                     </Card>
@@ -171,7 +177,7 @@ class HistoricalArbitrage extends React.Component {
                         Signal Performance
                       </Card.Header>
                       <Card.Body className="CustomCardBody text-white">
-                        {this.state.isLoading ? (
+                        {isLoading ? (
                           <Loader />
                         ) : (
                           <Table
@@ -183,16 +189,15 @@ class HistoricalArbitrage extends React.Component {
                             className="font-size-sm"
                           >
                             <tbody>
-                              {typeof this.state.PNLStatementForTheDay ===
-                                "object" &&
-                                Object.entries(
-                                  this.state.PNLStatementForTheDay
-                                ).map(([key, value]) => (
-                                  <tr key={key}>
-                                    <td>{key}</td>
-                                    <td>{value}</td>
-                                  </tr>
-                                ))}
+                              {typeof PNLStatementForTheDay === "object" &&
+                                Object.entries(PNLStatementForTheDay).map(
+                                  ([key, value]) => (
+                                    <tr key={key}>
+                                      <td>{key}</td>
+                                      <td>{value}</td>
+                                    </tr>
+                                  )
+                                )}
                             </tbody>
                           </Table>
                         )}
@@ -206,11 +211,7 @@ class HistoricalArbitrage extends React.Component {
                         Signal Stats
                       </Card.Header>
                       <Card.Body className="CustomCardBody text-white">
-                        {this.state.isLoading ? (
-                          <Loader />
-                        ) : (
-                          this.state.SignalCategorization
-                        )}
+                        {isLoading ? <Loader /> : SignalCategorization}
                       </Card.Body>
                     </Card>
                   </Col>
@@ -225,7 +226,7 @@ class HistoricalArbitrage extends React.Component {
                           <Loader />
                         ) : (
                           <DailyChangeUnderlyingFunc
-                            data={this.state.underlyingPerformance}
+                            data={underlyingPerformance}
                           />
                         )}
                       </Card.Body>
@@ -242,7 +243,7 @@ class HistoricalArbitrage extends React.Component {
                         Price Chart
                       </Card.Header>
                       <Card.Body className="BlackHeaderForModal">
-                        <ChartComponent data={this.state.etfPriceData} />
+                        <ChartComponent data={etfPriceData} />
                       </Card.Body>
                     </Card>
                   </Col>
@@ -252,7 +253,7 @@ class HistoricalArbitrage extends React.Component {
                         ETF Change % Vs NAV change %
                       </Card.Header>
                       <Card.Body className="CustomCardBody text-white">
-                        <ScatterPlot data={this.state.scatterPlotData} />
+                        <ScatterPlot data={scatterPlotData} />
                       </Card.Body>
                     </Card>
                   </Col>
