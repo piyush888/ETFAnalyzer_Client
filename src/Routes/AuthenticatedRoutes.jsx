@@ -12,7 +12,7 @@ import { useEffect } from "react";
 import { changeNavbarStartDate } from "../Common_Components/NavBar/NavBarActions";
 import { useDispatch } from "react-redux";
 import Axios from "axios";
-import { Articles } from "../Pages/Articles";
+import ArticlesRoutes from "./ArticlesRoutes";
 const EtfDescRoutes = React.lazy(() => import("./EtfDescRoutes"));
 const LiveArbitrageSingleRoutes = React.lazy(() =>
   import("./LiveArbitrageSingleRoutes")
@@ -51,7 +51,7 @@ const AuthenticatedRoutes = () => {
           path="/historical-arbitrage"
           component={HistArbiageRoutes}
         />
-        <ProtectedRoute path="/articles" component={Articles} />
+        <ProtectedRoute path="/articles" component={ArticlesRoutes} />
       </React.Suspense>
     </>
   );
