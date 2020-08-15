@@ -1,35 +1,27 @@
 const articlesList = [
   {
     id: 1,
-    imageUrl: "",
+    imageUrl: "ArbSeries",
 
-    title: "Article 1",
+    title: "Arbitrage in ETF Industry",
     text:
-      "Integer in diam mi. Etiam vehicula aliquam augue a rhoncus. Sed tincidunt quam sit amet odio suscipit, sed fringilla dui semper. Ut molestie interdum nunc ac pulvinar. Mauris id est enim",
+      "Balancing ETF price in $ 3 Trillion industry. Why? How? Opportunity & Solution",
   },
   {
     id: 2,
-    imageUrl: "",
+    imageUrl: "HammerPattern",
 
-    title: "Article 2",
+    title: "Hammer Pattern",
     text:
-      "Integer in diam mi. Etiam vehicula aliquam augue a rhoncus. Sed tincidunt quam sit amet odio suscipit, sed fringilla dui semper. Ut molestie interdum nunc ac pulvinar. Mauris id est enim",
+      "Combining Hammer pattern tech signal with ETF over sold arbitrage signal, high accuracy",
   },
   {
     id: 3,
-    imageUrl: "",
+    imageUrl: "ShootingStar",
 
-    title: "Article 3",
+    title: "Shooting Star",
     text:
-      "Integer in diam mi. Etiam vehicula aliquam augue a rhoncus. Sed tincidunt quam sit amet odio suscipit, sed fringilla dui semper. Ut molestie interdum nunc ac pulvinar. Mauris id est enim",
-  },
-  {
-    id: 4,
-    imageUrl: "",
-
-    title: "Article 4",
-    text:
-      "Integer in diam mi. Etiam vehicula aliquam augue a rhoncus. Sed tincidunt quam sit amet odio suscipit, sed fringilla dui semper. Ut molestie interdum nunc ac pulvinar. Mauris id est enim",
+      "Combining ETF Over bought signal with Shooting star pattern, profit trading strategy",
   },
 ];
 
