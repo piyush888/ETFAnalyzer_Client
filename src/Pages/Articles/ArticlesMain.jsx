@@ -76,7 +76,13 @@ const ArticlesMain = () => {
                       <Card.Text>
                         {data.text}
                       </Card.Text>
-                      <Button as={NavLink} to={`/articles/${data.id}`} variant="primary">
+                        
+                      <Button as={NavLink} 
+                        to={{
+                          pathname:`/articles/${data.id}`,
+                        }} 
+                        variant="primary">
+
                         Go to article
                       </Button>
                     </Card.Body>
