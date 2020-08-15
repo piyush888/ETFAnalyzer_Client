@@ -2,6 +2,9 @@ import React from "react";
 import { CommonNavBar } from "../../Common_Components/NavBar";
 import articlesList from "./articlesList";
 
+import HammerPattern from "../../static/Images/AppScreenShots/HammerPattern.png";
+import ShootingStar from "../../static/Images/AppScreenShots/ShootingStar.png";
+import ArbSeries from "../../static/Images/AppScreenShots/ShootingStar.png";
 
 const ArticleView = (props) => {
   
@@ -26,37 +29,30 @@ const ArticleView = (props) => {
 
 			        <hr/>
 
-			        
 			        <p>Posted on {data.releaseDate}</p>
 
 			        <hr/>
 
-			        
 			        <img
                       className="d-block w-100 Rounded"
-                      src="http://placehold.it/900x300"
+                      src={HammerPattern}
                       alt="Stock Price Chart"
                     />
 
 			        <hr/>
 
+			        <p>{data.Intro}</p>
+			        <p>{data.Para1}</p>
 			        
-			        <p className="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore?</p>
+			        <p className="text-muted">{data.Question2}</p>
+			        <p>{data.Para2}</p>
+			        <p>{data.Para2_2}</p>
 
-			        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.</p>
+			        
+			        <p className="text-muted">{data.Question3}</p>
+			        <p>{data.Para3}</p>
+			        <p>{data.Para3_2}</p>
 
-			        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, doloribus, dolorem iusto blanditiis unde eius illum consequuntur neque dicta incidunt ullam ea hic porro optio ratione repellat perspiciatis. Enim, iure!</p>
-
-			        <blockquote className="blockquote">
-			          <p className="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-			          <footer className="blockquote-footer">Someone famous in
-			            <cite title="Source Title">Source Title</cite>
-			          </footer>
-			        </blockquote>
-
-			        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, nostrum, aliquid, animi, ut quas placeat totam sunt tempora commodi nihil ullam alias modi dicta saepe minima ab quo voluptatem obcaecati?</p>
-
-			        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, dolor quis. Sunt, ut, explicabo, aliquam tenetur ratione tempore quidem voluptates cupiditate voluptas illo saepe quaerat numquam recusandae? Qui, necessitatibus, est!</p>
 
 			        <hr/>
 
