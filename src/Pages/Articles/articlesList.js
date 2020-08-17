@@ -7,37 +7,90 @@ const articlesList = [
     title: "Arbitrage in ETF Industry",
     text:
       "Balancing ETF price in $ 3 Trillion industry. Why? How? Opportunity & Solution",
+      body:[]
   },
   {
     id: 2,
     imageUrl: "HammerPattern",
     writer: "Piyush Garg",
     writeremail: "piyushgarg888@gmail.com",
-    releaseDate:  "August 16, 2020",
+    releaseDate: "August 16, 2020",
     title: "Hammer Pattern & ETF Arbitrage(Over Sold Signal)",
-    text:"Combining Hammer pattern tech signal with ETF over sold arbitrage signal, high accuracy",
-    
-    Intro:"In our analysis of the results produced by our software, we found some exciting results regarding arbitrage opportunities in ETFs using certain kinds of Candlestick Patterns and our algorithm-generated Buy/Sell signals. We would like to share these results with you here.",
-    
-    Para1:"A hammer candlestick pattern is seen when a candlestick with a short body and long lower wick is formed. It is usually found at the bottom of a downward price trend. Whenever our software detects this Hammer pattern & combine with ETF’s Tracking error (deviation of ETF price from NAV) & informs the trader, via signals, to either buy (green arrow) or hold.",
-    
-    Question2:"What is Arbitrage and what does it mean in the context of ETFs?",
-    Para2:"Arbitrage, roughly, means to take advantage of different pricing of the same asset - securities, commodities, or currency, in different markets or forms to make some profit. Similarly, with ETFs, traders can take advantage of mispricing in the market which may last only for a short amount of time to make some profit using the arbitrage.",
-    Para2_2:"Arbitrage happens in ETF due to liquid mismatching & hence resulting in mispricing opportunities in cents. Such arbitrage opportunities happens more times than you will like to think on a daily basis.",
-    
-    Question3:"How does our system calculate the Arbitrage in ETFs?",
-    Para3:"We follow the standard formula prevalent in the market to calculate the Net Asset Value, percentage change in Net Asset Value, percentage change in the ETF Price, and finally the mispricing. Net Asset Value is the ideal trading price calculated by taking the volume-weighted price of underlying holdings of an ETF. Net Asset Value and, subsequently, Arbitrage in $ are calculated using the following formulae.",
-    Para3_2:"For accuracy, we made brackets of the magnitude of Arbitrage that is generally seen in the market. Here ‘Magnitude’ of Arbitrage, signifies the amount of arbitrage that the trader may stand a chance to gain by either Buying or Selling an ETF. We have divided this Magnitude of Arbitrage in the 1 cent brackets starting from $0.01 - $0.02, $0.01 - $0.02 up to $0.09 - $0.1, $0.1 and above.",
-
+    text:
+      "Combining Hammer pattern tech signal with ETF over sold arbitrage signal, high accuracy",
+    body: [
+      {
+        paragraph:
+          "In our analysis of the results produced by our algorithm, we found some exciting results regarding arbitrage opportunities in ETFs using certain kinds of Candlestick Patterns and our algorithm-generated Buy/Sell signals. We would like to share these results with you here.",
+      },
+      {
+        question:
+          "Firstly, what is a Candlestick, and what is a Hammer Pattern?",
+      },
+      {
+        paragraph:
+          "A candlestick is one of the most popular components of technical analysis of an asset which lets traders quickly assess an asset's various price information using just one plot.",
+      },
+      { imageURL: "https://a.c-dn.net/c/content/dam/publicsites/igcom/uk/images/ContentImage/BULLISH%20BEARISH%20CANDLESTICK-150620.jpg" },
+      {
+        paragraph:
+          "A hammer candlestick pattern is seen when a candlestick with a short body and long lower wick is formed. It is usually found at the bottom of a downward price trend. Whenever our algorithm detects this pattern, it informs the trader, via signals, to either buy (green arrow) or hold.",
+      },
+      {
+        question:
+          "Now comes the question, What is Arbitrage and what does it mean in the context of ETFs?",
+      },
+      {
+        paragraph:
+          "Arbitrage, roughly, means to take advantage of different pricing of the same asset - securities, commodities, or currency, in different markets or forms to make some profit. Similarly, with ETFs, traders can take advantage of mispricing in the market which may last only for a short amount of time to make some profit using the arbitrage.",
+      },
+      {
+        paragraph:
+          "We, with our system, are trying to study and understand these arbitrage opportunities in the market using our accrued ETF historical data and some analysis on it.",
+      },
+      {
+        question:
+          "But now one would ask, How does our system calculate the Arbitrage in ETFs?",
+      },
+      {
+        paragraph:
+          "Well, we follow the standard formula prevalent in the market to calculate the Net Asset Value, percentage change in Net Asset Value, percentage change in the ETF Price, and finally the mispricing. Net Asset Value is the ideal trading price calculated by taking the volume-weighted price of underlying holdings of an ETF. Net Asset Value and, subsequently, Arbitrage in $ are calculated using the following formulae:",
+      },
+      {
+        imageURL: null,
+      },
+      {
+        paragraph:
+          "For the sake of accuracy, we made brackets of the magnitude of Arbitrage that is generally seen in the market. Here ‘Magnitude’ of Arbitrage, signifies the amount of arbitrage that the trader may stand a chance to gain by either Buying or Selling an ETF.",
+      },
+      {
+        paragraph:
+          "We have divided this Magnitude of Arbitrage in the 1 cent brackets starting from $0.01 - $0.02, $0.01 - $0.02 up to $0.09 - $0.1, $0.1 and above.",
+      },
+      {
+        paragraph:
+          "In our analysis of the major ETFs with Total Assets Under Management of over $10 billion, we found that our algorithm gave extremely accurate results for highly traded ETFs like QQQ, SPY, and XLY.",
+      },
+      { imageURL: null },
+      {
+        paragraph:
+          "For ETFs QQQ and SPY, the candlestick hammer patterns combined with our algorithm-generated Buy/Sell signals, positive results could be achieved with a high probability of 79% and above for all the above-mentioned brackets of Arbitrage. The probability further goes over 90% in the arbitrage brackets over $0.03, for both of these ETFs.",
+      },
+      {
+        paragraph:
+          "The State Street SPDR ETF, XLY, shows similar potential with over 75% positive signal prediction in all Arbitrage brackets and over 88% positive signal prediction in brackets of $0.06 and above. This provides us a certain level of confidence that we are in the right direction. We can safely assume for such results that a trader should always buy or hold on these ETFs based on our signal whenever they spot a hammer candlestick pattern.",
+      },
+    ],
   },
   {
     id: 3,
     imageUrl: "ShootingStar",
     writer: "Kshitiz Sharma",
-    releaseDate:  "August 16, 2020",
+    releaseDate: "August 16, 2020",
     title: "Shooting Star & ETF Arbitrage(Over Bought Signal)",
     text:
       "Combining ETF Over bought signal with Shooting star pattern, profit trading strategy",
+      body:[]
   },
 ];
 

@@ -40,16 +40,20 @@ const ArticleView = (props) => {
 
               <hr />
               <div className="font-size-m">
-                <p>{data.Intro}</p>
-                <p>{data.Para1}</p>
-
-                <p className="text-muted">{data.Question2}</p>
-                <p>{data.Para2}</p>
-                <p>{data.Para2_2}</p>
-
-                <p className="text-muted">{data.Question3}</p>
-                <p>{data.Para3}</p>
-                <p>{data.Para3_2}</p>
+                {data.body.map((content, index) => {
+                  if (content.paragraph) {
+                    return <p>{content.paragraph}</p>;
+                  }
+                  if (content.question) {
+                    return <p className="text-muted">{content.question}</p>;
+                  }
+                  if(content.imageURL)
+                  {
+                    return <img className="d-block w-100 Rounded"
+                    src={content.imageURL}
+                    alt="Stock Price Chart"/>
+                  }
+                })}
               </div>
 
               <hr />
