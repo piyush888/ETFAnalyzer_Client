@@ -4,6 +4,7 @@ import ProtectedRoute from "./ProtectedRoute";
 
 import { Articles } from "../Pages/Articles";
 import ArticleView from "../Pages/Articles/ArticleView";
+import ArticleView2 from "../Pages/Articles/ArticleView2";
 
 const ArticlesRoutes = () => {
   return (
