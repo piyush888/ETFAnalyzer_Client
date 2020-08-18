@@ -31,10 +31,6 @@ const articlesList = [
         paragraph:
           "A candlestick is one of the most popular components of technical analysis of an asset which lets traders quickly assess an asset's various price information using just OHLC & previous candles depending on the 1 min, 2 min, 5 min.. etc your outlook. Our prediction is on a 1 min candle",
       },
-      {
-        imageURL:
-          "https://a.c-dn.net/c/content/dam/publicsites/igcom/uk/images/ContentImage/BULLISH%20BEARISH%20CANDLESTICK-150620.jpg",
-      },
       { imageURL: "https://i.ibb.co/TYXyx7h/Hammer-QQQ.png" },
       {
         paragraph:
