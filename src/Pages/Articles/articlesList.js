@@ -75,13 +75,10 @@ const articlesList = [
         paragraph:
           "In our analysis of the major ETFs with Total Assets Under Management of over $10 billion, we found that our algorithm gave extremely accurate results for highly traded ETFs like QQQ, SPY, and XLY.",
       },
-<<<<<<< HEAD
       {
         imageURL: "https://i.ibb.co/FxWrhx2/Hammer-Table.png",
         imageText: "Hammer-Text",
       },
-=======
->>>>>>> 0283d54c8cadeb722c177810ba482482ac8d0ad2
       {
         paragraph:
           "For ETFs QQQ and SPY, the candlestick hammer patterns combined with our algorithm-generated Buy/Sell signals, positive results could be achieved with a high probability of 79% and above for all the above-mentioned brackets of Arbitrage. The probability further goes over 90% in the arbitrage brackets over $0.03, for both of these ETFs.",
