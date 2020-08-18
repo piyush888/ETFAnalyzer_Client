@@ -10,9 +10,7 @@ import { CommonNavBar } from "../../Common_Components/NavBar";
 import StockChart from "../../static/Images/AppScreenShots/StockChart.png";
 import HistChart from "../../static/Images/AppScreenShots/HistChart.png";
 import HistArbSeries from "../../static/Images/AppScreenShots/HistArbSeries.png";
-import HammerPattern from "../../static/Images/AppScreenShots/HammerPattern.png";
-import ShootingStar from "../../static/Images/AppScreenShots/ShootingStar.png";
-import ArbSeries from "../../static/Images/AppScreenShots/ShootingStar.png";
+
 
 import "./Articles.css";
 
