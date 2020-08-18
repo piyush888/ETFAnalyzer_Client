@@ -92,7 +92,7 @@ const articlesList = [
         paragraph:
           "Just like XLY, our analysis of some other ETFs from State Street SPDR shows similar positive results. For ETFs XLC and XLI, our algorithm yields buy/sell signals with an accuracy of over 75% and over 80% respectively, in all Arbitrage brackets of $0.02 and above.",
       },
-      { imageURL: "https://i.ibb.co/FxWrhx2/Hammer-Table.png" },
+     
       {
         paragraph:
           "While these were the main highlights of our analysis, our positive results don't end here. Major technology ETFs, XLK from State Street SPDR and SCHX from Charles Schwab Corporation, have a positive buy/sell prediction probability of over 80% in all Arbitrage brackets of $0.05, and above and over 75% in all Arbitrage brackets of $0.03 and above, respectively. Furthermore, ETFs like XLP and DIA enjoy a positive signal prediction probability of over 75% in all Arbitrage brackets.",
