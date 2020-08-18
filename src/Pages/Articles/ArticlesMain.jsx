@@ -32,6 +32,7 @@ const ArticlesMain = () => {
                       className="d-block w-100 h-50 Rounded"
                       src={HistChart}
                       alt="Historical Arbitrage Series"
+                      style={{filter: "brightness(.6)"}}
                     />
                     <Carousel.Caption>
                       <h3>Historical Arbitrage</h3>
@@ -44,6 +45,7 @@ const ArticlesMain = () => {
                       className="d-block w-100 Rounded"
                       src={StockChart}
                       alt="Stock Price Chart"
+                      style={{filter: "brightness(.6)"}}
                     />
 
                     <Carousel.Caption>
@@ -57,6 +59,7 @@ const ArticlesMain = () => {
                       className="d-block w-100 Rounded"
                       src={HistArbSeries}
                       alt="Arbitrage Time Series"
+                      style={{filter: "brightness(.6)"}}
                     />
 
                     <Carousel.Caption>
@@ -70,7 +73,7 @@ const ArticlesMain = () => {
               {articlesList.map((data, index) => (
                 <div key={data.title} className="col-sm-4 margin-top-1em">
                   <Card className="CardBody">
-                    <Card.Img className="Rounded" variant="top" src={ShootingStar} />
+                    <Card.Img className="Rounded" variant="top" src={data.imageUrl} />
                     <Card.Body>
                       <Card.Title>{data.title}</Card.Title>
                       <Card.Text>

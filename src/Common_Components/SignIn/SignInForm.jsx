@@ -4,6 +4,7 @@ import { useContext } from "react";
 import AuthContext from "../../Utilities/AuthContext";
 import { Redirect, NavLink } from "react-router-dom";
 import { firebaseAuth } from "../../Utilities/firebase";
+import { CommonNavBar } from "../NavBar";
 
 const SignInForm = (props) => {
   const { currentUser, logout } = useContext(AuthContext);
@@ -37,76 +38,80 @@ const SignInForm = (props) => {
     return <Redirect to="/" />;
   }
   return (
-    <div className="white-background padding-top-20vh height-100vh">
-      {currentUser && !currentUser.emailVerified ? (
-        <div className="margin-left-auto margin-right-auto width-30em">
-          <center>
-            <h4 className="text-primary">Verify email address</h4>
-          </center>
-          <Form>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label className="text-primary">Email address</Form.Label>
-              <Form.Control
-                readOnly
-                value={currentUser.email}
-                type="email"
-                placeholder="Enter email"
-              />
-            </Form.Group>
+    <>
+      <CommonNavBar />
 
-            <Form.Row>
-              <Col>
-                <Button
-                  variant="primary"
-                  type="button"
-                  onClick={onSendVerificationEmail}
-                >
-                  Send Verification Link
-                </Button>
-              </Col>
-            </Form.Row>
-          </Form>
-        </div>
-      ) : (
-        <div className="margin-left-auto margin-right-auto width-30em">
-          <center>
-            <h4 className="text-primary">Login</h4>
-          </center>
-          <Form onSubmit={onSubmit}>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label className="text-primary">Email address</Form.Label>
-              <Form.Control
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                type="email"
-                placeholder="Enter email"
-              />
-              <Form.Text className="text-muted">
-                We'll never share your email with anyone else.
-              </Form.Text>
-            </Form.Group>
+      <div className="white-background padding-top-20vh height-100vh">
+        {currentUser && !currentUser.emailVerified ? (
+          <div className="margin-left-auto margin-right-auto width-30em">
+            <center>
+              <h4 className="text-primary">Verify email address</h4>
+            </center>
+            <Form>
+              <Form.Group controlId="formBasicEmail">
+                <Form.Label className="text-primary">Email address</Form.Label>
+                <Form.Control
+                  readOnly
+                  value={currentUser.email}
+                  type="email"
+                  placeholder="Enter email"
+                />
+              </Form.Group>
 
-            <Form.Group controlId="formBasicPassword">
-              <Form.Label className="text-primary">Password</Form.Label>
-              <Form.Control
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                type="password"
-                placeholder="Password"
-              />
-            </Form.Group>
+              <Form.Row>
+                <Col>
+                  <Button
+                    variant="primary"
+                    type="button"
+                    onClick={onSendVerificationEmail}
+                  >
+                    Send Verification Link
+                  </Button>
+                </Col>
+              </Form.Row>
+            </Form>
+          </div>
+        ) : (
+          <div className="margin-left-auto margin-right-auto width-30em">
+            <center>
+              <h4 className="text-primary">Login</h4>
+            </center>
+            <Form onSubmit={onSubmit}>
+              <Form.Group controlId="formBasicEmail">
+                <Form.Label className="text-primary">Email address</Form.Label>
+                <Form.Control
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  type="email"
+                  placeholder="Enter email"
+                />
+                <Form.Text className="text-muted">
+                  We'll never share your email with anyone else.
+                </Form.Text>
+              </Form.Group>
 
-            <Form.Row>
-              <Col>
-                <Button variant="primary" type="submit">
-                  Login
-                </Button>
-              </Col>
-            </Form.Row>
-          </Form>
-        </div>
-      )}
-    </div>
+              <Form.Group controlId="formBasicPassword">
+                <Form.Label className="text-primary">Password</Form.Label>
+                <Form.Control
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  type="password"
+                  placeholder="Password"
+                />
+              </Form.Group>
+
+              <Form.Row>
+                <Col>
+                  <Button variant="primary" type="submit">
+                    Login
+                  </Button>
+                </Col>
+              </Form.Row>
+            </Form>
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 

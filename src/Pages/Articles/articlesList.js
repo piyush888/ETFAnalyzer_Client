@@ -1,17 +1,17 @@
 const articlesList = [
   {
     id: 1,
-    imageUrl: "ArbSeries",
+    imageUrl: "https://i.ibb.co/KDPTmCH/Arb-Series.png",
     writer: "Kshitiz Sharma",
     releaseDate: "August 16, 2020",
     title: "Arbitrage in ETF Industry",
     text:
       "Balancing ETF price in $ 3 Trillion industry. Why? How? Opportunity & Solution",
-      body:[]
+    body: [],
   },
   {
     id: 2,
-    imageUrl: "HammerPattern",
+    imageUrl: "https://i.ibb.co/mtHBH5w/Hammer-Pattern.png",
     writer: "Piyush Garg",
     writeremail: "piyushgarg888@gmail.com",
     releaseDate: "August 16, 2020",
@@ -31,7 +31,10 @@ const articlesList = [
         paragraph:
           "A candlestick is one of the most popular components of technical analysis of an asset which lets traders quickly assess an asset's various price information using just one plot.",
       },
-      { imageURL: "https://a.c-dn.net/c/content/dam/publicsites/igcom/uk/images/ContentImage/BULLISH%20BEARISH%20CANDLESTICK-150620.jpg" },
+      {
+        imageURL:
+          "https://a.c-dn.net/c/content/dam/publicsites/igcom/uk/images/ContentImage/BULLISH%20BEARISH%20CANDLESTICK-150620.jpg",
+      },
       {
         paragraph:
           "A hammer candlestick pattern is seen when a candlestick with a short body and long lower wick is formed. It is usually found at the bottom of a downward price trend. Whenever our algorithm detects this pattern, it informs the trader, via signals, to either buy (green arrow) or hold.",
@@ -71,7 +74,10 @@ const articlesList = [
         paragraph:
           "In our analysis of the major ETFs with Total Assets Under Management of over $10 billion, we found that our algorithm gave extremely accurate results for highly traded ETFs like QQQ, SPY, and XLY.",
       },
-      { imageURL: null },
+      {
+        imageURL: "https://i.ibb.co/FxWrhx2/Hammer-Table.png",
+        imageText: "Hammer-Text",
+      },
       {
         paragraph:
           "For ETFs QQQ and SPY, the candlestick hammer patterns combined with our algorithm-generated Buy/Sell signals, positive results could be achieved with a high probability of 79% and above for all the above-mentioned brackets of Arbitrage. The probability further goes over 90% in the arbitrage brackets over $0.03, for both of these ETFs.",
@@ -84,13 +90,13 @@ const articlesList = [
   },
   {
     id: 3,
-    imageUrl: "ShootingStar",
+    imageUrl: "https://i.ibb.co/pJ7CLr3/Shooting-Star.png",
     writer: "Kshitiz Sharma",
     releaseDate: "August 16, 2020",
     title: "Shooting Star & ETF Arbitrage(Over Bought Signal)",
     text:
       "Combining ETF Over bought signal with Shooting star pattern, profit trading strategy",
-      body:[]
+    body: [],
   },
 ];
 

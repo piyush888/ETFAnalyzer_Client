@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, } from "react-router-dom";
+import { Switch, Route, } from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 
 import { Articles } from "../Pages/Articles";
@@ -9,8 +9,8 @@ import ArticleView2 from "../Pages/Articles/ArticleView2";
 const ArticlesRoutes = () => {
   return (
     <Switch>
-      <ProtectedRoute exact path="/articles" component={Articles} />
-      <ProtectedRoute
+      <Route exact path="/articles" component={Articles} />
+      <Route
         path="/articles/:articleNo"
         component={ArticleView}
       />

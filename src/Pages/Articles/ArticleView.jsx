@@ -34,7 +34,7 @@ const ArticleView = (props) => {
 
               <img
                 className="d-block w-100 Rounded"
-                src={HammerPattern}
+                src={data.imageUrl}
                 alt="Stock Price Chart"
               />
 
@@ -45,13 +45,26 @@ const ArticleView = (props) => {
                     return <p>{content.paragraph}</p>;
                   }
                   if (content.question) {
-                    return <p className="text-muted">{content.question}</p>;
+                    return (
+                      <>
+                        <br />
+                        <p className="text-muted">{content.question}</p>
+                      </>
+                    );
                   }
-                  if(content.imageURL)
-                  {
-                    return <img className="d-block w-100 Rounded"
-                    src={content.imageURL}
-                    alt="Stock Price Chart"/>
+                  if (content.imageURL) {
+                    return (
+                      <>
+                        <br />
+                        <img
+                          className="d-block w-100 Rounded"
+                          src={content.imageURL}
+                          alt="Stock Price Chart"
+                        />
+                        <br />
+                        <br />
+                      </>
+                    );
                   }
                 })}
               </div>

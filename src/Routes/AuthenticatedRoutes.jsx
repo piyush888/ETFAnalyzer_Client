@@ -51,7 +51,7 @@ const AuthenticatedRoutes = () => {
           path="/historical-arbitrage"
           component={HistArbiageRoutes}
         />
-        <ProtectedRoute path="/articles" component={ArticlesRoutes} />
+        <Route path="/articles" component={ArticlesRoutes} />
       </React.Suspense>
     </>
   );
