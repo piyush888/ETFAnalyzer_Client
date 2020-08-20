@@ -1,21 +1,11 @@
 const articlesList = [
   {
     id: 1,
-    imageUrl: "https://i.ibb.co/KDPTmCH/Arb-Series.png",
-    writer: "Kshitiz Sharma",
-    releaseDate: "August 16, 2020",
-    title: "Arbitrage in ETF Industry",
-    text:
-      "Balancing ETF price in $ 3 Trillion industry. Why? How? Opportunity & Solution",
-    body: [],
-  },
-  {
-    id: 2,
     imageUrl: "https://i.ibb.co/mtHBH5w/Hammer-Pattern.png",
     writer: "Piyush Garg",
     writeremail: "piyushgarg888@gmail.com",
     releaseDate: "August 16, 2020",
-    title: "Hammer Pattern & ETF Arbitrage(Over Sold Signal)",
+    title: "Technical Analysis with ETF Arbitrage 1 : Hammer Pattern",
     text:
       "Combining Hammer pattern tech signal with ETF over sold arbitrage signal, high accuracy",
     body: [
@@ -109,15 +99,88 @@ const articlesList = [
     ],
   },
   {
-    id: 3,
-    imageUrl: "https://i.ibb.co/pJ7CLr3/Shooting-Star.png",
-    writer: "Kshitiz Sharma",
-    releaseDate: "August 16, 2020",
-    title: "Shooting Star & ETF Arbitrage(Over Bought Signal)",
+    id: 2,
+    imageUrl: "https://i.ibb.co/Xy04vJ3/Shooting-star-candlestick-2x.png",
+    writer: "Piyush Garg",
+    writeremail: "piyushgarg888@gmail.com",
+    releaseDate: "August 18, 2020",
+    title: "Technical Analysis with ETF Arbitrage 2 : Shooting Starr Pattern",
     text:
-      "Combining ETF Over bought signal with Shooting star pattern, profit trading strategy",
-    body: [],
+      "Combining Shooting Star pattern tech signal with ETF over bought arbitrage signal, high accuracy",
+    body: [
+      {
+        paragraph:
+          "Our team has been busy analyzing some more Candlesticks patterns and with immense pleasure, I’d like to share another positive report in which we bring you the results of the Shooting Star Pattern combined with our system produced Buy/Sell signals.",
+      },
+      {
+        question:
+          "We have already introduced you to what Candlestick patterns are but, what is a Shooting Star Pattern?",
+      },
+      {
+        paragraph:
+          "A Shooting Star Candlestick pattern appears when an asset’s price observes a significant uptrend and is suddenly rejected and closed near its open price. This Candlestick pattern is marked by a long upper wick, a small lower wick, and a small body.",
+      },
+      {
+        imageURL: "https://i.ibb.co/KyW0tCk/Screenshot-2020-08-18-at-10-13-38-PM.png",
+        imageText: "Shooting Star Candlestick Pattern",
+      },
+      {
+        paragraph:
+          "A Shooting Star Candlestick pattern generally appears at the top of an uptrend and hence usually indicates the possibility of a bearish reversal.",
+      },
+      {
+        paragraph:
+          "We explained what is Arbitrage in ETFs and how we calculate the Arbitrage for each ETF illustrated by the formula for it in our last report of Hammer Pattern.",
+      },
+      {
+        paragraph:
+          "In our analysis of all the Candlestick patterns, we have made brackets of the magnitude of Arbitrage that is generally seen in the market. Here ‘Magnitude’ of Arbitrage, signifies the amount of arbitrage that the trader may stand a chance to gain by either Buying or Selling an ETF.",
+      },
+      {
+        paragraph:
+          "Magnitude of Arbitrage, divided in the 1 cent brackets, ranges from $0.01 - $0.02, $0.01 - $0.02 up to $0.09 - $0.1, $0.1 and above.",
+      },
+      {
+        paragraph:
+          "Starting from the highlight of our analysis, the Vanguard Mid-Cap ETF VO, we would like to inform you that, combining the Shooting Star pattern with our system-generated trade signal, produced extremely versatile results. With over 75% favorable probability in all brackets of arbitrage of $0.02 and above, and even better results above $0.04 magnitude of arbitrage, VO shows that our signals have the potential to generate considerable profits.",
+      },
+      {
+        imageURL: "https://i.ibb.co/P1w3jf9/Screenshot-2020-08-18-at-9-46-36-PM.png",
+        imageText: "Probability table",
+      },
+      {
+        paragraph:
+          "Similarly, some of the major technology ETFs, the XLK, SCHX, and VBK show great versatility. With over 75% favorable probability on brackets of $0.04 and above both XLK and SCHX show great potential. For VBK, our algorithm produced positively aligned results in all brackets of $0.02 and above with over 75% favorable results.",
+      },
+      {
+        paragraph:
+          "Now that’s not all, ETFs like SPY, IJR, XLU, VNQ, IWS, and DIA showed results backed by a great number of Shooting Star signals, forming a solid foundation for our belief in our algorithm.",
+      },
+      {
+        paragraph:
+          "With more than 80% favorable probability of correct signals, the ETFs IWS, VNQ, and XLU show excellent potential in $0.01-$0.04 bracket. Furthermore, IWS also enjoys favorable results in the bracket of $0.06-$0.09 of arbitrage.",
+      },
+      {
+        paragraph:
+          "Finally, last but not the least, Large-Cap ETFs SPY and DIA along with Small-Cap ETF IJR show potential in limited brackets but with a great number of Shooting Star patterns and a high probability of over 75%.",
+      },
+      {
+        paragraph:
+          "Hope you found this article informational and exciting.",
+      },
+    ],
   },
+  
+  // {
+  //   id: 3,
+  //   imageUrl: "https://i.ibb.co/pJ7CLr3/Shooting-Star.png",
+  //   writer: "Kshitiz Sharma",
+  //   releaseDate: "August 16, 2020",
+  //   title: "Shooting Star & ETF Arbitrage(Over Bought Signal)",
+  //   text:
+  //     "Combining ETF Over bought signal with Shooting star pattern, profit trading strategy",
+  //   body: [],
+  // },
 ];
 
 export default articlesList;
