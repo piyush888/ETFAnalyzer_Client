@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { firebaseAuth } from "../../Utilities/firebase";
+import { CommonNavBar } from "../NavBar";
 
 const SignUpForm = (props) => {
   const [email, setEmail] = useState("");
@@ -17,6 +18,10 @@ const SignUpForm = (props) => {
     }
   };
   return (
+   
+    <>
+     <CommonNavBar/>
+    
     <div className="white-background padding-top-20vh height-100vh">
       <div className="margin-left-auto margin-right-auto width-30em">
         <center>
@@ -54,6 +59,7 @@ const SignUpForm = (props) => {
         </Form>
       </div>
     </div>
+    </>
   );
 };
 

@@ -243,6 +243,14 @@ const NavBarMain = (props) => {
           >
             Live-Arbitrage
           </Nav.Link>
+          <Nav.Link
+            style={{ color: "white" }}
+            as={Link}
+            to="/articles"
+            eventKey="articles"
+          >
+            Articles
+          </Nav.Link>
         </Nav>
 
         {currentUser && currentUser.emailVerified ? (
