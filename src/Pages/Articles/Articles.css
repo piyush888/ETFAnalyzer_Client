@@ -13,3 +13,10 @@
 .Rounded{
 	border-radius:.45rem!important;
 }
+
+.card-image {
+
+	height: 15em;
+	width: auto;
+	object-fit:scale-down;
+}

@@ -2,9 +2,7 @@ import React from "react";
 import { CommonNavBar } from "../../Common_Components/NavBar";
 import articlesList from "./articlesList";
 
-import HammerPattern from "../../static/Images/AppScreenShots/HammerPattern.png";
-import ShootingStar from "../../static/Images/AppScreenShots/ShootingStar.png";
-import ArbSeries from "../../static/Images/AppScreenShots/ShootingStar.png";
+
 
 const ArticleView = (props) => {
   const articleNo = props.match.params.articleNo;
@@ -54,16 +52,18 @@ const ArticleView = (props) => {
                   }
                   if (content.imageURL) {
                     return (
-                      <>
+                      <div className="text-center">
                         <br />
                         <img
-                          className="d-block w-100 Rounded"
+                          className="d-block Rounded width-20em margin-auto height-auto"
                           src={content.imageURL}
                           alt="Stock Price Chart"
                         />
+                        <br/>
+                        <div className="text-center"> {content.imageText || ""} </div>
                         <br />
                         <br />
-                      </>
+                      </div>
                     );
                   }
                 })}
