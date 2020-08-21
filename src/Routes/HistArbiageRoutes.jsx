@@ -12,11 +12,11 @@ const HistArbiageRoutes = () => {
         path="/historical-arbitrage/:ETF/:startDate"
         component={HistoricalArbitrage}
       />
-         {/* <Redirect
+         <Redirect
       
       from="/historical-arbitrage/:ETF"
       to={`/historical-arbitrage/:ETF/${startDate}`}
-    /> */}
+    />
       <Redirect
         from="/historical-arbitrage"
         to={`/historical-arbitrage/${ETF}/${startDate}`}
