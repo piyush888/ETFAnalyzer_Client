@@ -10,7 +10,7 @@ import {
 } from "react-router-dom";
 import { useEffect } from "react";
 import { changeNavbarStartDate } from "../Common_Components/NavBar/NavBarActions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Axios from "axios";
 import ArticlesRoutes from "./ArticlesRoutes";
 const EtfDescRoutes = React.lazy(() => import("./EtfDescRoutes"));
@@ -21,6 +21,7 @@ const LiveArbitrageAllRoutes = React.lazy(() => import("./Live_Arbitrage_All"));
 const HistArbiageRoutes = React.lazy(() => import("./HistArbiageRoutes"));
 
 const AuthenticatedRoutes = () => {
+  const { isLoggedIn } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
@@ -30,9 +31,10 @@ const AuthenticatedRoutes = () => {
     history.push(generatePath(location.pathname, ETF, value));
   };
   useEffect(() => {
-    Axios.get("/api/LastWorkingDate")
-      .then((res) => handleDateChange(res.data))
-      .catch((err) => console.log(err));
+    isLoggedIn &&
+      Axios.get("/api/LastWorkingDate")
+        .then((res) => handleDateChange(res.data))
+        .catch((err) => console.log(err));
   }, []);
   return (
     <>

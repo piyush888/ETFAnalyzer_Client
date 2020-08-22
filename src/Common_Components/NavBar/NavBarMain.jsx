@@ -152,6 +152,7 @@ const generateDateAndEtf = (
 
 const NavBarMain = (props) => {
   const { logout, currentUser } = useContext(AuthContext);
+  const { isLoggedIn } = useSelector((state) => state.auth);
   const history = useHistory();
   const location = useLocation();
   const { ETF, startDate } = useParams();
@@ -165,7 +166,7 @@ const NavBarMain = (props) => {
     if (startDate) {
       dispatch({ type: changeNavbarStartDate, payload: { value: startDate } });
     }
-    if (!startDate) {
+    if (!startDate && isLoggedIn) {
       Axios.get("/api/ListOfHolidays")
         .then((res) => {
           const tempX = [];
