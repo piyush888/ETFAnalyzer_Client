@@ -3,7 +3,7 @@ const articlesList = [
     id: 1,
     imageUrl: "https://i.ibb.co/mtHBH5w/Hammer-Pattern.png",
     writer: "Piyush Garg",
-    writeremail: "piyushgarg888@gmail.com",
+    writeremail: "piyush888@gmail.com",
     releaseDate: "August 16, 2020",
     title: "Technical Analysis with ETF Arbitrage 1 : Hammer Pattern",
     text:
@@ -102,9 +102,9 @@ const articlesList = [
     id: 2,
     imageUrl: "https://i.ibb.co/Xy04vJ3/Shooting-star-candlestick-2x.png",
     writer: "Piyush Garg",
-    writeremail: "piyushgarg888@gmail.com",
+    writeremail: "piyush888@gmail.com",
     releaseDate: "August 18, 2020",
-    title: "Technical Analysis with ETF Arbitrage 2 : Shooting Starr Pattern",
+    title: "Technical Analysis with ETF Arbitrage 2 : Shooting Star Pattern",
     text:
       "Combining Shooting Star pattern tech signal with ETF over bought arbitrage signal, high accuracy",
     body: [
@@ -170,9 +170,89 @@ const articlesList = [
       },
     ],
   },
-  
+  {
+    id: 3,
+    imageUrl: "https://i.ibb.co/BNty16T/morning-star-candlestick-body-morningstarheadline.png",
+    writer: "Piyush Garg",
+    writeremail: "piyush888@gmail.com",
+    releaseDate: "August 22, 2020",
+    title: "Technical Analysis with ETF Arbitrage 3 : Morning Star Pattern",
+    text:
+      "Combining Morning Star pattern tech signal with ETF over sold arbitrage signal, high accuracy",
+    body: [
+      {
+        paragraph:
+          "Greetings! We have been doing some testing and analysis of the results that our product is yielding and keeping in line with our previous reports, we have brought another analysis report showcasing the efficacy of the combination of Morning Star Candlestick pattern along with our system-generated Buy/Sell Signals.",
+      },
+      {
+        question:
+          "First and foremost, what is a Morning Star Candlestick Pattern?",
+      },
+      {
+        paragraph:
+          "The Morning Star pattern is a pattern consisting of three candles in succession, that appears at the bottom of a downward trend and usually means a Bullish reversal. By Bullish reversal, one generally means going from a downward trend to an upward trend.",
+      },
+      {
+        imageURL: "https://i.ibb.co/rf8RDWH/Morning-Star-SPY-26-06-2020.png",
+        imageText: "Morning Star SPY 26th June 2020",
+      },
+      {
+        imageURL: "https://i.ibb.co/BwHkJLS/Doji-Morning-star-SPY-30-06-2020.png",
+        imageText: "Doji Morning Star SPY 30th June 2020",
+      },
+      {
+        paragraph:
+          "It generally signifies the gradual slowing of a downward trend before a large upward trend is set in motion.",
+      },
+      {
+        paragraph:
+          "The Doji Morning Star is very similar to Morning Star in beaviour and significance, but it's body differs from Morning Star essentially because a Doji means the Open and Close prices are virtually equal.",
+      },
+      {
+        paragraph:
+          "Preserving the scheme of measuring performance using probability in small uniform brackets of Arbitrage (Magnitude of Arbitrage, as we say) we have 1 cent brackets starting from $0.01 - $0.02, $0.01 - $0.02 up to $0.09 - $0.1, $0.1 and above.",
+      },
+      {
+        paragraph:
+          "For this series of analyses of different candlestick patterns combined with our signals, we have been studying the effects on ETFs with Total Asset Under Management over USD 10 Billion, and for these ETFs, our algorithm along with the Morning star pattern has generated astonishing results.",
+      },
+      {
+        paragraph:
+          "With a large number of Morningstar Pattern candlesticks occurring, Large-Cap ETFs like SPY and QQQ enjoy an accuracy of over 95% in suggesting a favorable buy/sell signal in Arbitrage ranges $0.01 - $0.06 and $0.01 - $0.07 respectively.",
+      },
+      {
+        imageURL: "https://i.ibb.co/XVPkNT7/Morning-Star-SPY-14-07-2020.png",
+        imageText: "Morning Star SPY 14th July 2020",
+      },
+      {
+        imageURL: "https://i.ibb.co/16k89ZH/Morning-Star-QQQ-23-07-2020.png",
+        imageText: "Morning Star QQQ 23rd July 2020",
+      },
+      {
+        paragraph:
+          "In a similar range of Arbitrage of $0.01 - $0.06, for the Large-Cap SPDR Dow Jones ETF DIA, our algorithm shows an extremely consistent result with an impressive accuracy of over 83% in suggesting a favorable trade signal. Another Large-Cap Equity ETF, RSP, also shows great potential in the Arbitrage range of $0.01 - $0.03 with an overwhelming probability of over 95% in predicting favorable signals.",
+      },
+      {
+        paragraph:
+          "Furthermore, the Morning Star pattern in conjunction with our system-generated signals proved to be especially beneficial with the iShares ETFs. The iShares ETFs IJH, IVE, IVW and IWS show extremely dependable results in the Arbitrage range of $0.01 - $0.03 with all of them obtaining a probability of favorable trade signal over 95%. The ETF IJH further extends the same probability in the Arbitrage range of $0.04 - $-0.06.",
+      },
+      {
+        imageURL: "https://i.ibb.co/P1w3jf9/Screenshot-2020-08-18-at-9-46-36-PM.png",
+        imageText: "Probability table - Morning Star Pattern",
+      },
+      {
+        paragraph:
+          "These are some extraordinary results but this is not the end of this report. Largely Technological ETFs from Vanguard, VGT and VOO, and the State Street SPDR Diversified Retail ETF, XLY show potential worth with over 95% accuracy in our trade signals in varied ranges as shown in the table above.",
+      },
+      {
+        paragraph:
+          "While the results highlighted in this report, with such overwhelming accuracy, is already unprecedented, we are dedicated and determined to prove the value of our system in the ETF trading world. Hence with the promise of only improving from this point, signing off.",
+      },
+      
+    ],
+  },
   // {
-  //   id: 3,
+  //   id: 4,
   //   imageUrl: "https://i.ibb.co/pJ7CLr3/Shooting-Star.png",
   //   writer: "Kshitiz Sharma",
   //   releaseDate: "August 16, 2020",
