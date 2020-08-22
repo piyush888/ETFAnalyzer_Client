@@ -237,7 +237,7 @@ const articlesList = [
           "Furthermore, the Morning Star pattern in conjunction with our system-generated signals proved to be especially beneficial with the iShares ETFs. The iShares ETFs IJH, IVE, IVW and IWS show extremely dependable results in the Arbitrage range of $0.01 - $0.03 with all of them obtaining a probability of favorable trade signal over 95%. The ETF IJH further extends the same probability in the Arbitrage range of $0.04 - $-0.06.",
       },
       {
-        imageURL: "https://i.ibb.co/P1w3jf9/Screenshot-2020-08-18-at-9-46-36-PM.png",
+        imageURL: "https://i.ibb.co/b6jcd8P/Probability-Table-Morning-Star.png",
         imageText: "Probability table - Morning Star Pattern",
       },
       {
