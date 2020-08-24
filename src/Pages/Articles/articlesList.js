@@ -15,6 +15,18 @@ const articlesList = [
       },
       {
         question:
+          "Combining candlestick patterns with ETF over-bought/sold signals for better accuracy in predicting T+1 minute",
+      },
+      {
+        paragraph:
+          "We have combined 2 different signals in search for alpha & results are astonishing. On average we can predict the right direction of T+1 min with an accuracy of 95%. Now the first thing you will ask is - Why don't I use my strategy to invest and become a millionaire? Fair question. My response is \"I am a developer/analyst, taking advantage of arbitrage in cents requires capital & trading infrastructure. Therefore we are publishing these results to get attention and sell our software to ETF providers, hedge funds, investment banks\". We have already taken into consideration the spreads(trading cost) in our algorithm. Our algorithm looks into fundamental pricing of ETF & the tracking error to track arbitrage in ETFs.",
+      },
+      {
+        paragraph:
+          "We have combined a trend reversal signal with a signal of confidence. Our confidence signal is the arbitrage of the ETF. If a trend reversal candlestick pattern occurs & the ETF price deviates from NAV(Tracking Error) at the same moment, it confirms the reversal. A trader using our application should look at the strength of arbitrage to confirm the reversal.",
+      },
+      {
+        question:
           "Firstly, what is a Candlestick, and what is a Hammer Pattern?",
       },
       {
@@ -63,16 +75,24 @@ const articlesList = [
           "In our analysis of the major ETFs with Total Assets Under Management of over $10 billion, we found that our algorithm gave extremely accurate results for highly traded ETFs like QQQ, SPY, and XLY.",
       },
       {
-        imageURL: "https://i.ibb.co/FxWrhx2/Hammer-Table.png",
-        imageText: "Hammer-Table",
+        question: "Observation: Hamer pattern combined with ETF arbitrage",
       },
       {
         paragraph:
           "For ETFs QQQ and SPY, the candlestick hammer patterns combined with our algorithm-generated Buy/Sell signals, positive results could be achieved with a high probability of 79% and above for all the above-mentioned brackets of Arbitrage. The probability further goes over 90% in the arbitrage brackets over $0.03, for both of these ETFs.",
       },
       {
+        question:
+          "Interpretation: The way you should observe the above statement is as follows. So we are saying, whenever a Hammer Pattern occurs in SPY or QQQ, a trader should check arbitrage in SPY or QQQ for those minutes on our software. If a trader observes that ETF is oversold(-ve arbitrage more than -$0.03), then a trader with 90% confidence can say that at T+1 minute the ETF price will increase from T.",
+      },
+      
+      {
         imageURL: "https://i.ibb.co/9bM4SjH/Hammer-SPY.png",
         imageText: "Hammer-SPY",
+      },
+      {
+        imageURL: "https://i.ibb.co/FxWrhx2/Hammer-Table.png",
+        imageText: "Hammer-Table",
       },
       {
         paragraph:
@@ -100,13 +120,13 @@ const articlesList = [
   },
   {
     id: 2,
-    imageUrl: "https://i.ibb.co/Xy04vJ3/Shooting-star-candlestick-2x.png",
+    imageUrl: "https://i.ibb.co/WFxkc1j/Shooting-Star.png",
     writer: "Piyush Garg",
     writeremail: "piyush888@gmail.com",
     releaseDate: "August 18, 2020",
     title: "Technical Analysis with ETF Arbitrage 2 : Shooting Star Pattern",
     text:
-      "Combining Shooting Star pattern tech signal with ETF over bought arbitrage signal, high accuracy",
+      "Combining Shooting Star pattern signal with ETF over bought arbitrage signal, high accuracy",
     body: [
       {
         paragraph:
@@ -174,15 +194,27 @@ const articlesList = [
     id: 3,
     imageUrl: "https://i.ibb.co/BNty16T/morning-star-candlestick-body-morningstarheadline.png",
     writer: "Piyush Garg",
-    writeremail: "piyush888@gmail.com",
+    writeremail: "piyush888@gmail.com, kshitizsharmav@gmail.com",
     releaseDate: "August 22, 2020",
     title: "Technical Analysis with ETF Arbitrage 3 : Morning Star Pattern",
     text:
-      "Combining Morning Star pattern tech signal with ETF over sold arbitrage signal, high accuracy",
+      "Combining Morning Star pattern signal with ETF over sold arbitrage signal, high accuracy",
     body: [
       {
         paragraph:
-          "Greetings! We have been doing some testing and analysis of the results that our product is yielding and keeping in line with our previous reports, we have brought another analysis report showcasing the efficacy of the combination of Morning Star Candlestick pattern along with our system-generated Buy/Sell Signals.",
+          "Greetings! We have been doing some testing and analysis of the ETF arbitrage signals that our software is yielding and keeping in line with our previous reports, we have brought another analysis report showcasing the efficacy of the combination of Morning Star Candlestick pattern along with our system-generated Buy/Sell Signals. We have highlighted how you can use the application to balance the ETF price relative to NAV(Net Asset Value) & generate HFT trading signals.",
+      },
+      {
+        question:
+          "Combining candlestick patterns with ETF over-bought/sold signals for better accuracy in predicting T+1 minute",
+      },
+      {
+        paragraph:
+          "We have combined 2 different signals in search for alpha & results are astonishing. On average we can predict the right direction of T+1 min with an accuracy of 95%. Now the first thing you will ask is - Why don't I use my strategy to invest and become a millionaire? Fair question. My response is \"I am a developer/analyst, taking advantage of arbitrage in cents requires capital & trading infrastructure. Therefore we are publishing these results to get attention and sell our software to ETF providers, hedge funds, investment banks\". We have already taken into consideration the spreads(trading cost) in our algorithm. Our algorithm looks into fundamental pricing of ETF & the tracking error to track arbitrage in ETFs.",
+      },
+      {
+        paragraph:
+          "We have combined a trend reversal signal with a signal of confidence. Our confidence signal is the arbitrage of the ETF. If a trend reversal candlestick pattern occurs & the ETF price deviates from NAV(Tracking Error) at the same moment, it confirms the reversal. A trader using our application should look at the strength of arbitrage to confirm the reversal.",
       },
       {
         question:
@@ -206,19 +238,45 @@ const articlesList = [
       },
       {
         paragraph:
-          "The Doji Morning Star is very similar to Morning Star in beaviour and significance, but it's body differs from Morning Star essentially because a Doji means the Open and Close prices are virtually equal.",
+          "The Doji Morning Star is very similar to Morning Star in behavior and significance, but its body differs from Morning Star essentially because a Doji means the Open and Close prices are virtually equal.",
+      },
+      {
+        question:
+          "What is Arbitrage and what does it mean in the context of ETFs?",
       },
       {
         paragraph:
-          "Preserving the scheme of measuring performance using probability in small uniform brackets of Arbitrage (Magnitude of Arbitrage, as we say) we have 1 cent brackets starting from $0.01 - $0.02, $0.01 - $0.02 up to $0.09 - $0.1, $0.1 and above.",
+          "Arbitrage means to take advantage of different pricing of the same asset - securities, commodities, or currency, in different markets or forms to make a profit. Similarly, with ETFs, a trader can take advantage of deviation of ETF price from NAV in the market which may last only for a short amount of time & booking some profit using our software.",
       },
       {
+        paragraph:
+          "We, with our system, are trying to study and understand these arbitrage opportunities in the market using our accrued ETF historical data and some analysis on it. Arbitrage in the ETF industry can happen due to liquidity mismatch, the inability of the designated AP (Authorized Participant) to act with due diligence & conflict of interest, wild market swings, or liquidity crunch.",
+      },
+      {
+        question: "How does our system calculate the Arbitrage in ETFs?",
+      },
+      {
+        paragraph:
+          "We follow the standard formula prevalent in the market to calculate the Net Asset Value, percentage change in Net Asset Value, percentage change in the ETF Price, and finally the mispricing. Net Asset Value is the ideal trading price calculated by taking the volume-weighted price of underlying holdings of an ETF. Net Asset Value and, subsequently, Arbitrage in $ are calculated using the following formulae:",
+      },
+      {imageURL: "https://i.ibb.co/Pgw2mh7/Formulae.jpg"},
+      {   
+        paragraph:
+          "We have divided this Magnitude of Arbitrage in the 1 cent brackets starting from $0.01 - $0.02, $0.01 - $0.02 up to $0.09 - $0.1, $0.1 and above.",
+      },      {
         paragraph:
           "For this series of analyses of different candlestick patterns combined with our signals, we have been studying the effects on ETFs with Total Asset Under Management over USD 10 Billion, and for these ETFs, our algorithm along with the Morning star pattern has generated astonishing results.",
       },
       {
+        question: "Observation: Morning Star pattern combined  with ETF arbitrage",
+      },
+      {
         paragraph:
-          "With a large number of Morningstar Pattern candlesticks occurring, Large-Cap ETFs like SPY and QQQ enjoy an accuracy of over 95% in suggesting a favorable buy/sell signal in Arbitrage ranges $0.01 - $0.06 and $0.01 - $0.07 respectively.",
+          "With a large number of Morningstar Pattern candlesticks occurring, Large-Cap ETFs like SPY and QQQ enjoy an accuracy of over 95% in suggesting a favorable buy/sell signal in arbitrage ranges $0.01 - $0.06 and $0.01 - $0.07 respectively.",
+      },
+      {
+        question:
+          "Interpretation: The way you should observe the above statement is as follows. So we are saying, whenever a Morning Star Pattern occurs in SPY or QQQ, a trader should check arbitrage in SPY or QQQ for those minutes on our software. If a trader observes that ETF is oversold(-ve arbitrage), then a trader with 95% confidence can say that at T+1 minute the ETF price will increase from T.",
       },
       {
         imageURL: "https://i.ibb.co/XVPkNT7/Morning-Star-SPY-14-07-2020.png",
@@ -246,7 +304,7 @@ const articlesList = [
       },
       {
         paragraph:
-          "While the results highlighted in this report, with such overwhelming accuracy, is already unprecedented, we are dedicated and determined to prove the value of our system in the ETF trading world. Hence with the promise of only improving from this point, signing off.",
+          "While the results highlighted in this report, with such overwhelming accuracy, is already unprecedented, we are dedicated and determined to prove the value of our system in the ETF trading world. Hence with the promise of only improving from this point by publishing more research-backed numbers & stats.",
       },
       
     ],

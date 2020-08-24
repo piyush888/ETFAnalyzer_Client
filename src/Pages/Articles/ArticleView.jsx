@@ -20,8 +20,7 @@ const ArticleView = (props) => {
               <h1 className="mt-4">{data.title}</h1>
 
               <p className="lead">
-                by
-                <a href="#"> {data.writer}</a>
+                by {data.writer}
               </p>
 
               <hr />
@@ -55,7 +54,7 @@ const ArticleView = (props) => {
                       <div className="text-center">
                         <br />
                         <img
-                          className="d-block Rounded width-20em margin-auto height-auto"
+                          className="d-block Rounded width-30em margin-auto height-auto"
                           src={content.imageURL}
                           alt="Stock Price Chart"
                         />
