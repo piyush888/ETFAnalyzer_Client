@@ -20,7 +20,7 @@ const ArticlesMain = () => {
   return (
     <>
       <CommonNavBar />
-      <div className="ArticlePage height-100vh">
+      <div className="ArticlePage">
         <br />
 
         <div className="container">

@@ -12,7 +12,7 @@ const ArticleView = (props) => {
     <>
       <CommonNavBar />
 
-      <div className="ArticlePage height-200vh">
+      <div className="ArticlePage">
         <br />
         <div className="container">
           <div className="row">
