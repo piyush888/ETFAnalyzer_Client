@@ -309,6 +309,200 @@ const articlesList = [
       
     ],
   },
+  {
+    id: 4,
+    imageUrl: "https://i.ibb.co/wWmW1JJ/Dragonfly-3-white.png",
+    writer: "Piyush Garg, Kshitiz Sharma",
+    writeremail: "piyush888@gmail.com, kshitizsharmav@gmail.com",
+    releaseDate: "August 22, 2020",
+    title: "Technical Analysis with ETF Arbitrage 4 : Dragonfly Doji Pattern and Three White Soldiers Pattern",
+    text:
+      "Combining each Dragonfly Doji Pattern and Three White Soldiers Pattern signal with ETF over sold arbitrage signal, high accuracy",
+    body: [
+      {
+        paragraph:
+          "We have been cooking something exciting for months now just for the ETF market venturers, and now we are sharing the results of the analysis of this tool. This article is the fourth in this line of analyses and we are proud to share yet another report which supports our cause for this tool and gives us a confidence boost.",
+      },
+      {
+        paragraph:
+        "This article will combine results for two types of Candlestick patterns - Dragonfly Doji Candlestick pattern and Three White Soldiers Candlestick Pattern. But before we jump into our analysis results, here is a brief introduction to what these patterns look like and their respective significance."
+      },
+      {
+        question:
+          "What is a Dragonfly Doji Candlestick pattern?",
+      },
+      {
+        paragraph:
+          "A Dragonfly Doji Candlestick is typically a Bullish reversal candlestick pattern and is generally found at the bottom of a downtrend. Generally, it is considered a sign of an imminent bullish movement in the market after a downtrend.",
+      },
+      {
+        paragraph:
+          "A Dragonfly Doji is characterized by its minuscule body and a long lower wick. This signifies that the Open, Close, and High were all about the same prices or equal (rare). The longer lower wick means the market was tested to find out where the demand lies and the downward movement was rejected.",
+      },
+      {
+        question:
+          "What is a Three White Soldiers Candlestick pattern?",
+      },
+      {
+        paragraph:
+          "The Three White Soldiers is a bullish candlestick pattern. It consists of three bullish candles and generally signifies high buying pressure in the market. This may be treated as a sign of a possible uptrend because of the high buying pressure.",
+      },
+      {
+        paragraph:
+        "It appears generally at the bottom of a downtrend and has big bodies with short or no wicks at all. Each candle must have a gradual increase in open and close compared to the last candle."
+      },
+      {
+        paragraph:
+        "We will retain our scheme of distributing Arbitrage in small brackets of one cent from our previous analyses."
+      },
+      {
+        paragraph:
+          "Starting with the Dragonfly Doji Candlestick pattern, we obtained some highly consistent results supported by a high frequency of Signals.",
+      },
+      {
+        imageURL: "https://i.ibb.co/0Cn3ZxB/Probability-Table-Dragonfly-Doji.png",
+        imageText: "Probability Table Dragonfly Doji",
+      },
+      {
+        paragraph:
+          "Our system performed particularly well in producing Buy/Sell signals for State Street SPDR ETFs. Particularly, for the Consumer Discretionary Select Sector SPDR ETF - XLY, our algorithm produced spectacularly accurate signals with over 95% accuracy in the Arbitrage range of $0.04-$0.05 and $0.06-$0.09.",
+      },
+      {
+        imageURL: "https://i.ibb.co/6wKKCtY/Dragonfly-Doji-XLY-6-7-2020-15-33.png",
+        imageText: "Dragonfly Doji XLY 6th July 2020",
+      },
+      {
+        paragraph:
+          "Following the suit, other State Street SPDR ETFs namely, XLC, XLV, XLE, and XLP also enjoy admirable results. All of these ETFs show great potential for gains in tandem with our system-generated trade signals in the range of Arbitrage of $0.01 - $0.03, with XLC extending its range up to $0.04 of arbitrage. These ETFs show varied accuracy ranging from 75% to more than 87%. You can find the exact figures in the Probability table given.",
+      },
+      {
+        imageURL: "https://i.ibb.co/pKmyHWv/Dragonfly-Doji-XLC-8-6-2020-11-54.png",
+        imageText: "Dragonfly Doji XLC 8th June 2020",
+      },
+      {
+        imageURL: "https://i.ibb.co/1qj3PFr/Dragonfly-Doji-XLV-12-6-2020-11-24.png",
+        imageText: "Dragonfly Doji XLV 12th June 2020",
+      },
+      {
+        paragraph:
+          "Apart from these, the Large-Cap ETFs SPY, QQQ, and VGT also have a huge number of Dragonfly Doji signals. For the Large-Cap SPDR S&P 500 ETF SPY, our algorithm produced favorable signals with an accuracy of over 85% in the Arbitrage range of $0.03 - $0.08.",
+      },
+      {
+        imageURL: "https://i.ibb.co/5k1fJ3x/Dragonfly-Doji-SPY-7-7-2020-14-39.png",
+        imageText: "Dragonfly Doji SPY 7th July 2020",
+      },
+      {
+        paragraph:
+          "Moreover, the Large-Cap major technology ETFs QQQ and VGT each enjoy an accuracy of over 75% for favorable trade signals in the arbitrage ranges of $0.01 - $0.05 and $0.05 - $ 0.08 respectively.",
+      },
+      {
+        paragraph:
+          "A possibility of earning an arbitrage in the range of $0.08 with an accuracy of 85% truly confirms the value in our system.",
+      },
+      {
+        paragraph:
+          "Coming to the Three White Soldiers Candlestick pattern, we obtained the most consistent results to date. These are rather interesting, to be honest.",
+      },
+      {
+        paragraph:
+          "For Three White Soldiers, the ETFs DIA, IJR, IVW, MTUM, SCHX, VNQ, VO, VOO, VUG, and XLY produced noteworthy results. All the aforementioned ETFs received trade signals with an accuracy of over 95% in the Arbitrage bracket of $0.01 - $0.03.",
+      },
+      {
+        imageURL: "https://i.ibb.co/KNm57sD/3-white-soldiers-VNQ-7-8-2020-9-44-AM.png",
+        imageText: "Three White Soldiers VNQ 7th August 2020",
+      },
+      {
+        imageURL: "https://i.ibb.co/VvCPP3k/3-white-soldiers-VOO-12-6-2020-11-56-AM.png",
+        imageText: "Three White Soldiers VOO 12th June 2020",
+      },
+      {
+        imageURL: "https://i.ibb.co/2kP1JpF/Probability-Table-3-white-soldiers.png",
+        imageText: "Probability Table Three White Soldiers",
+      },
+      {
+        paragraph:
+          "These are some extraordinary results that we’ve ever got in any of our analyses so far. This gives us a degree of confidence that whenever Three White Soldiers pattern occurs for the above mentioned ETFs, our system will provide the most accurate trade signal.",
+      },
+      {
+        paragraph:
+          "We’re grateful you lent us your time reading this report and with a promise of more improvements and analysis for our system, signing off.",
+      },
+      
+    ],
+  },
+  {
+    id: 5,
+    imageUrl: "https://i.ibb.co/TTRDmQV/Bullish-Piercing-Line-Sample.png",
+    writer: "Piyush Garg, Kshitiz Sharma",
+    writeremail: "piyush888@gmail.com, kshitizsharmav@gmail.com",
+    releaseDate: "August 22, 2020",
+    title: "Technical Analysis with ETF Arbitrage 5 : Piercing Line Pattern",
+    text:
+      "Combining Piercing Line pattern signal with ETF over sold arbitrage signal, high accuracy",
+    body: [
+      {
+        paragraph:
+          "We’ve been keeping ourselves busy during these lockdown times by bringing you these exciting results from our analyses of our system generated trade signals based on different Candlestick patterns. Today we’d like to share a report about our system’s performance with another such Candlestick pattern - Piercing Line Pattern.",
+      },
+      {
+        question:
+          "First things first, what is a Piercing Line Candlestick Pattern?",
+      },
+      {
+        paragraph:
+          "A Piercing Line pattern is generally a consecutive pair of a bearish and a bullish candle, in that order. It signifies the bullish sentiment in the market and usually is a mark of the upcoming bullish movement in the market.",
+      },
+      {
+        paragraph:
+          "As mentioned above, it is a pair of consecutive candles - one bearish and one bullish, in that order. The distinguishing feature, though, is that the second candle or the bullish candle has Close Price above 50% of the previous (bearish) candle. This shows the market retraced at least 50% of the loss made in the last minute/hour/day.",
+      },
+      {
+        paragraph:
+          "As with all our previous articles, we’ll preserve the system of dividing potential Arbitrage in brackets of one cent each starting from $0.01 - $0.02 to $0.1 and above.",
+      },
+      {
+        paragraph:
+        "Starting with the iShares ETFs IVW and IWP, we obtained a high accuracy of over 95% for favorable trade signals in majorly Arbitrage brackets of $0.01 - $0.02 and $0.04 - $0.06. IVW shows this consistency further in brackets above $0.08 as well."
+      },
+      {
+        paragraph:
+        "Similarly, when considered in $0.01 - $0.07 of Arbitrage, ETFs DIA, IJH, IVV, VOO, and VUG really shine. Trade signal accuracies ranging from over 75% to over 85% can be found for these ETFs in these ranges of Arbitrage. Among these ETFs, the Large-Cap ETF DIA enjoys the best accuracy of over 85% in arbitrage ranges of $0.01 - $0.02 and $0.04 - $0.07."
+      },
+      {
+        imageURL: "https://i.ibb.co/xfcbhTx/Piercing-Line-DIA-10-7-2020-14-22.png",
+        imageText: "Piercing Line DIA 10th July 2020",
+      },
+      {
+        paragraph:
+          "Furthermore, the iShares ETF MTUM and State Street SPDR ETF XLY obtain accurate trade signals from our algorithm with a probability of over 92% and 83% respectively. The Arbitrage opportunities for these ETFs also lie in the range of $0.01 - $0.07.",
+      },
+      {
+        imageURL: "https://i.ibb.co/Thc5Lrs/Piercing-Line-MTUM-4-8-2020-13-05.png",
+        imageText: "Piercing Line MTUM 4th August 2020",
+      },
+      {
+        paragraph:
+          "So far categorizing ETFs with the arbitrage range, the last group of ETFs that we studied in this pattern had arbitrage opportunities lying between $0.01 - $0.04. Sharing this bucket are the Large Cap ETFs SCHX, QQQ, and IVE, major technological ETF XLK, and iShares Core S&P Small-Cap ETF IJR. The Technology Select Sector SPDR ETF XLK had the most accurate trade signals from our system with an accuracy of over 92%. All these ETFs had an accuracy of favorable trade signals over 76%.",
+      },
+      {
+        imageURL: "https://i.ibb.co/gtmKcf9/Piercing-Line-XLY-13-7-2020-12-37.png",
+        imageText: "Piercing Line XLY 13th July 2020",
+      },
+      {
+        imageURL: "https://i.ibb.co/C8Xhz33/Piercing-Line-XLK-25-6-2020-14-03.png",
+        imageText: "Piercing Line XLK 25th June 2020",
+      },
+      {
+        imageURL: "https://i.ibb.co/4Vb2n2X/Probability-Table-Piercing-Line.png",
+        imageText: "Piercing Line Probability Table",
+      },
+      {
+        paragraph:
+        "We are very pleased our system is standing tall on our own standards and the market standards. Hope you found some insight with this report into our system’s potential. Thank you.",
+      },
+      
+    ],
+  },
   // {
   //   id: 4,
   //   imageUrl: "https://i.ibb.co/pJ7CLr3/Shooting-Star.png",
