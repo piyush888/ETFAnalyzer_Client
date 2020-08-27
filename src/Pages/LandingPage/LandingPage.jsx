@@ -57,6 +57,7 @@ const LandingPage = (props) => {
                 ETFs in industry, similar Assets Under Management
               </li>
             </ul>
+            <p>Our tool is FREE to use. Signup, Login & start using</p>
           </div>
         </div>
 
