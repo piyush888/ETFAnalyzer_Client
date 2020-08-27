@@ -115,10 +115,10 @@ class CandleStickChartWithMACDIndicator extends React.Component {
 		};
 
 		return (
-			<ChartCanvas height={600}
+			<ChartCanvas height={550}
 				width={width}
 				ratio={ratio}
-				margin={{ left: 70, right: 70, top: 20, bottom: 30 }}
+				margin={{ left: 70, right: 70, top: 5, bottom: 5 }}
 				type={type}
 				seriesName="MSFT"
 				data={data}
@@ -126,7 +126,7 @@ class CandleStickChartWithMACDIndicator extends React.Component {
 				xAccessor={xAccessor}
 				displayXAccessor={displayXAccessor}
 			>
-				<Chart id={1} height={400}
+				<Chart id={1} height={300}
 					yExtents={[d => [d.high, d.low], ema26.accessor(), ema12.accessor()]}
 					padding={{ top: 10, bottom: 20 }}
 				>
@@ -185,7 +185,7 @@ class CandleStickChartWithMACDIndicator extends React.Component {
 						when={d => d['Over Bought/Sold'] === "Over Bought"}
 						usingProps={shortAnnotationProps} />
 				</Chart>
-				<Chart id={2} height={150}
+				<Chart id={2} height={100}
 					yExtents={[d => d.volume, smaVolume50.accessor()]}
 					origin={(w, h) => [0, h - 300]}
 				>
@@ -201,7 +201,7 @@ class CandleStickChartWithMACDIndicator extends React.Component {
 					<BarSeries yAccessor={d => d.volume} fill={d => d.close > d.open ? "#6BA583" : "#FF0000"} />
 					<AreaSeries yAccessor={smaVolume50.accessor()} stroke={smaVolume50.stroke()} fill={smaVolume50.fill()}/>
 				</Chart>
-				<Chart id={3} height={150}
+				<Chart id={3} height={100}
 					yExtents={macdCalculator.accessor()}
 					origin={(w, h) => [0, h - 150]} padding={{ top: 10, bottom: 10 }}
 				>

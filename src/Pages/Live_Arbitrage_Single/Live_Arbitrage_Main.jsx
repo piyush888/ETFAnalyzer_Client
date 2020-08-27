@@ -16,6 +16,7 @@ import { Loader } from "../../Common_Components/Loader";
 import ScatterPlot from "../../Component/ScatterPlott";
 import { CommonNavBar } from "../../Common_Components/NavBar";
 import "./Styles/style.css";
+import { CardGroup } from "react-bootstrap";
 
 class Live_Arbitrage_Single extends React.Component {
   state = {
@@ -88,15 +89,9 @@ class Live_Arbitrage_Single extends React.Component {
                 this.parseData(this.state.parseDate)
               ),
             },
-            pnlstatementforday: (
-              <AppTable data={JSON.parse(res.data.pnlstatementforday)} />
-            ),
-            SignalCategorization: (
-              <AppTable data={JSON.parse(res.data.SignalCategorization)} />
-            ),
-            scatterPlotData: (
-              <ScatterPlot data={JSON.parse(res.data.scatterPlotData)} />
-            ),
+            pnlstatementforday: JSON.parse(res.data.pnlstatementforday),
+            SignalCategorization: JSON.parse(res.data.SignalCategorization),
+            scatterPlotData: JSON.parse(res.data.scatterPlotData),
             ArbitrageLineChart: res.data.ArbitrageLineChart,
             etfmoversDictCount: JSON.parse(res.data.etfmoversDictCount),
             highestChangeDictCount: JSON.parse(res.data.highestChangeDictCount),
@@ -152,6 +147,9 @@ class Live_Arbitrage_Single extends React.Component {
       LiveArbitrage,
       LiveSpread,
       LiveColor,
+      scatterPlotData,
+      SignalCategorization,
+      pnlstatementforday,
     } = this.state;
 
     return (
@@ -159,7 +157,7 @@ class Live_Arbitrage_Single extends React.Component {
         <CommonNavBar />
         <div className="live-arb-container font-size-sm">
           <div className="live-arb-table">
-            <Card bg="dark" text="white" className="height-100">
+            <Card bg="dark" text="white" style={{ height: "60vh" }}>
               <Card.Header className="flex-row">
                 <span>Live Arbitrage {ETF}</span>
                 <div className="margin-left-auto">
@@ -169,7 +167,7 @@ class Live_Arbitrage_Single extends React.Component {
                   />
                 </div>
               </Card.Header>
-              <Card.Body className="height-90vh overflow-auto">
+              <Card.Body className="padding-1px overflow-auto">
                 {this.state.isLoading ? (
                   <Loader />
                 ) : (
@@ -180,28 +178,51 @@ class Live_Arbitrage_Single extends React.Component {
               </Card.Body>
             </Card>
           </div>
+          <div className="card-group">
+            <CardGroup style={{ width: "100%" }}>
+              <LiveStatusWindow
+                HighPrice={HighPrice}
+                OpenPrice={OpenPrice}
+                ClosePrice={ClosePrice}
+                LowPrice={LowPrice}
+                SignalStrength={SignalStrength}
+                CurrentTime={CurrentTime}
+                ETFStatus={ETFStatus}
+                Signal={Signal}
+                LiveArbitrage={LiveArbitrage}
+                LiveSpread={LiveSpread}
+                LiveColor={LiveColor}
+              />
+              <Card className="height-100" bg="dark" text="white">
+                <Card.Header>Signal Performace</Card.Header>
 
-          <div className="live-status-window">
-            <LiveStatusWindow
-              HighPrice={HighPrice}
-              OpenPrice={OpenPrice}
-              ClosePrice={ClosePrice}
-              LowPrice={LowPrice}
-              SignalStrength={SignalStrength}
-              CurrentTime={CurrentTime}
-              ETFStatus={ETFStatus}
-              Signal={Signal}
-              LiveArbitrage={LiveArbitrage}
-              LiveSpread={LiveSpread}
-              LiveColor={LiveColor}
-            />
+                <Card.Body className="padding-1px">
+                  {this.state.isLoading ? (
+                    <Loader />
+                  ) : (
+                    <AppTable data={pnlstatementforday} />
+                  )}
+                </Card.Body>
+              </Card>
+              <Card bg="dark" text="white" className="height-100">
+                <Card.Header>Signal Stats</Card.Header>
+
+                <Card.Body className="padding-1px">
+                  {this.state.isLoading ? (
+                    <Loader />
+                  ) : (
+                    <AppTable data={SignalCategorization} />
+                  )}
+                </Card.Body>
+              </Card>
+            </CardGroup>
           </div>
 
           <div className="time-series">
             <Card bg="dark" text="white" className="height-100">
               <Card.Header>Arb Time Series</Card.Header>
 
-              <Card.Body>
+              <Card.Body className="padding-1px">
                 {this.state.isLoading ? (
                   <Loader />
                 ) : (
@@ -210,38 +231,12 @@ class Live_Arbitrage_Single extends React.Component {
               </Card.Body>
             </Card>
           </div>
-          <div className="signal-performance">
-            <Card className="height-100" bg="dark" text="white">
-              <Card.Header>Signal Performace</Card.Header>
-
-              <Card.Body>
-                {this.state.isLoading ? (
-                  <Loader />
-                ) : (
-                  this.state.pnlstatementforday
-                )}
-              </Card.Body>
-            </Card>
-          </div>
-
-          <div className="signal-stats">
-            <Card bg="dark" text="white" className="height-100">
-              <Card.Header>Signal Stats</Card.Header>
-
-              <Card.Body>
-                {this.state.isLoading ? (
-                  <Loader />
-                ) : (
-                  this.state.SignalCategorization
-                )}
-              </Card.Body>
-            </Card>
-          </div>
+          <div className="signal-performance"></div>
 
           <div className="price-chart">
             <Card bg="dark" text="white" className="height-100">
               <Card.Header>Price Chart</Card.Header>
-              <Card.Body>
+              <Card.Body className="padding-1px">
                 <ChartComponent data={this.state.Full_Day_Prices} />
               </Card.Body>
             </Card>
@@ -251,8 +246,12 @@ class Live_Arbitrage_Single extends React.Component {
             <Card bg="dark" text="white" className="height-100">
               <Card.Header>ETF Change % Vs NAV change %</Card.Header>
 
-              <Card.Body>
-                {this.state.isLoading ? <Loader /> : this.state.scatterPlotData}
+              <Card.Body className="padding-1px">
+                {this.state.isLoading ? (
+                  <Loader />
+                ) : (
+                  <ScatterPlot data={scatterPlotData} />
+                )}
               </Card.Body>
             </Card>
           </div>

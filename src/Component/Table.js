@@ -63,7 +63,7 @@ const AppTable = (props) => {
   }
   
   const TableStyling = {
-    fontSize: '13px'
+    fontSize: '11px'
   };
 
   return (

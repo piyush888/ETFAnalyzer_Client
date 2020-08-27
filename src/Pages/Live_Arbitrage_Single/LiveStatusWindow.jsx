@@ -4,7 +4,7 @@ import "../../static/css/Live_Arbitrage.css";
 
 const LiveStatusWindow = (props) => {
   return (
-    <Card bg="dark" text="light">
+    <Card bg="dark" text="light" className="height-100">
       <Card.Header>
         <span className="h4 pull-left pr-2"></span>
         H: <span className="text-muted">{props.HighPrice} </span>
@@ -16,7 +16,7 @@ const LiveStatusWindow = (props) => {
         </div>
       </Card.Header>
 
-      <Card.Body>
+      <Card.Body className="padding-1px">
         <div>
           <h5>
             <span className={props.LiveColor}>

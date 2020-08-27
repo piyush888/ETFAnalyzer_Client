@@ -21,6 +21,7 @@ import { connect } from "react-redux";
 import { Loader } from "../../Common_Components/Loader";
 import ScatterPlot from "../../Component/ScatterPlott";
 import { CommonNavBar } from "../../Common_Components/NavBar";
+import { CardGroup } from "react-bootstrap";
 
 class HistoricalArbitrage extends React.Component {
   state = {
@@ -132,7 +133,7 @@ class HistoricalArbitrage extends React.Component {
         <CommonNavBar />
         <div className="hist-main-container font-size-sm">
           <div className="arbitrage-table">
-            <Card bg="dark" text="light" className="height-100">
+            <Card bg="dark" text="light" style={{height:"60vh"}}>
               <Card.Header className="flex-row">
                 <span>
                   Histortical Data {ETF} {startDate}
@@ -145,7 +146,7 @@ class HistoricalArbitrage extends React.Component {
                   />
                 </div>
               </Card.Header>
-              <Card.Body className="height-90vh overflow-auto">
+              <Card.Body className="padding-1px overflow-auto">
                 {isLoading ? (
                   <Loader />
                 ) : (
@@ -155,12 +156,53 @@ class HistoricalArbitrage extends React.Component {
             </Card>
           </div>
 
+          <div className="card-group">
+            <CardGroup style={{width:"100%"}}>
+              <Card className="height-100" bg="dark" text="light">
+                <Card.Header>Signal Performance</Card.Header>
+                <Card.Body className="padding-1px">
+                  {isLoading ? (
+                    <Loader />
+                  ) : (
+                    <Table size="sm" striped bordered hover variant="dark">
+                      <tbody>
+                        {typeof PNLStatementForTheDay === "object" &&
+                          Object.entries(PNLStatementForTheDay).map(
+                            ([key, value]) => (
+                              <tr key={key}>
+                                <td>{key}</td>
+                                <td>{value}</td>
+                              </tr>
+                            )
+                          )}
+                      </tbody>
+                    </Table>
+                  )}
+                </Card.Body>
+              </Card>
+              <Card bg="dark" text="light" className="height-100">
+                <Card.Header>Signal Stats</Card.Header>
+                <Card.Body className="padding-1px">
+                  {isLoading ? <Loader /> : SignalCategorization}
+                </Card.Body>
+              </Card>
+              <Card bg="dark" text="light">
+                <Card.Header>Underlyings Daily Change</Card.Header>
+                <Card.Body style={{height:"25vh"}} className="overflow-auto padding-sm padding-1px">
+                  {this.state.isLoading ? (
+                    <Loader />
+                  ) : (
+                    <DailyChangeUnderlyingFunc data={underlyingPerformance} />
+                  )}
+                </Card.Body>
+              </Card>
+            </CardGroup>
+          </div>
+
           <div className="time-series">
             <Card bg="dark" text="light" className="height-100">
-              <Card.Header>
-                Arb Time Series
-              </Card.Header>
-              <Card.Body >
+              <Card.Header>Arb Time Series</Card.Header>
+              <Card.Body className="padding-1px">
                 {isLoading ? (
                   <Loader />
                 ) : (
@@ -170,71 +212,10 @@ class HistoricalArbitrage extends React.Component {
             </Card>
           </div>
 
-          <div className="signal-performance">
-            <Card className="height-100" bg="dark" text="light">
-              <Card.Header >
-                Signal Performance
-              </Card.Header>
-              <Card.Body >
-                {isLoading ? (
-                  <Loader />
-                ) : (
-                  <Table
-                    size="sm"
-                    striped
-                    bordered
-                    hover
-                    variant="dark"
-                  >
-                    <tbody>
-                      {typeof PNLStatementForTheDay === "object" &&
-                        Object.entries(PNLStatementForTheDay).map(
-                          ([key, value]) => (
-                            <tr key={key}>
-                              <td>{key}</td>
-                              <td>{value}</td>
-                            </tr>
-                          )
-                        )}
-                    </tbody>
-                  </Table>
-                )}
-              </Card.Body>
-            </Card>
-          </div>
-
-          <div className="signal-stats">
-            <Card bg="dark" text="light" className="height-100">
-              <Card.Header >
-                Signal Stats
-              </Card.Header>
-              <Card.Body >
-                {isLoading ? <Loader /> : SignalCategorization}
-              </Card.Body>
-            </Card>
-          </div>
-
-          <div className="daily-change">
-            <Card className="height-100" bg="dark" text="light">
-              <Card.Header >
-                Underlyings Daily Change
-              </Card.Header>
-              <Card.Body className="height-30vh overflow-auto padding-sm">
-                {this.state.isLoading ? (
-                  <Loader />
-                ) : (
-                  <DailyChangeUnderlyingFunc data={underlyingPerformance} />
-                )}
-              </Card.Body>
-            </Card>
-          </div>
-
           <div className="price-chart">
             <Card bg="dark" text="light" className="height-100">
-              <Card.Header>
-                Price Chart
-              </Card.Header>
-              <Card.Body >
+              <Card.Header>Price Chart</Card.Header>
+              <Card.Body className="padding-1px">
                 <ChartComponent data={etfPriceData} />
               </Card.Body>
             </Card>
@@ -242,11 +223,9 @@ class HistoricalArbitrage extends React.Component {
 
           <div className="etfchange-navchange">
             <Card bg="dark" text="light" className="height-100">
-              <Card.Header >
-                ETF Change % Vs NAV change %
-              </Card.Header>
-              <Card.Body className="margin-auto">
-                <ScatterPlot data={scatterPlotData} />
+              <Card.Header>ETF Change % Vs NAV change %</Card.Header>
+              <Card.Body className="margin-auto padding-1px">
+                <ScatterPlot data={scatterPlotData} width={350} />
               </Card.Body>
             </Card>
           </div>
