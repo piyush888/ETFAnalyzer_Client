@@ -57,6 +57,7 @@ const LandingPage = (props) => {
                 ETFs in industry, similar Assets Under Management
               </li>
             </ul>
+            <p>Our tool is FREE to use. Signup, Login & start using</p>
           </div>
         </div>
 
@@ -223,13 +224,13 @@ const LandingPage = (props) => {
               >
                 Kshitiz Sharma
               </a>{" "}
-              - Developer & Business development
+              - Developer & business development
             </li>
             <li>
               <a href="https://www.linkedin.com/in/piyush888/" target="_blank">
                 Piyush Garg
               </a>{" "}
-              - Lead tech architect & Business development
+              - Lead tech architect & ETF expert
             </li>
             <li>
               <a
@@ -238,8 +239,19 @@ const LandingPage = (props) => {
               >
                 Aditya Naik
               </a>{" "}
-              - UI design & developer
+              - UX/UI design & developer
             </li>
+
+            <li>
+              <a
+                href="https://www.linkedin.com/in/haochen-liu-a62b2b96/"
+                target="_blank"
+              >
+                Haochen Liu
+              </a>{" "}
+              - Business development & data scientist
+            </li>
+
           </ul>
         </div>
 

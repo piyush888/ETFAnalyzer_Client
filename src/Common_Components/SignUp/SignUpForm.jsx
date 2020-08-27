@@ -50,6 +50,8 @@ const SignUpForm = (props) => {
               placeholder="Password"
             />
           </Form.Group>
+          <p className="light">By Signing up you agree to our Terms & Conditions. This is an analytical tool & though we stand behind our numbers we won't be held responsible for any losses incurred in the market if you make trading decisions using our application www.etftrace.com.</p>
+
           <Form.Group controlId="formBasicCheckbox">
             <Form.Check type="checkbox" label="Check me out" />
           </Form.Group>

@@ -67,9 +67,9 @@ const SameIndustryTable = (props) => {
       {isLoading ? (
         <Loader />
       ) : (
-        <Card bg="dark" text="light">
-          <Card.Header className="flex-row">
-            ETF in Same Industry : Technology Equities
+        <Card>
+          <Card.Header className="text-white bg-color-dark flex-row">
+            ETF in Same Industry
             <input
               className="margin-left-auto d-inline-block"
               name="search"
