@@ -64,8 +64,8 @@ const SameIssuerTable = (props) => {
   };
 
   return (
-    <Card>
-      <Card.Header className="text-white bg-color-dark flex-row">
+    <Card bg="dark" text="light">
+      <Card.Header className="flex-row">
         ETF in Same Issuer
         <input
           className="margin-left-auto d-inline-block"
@@ -75,7 +75,7 @@ const SameIssuerTable = (props) => {
         />
       </Card.Header>
 
-      <Card.Body className="padding-0 bg-color-dark overflow-auto height-50vh font-size-sm">
+      <Card.Body className="padding-0  overflow-auto height-50vh">
         {isLoading ? (
           <Loader />
         ) : (

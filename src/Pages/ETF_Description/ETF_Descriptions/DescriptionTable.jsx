@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Card from "react-bootstrap/Card";
 import Table from "react-bootstrap/Table";
 import { useEffect } from "react";
+import "../Styles/styles.css";
 
 const DescriptionTable = (props) => {
   const { DescriptionData } = props;
@@ -30,11 +31,11 @@ const DescriptionTable = (props) => {
   };
 
   return (
-    <Card>
-      <Card.Header className="text-white bg-color-dark">
+    <Card text="light" bg="dark">
+      <Card.Header>
         ETF Description
       </Card.Header>
-      <Card.Body className="padding-0 bg-color-dark overflow-auto height-50vh font-size-sm">
+      <Card.Body className="padding-0 overflow-auto height-50vh">
         <Table size="sm" striped bordered hover variant="dark">
           <thead>
             <tr>

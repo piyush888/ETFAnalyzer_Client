@@ -73,56 +73,28 @@ class ETF_Description extends React.Component {
     return (
       <>
         <CommonNavBar />
-        <Row>
-          <Col xs={12} md={12}>
-            <Row>
-              <Col xs={12} md={3}>
-                {DescriptionData ? (
-                  <DescriptionTable DescriptionData={DescriptionData} />
-                ) : (
-                  <Loader />
-                )}
-              </Col>
-
-              {/*
-        <Col xs={12} md={8}>
-          <Card>
-            <Card.Header className="text-white BlackHeaderForModal">Price Chart</Card.Header>
-            <Card.Body style={{'backgroundColor':'#292b2c'}}>
-              <ChartComponent data={this.state.OHLCDailyData} />
-            </Card.Body>
-          </Card>
-        </Col>
-      */}
-
-              <Col xs={12} md={3}>
-                <ETFHoldings ETF={ETF} startDate={startDate} />
-              </Col>
-
-              <Col xs={12} md={6}>
-                <PNL ETF={ETF} />
-              </Col>
-
-              <Col xs={12} md={4}>
-                <EtfSameIssuer IssuerName={IssuerName} />
-              </Col>
-
-              <Col xs={12} md={4}>
-                {SimilarTotalAsstUndMgmt && (
-                  <SimilarAssetUnderManagement
-                    SimilarTotalAsstUndMgmt={SimilarTotalAsstUndMgmt}
-                  />
-                )}
-              </Col>
-
-              <Col xs={12} md={4}>
-                {EtfDbCategory && (
-                  <EtfSameIndustry EtfDbCategory={EtfDbCategory} />
-                )}
-              </Col>
-            </Row>
-          </Col>
-        </Row>
+        <div className="font-size-sm etf-desc-container">
+          <div className="etf-desc-table">
+            {DescriptionData ? (
+              <DescriptionTable DescriptionData={DescriptionData} />
+            ) : (
+              <Loader />
+            )}
+          </div>
+          <div className="etf-hold-table">
+            <ETFHoldings ETF={ETF} startDate={startDate} />
+          </div>
+          <div className="pnl-table">
+            <PNL ETF={ETF} />
+          </div>
+          <EtfSameIssuer IssuerName={IssuerName} />
+          {SimilarTotalAsstUndMgmt && (
+            <SimilarAssetUnderManagement
+              SimilarTotalAsstUndMgmt={SimilarTotalAsstUndMgmt}
+            />
+          )}
+          {EtfDbCategory && <EtfSameIndustry EtfDbCategory={EtfDbCategory} />}
+        </div>
       </>
     );
   }

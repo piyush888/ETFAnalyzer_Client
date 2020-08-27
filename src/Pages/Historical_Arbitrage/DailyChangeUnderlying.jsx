@@ -8,33 +8,28 @@ import orderBy from "lodash/orderBy";
 
 import "./Styles/arbitrage.css";
 
-const DailyChangeUnderlyingFunc = (props) => {
-  const DailyChangeUnderlying = props.data;
+const DailyChangeUnderlyingFunc = ({ data }) => {
   return (
-      <Table size="sm" striped bordered hover variant="dark">
-          <thead>
-            <tr>
-              <th className="cursor-pointer" >
-                Ticker
-              </th>
-              <th>Daily Change %</th>
-              <th>Volume</th>
+    <Table size="sm" striped bordered hover variant="dark" >
+      <thead>
+        <tr>
+          <th className="cursor-pointer">Ticker</th>
+          <th>Daily Change %</th>
+          <th>Volume</th>
+        </tr>
+      </thead>
+      <tbody>
+        {Array.isArray(data) &&
+          data.map(({ symbol, DailyChangepct, volume }, index) => (
+            <tr key={`symbol${index}`}>
+              <td>{symbol && symbol}</td>
+              <td>{DailyChangepct && DailyChangepct}</td>
+              <td>{volume && volume}</td>
             </tr>
-          </thead>
-          <tbody>
-            {typeof DailyChangeUnderlying === "object"  &&
-              DailyChangeUnderlying.data.map(
-                ({ symbol, DailyChangepct, volume }, index) => (
-                  <tr key={`symbol${index}`}>
-                    <td>{symbol && symbol}</td>
-                    <td>{DailyChangepct && DailyChangepct}</td>
-                    <td>{volume && volume}</td>
-                  </tr>
-                )
-              )}
-          </tbody>
-        </Table>
-   );
+          ))}
+      </tbody>
+    </Table>
+  );
 };
 
 export default DailyChangeUnderlyingFunc;

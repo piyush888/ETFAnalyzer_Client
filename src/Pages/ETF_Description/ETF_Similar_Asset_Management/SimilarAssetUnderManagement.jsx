@@ -42,11 +42,11 @@ const SimilarAssetUnderManagement = (props) => {
   };
 
   return (
-    <Card>
-      <Card.Header className="text-white bg-color-dark">
+    <Card bg="dark" text="light">
+      <Card.Header>
         Similar Asset under Management
       </Card.Header>
-      <Card.Body className="padding-0 bg-color-dark overflow-auto height-50vh font-size-sm">
+      <Card.Body className="padding-0 overflow-auto height-50vh">
         <Table size="sm" striped bordered hover variant="dark">
           <thead>
             <tr>

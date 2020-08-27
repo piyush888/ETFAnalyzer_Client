@@ -1,0 +1,18 @@
+.etf-desc-container {
+  display: grid;
+  grid-gap: 1em;
+  grid-template-columns: 1fr 1fr auto;
+  margin:5px;
+}
+
+.etf-desc-table {
+  grid-column: 1/2;
+}
+
+.etf-hold-table {
+  grid-column: 2/3;
+}
+
+.pnl-table {
+  grid-column: 3/4;
+}

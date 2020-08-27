@@ -1,6 +1,7 @@
 import React from "react";
 import { CommonNavBar } from "../../Common_Components/NavBar";
 import articlesList from "./articlesList";
+import ReactHtmlParser from "react-html-parser"
 
 
 
@@ -38,7 +39,8 @@ const ArticleView = (props) => {
 
               <hr />
               <div className="font-size-m">
-                {data.body.map((content, index) => {
+                {data.testHTML && <div> {ReactHtmlParser(data.testHTML)} </div>}
+                {data.body && data.body.map((content, index) => {
                   if (content.paragraph) {
                     return <p>{content.paragraph}</p>;
                   }

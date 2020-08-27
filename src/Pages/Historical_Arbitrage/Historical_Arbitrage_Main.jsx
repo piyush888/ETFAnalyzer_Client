@@ -32,6 +32,7 @@ class HistoricalArbitrage extends React.Component {
     ArbitrageCumSum: [],
     highestChangeDictCount: null,
     isLoading: true,
+    underlyingPerformance: [],
   };
   parseDate = timeParse("%Y-%m-%d %H:%M:%S");
 
@@ -54,6 +55,7 @@ class HistoricalArbitrage extends React.Component {
       this.setState({ ...this.state, isLoading: true });
       Axios.get(`/api/PastArbitrageData/${ETF}/${startDate}`)
         .then(({ data }) => {
+          console.log(data);
           this.setState({
             ...this.state,
             etfArbitrageTableData: data.etfhistoricaldata,
@@ -65,7 +67,7 @@ class HistoricalArbitrage extends React.Component {
             etfmoversDictCount: data.etfmoversDictCount,
             highestChangeDictCount: data.highestChangeDictCount,
             SignalCategorization: <AppTable data={data.SignalCategorization} />,
-            ArbitrageCumSum: data.ArbitrageCumSum,
+            ArbitrageCumSum: [...data.ArbitrageCumSum],
             isLoading: false,
           });
         })
@@ -80,9 +82,10 @@ class HistoricalArbitrage extends React.Component {
       this.setState({ ...this.state, isLoading: true });
       Axios.get(`/api/PastArbitrageData/DailyChange/${ETF}/${startDate}`)
         .then((res) => {
+          console.log(res);
           this.setState({
             ...this.state,
-            underlyingPerformance: res,
+            underlyingPerformance: [...res.data],
             isLoading: false,
           });
         })
@@ -127,10 +130,10 @@ class HistoricalArbitrage extends React.Component {
     return (
       <div>
         <CommonNavBar />
-        <Row>
-          <Col className="etfArbitrageTable" xs={12} md={5}>
-            <Card>
-              <Card.Header className="text-white bg-color-dark flex-row">
+        <div className="hist-main-container font-size-sm">
+          <div className="arbitrage-table">
+            <Card bg="dark" text="light" className="height-100">
+              <Card.Header className="flex-row">
                 <span>
                   Histortical Data {ETF} {startDate}
                 </span>
@@ -142,7 +145,7 @@ class HistoricalArbitrage extends React.Component {
                   />
                 </div>
               </Card.Header>
-              <Card.Body className="BlackHeaderForModal height-90vh overflow-auto">
+              <Card.Body className="height-90vh overflow-auto">
                 {isLoading ? (
                   <Loader />
                 ) : (
@@ -150,118 +153,104 @@ class HistoricalArbitrage extends React.Component {
                 )}
               </Card.Body>
             </Card>
-          </Col>
+          </div>
 
-          <Col xs={12} md={7}>
-            <Row>
-              <Col xs={12} md={5}>
-                <Row>
-                  <Col xs={12} md={12}>
-                    <Card className="CustomCard">
-                      <Card.Header className="CustomCardHeader text-white">
-                        Arb Time Series
-                      </Card.Header>
-                      <Card.Body className="CustomCardBody text-white">
-                        {isLoading ? (
-                          <Loader />
-                        ) : (
-                          <LineChartForHistArb data={ArbitrageCumSum} />
+          <div className="time-series">
+            <Card bg="dark" text="light" className="height-100">
+              <Card.Header>
+                Arb Time Series
+              </Card.Header>
+              <Card.Body >
+                {isLoading ? (
+                  <Loader />
+                ) : (
+                  <LineChartForHistArb data={ArbitrageCumSum} />
+                )}
+              </Card.Body>
+            </Card>
+          </div>
+
+          <div className="signal-performance">
+            <Card className="height-100" bg="dark" text="light">
+              <Card.Header >
+                Signal Performance
+              </Card.Header>
+              <Card.Body >
+                {isLoading ? (
+                  <Loader />
+                ) : (
+                  <Table
+                    size="sm"
+                    striped
+                    bordered
+                    hover
+                    variant="dark"
+                  >
+                    <tbody>
+                      {typeof PNLStatementForTheDay === "object" &&
+                        Object.entries(PNLStatementForTheDay).map(
+                          ([key, value]) => (
+                            <tr key={key}>
+                              <td>{key}</td>
+                              <td>{value}</td>
+                            </tr>
+                          )
                         )}
-                      </Card.Body>
-                    </Card>
-                  </Col>
+                    </tbody>
+                  </Table>
+                )}
+              </Card.Body>
+            </Card>
+          </div>
 
-                  <Col xs={12} md={12}>
-                    <Card className="CustomCard">
-                      <Card.Header className="CustomCardHeader text-white">
-                        Signal Performance
-                      </Card.Header>
-                      <Card.Body className="CustomCardBody text-white">
-                        {isLoading ? (
-                          <Loader />
-                        ) : (
-                          <Table
-                            size="sm"
-                            striped
-                            bordered
-                            hover
-                            variant="dark"
-                            className="font-size-sm"
-                          >
-                            <tbody>
-                              {typeof PNLStatementForTheDay === "object" &&
-                                Object.entries(PNLStatementForTheDay).map(
-                                  ([key, value]) => (
-                                    <tr key={key}>
-                                      <td>{key}</td>
-                                      <td>{value}</td>
-                                    </tr>
-                                  )
-                                )}
-                            </tbody>
-                          </Table>
-                        )}
-                      </Card.Body>
-                    </Card>
-                  </Col>
+          <div className="signal-stats">
+            <Card bg="dark" text="light" className="height-100">
+              <Card.Header >
+                Signal Stats
+              </Card.Header>
+              <Card.Body >
+                {isLoading ? <Loader /> : SignalCategorization}
+              </Card.Body>
+            </Card>
+          </div>
 
-                  <Col xs={12} md={12}>
-                    <Card className="CustomCard">
-                      <Card.Header className="CustomCardHeader text-white">
-                        Signal Stats
-                      </Card.Header>
-                      <Card.Body className="CustomCardBody text-white">
-                        {isLoading ? <Loader /> : SignalCategorization}
-                      </Card.Body>
-                    </Card>
-                  </Col>
+          <div className="daily-change">
+            <Card className="height-100" bg="dark" text="light">
+              <Card.Header >
+                Underlyings Daily Change
+              </Card.Header>
+              <Card.Body className="height-30vh overflow-auto padding-sm">
+                {this.state.isLoading ? (
+                  <Loader />
+                ) : (
+                  <DailyChangeUnderlyingFunc data={underlyingPerformance} />
+                )}
+              </Card.Body>
+            </Card>
+          </div>
 
-                  <Col xs={12} md={12}>
-                    <Card className="CustomCard smallHeightTable">
-                      <Card.Header className="CustomCardHeader text-white CustomBackGroundColor">
-                        Underlyings Daily Change
-                      </Card.Header>
-                      <Card.Body className="CustomCardBody padding-0 bg-color-dark overflow-auto height-50vh font-size-sm">
-                        {this.state.isLoading ? (
-                          <Loader />
-                        ) : (
-                          <DailyChangeUnderlyingFunc
-                            data={underlyingPerformance}
-                          />
-                        )}
-                      </Card.Body>
-                    </Card>
-                  </Col>
-                </Row>
-              </Col>
+          <div className="price-chart">
+            <Card bg="dark" text="light" className="height-100">
+              <Card.Header>
+                Price Chart
+              </Card.Header>
+              <Card.Body >
+                <ChartComponent data={etfPriceData} />
+              </Card.Body>
+            </Card>
+          </div>
 
-              <Col xs={12} md={7}>
-                <Row>
-                  <Col xs={12} md={12}>
-                    <Card>
-                      <Card.Header className="modalCustomHeader text-white CustomBackGroundColor">
-                        Price Chart
-                      </Card.Header>
-                      <Card.Body className="BlackHeaderForModal">
-                        <ChartComponent data={etfPriceData} />
-                      </Card.Body>
-                    </Card>
-                  </Col>
-                  <Col xs={12} md={12}>
-                    <Card className="CustomCard">
-                      <Card.Header className="CustomCardHeader text-white">
-                        ETF Change % Vs NAV change %
-                      </Card.Header>
-                      <Card.Body className="CustomCardBody text-white">
-                        <ScatterPlot data={scatterPlotData} />
-                      </Card.Body>
-                    </Card>
-                  </Col>
-                </Row>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
+          <div className="etfchange-navchange">
+            <Card bg="dark" text="light" className="height-100">
+              <Card.Header >
+                ETF Change % Vs NAV change %
+              </Card.Header>
+              <Card.Body className="margin-auto">
+                <ScatterPlot data={scatterPlotData} />
+              </Card.Body>
+            </Card>
+          </div>
+        </div>
       </div>
     );
   }
