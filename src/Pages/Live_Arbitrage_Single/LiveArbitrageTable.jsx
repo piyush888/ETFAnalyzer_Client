@@ -15,9 +15,9 @@ const LiveArbitrageTable = (props) => {
       let cls = "";
 
       if (props.data["Over Bought/Sold"][key] == "Over Bought") {
-        cls = "green";
-      } else if (props.data["Over Bought/Sold"][key] == "Over Sold") {
         cls = "red";
+      } else if (props.data["Over Bought/Sold"][key] == "Over Sold") {
+        cls = "green";
       } else {
         cls = "";
       }
