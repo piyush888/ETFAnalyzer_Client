@@ -15,6 +15,7 @@ import LineChartForHistArb from "../../Component/LineChartForHistArb";
 import { Loader } from "../../Common_Components/Loader";
 import ScatterPlot from "../../Component/ScatterPlott";
 import { CommonNavBar } from "../../Common_Components/NavBar";
+import "./Styles/style.css";
 
 class Live_Arbitrage_Single extends React.Component {
   state = {
@@ -156,11 +157,11 @@ class Live_Arbitrage_Single extends React.Component {
     return (
       <>
         <CommonNavBar />
-        <Row>
-          <Col xs={12} md={5}>
-            <Card>
-              <Card.Header className="text-white bg-color-dark flex-row">
-                Live Arbitrage {ETF}
+        <div className="live-arb-container font-size-sm">
+          <div className="live-arb-table">
+            <Card bg="dark" text="white" className="height-100">
+              <Card.Header className="flex-row">
+                <span>Live Arbitrage {ETF}</span>
                 <div className="margin-left-auto">
                   <CombinedPieCharts
                     etfmoversDictCount={this.state.etfmoversDictCount}
@@ -168,113 +169,94 @@ class Live_Arbitrage_Single extends React.Component {
                   />
                 </div>
               </Card.Header>
-              <Card.Body className="BlackHeaderForModal">
+              <Card.Body className="height-90vh overflow-auto">
                 {this.state.isLoading ? (
                   <Loader />
                 ) : (
-                  <div className="FullPageDiv">
-                    <LiveArbitrageTable
-                      data={this.state.Full_Day_Arbitrage_Data}
-                    />
-                  </div>
+                  <LiveArbitrageTable
+                    data={this.state.Full_Day_Arbitrage_Data}
+                  />
                 )}
               </Card.Body>
             </Card>
-          </Col>
+          </div>
 
-          <Col xs={12} md={3}>
-            <Row>
-              <Col xs={12} md={12}>
-                <LiveStatusWindow
-                  HighPrice={HighPrice}
-                  OpenPrice={OpenPrice}
-                  ClosePrice={ClosePrice}
-                  LowPrice={LowPrice}
-                  SignalStrength={SignalStrength}
-                  CurrentTime={CurrentTime}
-                  ETFStatus={ETFStatus}
-                  Signal={Signal}
-                  LiveArbitrage={LiveArbitrage}
-                  LiveSpread={LiveSpread}
-                  LiveColor={LiveColor}
-                />
-              </Col>
+          <div className="live-status-window">
+            <LiveStatusWindow
+              HighPrice={HighPrice}
+              OpenPrice={OpenPrice}
+              ClosePrice={ClosePrice}
+              LowPrice={LowPrice}
+              SignalStrength={SignalStrength}
+              CurrentTime={CurrentTime}
+              ETFStatus={ETFStatus}
+              Signal={Signal}
+              LiveArbitrage={LiveArbitrage}
+              LiveSpread={LiveSpread}
+              LiveColor={LiveColor}
+            />
+          </div>
 
-              <Col xs={12} md={12}>
-                <Card className="CustomCard">
-                  <Card.Header className="CustomCardHeader text-white">
-                    Arb Time Series
-                  </Card.Header>
-                  {this.state.isLoading ? (
-                    <Loader />
-                  ) : (
-                    <Card.Body className="CustomCardBody text-white">
-                      <LineChartForHistArb
-                        data={this.state.ArbitrageLineChart}
-                      />
-                    </Card.Body>
-                  )}
-                </Card>
-              </Col>
+          <div className="time-series">
+            <Card bg="dark" text="white" className="height-100">
+              <Card.Header>Arb Time Series</Card.Header>
 
-              <Col xs={12} md={12}>
-                <Card className="CustomCard">
-                  <Card.Header className="CustomCardHeader text-white">
-                    Signal Performace
-                  </Card.Header>
-                  {this.state.isLoading ? (
-                    <Loader />
-                  ) : (
-                    <Card.Body className="CustomCardBody text-white">
-                      {this.state.pnlstatementforday}
-                    </Card.Body>
-                  )}
-                </Card>
-              </Col>
-
-              <Col xs={12} md={12}>
-                <Card className="CustomCard">
-                  <Card.Header className="CustomCardHeader text-white">
-                    Signal Stats
-                  </Card.Header>
-                  {this.state.isLoading ? (
-                    <Loader />
-                  ) : (
-                    <Card.Body className="CustomCardBody text-white">
-                      {this.state.SignalCategorization}
-                    </Card.Body>
-                  )}
-                </Card>
-              </Col>
-            </Row>
-          </Col>
-
-          <Col xs={12} md={4}>
-            <div className="DescriptionTable3">
-              <Card>
-                <Card.Header className="modalCustomHeader text-white CustomBackGroundColor">
-                  Price Chart
-                </Card.Header>
-                <Card.Body className="BlackHeaderForModal">
-                  <ChartComponent data={this.state.Full_Day_Prices} />
-                </Card.Body>
-              </Card>
-            </div>
-
-            <Card className="CustomCard">
-              <Card.Header className="CustomCardHeader text-white">
-                ETF Change % Vs NAV change %
-              </Card.Header>
-              {this.state.isLoading ? (
-                <Loader />
-              ) : (
-                <Card.Body className="CustomCardBody text-white">
-                  {this.state.scatterPlotData}
-                </Card.Body>
-              )}
+              <Card.Body>
+                {this.state.isLoading ? (
+                  <Loader />
+                ) : (
+                  <LineChartForHistArb data={this.state.ArbitrageLineChart} />
+                )}
+              </Card.Body>
             </Card>
-          </Col>
-        </Row>
+          </div>
+          <div className="signal-performance">
+            <Card className="height-100" bg="dark" text="white">
+              <Card.Header>Signal Performace</Card.Header>
+
+              <Card.Body>
+                {this.state.isLoading ? (
+                  <Loader />
+                ) : (
+                  this.state.pnlstatementforday
+                )}
+              </Card.Body>
+            </Card>
+          </div>
+
+          <div className="signal-stats">
+            <Card bg="dark" text="white" className="height-100">
+              <Card.Header>Signal Stats</Card.Header>
+
+              <Card.Body>
+                {this.state.isLoading ? (
+                  <Loader />
+                ) : (
+                  this.state.SignalCategorization
+                )}
+              </Card.Body>
+            </Card>
+          </div>
+
+          <div className="price-chart">
+            <Card bg="dark" text="white" className="height-100">
+              <Card.Header>Price Chart</Card.Header>
+              <Card.Body>
+                <ChartComponent data={this.state.Full_Day_Prices} />
+              </Card.Body>
+            </Card>
+          </div>
+
+          <div className="etfchange-navchange">
+            <Card bg="dark" text="white" className="height-100">
+              <Card.Header>ETF Change % Vs NAV change %</Card.Header>
+
+              <Card.Body>
+                {this.state.isLoading ? <Loader /> : this.state.scatterPlotData}
+              </Card.Body>
+            </Card>
+          </div>
+        </div>
       </>
     );
   }
