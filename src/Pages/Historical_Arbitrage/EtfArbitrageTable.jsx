@@ -37,9 +37,9 @@ console.log(data)
           data.map((data, index) => {
             let cls = "";
             if (data["Over Bought/Sold"] == "Over Bought") {
-              cls = "green";
-            } else if (data["Over Bought/Sold"] == "Over Sold") {
               cls = "red";
+            } else if (data["Over Bought/Sold"] == "Over Sold") {
+              cls = "green";
             } else {
               cls = "";
             }

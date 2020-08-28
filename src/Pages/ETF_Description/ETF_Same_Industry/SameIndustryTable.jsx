@@ -77,7 +77,7 @@ const SameIndustryTable = (props) => {
               value={searchString}
             />
           </Card.Header>
-          <Card.Body className="padding-0 overflow-auto height-50vh">
+          <Card.Body className="padding-0 overflow-auto half-height">
             <Table size="sm" striped bordered hover variant="dark">
               <thead>
                 <tr>

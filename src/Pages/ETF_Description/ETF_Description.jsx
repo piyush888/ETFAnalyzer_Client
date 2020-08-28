@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import { compose } from "recompose";
 import { Loader } from "../../Common_Components/Loader";
 import { CommonNavBar } from "../../Common_Components/NavBar";
+import "./Styles/styles.css";
 
 class ETF_Description extends React.Component {
   state = {
@@ -73,27 +74,41 @@ class ETF_Description extends React.Component {
     return (
       <>
         <CommonNavBar />
-        <div className="font-size-sm etf-desc-container">
-          <div className="etf-desc-table">
-            {DescriptionData ? (
-              <DescriptionTable DescriptionData={DescriptionData} />
-            ) : (
-              <Loader />
-            )}
+        <div className="container-fluid font-size-sm">
+          <div className="row">
+            
+            <div className="col-md-3 col-lg-3 col-sm-12 padding-0">
+              {DescriptionData ? (
+                <DescriptionTable DescriptionData={DescriptionData} />
+              ) : (
+                <Loader />
+              )}
+            </div>
+            
+            <div className="col-md-4 col-lg-4 col-sm-12 padding-0">
+              <ETFHoldings ETF={ETF} startDate={startDate} />
+            </div>
+            
+            <div className="col-md-5 col-lg-5 col-sm-12 padding-0">
+              <PNL ETF={ETF} />
+            </div>
+            
+            <div className="col-md-4 col-lg-4 col-sm-12 padding-0">
+              <EtfSameIssuer IssuerName={IssuerName} />
+            </div>
+
+            <div className="col-md-4 col-lg-4 col-sm-12 padding-0">
+              {SimilarTotalAsstUndMgmt && (
+              <SimilarAssetUnderManagement
+                SimilarTotalAsstUndMgmt={SimilarTotalAsstUndMgmt}
+              />
+              )}
+            </div>
+
+            <div className="col-md-4 col-lg-4 col-sm-12 padding-0">
+              {EtfDbCategory && <EtfSameIndustry EtfDbCategory={EtfDbCategory} />}
+            </div>
           </div>
-          <div className="etf-hold-table">
-            <ETFHoldings ETF={ETF} startDate={startDate} />
-          </div>
-          <div className="pnl-table">
-            <PNL ETF={ETF} />
-          </div>
-          <EtfSameIssuer IssuerName={IssuerName} />
-          {SimilarTotalAsstUndMgmt && (
-            <SimilarAssetUnderManagement
-              SimilarTotalAsstUndMgmt={SimilarTotalAsstUndMgmt}
-            />
-          )}
-          {EtfDbCategory && <EtfSameIndustry EtfDbCategory={EtfDbCategory} />}
         </div>
       </>
     );

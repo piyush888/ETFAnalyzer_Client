@@ -125,10 +125,10 @@ class Live_Arbitrage_Single extends React.Component {
             SignalStrength: res.data.SignalInfo.Strength,
             LiveColor:
               res.data.Arbitrage["Arbitrage in $"][0] > 0
-                ? "text-success"
+                ? "text-danger"
                 : res.data.Arbitrage["Arbitrage in $"][0] == 0
                 ? "text-muted"
-                : "text-danger",
+                : "text-success",
           });
         })
         .catch((err) => console.log(err));

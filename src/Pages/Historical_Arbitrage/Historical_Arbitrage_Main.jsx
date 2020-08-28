@@ -248,8 +248,8 @@ class HistoricalArbitrage extends React.Component {
                 <div className="col-lg-6 col-md-6 col-sm-12 padding-0">
                   <Card bg="dark" text="light" className="height-100">
                     <Card.Header>ETF Change % Vs NAV change %</Card.Header>
-                    <Card.Body className="margin-auto padding-1px">
-                      <ScatterPlot data={scatterPlotData} width={350} />
+                    <Card.Body className="padding-1px">
+                      <ScatterPlot data={scatterPlotData}  />
                     </Card.Body>
                   </Card>
                 </div>
