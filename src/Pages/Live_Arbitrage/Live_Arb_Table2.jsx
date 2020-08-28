@@ -105,7 +105,7 @@ const LiveArbitrageAllTable = (props) => {
       text: "Ticker",
       sort: true,
       filter: textFilter({
-        style: { width: "100px", marginLeft: "10px" },
+        style: {width: "100px",height:"25px", marginLeft: "10px" },
       }),
       sortCaret: (order, column) => {
         if (!order)
@@ -140,8 +140,8 @@ const LiveArbitrageAllTable = (props) => {
       text: "Arbitrage in $",
       sort: true,
       filter: numberFilter({
-        comparatorStyle: { padding: "5px" },
-        numberStyle: { width: "100px", margin: "10px" },
+        comparatorStyle: { padding: "5px",height:"25px" },
+        numberStyle: { width: "100px",height:"25px", margin: "10px" },
       }),
       formatter: priceFormatter,
       sortCaret: (order, column) => {
@@ -177,8 +177,8 @@ const LiveArbitrageAllTable = (props) => {
       text: "ETF Trading Spread in $",
       sort: true,
       filter: numberFilter({
-        comparatorStyle: { padding: "5px" },
-        numberStyle: { width: "100px", margin: "10px" },
+        comparatorStyle: { padding: "5px",height:"25px" },
+        numberStyle: { width: "100px",height:"25px", margin: "10px" },
       }),
       formatter: priceFormatter,
       sortCaret: (order, column) => {
@@ -214,8 +214,8 @@ const LiveArbitrageAllTable = (props) => {
       text: "Absolute Arbitrage",
       sort: true,
       filter: numberFilter({
-        comparatorStyle: { padding: "5px" },
-        numberStyle: { width: "100px", margin: "10px" },
+        comparatorStyle: { padding: "5px",height:"25px"},
+        numberStyle: { width: "100px", height:"25px",margin: "10px" },
       }),
       formatter: priceFormatter,
       sortCaret: (order, column) => {
@@ -352,7 +352,7 @@ const LiveArbitrageAllTable = (props) => {
       formatter: (cell) => selectOptions[cell],
       filter: selectFilter({
         options: selectOptions,
-        style: { width: "100px", margin: "10px" },
+        style: { width: "100px", height:"25px",margin: "10px" },
       }),
       formatter: priceFormatter,
       sortCaret: (order, column) => {
@@ -521,10 +521,10 @@ const LiveArbitrageAllTable = (props) => {
       <form>
         <div className="form-row">
           <div className="col-md-4 mb-3">
-            <strong className="App-clock text-white">
+            <span className="App-clock text-white">
               Showing Data for :{" "}
-            </strong>
-            <strong style={{ color: "red" }}>
+            </span>
+            <span style={{ color: "red" }}>
               {new Date(dataForTime).toLocaleTimeString([], {
                 year: "numeric",
                 month: "numeric",
@@ -532,24 +532,24 @@ const LiveArbitrageAllTable = (props) => {
                 hour: "2-digit",
                 minute: "2-digit",
               })}
-            </strong>
-            <strong className="text-white"> Local Time</strong>
+            </span>
+            <span className="text-white"> Local Time</span>
           </div>
           <div className="col-md-4 mb-3">
-            <strong className="App-clock text-white">Data Fetched at: </strong>
-            <strong style={{ color: "red" }}>
+            <span className="App-clock text-white">Data Fetched at: </span>
+            <span style={{ color: "red" }}>
               {fetchTime.toLocaleString()}
-            </strong>
-            <strong className="text-white"> Local Time</strong>
+            </span>
+            <span className="text-white"> Local Time</span>
           </div>
           <div className="col-md-4 mb-3">
-            <strong className="App-clock text-white">
+            <span className="App-clock text-white">
               Current Local time:{" "}
-            </strong>
-            <strong style={{ color: "red" }}>
+            </span>
+            <span style={{ color: "red" }}>
               {currentTime.toLocaleString()}
-            </strong>
-            <strong className="text-white"> Local Time</strong>
+            </span>
+            <span className="text-white"> Local Time</span>
           </div>
         </div>
       </form>
