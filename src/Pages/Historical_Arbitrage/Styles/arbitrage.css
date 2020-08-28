@@ -31,36 +31,25 @@
   height: 250px;
 }
 
-.hist-main-container {
-  max-height: calc(100vh - 56px);
-  display: grid;
-  grid-template-columns: auto 25vw 25vw;
-  grid-template-rows: 60vh fit-content(40vh);
-  grid-gap: 0.5em;
-  padding: 10px;
-  justify-content: stretch;
-  
+
+.etfArbitrageTable{
+    overflow: auto;
 }
 
-.card-group {
-  grid-column: 1/2;
-  grid-row: 2/3;
+.etfArbitrageTable::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.37);
+    border-radius: 10px;
+    background-color: #F5F5F5;
 }
 
-.arbitrage-table {
-  grid-column: 1/2;
-  grid-row: 1/2;
-}
-.price-chart {
-  grid-column: 2/4;
-  grid-row: 1/2;
+.etfArbitrageTable::-webkit-scrollbar {
+    /* display: none; */
+    width: 10px;
+    background-color: #F5F5F5;
 }
 
-.time-series {
-  grid-column: 2/3;
-  grid-row: 2/3;
-}
-.etfchange-navchange {
-  grid-column: 3/4;
-  grid-row: 2/3;
+.etfArbitrageTable::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: #555;
 }

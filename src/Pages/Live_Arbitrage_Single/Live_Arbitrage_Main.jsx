@@ -265,7 +265,7 @@ class Live_Arbitrage_Single extends React.Component {
 
                     <div className="col-lg-12 col-md-12 col-sm-12">
                       <Card bg="dark" text="white" className="height-100">
-                          <Card.Header>Signal Stats</Card.Header>
+                          <Card.Header>Arbitrage Spread</Card.Header>
                         <Card.Body className="padding-1px">
                             {this.state.isLoading ? (
                               <Loader />

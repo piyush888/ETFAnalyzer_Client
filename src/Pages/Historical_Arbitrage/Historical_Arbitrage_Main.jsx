@@ -129,108 +129,137 @@ class HistoricalArbitrage extends React.Component {
       scatterPlotData,
     } = this.state;
     return (
-      <div>
-        <CommonNavBar />
-        <div className="hist-main-container font-size-sm">
-          <div className="arbitrage-table">
-            <Card bg="dark" text="light" style={{height:"60vh"}}>
-              <Card.Header className="flex-row">
-                <span>
-                  Histortical Data {ETF} {startDate}
-                </span>
+    <>
+      <CommonNavBar />
+       <div className="container-fluid font-size-sm">
+          <div className="row">
+          
+            <div className="col-lg-6 col-md-6 col-sm-12">
+                <div className="row">
+                  
+                  <div className="col-lg-8 col-md-8 col-sm-12 padding-0">
+                    <div className="etfArbitrageTable"  style={{ height: "92vh" }}>
+                      <Card bg="dark" text="light">
+                        <Card.Header className="flex-row">
+                          <span>
+                            Histortical Data {ETF} {startDate}
+                          </span>
 
-                <div className="margin-left-auto">
-                  <CombinedPieCharts
-                    etfmoversDictCount={etfmoversDictCount}
-                    highestChangeDictCount={highestChangeDictCount}
-                  />
-                </div>
-              </Card.Header>
-              <Card.Body className="padding-1px overflow-auto">
-                {isLoading ? (
-                  <Loader />
-                ) : (
-                  <EtfArbitrageTable data={etfArbitrageTableData} />
-                )}
-              </Card.Body>
-            </Card>
-          </div>
-
-          <div className="card-group">
-            <CardGroup style={{width:"100%"}}>
-              <Card className="height-100" bg="dark" text="light">
-                <Card.Header>Signal Performance</Card.Header>
-                <Card.Body className="padding-1px">
-                  {isLoading ? (
-                    <Loader />
-                  ) : (
-                    <Table size="sm" striped bordered hover variant="dark">
-                      <tbody>
-                        {typeof PNLStatementForTheDay === "object" &&
-                          Object.entries(PNLStatementForTheDay).map(
-                            ([key, value]) => (
-                              <tr key={key}>
-                                <td>{key}</td>
-                                <td>{value}</td>
-                              </tr>
-                            )
+                          <div className="margin-left-auto">
+                            <CombinedPieCharts
+                              etfmoversDictCount={etfmoversDictCount}
+                              highestChangeDictCount={highestChangeDictCount}
+                            />
+                          </div>
+                        </Card.Header>
+                        <Card.Body className="padding-1px overflow-auto">
+                          {isLoading ? (
+                            <Loader />
+                          ) : (
+                            <EtfArbitrageTable data={etfArbitrageTableData} />
                           )}
-                      </tbody>
-                    </Table>
-                  )}
-                </Card.Body>
-              </Card>
-              <Card bg="dark" text="light" className="height-100">
-                <Card.Header>Signal Stats</Card.Header>
-                <Card.Body className="padding-1px">
-                  {isLoading ? <Loader /> : SignalCategorization}
-                </Card.Body>
-              </Card>
-              <Card bg="dark" text="light">
-                <Card.Header>Underlyings Daily Change</Card.Header>
-                <Card.Body style={{height:"25vh"}} className="overflow-auto padding-sm padding-1px">
-                  {this.state.isLoading ? (
-                    <Loader />
-                  ) : (
-                    <DailyChangeUnderlyingFunc data={underlyingPerformance} />
-                  )}
-                </Card.Body>
-              </Card>
-            </CardGroup>
-          </div>
+                        </Card.Body>
+                      </Card>
+                    </div>
+                  </div>
 
-          <div className="time-series">
-            <Card bg="dark" text="light" className="height-100">
-              <Card.Header>Arb Time Series</Card.Header>
-              <Card.Body className="padding-1px">
-                {isLoading ? (
-                  <Loader />
-                ) : (
-                  <LineChartForHistArb data={ArbitrageCumSum} />
-                )}
-              </Card.Body>
-            </Card>
-          </div>
+                  <div className="col-lg-4 col-md-4 col-sm-12">
+                    <div className="row">
 
-          <div className="price-chart">
-            <Card bg="dark" text="light" className="height-100">
-              <Card.Header>Price Chart</Card.Header>
-              <Card.Body className="padding-1px">
-                <ChartComponent data={etfPriceData} />
-              </Card.Body>
-            </Card>
-          </div>
+                      <div className="col-lg-12 col-md-12 col-sm-12">
+                         <Card className="height-100" bg="dark" text="light">
+                            <Card.Header>Signal Performance</Card.Header>
+                            <Card.Body className="padding-1px">
+                              {isLoading ? (
+                                <Loader />
+                              ) : (
+                                <Table size="sm" striped bordered hover variant="dark">
+                                  <tbody>
+                                    {typeof PNLStatementForTheDay === "object" &&
+                                      Object.entries(PNLStatementForTheDay).map(
+                                        ([key, value]) => (
+                                          <tr key={key}>
+                                            <td>{key}</td>
+                                            <td>{value}</td>
+                                          </tr>
+                                        )
+                                      )}
+                                  </tbody>
+                                </Table>
+                              )}
+                            </Card.Body>
+                          </Card>
+                      </div>
 
-          <div className="etfchange-navchange">
-            <Card bg="dark" text="light" className="height-100">
-              <Card.Header>ETF Change % Vs NAV change %</Card.Header>
-              <Card.Body className="margin-auto padding-1px">
-                <ScatterPlot data={scatterPlotData} width={350} />
-              </Card.Body>
-            </Card>
+                       <div className="col-lg-12 col-md-12 col-sm-12">
+                          <Card bg="dark" text="light" className="height-100">
+                            <Card.Header>Arbitrage Spread</Card.Header>
+                            <Card.Body className="padding-1px">
+                              {isLoading ? <Loader /> : SignalCategorization}
+                            </Card.Body>
+                          </Card>
+                        </div>
+
+                      <div className="col-lg-12 col-md-12 col-sm-12">
+                          <Card bg="dark" text="light">
+                            <Card.Header>Underlyings Daily Change</Card.Header>
+                            <Card.Body style={{height:"40vh"}} className="overflow-auto padding-sm padding-1px">
+                              {this.state.isLoading ? (
+                                <Loader />
+                              ) : (
+                                <DailyChangeUnderlyingFunc data={underlyingPerformance} />
+                              )}
+                            </Card.Body>
+                        </Card>
+                      </div>
+
+                    </div>
+                  </div>
+
+                </div>
+            </div>
+
+
+            <div className="col-lg-6 col-md-6 col-sm-12 padding-0">
+              <div className="row">
+                
+               <div className="col-lg-12 col-md-12 col-sm-12">
+                  <Card bg="dark" text="light" className="height-100">
+                    <Card.Header>Price Chart</Card.Header>
+                    <Card.Body className="padding-1px">
+                      <ChartComponent data={etfPriceData} />
+                    </Card.Body>
+                  </Card>
+               </div>
+
+                <div className="col-lg-6 col-md-6 col-sm-12">
+                  <Card bg="dark" text="light" className="height-100">
+                    <Card.Header>Arb Time Series</Card.Header>
+                    <Card.Body className="padding-1px">
+                      {isLoading ? (
+                        <Loader />
+                      ) : (
+                        <LineChartForHistArb data={ArbitrageCumSum} />
+                      )}
+                    </Card.Body>
+                  </Card>
+                </div>
+
+                <div className="col-lg-6 col-md-6 col-sm-12 padding-0">
+                  <Card bg="dark" text="light" className="height-100">
+                    <Card.Header>ETF Change % Vs NAV change %</Card.Header>
+                    <Card.Body className="margin-auto padding-1px">
+                      <ScatterPlot data={scatterPlotData} width={350} />
+                    </Card.Body>
+                  </Card>
+                </div>
+
+              </div>
+            </div>
+
           </div>
         </div>
-      </div>
+      </>
     );
   }
 }
