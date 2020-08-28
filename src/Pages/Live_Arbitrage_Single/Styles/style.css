@@ -1,39 +1,4 @@
-.hist-main-container {
-}
-
-.arbitrage-table {
-  grid-column: 1/2;
-  grid-row: 1/2;
-}
-
-.live-arb-container {
-  max-height: calc(100vh - 56px);
-  display: grid;
-  grid-template-columns: auto 25vw 25vw;
-  grid-template-rows: 60vh fit-content(40vh);
-  grid-gap: 0.5em;
-  padding: 10px;
-  justify-content: stretch;
-}
-
-.live-arb-table {
-  grid-column: 1/2;
-  grid-row: 1/6;
-}
-.card-group {
-  grid-column: 1/2;
-  grid-row: 2/3;
-}
-.price-chart {
-  grid-column: 2/4;
-  grid-row: 1/2;
-}
-
-.time-series {
-  grid-column: 2/3;
-  grid-row: 2/3;
-}
-.etfchange-navchange {
-  grid-column: 3/4;
-  grid-row: 2/3;
+.padding-0{
+    padding-right:3px;
+    padding-left:3px;
 }

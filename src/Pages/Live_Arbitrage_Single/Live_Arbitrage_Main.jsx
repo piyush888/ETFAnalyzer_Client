@@ -5,6 +5,7 @@ import axios from "axios";
 import { tsvParse, csvParse } from "d3-dsv";
 import { timeParse } from "d3-time-format";
 import Card from "react-bootstrap/Card";
+import Table from "react-bootstrap/Table";
 import ChartComponent from "../../Component/StockPriceChart";
 import AppTable from "../../Component/Table.js";
 import LiveStatusWindow from "./LiveStatusWindow";
@@ -15,6 +16,7 @@ import LineChartForHistArb from "../../Component/LineChartForHistArb";
 import { Loader } from "../../Common_Components/Loader";
 import ScatterPlot from "../../Component/ScatterPlott";
 import { CommonNavBar } from "../../Common_Components/NavBar";
+import { CommonPieChart } from "../../Common_Components/PieChart";
 import "./Styles/style.css";
 import { CardGroup } from "react-bootstrap";
 
@@ -155,106 +157,181 @@ class Live_Arbitrage_Single extends React.Component {
     return (
       <>
         <CommonNavBar />
-        <div className="live-arb-container font-size-sm">
-          <div className="live-arb-table">
-            <Card bg="dark" text="white" style={{ height: "60vh" }}>
-              <Card.Header className="flex-row">
-                <span>Live Arbitrage {ETF}</span>
-                <div className="margin-left-auto">
-                  <CombinedPieCharts
-                    etfmoversDictCount={this.state.etfmoversDictCount}
-                    highestChangeDictCount={this.state.highestChangeDictCount}
-                  />
+        <div className="container-fluid font-size-sm">
+          <div className="row">
+            
+            <div className="col-lg-6 col-md-6 col-sm-12">
+              <div className="row">
+                
+                <div className="col-lg-8 col-md-8 col-sm-12 padding-0">
+                    <div className="FullPageDiv"  style={{ height: "92vh" }}>
+                      <Card bg="dark" text="white">
+                        <Card.Header className="flex-row">
+                          <span>Live Arbitrage {ETF}</span>
+                          <div className="margin-left-auto">
+                            <CombinedPieCharts
+                              etfmoversDictCount={this.state.etfmoversDictCount}
+                              highestChangeDictCount={this.state.highestChangeDictCount}
+                            />
+                          </div>
+                        </Card.Header>
+                        <Card.Body className="padding-1px overflow-auto">
+                          {this.state.isLoading ? (
+                            <Loader />
+                          ) : (
+                            <LiveArbitrageTable
+                              data={this.state.Full_Day_Arbitrage_Data}
+                            />
+                          )}
+                        </Card.Body>
+                      </Card>
+                    </div>
                 </div>
-              </Card.Header>
-              <Card.Body className="padding-1px overflow-auto">
-                {this.state.isLoading ? (
-                  <Loader />
-                ) : (
-                  <LiveArbitrageTable
-                    data={this.state.Full_Day_Arbitrage_Data}
-                  />
-                )}
-              </Card.Body>
-            </Card>
+                  
+                <div className="col-lg-4 col-md-4 col-sm-12">
+                  <div className="row">
+                    <div className="col-lg-12 col-md-12 col-sm-12">
+                        <LiveStatusWindow
+                          HighPrice={HighPrice}
+                          OpenPrice={OpenPrice}
+                          ClosePrice={ClosePrice}
+                          LowPrice={LowPrice}
+                          SignalStrength={SignalStrength}
+                          CurrentTime={CurrentTime}
+                          ETFStatus={ETFStatus}
+                          Signal={Signal}
+                          LiveArbitrage={LiveArbitrage}
+                          LiveSpread={LiveSpread}
+                          LiveColor={LiveColor}
+                        />
+                    </div>
+
+                    <div className="col-lg-12 col-md-12 col-sm-12">
+                          <Card className="height-100" bg="dark" text="white">
+                          <Card.Header>Alpha Candle Stick Pattern Signals</Card.Header>
+
+                          <Card.Body className="padding-1px overflow-auto">
+                            <Table size="sm" striped bordered hover variant="dark" >
+                                <thead>
+                                  <tr>
+                                    <th>Candle Type</th>
+                                    <th>Signal</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <th>Hammer</th>
+                                    <th><i className="fa fa-lock text-muted"></i></th>
+                                  </tr>
+                                  <tr>
+                                    <th>Shooting Star</th>
+                                    <th><i className="fa fa-lock text-muted"></i></th>
+                                  </tr>
+                                  <tr>
+                                    <th>Dragonfly Doji</th>
+                                    <th><i className="fa fa-lock text-muted"></i></th>
+                                  </tr>
+                                  <tr>
+                                    <th>Morning Star</th>
+                                    <th><i className="fa fa-lock text-muted"></i></th>
+                                  </tr>
+                                  <tr>
+                                    <th>Three White Soldiers</th>
+                                    <th><i className="fa fa-lock text-muted"></i></th>
+                                  </tr>
+                                  <tr>
+                                    <th>Piercing Line</th>
+                                    <th><i className="fa fa-lock text-muted"></i></th>
+                                  </tr>
+                                </tbody>
+                              </Table>
+                          </Card.Body>
+                        </Card>
+                    </div>
+
+                    <div className="col-lg-12 col-md-12 col-sm-12">
+                        <Card className="height-100" bg="dark" text="white">
+                          <Card.Header>Signal Performace</Card.Header>
+
+                          <Card.Body className="padding-1px">
+                            {this.state.isLoading ? (
+                              <Loader />
+                            ) : (
+                              <AppTable data={pnlstatementforday} />
+                            )}
+                          </Card.Body>
+                        </Card>
+                    </div>
+
+                    <div className="col-lg-12 col-md-12 col-sm-12">
+                      <Card bg="dark" text="white" className="height-100">
+                          <Card.Header>Signal Stats</Card.Header>
+                        <Card.Body className="padding-1px">
+                            {this.state.isLoading ? (
+                              <Loader />
+                            ) : (
+                              <AppTable data={SignalCategorization} />
+                            )}
+                          </Card.Body>
+                        </Card>
+                    </div>
+
+
+                  </div>
+                </div>
+
+                
+              </div>
+            </div>
+            
+            <div className="col-lg-6 col-md-6 col-sm-12 padding-0">
+              <div className="row">
+
+                <div className="col-lg-12 col-md-12 col-sm-12">
+                  <Card bg="dark" text="white" className="height-100">
+                    <Card.Header>Price Chart</Card.Header>
+                    <Card.Body className="padding-1px">
+                      <ChartComponent data={this.state.Full_Day_Prices} />
+                    </Card.Body>
+                  </Card>
+                </div>
+
+                
+                <div className="col-lg-6 col-md-6 col-sm-12">
+                  <Card bg="dark" text="white" className="height-100">
+                    <Card.Header>Arb Time Series</Card.Header>
+
+                    <Card.Body className="padding-1px">
+                      {this.state.isLoading ? (
+                        <Loader />
+                      ) : (
+                        <LineChartForHistArb data={this.state.ArbitrageLineChart} />
+                      )}
+                    </Card.Body>
+                  </Card>
+                </div>
+
+                <div className="col-lg-6 col-md-6 col-sm-12 padding-0">
+                  <Card bg="dark" text="white" className="height-100">
+                    <Card.Header>ETF Change % Vs NAV change %</Card.Header>
+
+                    <Card.Body className="padding-1px">
+                      {this.state.isLoading ? (
+                        <Loader />
+                      ) : (
+                        <ScatterPlot data={scatterPlotData} />
+                      )}
+                    </Card.Body>
+                  </Card>
+                </div>
+
+              </div>
+            </div>
+
           </div>
-          <div className="card-group">
-            <CardGroup style={{ width: "100%" }}>
-              <LiveStatusWindow
-                HighPrice={HighPrice}
-                OpenPrice={OpenPrice}
-                ClosePrice={ClosePrice}
-                LowPrice={LowPrice}
-                SignalStrength={SignalStrength}
-                CurrentTime={CurrentTime}
-                ETFStatus={ETFStatus}
-                Signal={Signal}
-                LiveArbitrage={LiveArbitrage}
-                LiveSpread={LiveSpread}
-                LiveColor={LiveColor}
-              />
-              <Card className="height-100" bg="dark" text="white">
-                <Card.Header>Signal Performace</Card.Header>
 
-                <Card.Body className="padding-1px">
-                  {this.state.isLoading ? (
-                    <Loader />
-                  ) : (
-                    <AppTable data={pnlstatementforday} />
-                  )}
-                </Card.Body>
-              </Card>
-              <Card bg="dark" text="white" className="height-100">
-                <Card.Header>Signal Stats</Card.Header>
 
-                <Card.Body className="padding-1px">
-                  {this.state.isLoading ? (
-                    <Loader />
-                  ) : (
-                    <AppTable data={SignalCategorization} />
-                  )}
-                </Card.Body>
-              </Card>
-            </CardGroup>
-          </div>
 
-          <div className="time-series">
-            <Card bg="dark" text="white" className="height-100">
-              <Card.Header>Arb Time Series</Card.Header>
-
-              <Card.Body className="padding-1px">
-                {this.state.isLoading ? (
-                  <Loader />
-                ) : (
-                  <LineChartForHistArb data={this.state.ArbitrageLineChart} />
-                )}
-              </Card.Body>
-            </Card>
-          </div>
-          <div className="signal-performance"></div>
-
-          <div className="price-chart">
-            <Card bg="dark" text="white" className="height-100">
-              <Card.Header>Price Chart</Card.Header>
-              <Card.Body className="padding-1px">
-                <ChartComponent data={this.state.Full_Day_Prices} />
-              </Card.Body>
-            </Card>
-          </div>
-
-          <div className="etfchange-navchange">
-            <Card bg="dark" text="white" className="height-100">
-              <Card.Header>ETF Change % Vs NAV change %</Card.Header>
-
-              <Card.Body className="padding-1px">
-                {this.state.isLoading ? (
-                  <Loader />
-                ) : (
-                  <ScatterPlot data={scatterPlotData} />
-                )}
-              </Card.Body>
-            </Card>
-          </div>
         </div>
       </>
     );

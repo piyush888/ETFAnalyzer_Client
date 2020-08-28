@@ -6,31 +6,29 @@ const LiveStatusWindow = (props) => {
   return (
     <Card bg="dark" text="light" className="height-100">
       <Card.Header>
-        <span className="h4 pull-left pr-2"></span>
+      <div>
+        <span className="h4"></span>
         H: <span className="text-muted">{props.HighPrice} </span>
         O: <span className="text-muted">{props.OpenPrice} </span>
         C: <span className="text-muted">{props.ClosePrice} </span>
         L: <span className="text-muted">{props.LowPrice} </span>
+      </div>
         <div>
           Time: <span className="text-muted">{props.CurrentTime}</span>
         </div>
       </Card.Header>
 
-      <Card.Body className="padding-1px">
+      <Card.Body>
         <div>
-          <h5>
-            <span className={props.LiveColor}>
+            <span className={props.LiveColor}  style={{fontSize:"15px"}}>
               ETF Status: {props.ETFStatus}
             </span>
-          </h5>
         </div>
         <div>
-          <h5>
-            <span className={props.LiveColor}>Signal: {props.Signal}</span>
-          </h5>
+            <span className={props.LiveColor}  style={{fontSize:"15px"}}>Signal: {props.Signal}</span>
         </div>
         <div>
-          <span className={props.LiveColor}>
+          <span className={props.LiveColor} style={{fontSize:"15px"}}>
             Strength: {props.SignalStrength}
           </span>
         </div>
