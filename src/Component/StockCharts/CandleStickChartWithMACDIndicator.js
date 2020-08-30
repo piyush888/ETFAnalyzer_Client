@@ -215,7 +215,7 @@ class CandleStickChartWithMACDIndicator extends React.Component {
 					<MouseCoordinateX
 						at="bottom"
 						orient="bottom"
-						displayFormat={timeFormat("%Y-%m-%d")}
+						displayFormat={timeFormat("%H:%M")}
 						rectRadius={5}
 						{...mouseEdgeAppearance}
 					/>
