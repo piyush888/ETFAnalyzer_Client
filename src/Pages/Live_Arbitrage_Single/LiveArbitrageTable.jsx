@@ -2,6 +2,7 @@ import React from "react";
 import { Table } from "react-bootstrap";
 
 const LiveArbitrageTable = (props) => {
+  console.log(props)
   if (props.data["Arbitrage in $"] == undefined) {
     return "Loading";
   }
