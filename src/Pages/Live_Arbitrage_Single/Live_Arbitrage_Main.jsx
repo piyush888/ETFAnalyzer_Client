@@ -1,6 +1,4 @@
 import React from "react";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import axios from "axios";
 import { tsvParse, csvParse } from "d3-dsv";
 import { timeParse } from "d3-time-format";
@@ -22,7 +20,7 @@ import { CardGroup } from "react-bootstrap";
 
 class Live_Arbitrage_Single extends React.Component {
   state = {
-    Full_Day_Arbitrage_Data: {},
+    Full_Day_Arbitrage_Data: [],
     Full_Day_Prices: "",
     scatterPlotData: "",
     LiveArbitrage: "",
@@ -44,7 +42,7 @@ class Live_Arbitrage_Single extends React.Component {
     ArbitrageLineChart: "",
     etfmoversDictCount: "",
     highestChangeDictCount: "",
-    CandlestickSignals:[],
+    CandlestickSignals: [],
     isLoading: true,
   };
 
@@ -85,19 +83,19 @@ class Live_Arbitrage_Single extends React.Component {
         .then((res) => {
           this.setState({
             ...this.state,
-            Full_Day_Arbitrage_Data: JSON.parse(res.data.Arbitrage),
+            Full_Day_Arbitrage_Data: [...res.data.Arbitrage],
             Full_Day_Prices: {
               data: tsvParse(
                 res.data.Prices,
                 this.parseData(this.state.parseDate)
               ),
             },
-            pnlstatementforday: JSON.parse(res.data.pnlstatementforday),
-            SignalCategorization: JSON.parse(res.data.SignalCategorization),
-            scatterPlotData: JSON.parse(res.data.scatterPlotData),
+            pnlstatementforday: res.data.pnlstatementforday,
+            SignalCategorization: res.data.SignalCategorization,
+            scatterPlotData: res.data.scatterPlotData,
             ArbitrageLineChart: res.data.ArbitrageLineChart,
-            etfmoversDictCount: JSON.parse(res.data.etfmoversDictCount),
-            highestChangeDictCount: JSON.parse(res.data.highestChangeDictCount),
+            etfmoversDictCount: res.data.etfmoversDictCount,
+            highestChangeDictCount: res.data.highestChangeDictCount,
             CandlestickSignals: res.data.CandlestickSignals,
             last_minute_signal: res.data.last_minute_signal,
             isLoading: false,
@@ -156,6 +154,11 @@ class Live_Arbitrage_Single extends React.Component {
       SignalCategorization,
       pnlstatementforday,
       last_minute_signal,
+      etfmoversDictCount,
+      Full_Day_Arbitrage_Data,
+      highestChangeDictCount,
+      isLoading,
+      CandlestickSignals,
     } = this.state;
 
     return (
@@ -163,119 +166,163 @@ class Live_Arbitrage_Single extends React.Component {
         <CommonNavBar />
         <div className="container-fluid font-size-sm">
           <div className="row">
-            
             <div className="col-lg-6 col-md-6 col-sm-12">
               <div className="row">
-                
                 <div className="col-lg-8 col-md-8 col-sm-12 padding-0">
-                    <div className="FullPageDiv"  style={{ height: "92vh" }}>
-                      <Card bg="dark" text="white">
-                        <Card.Header className="flex-row">
-                          <span>Live Arbitrage {ETF}</span>
-                          <div className="margin-left-auto">
-                            <CombinedPieCharts
-                              etfmoversDictCount={this.state.etfmoversDictCount}
-                              highestChangeDictCount={this.state.highestChangeDictCount}
-                            />
-                          </div>
+                  <div className="FullPageDiv" style={{ height: "92vh" }}>
+                    <Card bg="dark" text="white">
+                      <Card.Header className="flex-row">
+                        <span>Live Arbitrage {ETF}</span>
+                        <div className="margin-left-auto">
+                          <CombinedPieCharts
+                            etfmoversDictCount={etfmoversDictCount}
+                            highestChangeDictCount={highestChangeDictCount}
+                          />
+                        </div>
+                      </Card.Header>
+                      <Card.Body className="padding-1px overflow-auto">
+                        {isLoading ? (
+                          <Loader />
+                        ) : (
+                          <LiveArbitrageTable data={Full_Day_Arbitrage_Data} />
+                        )}
+                      </Card.Body>
+                    </Card>
+                  </div>
+                </div>
+
+                <div className="col-lg-4 col-md-4 col-sm-12">
+                  <div className="row">
+                    <div className="col-lg-12 col-md-12 col-sm-12">
+                      <LiveStatusWindow
+                        HighPrice={HighPrice}
+                        OpenPrice={OpenPrice}
+                        ClosePrice={ClosePrice}
+                        LowPrice={LowPrice}
+                        SignalStrength={SignalStrength}
+                        CurrentTime={CurrentTime}
+                        ETFStatus={ETFStatus}
+                        Signal={Signal}
+                        LiveArbitrage={LiveArbitrage}
+                        LiveSpread={LiveSpread}
+                        LiveColor={LiveColor}
+                        last_minute_signal={last_minute_signal}
+                      />
+                    </div>
+
+                    <div className="col-lg-12 col-md-12 col-sm-12">
+                      <Card className="height-100" bg="dark" text="white">
+                        <Card.Header>
+                          Alpha Candle Stick Pattern Signals
                         </Card.Header>
+
                         <Card.Body className="padding-1px overflow-auto">
-                          {this.state.isLoading ? (
+                          <Table
+                            size="sm"
+                            striped
+                            bordered
+                            hover
+                            variant="dark"
+                          >
+                            <thead>
+                              <tr>
+                                <th>Candle Type</th>
+                                <th>Last Occurrence</th>
+                                <th>Trade Signal</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {CandlestickSignals.map((data, index) => (
+                                <tr key={index}>
+                                  <td>{data[0]}</td>
+                                  <td>{data[1]}</td>
+                                  <td>{data[2]}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </Table>
+                        </Card.Body>
+                      </Card>
+                    </div>
+
+                    <div className="col-lg-12 col-md-12 col-sm-12">
+                      <Card className="height-100" bg="dark" text="white">
+                        <Card.Header>Signal Performace</Card.Header>
+
+                        <Card.Body className="padding-1px">
+                          {isLoading ? (
                             <Loader />
                           ) : (
-                            <LiveArbitrageTable
-                              data={this.state.Full_Day_Arbitrage_Data}
-                            />
+                            <Table
+                              size="sm"
+                              striped
+                              bordered
+                              hover
+                              variant="dark"
+                            >
+                              <tbody>
+                                {Object.entries(pnlstatementforday).map(
+                                  ([key, value], index) => (
+                                    <tr key={index}>
+                                      <td>{key}</td>
+                                      <td>{value}</td>
+                                    </tr>
+                                  )
+                                )}
+                              </tbody>
+                            </Table>
                           )}
                         </Card.Body>
                       </Card>
                     </div>
-                </div>
-                  
-                <div className="col-lg-4 col-md-4 col-sm-12">
-                  <div className="row">
-                    <div className="col-lg-12 col-md-12 col-sm-12">
-                        <LiveStatusWindow
-                          HighPrice={HighPrice}
-                          OpenPrice={OpenPrice}
-                          ClosePrice={ClosePrice}
-                          LowPrice={LowPrice}
-                          SignalStrength={SignalStrength}
-                          CurrentTime={CurrentTime}
-                          ETFStatus={ETFStatus}
-                          Signal={Signal}
-                          LiveArbitrage={LiveArbitrage}
-                          LiveSpread={LiveSpread}
-                          LiveColor={LiveColor}
-                          last_minute_signal={last_minute_signal}
-                        />
-                    </div>
-
-                    <div className="col-lg-12 col-md-12 col-sm-12">
-                          <Card className="height-100" bg="dark" text="white">
-                          <Card.Header>Alpha Candle Stick Pattern Signals</Card.Header>
-
-                          <Card.Body className="padding-1px overflow-auto">
-                            <Table size="sm" striped bordered hover variant="dark" >
-                                <thead>
-                                  <tr>
-                                    <th>Candle Type</th>
-                                    <th>Last Occurrence</th>
-                                    <th>Trade Signal</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  {this.state.CandlestickSignals.map((data, index)=>  <tr key={index}>
-                                    <td>{data[0]}</td>
-                                    <td>{data[1]}</td>
-                                    <td>{data[2]}</td>
-                                    </tr>
-                                    )
-                                  }
-                                </tbody>
-                              </Table>
-                          </Card.Body>
-                        </Card>
-                    </div>
-
-                    <div className="col-lg-12 col-md-12 col-sm-12">
-                        <Card className="height-100" bg="dark" text="white">
-                          <Card.Header>Signal Performace</Card.Header>
-
-                          <Card.Body className="padding-1px">
-                            {this.state.isLoading ? (
-                              <Loader />
-                            ) : (
-                              <AppTable data={pnlstatementforday} />
-                            )}
-                          </Card.Body>
-                        </Card>
-                    </div>
 
                     <div className="col-lg-12 col-md-12 col-sm-12">
                       <Card bg="dark" text="white" className="height-100">
-                          <Card.Header>Arbitrage Spread</Card.Header>
+                        <Card.Header>Arbitrage Spread</Card.Header>
                         <Card.Body className="padding-1px">
-                            {this.state.isLoading ? (
-                              <Loader />
-                            ) : (
-                              <AppTable data={SignalCategorization} />
-                            )}
-                          </Card.Body>
-                        </Card>
+                          {this.state.isLoading ? (
+                            <Loader />
+                          ) : (
+                            <Table
+                              size="sm"
+                              striped
+                              bordered
+                              hover
+                              variant="dark"
+                            >
+                              <thead>
+                                <tr>
+                                  <th>Magnitude</th>
+                                  <th># Buy Sign</th>
+                                  <th>Buy Ret</th>
+                                  <th># Sell Sign</th>
+                                  <th>Sell Ret</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {Array.isArray(SignalCategorization) &&
+                                  SignalCategorization.map((data, index) => (
+                                    <tr key={index}>
+                                      <td>{data.Magnitude}</td>
+                                      <td>{data["# Buy Sign"]}</td>
+                                      <td>{data["Buy Ret"]}</td>
+                                      <td>{data["# Sell Sign"]}</td>
+                                      <td>{data["Sell Ret"]}</td>
+                                    </tr>
+                                  ))}
+                              </tbody>
+                            </Table>
+                          )}
+                        </Card.Body>
+                      </Card>
                     </div>
-
-
                   </div>
                 </div>
-
-                
               </div>
             </div>
-            
+
             <div className="col-lg-6 col-md-6 col-sm-12 padding-0">
               <div className="row">
-
                 <div className="col-lg-12 col-md-12 col-sm-12">
                   <Card bg="dark" text="white" className="height-100">
                     <Card.Header>Price Chart</Card.Header>
@@ -285,7 +332,6 @@ class Live_Arbitrage_Single extends React.Component {
                   </Card>
                 </div>
 
-                
                 <div className="col-lg-6 col-md-6 col-sm-12">
                   <Card bg="dark" text="white" className="height-100">
                     <Card.Header>Arb Time Series</Card.Header>
@@ -294,7 +340,9 @@ class Live_Arbitrage_Single extends React.Component {
                       {this.state.isLoading ? (
                         <Loader />
                       ) : (
-                        <LineChartForHistArb data={this.state.ArbitrageLineChart} />
+                        <LineChartForHistArb
+                          data={this.state.ArbitrageLineChart}
+                        />
                       )}
                     </Card.Body>
                   </Card>
@@ -313,14 +361,9 @@ class Live_Arbitrage_Single extends React.Component {
                     </Card.Body>
                   </Card>
                 </div>
-
               </div>
             </div>
-
           </div>
-
-
-
         </div>
       </>
     );

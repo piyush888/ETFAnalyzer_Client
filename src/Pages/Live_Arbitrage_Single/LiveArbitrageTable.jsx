@@ -1,63 +1,48 @@
 import React from "react";
 import { Table } from "react-bootstrap";
 
-const LiveArbitrageTable = (props) => {
-  console.log(props)
-  if (props.data["Arbitrage in $"] == undefined) {
-    return "Loading";
-  }
-  const getKeys = function (someJSON) {
-    return Object.keys(someJSON);
-  };
-
-  const getRowsData = () => {
-    const Time = getKeys(props.data.Time).reverse();
-    return Time.map((key, index) => {
-      let cls = "";
-
-      if (props.data["Over Bought/Sold"][key] == "Over Bought") {
-        cls = "red";
-      } else if (props.data["Over Bought/Sold"][key] == "Over Sold") {
-        cls = "green";
-      } else {
-        cls = "";
-      }
-
-      return (
-        <tr key={index}>
-          <td className={cls}>{props.data["Time"][key]}</td>
-          <td className={cls}>{props.data["Arbitrage in $"][key]}</td>
-          <td className={cls}>{props.data["ETF Trading Spread in $"][key]}</td>
-          <td className={cls}>{props.data["Magnitude of Arbitrage"][key]}</td>
-          <td className={cls}>{props.data["Over Bought/Sold"][key]}</td>
-          <td>{props.data["ETF Price"][key]}</td>
-          <td>{props.data["ETF Change Price %"][key]}</td>
-          <td>{props.data["TickVolume"][key]}</td>
-          <td>{props.data["ETFMover%1_ticker"][key]}</td>
-          <td>{props.data["Change%1_ticker"][key]}</td>
-        </tr>
-      );
-    });
-  };
-
+const LiveArbitrageTable = ({ data }) => {
   return (
     <div className="Table">
       <Table size="sm" striped bordered hover variant="dark">
         <thead className="TableHead">
           <tr>
-            <td>Time</td>
-            <td>$Arbitrage</td>
-            <td>$Spread</td>
-            <td>$Absolute Arbitrage</td>
-            <td>Over Bought/Sold</td>
-            <td>Price</td>
-            <td>T</td>
-            <td>TickVolume</td>
+            <th>Time</th>
+            <th>$Arbitrage</th>
+            <th>$Spread</th>
+            <th>$Absolute Arbitrage</th>
+            <th>Over Bought/Sold</th>
+            <th>Price</th>
+            <th>T</th>
+            <th>TickVolume</th>
             <th>Etf Mover</th>
             <th>Most Change%</th>
           </tr>
         </thead>
-        <tbody>{getRowsData()}</tbody>
+        <tbody>
+          {Array.isArray(data) &&
+            data.reverse().map((data, index) => {
+              return (
+                <tr
+                  className={
+                    data["Over_Bought/Sold"] == "Over Bought" ? "red" : "green"
+                  }
+                  key={index}
+                >
+                  <td>{data.Time}</td>
+                  <td>{data.Arbitrage_in_$}</td>
+                  <td>{data.ETF_Trading_Spread_in_$}</td>
+                  <td>{data.Magnitude_of_Arbitrage.toFixed(5)}</td>
+                  <td>{data["Over_Bought/Sold"]}</td>
+                  <td>{data.ETF_Price}</td>
+                  <td>{data["ETF_Change_Price_%"]}</td>
+                  <td>{data["TickVolume"]}</td>
+                  <td>{data["ETFMover%1_ticker"]}</td>
+                  <td>{data["Change%1_ticker"]}</td>
+                </tr>
+              );
+            })}
+        </tbody>
       </Table>
     </div>
   );
