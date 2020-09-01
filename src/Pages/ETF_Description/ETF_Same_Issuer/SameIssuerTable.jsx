@@ -75,7 +75,7 @@ const SameIssuerTable = (props) => {
         />
       </Card.Header>
 
-      <Card.Body className="padding-0  overflow-auto height-50vh">
+      <Card.Body className="padding-0  overflow-auto half-height">
         {isLoading ? (
           <Loader />
         ) : (

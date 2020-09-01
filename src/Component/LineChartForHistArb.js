@@ -23,8 +23,9 @@ const LineChartForHistArb = (props) => {
           padding={{ top: 0, right: 0, left: 0, bottom: 0 }}
         >
           <LineChart data={data}>
-            <XAxis className="recharts-cartesian-axis-tick" dataKey="Time" />
-            <YAxis className="recharts-cartesian-axis-tick" />
+          <CartesianGrid strokeDasharray="3 3" />
+            <XAxis className="recharts-cartesian-axis-tick" dataKey="Time" stroke="#58FF33"/>
+            <YAxis className="recharts-cartesian-axis-tick" stroke="#58FF33"/>
             <Tooltip />
             <Legend />
             <Brush dataKey="Time" height={30} stroke="#8884d8" />

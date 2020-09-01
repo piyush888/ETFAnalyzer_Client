@@ -39,6 +39,9 @@ const LiveStatusWindow = (props) => {
         <div>
           <span className="">$ Spread: {props.LiveSpread}</span>
         </div>
+        <div>
+          <span className="">Candlestick Observed: {props.last_minute_signal}</span>
+        </div>
       </Card.Body>
     </Card>
   );

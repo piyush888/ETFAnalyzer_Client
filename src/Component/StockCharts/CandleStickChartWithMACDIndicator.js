@@ -114,6 +114,10 @@ class CandleStickChartWithMACDIndicator extends React.Component {
 			y: ({ yScale, datum }) => yScale(datum.high),
 		};
 
+		const colorOfEMA = {
+			fill: "red"
+		}
+
 		return (
 			<ChartCanvas height={550}
 				width={width}
@@ -130,8 +134,8 @@ class CandleStickChartWithMACDIndicator extends React.Component {
 					yExtents={[d => [d.high, d.low], ema26.accessor(), ema12.accessor()]}
 					padding={{ top: 10, bottom: 20 }}
 				>
-					<XAxis axisAt="bottom" orient="bottom" showTicks={false} outerTickSize={0} />
-					<YAxis axisAt="right" orient="right" ticks={5} />
+					<XAxis tickStroke="#58FF33" stroke="#58FF33" axisAt="bottom" orient="bottom" showTicks={false} outerTickSize={0} />
+					<YAxis tickStroke="#58FF33" stroke="#58FF33" axisAt="right" orient="right" ticks={5} />
 
 					<MouseCoordinateY
 						at="right"
@@ -189,7 +193,7 @@ class CandleStickChartWithMACDIndicator extends React.Component {
 					yExtents={[d => d.volume, smaVolume50.accessor()]}
 					origin={(w, h) => [0, h - 300]}
 				>
-					<YAxis axisAt="left" orient="left" ticks={5} tickFormat={format(".2s")}/>
+					<YAxis tickStroke="#58FF33" axisAt="left" orient="left" ticks={5} tickFormat={format(".2s")}/>
 
 					<MouseCoordinateY
 						at="left"
@@ -205,13 +209,13 @@ class CandleStickChartWithMACDIndicator extends React.Component {
 					yExtents={macdCalculator.accessor()}
 					origin={(w, h) => [0, h - 150]} padding={{ top: 10, bottom: 10 }}
 				>
-					<XAxis axisAt="bottom" orient="bottom"/>
-					<YAxis axisAt="right" orient="right" ticks={2} />
+					<XAxis tickStroke="#58FF33" stroke="#58FF33" axisAt="bottom" orient="bottom"/>
+					<YAxis tickStroke="#58FF33" stroke="#58FF33" axisAt="right" orient="right" ticks={2} />
 
 					<MouseCoordinateX
 						at="bottom"
 						orient="bottom"
-						displayFormat={timeFormat("%Y-%m-%d")}
+						displayFormat={timeFormat("%H:%M")}
 						rectRadius={5}
 						{...mouseEdgeAppearance}
 					/>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import Axios from "axios";
 import { Card, Table } from "react-bootstrap";
+import "../Styles/styles.css";
 
 const PnlTable = (props) => {
   const { ETF } = props;
@@ -19,7 +20,7 @@ const PnlTable = (props) => {
   return (
     <Card style={{width:"100%"}} bg="dark" text="light">
       <Card.Header>PNL Table</Card.Header>
-      <Card.Body className="padding-0 overflow-auto height-50vh">
+      <Card.Body className="padding-0 overflow-auto half-height">
         <Table size="sm" striped bordered hover variant="dark">
           <thead>
             <tr>

@@ -2,6 +2,7 @@ import React from "react";
 import { Table } from "react-bootstrap";
 
 const LiveArbitrageTable = (props) => {
+  console.log(props)
   if (props.data["Arbitrage in $"] == undefined) {
     return "Loading";
   }
@@ -29,7 +30,7 @@ const LiveArbitrageTable = (props) => {
           <td className={cls}>{props.data["ETF Trading Spread in $"][key]}</td>
           <td className={cls}>{props.data["Magnitude of Arbitrage"][key]}</td>
           <td className={cls}>{props.data["Over Bought/Sold"][key]}</td>
-          <td>{props.data["Price"][key]}</td>
+          <td>{props.data["ETF Price"][key]}</td>
           <td>{props.data["ETF Change Price %"][key]}</td>
           <td>{props.data["TickVolume"][key]}</td>
           <td>{props.data["ETFMover%1_ticker"][key]}</td>

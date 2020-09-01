@@ -44,6 +44,7 @@ class Live_Arbitrage_Single extends React.Component {
     ArbitrageLineChart: "",
     etfmoversDictCount: "",
     highestChangeDictCount: "",
+    CandlestickSignals:[],
     isLoading: true,
   };
 
@@ -97,6 +98,8 @@ class Live_Arbitrage_Single extends React.Component {
             ArbitrageLineChart: res.data.ArbitrageLineChart,
             etfmoversDictCount: JSON.parse(res.data.etfmoversDictCount),
             highestChangeDictCount: JSON.parse(res.data.highestChangeDictCount),
+            CandlestickSignals: res.data.CandlestickSignals,
+            last_minute_signal: res.data.last_minute_signal,
             isLoading: false,
           });
         })
@@ -125,10 +128,10 @@ class Live_Arbitrage_Single extends React.Component {
             SignalStrength: res.data.SignalInfo.Strength,
             LiveColor:
               res.data.Arbitrage["Arbitrage in $"][0] > 0
-                ? "text-success"
+                ? "text-danger"
                 : res.data.Arbitrage["Arbitrage in $"][0] == 0
                 ? "text-muted"
-                : "text-danger",
+                : "text-success",
           });
         })
         .catch((err) => console.log(err));
@@ -152,6 +155,7 @@ class Live_Arbitrage_Single extends React.Component {
       scatterPlotData,
       SignalCategorization,
       pnlstatementforday,
+      last_minute_signal,
     } = this.state;
 
     return (
@@ -203,6 +207,7 @@ class Live_Arbitrage_Single extends React.Component {
                           LiveArbitrage={LiveArbitrage}
                           LiveSpread={LiveSpread}
                           LiveColor={LiveColor}
+                          last_minute_signal={last_minute_signal}
                         />
                     </div>
 
@@ -215,34 +220,18 @@ class Live_Arbitrage_Single extends React.Component {
                                 <thead>
                                   <tr>
                                     <th>Candle Type</th>
-                                    <th>Signal</th>
+                                    <th>Last Occurrence</th>
+                                    <th>Trade Signal</th>
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <tr>
-                                    <th>Hammer</th>
-                                    <th><i className="fa fa-lock text-muted"></i></th>
-                                  </tr>
-                                  <tr>
-                                    <th>Shooting Star</th>
-                                    <th><i className="fa fa-lock text-muted"></i></th>
-                                  </tr>
-                                  <tr>
-                                    <th>Dragonfly Doji</th>
-                                    <th><i className="fa fa-lock text-muted"></i></th>
-                                  </tr>
-                                  <tr>
-                                    <th>Morning Star</th>
-                                    <th><i className="fa fa-lock text-muted"></i></th>
-                                  </tr>
-                                  <tr>
-                                    <th>Three White Soldiers</th>
-                                    <th><i className="fa fa-lock text-muted"></i></th>
-                                  </tr>
-                                  <tr>
-                                    <th>Piercing Line</th>
-                                    <th><i className="fa fa-lock text-muted"></i></th>
-                                  </tr>
+                                  {this.state.CandlestickSignals.map((data, index)=>  <tr key={index}>
+                                    <td>{data[0]}</td>
+                                    <td>{data[1]}</td>
+                                    <td>{data[2]}</td>
+                                    </tr>
+                                    )
+                                  }
                                 </tbody>
                               </Table>
                           </Card.Body>

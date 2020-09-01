@@ -2,7 +2,7 @@ import React from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "./Styles/Live_Arbitrage_All.css";
-import LiveArbitrageAllTable from "./Live_Arb_Table2";
+import LiveArbitrageAllTable from "./Live_Arb_Table";
 import { connect } from "react-redux";
 import { CommonNavBar } from "../../Common_Components/NavBar";
 

@@ -1,18 +1,12 @@
-.etf-desc-container {
-  display: grid;
-  grid-gap: 1em;
-  grid-template-columns: 1fr 1fr auto;
-  margin:5px;
+.padding-0{
+    padding-right:3px;
+    padding-left:3px;
 }
 
-.etf-desc-table {
-  grid-column: 1/2;
-}
-
-.etf-hold-table {
-  grid-column: 2/3;
-}
-
-.pnl-table {
-  grid-column: 3/4;
+.half-height{
+ 	display:block;
+    width:100%;
+    max-height: 40vh;
+    height:40vh;
+    overflow:scroll;
 }
