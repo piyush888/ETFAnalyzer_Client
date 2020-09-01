@@ -27,7 +27,7 @@ class HistoricalArbitrage extends React.Component {
   state = {
     etfArbitrageTableData: null,
     historicalArbitrageData: "",
-    scatterPlotData: "",
+    scatterPlotData: [],
     etfmoversDictCount: null,
     etfPriceData: "",
     ArbitrageCumSum: [],
@@ -64,7 +64,7 @@ class HistoricalArbitrage extends React.Component {
             etfPriceData: {
               data: tsvParse(data.etfPrices, this.parseData(this.parseDate)),
             },
-            scatterPlotData: data.scatterPlotData,
+            scatterPlotData: [...data.scatterPlotData],
             etfmoversDictCount: data.etfmoversDictCount,
             highestChangeDictCount: data.highestChangeDictCount,
             SignalCategorization: <AppTable data={data.SignalCategorization} />,

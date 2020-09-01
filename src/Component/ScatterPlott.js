@@ -6,37 +6,37 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
-  
+  ResponsiveContainer,
 } from "recharts";
 
 class ScatterPlot extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
-    const { data, width, height } = this.props;
+    const { data } = this.props;
+console.log(data)
     return (
-      <ScatterChart width={width || 400} height={height || 240}>
-        <CartesianGrid />
-        <XAxis
-          stroke="#58FF33"
-          dataKey={"Net Asset Value Change%"}
-          type="number"
-          name="Net Asset Value Chage %"
-          unit="%"
-        />
-        <YAxis
-          stroke="#58FF33"
-          dataKey={"ETF Change Price %"}
-          type="number"
-          name="ETF Change Price %"
-          unit="%"
-        />
-        <Scatter name="A school" data={data} fill="#3336FF" />
-        <Tooltip cursor={{ strokeDasharray: "3 3" }} />
-      </ScatterChart>
+      <div style={{ width: "90%", height: 240 }}>
+        <ResponsiveContainer>
+          <ScatterChart>
+            <CartesianGrid />
+            <XAxis
+              stroke="#58FF33"
+              dataKey={"Net Asset Value Change%"}
+              type="number"
+              name="Net Asset Value Chage %"
+              unit="%"
+            />
+            <YAxis
+              stroke="#58FF33"
+              dataKey={"ETF Change Price %"}
+              type="number"
+              name="ETF Change Price %"
+              unit="%"
+            />
+            <Scatter name="A school" data={data} fill="#3336FF" />
+            <Tooltip cursor={{ strokeDasharray: "3 3" }} />
+          </ScatterChart>
+        </ResponsiveContainer>
+      </div>
     );
   }
 }
