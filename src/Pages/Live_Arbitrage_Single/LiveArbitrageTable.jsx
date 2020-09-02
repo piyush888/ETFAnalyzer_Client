@@ -22,13 +22,14 @@ const LiveArbitrageTable = ({ data }) => {
         <tbody>
           {Array.isArray(data) &&
             data.reverse().map((data, index) => {
+              let cls = "";
+              if (data["Over_Bought/Sold"] == "Over Bought") {
+                cls = "red";
+              } else if (data["Over_Bought/Sold"] == "Over Sold") {
+                cls = "green";
+              }
               return (
-                <tr
-                  className={
-                    data["Over_Bought/Sold"] == "Over Bought" ? "red" : "green"
-                  }
-                  key={index}
-                >
+                <tr className={cls} key={index}>
                   <td>{data.Time}</td>
                   <td>{data.Arbitrage_in_$}</td>
                   <td>{data.ETF_Trading_Spread_in_$}</td>

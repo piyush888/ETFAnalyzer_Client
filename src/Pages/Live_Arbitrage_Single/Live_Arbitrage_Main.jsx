@@ -111,23 +111,24 @@ class Live_Arbitrage_Single extends React.Component {
       axios
         .get(`/api/ETfLiveArbitrage/Single/UpdateTable/${ETF}`)
         .then((res) => {
+          console.log(res)
           this.setState({
             ...this.state,
-            LiveArbitrage: res.data.Arbitrage["Arbitrage in $"][0],
-            LiveSpread: res.data.Arbitrage["ETF Trading Spread in $"][0],
+            LiveArbitrage: res.data.Arbitrage["Arbitrage_in_$"][0],
+            LiveSpread: res.data.Arbitrage["ETF_Trading_Spread_in_$"][0],
             CurrentTime: res.data.Arbitrage["Time"][0],
-            LiveVWPrice: res.data.Prices["VWPrice"][0],
-            OpenPrice: res.data.Prices["open"][0],
-            ClosePrice: res.data.Prices["close"][0],
-            HighPrice: res.data.Prices["high"][0],
-            LowPrice: res.data.Prices["low"][0],
+            LiveVWPrice: res.data.Prices["VWPrice"]["0"],
+            OpenPrice: res.data.Prices["open"]["0"],
+            ClosePrice: res.data.Prices.close["0"],
+            HighPrice: res.data.Prices["high"]["0"],
+            LowPrice: res.data.Prices["low"]["0"],
             ETFStatus: res.data.SignalInfo.ETFStatus,
             Signal: res.data.SignalInfo.Signal,
             SignalStrength: res.data.SignalInfo.Strength,
             LiveColor:
-              res.data.Arbitrage["Arbitrage in $"][0] > 0
+              res.data.Arbitrage["Arbitrage_in_$"][0] > 0
                 ? "text-danger"
-                : res.data.Arbitrage["Arbitrage in $"][0] == 0
+                : res.data.Arbitrage["Arbitrage_in_$"][0] == 0
                 ? "text-muted"
                 : "text-success",
           });

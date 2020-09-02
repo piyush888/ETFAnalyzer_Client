@@ -3,6 +3,7 @@ import Card from "react-bootstrap/Card";
 import "../../static/css/Live_Arbitrage.css";
 
 const LiveStatusWindow = (props) => {
+  console.log(props)
   return (
     <Card bg="dark" text="light" className="height-100">
       <Card.Header>
