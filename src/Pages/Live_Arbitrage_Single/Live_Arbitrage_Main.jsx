@@ -1,11 +1,10 @@
 import React from "react";
 import axios from "axios";
-import { tsvParse, csvParse } from "d3-dsv";
+import { tsvParse } from "d3-dsv";
 import { timeParse } from "d3-time-format";
 import Card from "react-bootstrap/Card";
 import Table from "react-bootstrap/Table";
 import ChartComponent from "../../Component/StockPriceChart";
-import AppTable from "../../Component/Table.js";
 import LiveStatusWindow from "./LiveStatusWindow";
 import "../../static/css/Live_Arbitrage.css";
 import CombinedPieCharts from "../../Component/CombinedPieCharts";
@@ -14,26 +13,23 @@ import LineChartForHistArb from "../../Component/LineChartForHistArb";
 import { Loader } from "../../Common_Components/Loader";
 import ScatterPlot from "../../Component/ScatterPlott";
 import { CommonNavBar } from "../../Common_Components/NavBar";
-import { CommonPieChart } from "../../Common_Components/PieChart";
 import "./Styles/style.css";
-import { CardGroup } from "react-bootstrap";
+import { last } from "lodash";
 
 class Live_Arbitrage_Single extends React.Component {
   state = {
     Full_Day_Arbitrage_Data: [],
-    Full_Day_Prices: "",
+    Full_Day_Prices: null,
     scatterPlotData: "",
     LiveArbitrage: "",
     LiveSpread: "",
-    // Prices
+    Prices: {},
     LiveVWPrice: "",
     OpenPrice: "",
     ClosePrice: "",
     HighPrice: "",
     LowPrice: "",
-    parseDate: timeParse("%Y-%m-%d %H:%M:%S"),
     CurrentTime: "",
-    // Signal
     ETFStatus: "",
     Signal: "",
     SignalStrength: "",
@@ -45,12 +41,10 @@ class Live_Arbitrage_Single extends React.Component {
     CandlestickSignals: [],
     isLoading: true,
   };
+  parseDate = timeParse("%Y-%m-%d %H:%M:%S");
 
   componentDidMount() {
-    this.state.isLoading = true;
     this.fetchETFLiveData();
-    this.UpdateArbitragDataTables(false);
-    this.intervalId = this.dataFetchInterval();
   }
 
   componentDidUpdate(prevProps) {
@@ -58,8 +52,6 @@ class Live_Arbitrage_Single extends React.Component {
       this.state.isLoading = true;
       clearInterval(this.intervalId);
       this.fetchETFLiveData();
-      this.UpdateArbitragDataTables(false);
-      this.intervalId = this.dataFetchInterval();
     }
   }
 
@@ -70,26 +62,28 @@ class Live_Arbitrage_Single extends React.Component {
   dataFetchInterval = () =>
     setInterval(() => {
       if (new Date().getSeconds() == 8) {
-        this.UpdateArbitragDataTables(true);
-        this.fetchETFLiveData();
+        this.UpdateArbitragDataTables();
+        this.updateAnotherData();
       }
-    }, 1000);
+    }, 100);
 
   fetchETFLiveData() {
     const { ETF } = this.props.match.params;
+
     if (ETF) {
       axios
         .get(`/api/ETfLiveArbitrage/Single/${ETF}`)
         .then((res) => {
+          const lastArbitrage = res.data.Arbitrage.slice(-1).pop();
+          this.intervalId = this.dataFetchInterval();
           this.setState({
             ...this.state,
-            Full_Day_Arbitrage_Data: [...res.data.Arbitrage],
-            Full_Day_Prices: {
-              data: tsvParse(
-                res.data.Prices,
-                this.parseData(this.state.parseDate)
-              ),
-            },
+            Full_Day_Arbitrage_Data: [...res.data.Arbitrage].reverse(),
+            Full_Day_Prices: tsvParse(
+              res.data.Prices,
+              this.parseData(this.parseDate)
+            ),
+
             pnlstatementforday: res.data.pnlstatementforday,
             SignalCategorization: res.data.SignalCategorization,
             scatterPlotData: res.data.scatterPlotData,
@@ -98,6 +92,12 @@ class Live_Arbitrage_Single extends React.Component {
             highestChangeDictCount: res.data.highestChangeDictCount,
             CandlestickSignals: res.data.CandlestickSignals,
             last_minute_signal: res.data.last_minute_signal,
+            ETFStatus: res.data.SignalInfo.ETFStatus,
+            Signal: res.data.SignalInfo.Signal,
+            SignalStrength: res.data.SignalInfo.Strength,
+            LiveArbitrage: lastArbitrage["Arbitrage_in_$"],
+            LiveSpread: lastArbitrage["ETF_Trading_Spread_in_$"],
+            CurrentTime: last.Time,
             isLoading: false,
           });
         })
@@ -107,30 +107,74 @@ class Live_Arbitrage_Single extends React.Component {
 
   UpdateArbitragDataTables() {
     const { ETF } = this.props.match.params;
+    const tempArray = this.state.Full_Day_Prices;
     if (ETF) {
       axios
         .get(`/api/ETfLiveArbitrage/Single/UpdateTable/${ETF}`)
         .then((res) => {
-          console.log(res)
           this.setState({
             ...this.state,
-            LiveArbitrage: res.data.Arbitrage["Arbitrage_in_$"][0],
-            LiveSpread: res.data.Arbitrage["ETF_Trading_Spread_in_$"][0],
-            CurrentTime: res.data.Arbitrage["Time"][0],
-            LiveVWPrice: res.data.Prices["VWPrice"]["0"],
-            OpenPrice: res.data.Prices["open"]["0"],
-            ClosePrice: res.data.Prices.close["0"],
-            HighPrice: res.data.Prices["high"]["0"],
-            LowPrice: res.data.Prices["low"]["0"],
+            Full_Day_Arbitrage_Data:
+              this.state.Full_Day_Arbitrage_Data.slice(-1).pop().Time !==
+              res.data.Arbitrage
+                ? [res.data.Arbitrage, ...this.state.Full_Day_Arbitrage_Data]
+                : [...this.state.Full_Day_Arbitrage_Data],
+
+            ArbitrageLineChart: [
+              ...this.state.ArbitrageLineChart,
+              {
+                "Arbitrage in $": res.data.Arbitrage["Arbitrage_in_$"],
+                Time: res.data.Arbitrage.Time,
+              },
+            ],
+            scatterPlotData: [
+              ...this.state.scatterPlotData,
+              {
+                "ETF Change Price %": res.data.Arbitrage["ETF_Change_Price_%"],
+                "Net Asset Value Change%":
+                  res.data.Arbitrage["Net_Asset_Value_Change%"],
+              },
+            ],
+            LiveArbitrage: res.data.Arbitrage["Arbitrage_in_$"],
+            LiveSpread: res.data.Arbitrage["ETF_Trading_Spread_in_$"],
+            CurrentTime: res.data.Arbitrage.Time,
+            LiveVWPrice: res.data.Prices.VWPrice,
+            OpenPrice: res.data.Prices.open,
+            ClosePrice: res.data.Prices.close,
+            HighPrice: res.data.Prices.high,
+            LowPrice: res.data.Prices.low,
             ETFStatus: res.data.SignalInfo.ETFStatus,
             Signal: res.data.SignalInfo.Signal,
             SignalStrength: res.data.SignalInfo.Strength,
             LiveColor:
-              res.data.Arbitrage["Arbitrage_in_$"][0] > 0
+              res.data.Arbitrage["Arbitrage_in_$"] > 0
                 ? "text-danger"
-                : res.data.Arbitrage["Arbitrage_in_$"][0] == 0
+                : res.data.Arbitrage["Arbitrage_in_$"] == 0
                 ? "text-muted"
                 : "text-success",
+          });
+        })
+        .catch((err) => console.log(err));
+    }
+  }
+
+  updateAnotherData() {
+    const { ETF } = this.props.match.params;
+
+    if (ETF) {
+      axios
+        .get(`/api/ETfLiveArbitrage/Single/SignalAndCandle/${ETF}`)
+        .then((res) => {
+          this.setState({
+            ...this.state,
+            CandlestickSignals: [...res.data.CandlestickSignals],
+            SignalCategorization: [...res.data.SignalCategorization],
+            pnlstatementforday: { ...res.data.pnlstatementforday },
+            last_minute_signal: res.data.last_minute_signal,
+            Full_Day_Prices: tsvParse(
+              res.data.Prices,
+              this.parseData(this.parseDate)
+            ),
           });
         })
         .catch((err) => console.log(err));
@@ -160,6 +204,7 @@ class Live_Arbitrage_Single extends React.Component {
       highestChangeDictCount,
       isLoading,
       CandlestickSignals,
+      Full_Day_Prices,
     } = this.state;
 
     return (
@@ -247,37 +292,6 @@ class Live_Arbitrage_Single extends React.Component {
                     </div>
 
                     <div className="col-lg-12 col-md-12 col-sm-12">
-                      <Card className="height-100" bg="dark" text="white">
-                        <Card.Header>Signal Performace</Card.Header>
-
-                        <Card.Body className="padding-1px">
-                          {isLoading ? (
-                            <Loader />
-                          ) : (
-                            <Table
-                              size="sm"
-                              striped
-                              bordered
-                              hover
-                              variant="dark"
-                            >
-                              <tbody>
-                                {Object.entries(pnlstatementforday).map(
-                                  ([key, value], index) => (
-                                    <tr key={index}>
-                                      <td>{key}</td>
-                                      <td>{value}</td>
-                                    </tr>
-                                  )
-                                )}
-                              </tbody>
-                            </Table>
-                          )}
-                        </Card.Body>
-                      </Card>
-                    </div>
-
-                    <div className="col-lg-12 col-md-12 col-sm-12">
                       <Card bg="dark" text="white" className="height-100">
                         <Card.Header>Arbitrage Spread</Card.Header>
                         <Card.Body className="padding-1px">
@@ -328,7 +342,7 @@ class Live_Arbitrage_Single extends React.Component {
                   <Card bg="dark" text="white" className="height-100">
                     <Card.Header>Price Chart</Card.Header>
                     <Card.Body className="padding-1px">
-                      <ChartComponent data={this.state.Full_Day_Prices} />
+                      <ChartComponent data={Full_Day_Prices} />
                     </Card.Body>
                   </Card>
                 </div>

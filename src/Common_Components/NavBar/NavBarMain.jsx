@@ -265,10 +265,10 @@ const NavBarMain = (props) => {
             | Log Out
           </button>
         ) : (
-          <ul class="navbar-nav">
-            <li class="nav-item active">
+          <ul className="navbar-nav">
+            <li className="nav-item active">
               <a
-                class="nav-link"
+                className="nav-link"
                 href="/login"
                 onClick={() => {
                   logout();
@@ -277,8 +277,8 @@ const NavBarMain = (props) => {
                 | Sign In
               </a>
             </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="/signup">
+            <li className="nav-item active">
+              <a className="nav-link" href="/signup">
                 Sign Up
               </a>
             </li>

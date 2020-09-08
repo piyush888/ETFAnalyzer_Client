@@ -1,43 +1,13 @@
-import React from 'react';
-import { render } from 'react-dom';
-import Chart from './StockCharts/Chart';
-import CandleStickChartWithMACDIndicator from './StockCharts/CandleStickChartWithMACDIndicator';
+import React from "react";
 
-import { TypeChooser } from "react-stockcharts/lib/helper";
+import CandleStickChartWithMACDIndicator from "./StockCharts/CandleStickChartWithMACDIndicator";
 
-class ChartComponent extends React.Component {
-	
-	state={
-		data: this.props.data,
-		didupdate:false
-	}
-	
-	shouldComponentUpdate(nextProps) {
-	  // You don't have to do this check first, but it can help prevent an unneeded render
-	  	if (nextProps.data.data !== this.state.data && nextProps.data.data!==undefined) {
-			var DataCopy =  this.state.data;
-	  		DataCopy = nextProps.data.data;
-	  		this.setState({ 
-	  			data:DataCopy,
-	  			didupdate:true
-	  		});
-	  		return true
-	  	}
-	  	return false
-	}
-
-	render() {
-		if (this.state.data == '') {
-			return <div>Loading...</div>
-		}
-		if (this.state.didupdate){
-			console.log(this.state.data);
-			return (
-			<CandleStickChartWithMACDIndicator data={this.state.data} />
-			)	
-			this.state.didupdate=false;
-		}
-	}
-}
+const ChartComponent = ({ data }) => {
+  if (data) {
+    return <CandleStickChartWithMACDIndicator data={data} />;
+  } else {
+    return <></>;
+  }
+};
 
 export default ChartComponent;

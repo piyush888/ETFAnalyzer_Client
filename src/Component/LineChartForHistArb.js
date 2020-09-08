@@ -13,7 +13,7 @@ import {
 
 const LineChartForHistArb = (props) => {
   const { data } = props;
-  console.log(data);
+ 
   return (
     <>
       {data.length ? (
