@@ -56,14 +56,12 @@ class HistoricalArbitrage extends React.Component {
       this.setState({ ...this.state, isLoading: true });
       Axios.get(`/api/PastArbitrageData/${ETF}/${startDate}`)
         .then(({ data }) => {
-          console.log(data);
+          
           this.setState({
             ...this.state,
             etfArbitrageTableData: data.etfhistoricaldata,
             PNLStatementForTheDay: data.PNLStatementForTheDay,
-            etfPriceData: {
-              data: tsvParse(data.etfPrices, this.parseData(this.parseDate)),
-            },
+            etfPriceData: tsvParse(data.etfPrices, this.parseData(this.parseDate)),
             scatterPlotData: [...data.scatterPlotData],
             etfmoversDictCount: data.etfmoversDictCount,
             highestChangeDictCount: data.highestChangeDictCount,

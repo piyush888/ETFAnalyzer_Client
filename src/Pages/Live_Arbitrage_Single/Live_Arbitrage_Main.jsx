@@ -115,8 +115,8 @@ class Live_Arbitrage_Single extends React.Component {
           this.setState({
             ...this.state,
             Full_Day_Arbitrage_Data:
-              this.state.Full_Day_Arbitrage_Data.slice(-1).pop().Time !==
-              res.data.Arbitrage
+              this.state.Full_Day_Arbitrage_Data[0].Time !==
+              res.data.Arbitrage.Time
                 ? [res.data.Arbitrage, ...this.state.Full_Day_Arbitrage_Data]
                 : [...this.state.Full_Day_Arbitrage_Data],
 
