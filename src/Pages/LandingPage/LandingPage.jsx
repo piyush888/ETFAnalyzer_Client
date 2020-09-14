@@ -20,6 +20,8 @@ import ReactSymbol from "../../static/Images/PoweredBy/React.png";
 import Python from "../../static/Images/PoweredBy/Python.png";
 import MongoDb from "../../static/Images/PoweredBy/MongoDb.png";
 
+import HeroImage from "../../static/HomePage/hero-img.png";
+
 import "./LandingPage.css";
 import { CommonNavBar } from "../../Common_Components/NavBar";
 
@@ -30,96 +32,102 @@ const LandingPage = (props) => {
     <>
       <CommonNavBar />
       <div className="LandingPage">
-        <div className="jumbotron">
+        
           <div className="container">
-            <h3 className="">
-              ETF Trace solves all major problems in ETF industry
-            </h3>
-            <ul className="custom-bullet">
-              <li>
-                <i className="fa fa-check-square text-primary"></i> ETF mispricing &
-                divergence from underlying NAV
-              </li>
-              <li>
-                <i className="fa fa-check-square text-primary"></i> Be informed on
-                tracking error, spread & absolute error{" "}
-              </li>
-              <li>
-                <i className="fa fa-check-square text-primary"></i> Understand ETF
-                underlyings which are moving the ETF
-              </li>
-              <li>
-                <i className="fa fa-check-square text-primary"></i> Over Bought,
-                Over Sold or Balanced Signals for ETF
-              </li>
-              <li>
-                <i className="fa fa-check-square text-primary"></i> Compare multiple
-                ETFs in industry, similar Assets Under Management
-              </li>
-            </ul>
-            <p>Our tool is FREE to use. Signup, Login & start using</p>
-          </div>
+              <section id="hero">
+                <div className="container">
+                  <div className="row">
+                    <div className="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center aos-init aos-animate" data-aos="fade-up">
+                        <h2><b>ETF Trace solves arbitrage in etf industry</b></h2>
+                        <h4>Don't buy over priced or over sold etfs, measure arbitrage in ETF & Buy/Sell at right price.</h4>
+                        <a className="btn btn-primary btn-sm" href="/signup">Sign up & start for free, NO card required</a>
+                    </div>
+                    <div class="col-lg-6 order-1 order-lg-2 hero-img aos-init aos-animate" data-aos="fade-left">
+                      <Image src={HeroImage} style={{ height: "400px" }}  className="img-fluid"/>
+                    </div>
+                  </div>
+                </div>
+              </section>
         </div>
+        
 
         <div className="container">
           <div className="row">
-            <div className="col-md-6 col-lg-6 col-xs-12 FeatureBox">
-              <h4>Live Arbitrage</h4>
-              <ul>
-                <li>Tracking error on ETF updates every minute.</li>
-                <li>Over Sold/Bought or Balanced Signal</li>
-                <li>Arbitrage, Spread & Volume traded info</li>
-                <li>Quantitative Analysis of deviation of current arbitrage</li>
-              </ul>
-              <Image src={LiveArbitrage} fluid rounded />
+            <div className="col-md-12 col-lg-12 col-xs-12 FeatureBox">
+              <h3 className="text-dark"><b><center>Software services</center></b></h3>
+              <div class="row jumbotron">
+                <div className="col-md-6 col-lg-6 col-xs-12">
+                  <h5>Live Arbitrage</h5>
+                  <ul>
+                    <li>Tracking error on ETF updates every minute.</li>
+                    <li>Over Sold/Bought or Balanced Signal</li>
+                    <li>Arbitrage, Spread & Volume traded info</li>
+                    <li>Quantitative Analysis of deviation of current arbitrage</li>
+                  </ul>
+                </div>
+                <div className="col-md-6 col-lg-6 col-xs-12">
+                  <Image src={LiveArbitrage} fluid rounded />
+                </div>
+              </div>
+            
+
+            <div class="row mb-3">
+              <div className="col-md-6 col-lg-6 col-xs-12">
+                <Image src={AllETFLiveArbitrage} fluid rounded />
+              </div>
+              <div className="col-md-6 col-lg-6 col-xs-12">
+                <h5>All ETF Live Arbitrage</h5>
+                <ul>
+                  <li>Live tracking error on all major ETF above $ 1 Billion</li>
+                  <li>Compare arbitrage on ETF universe</li>
+                  <li>
+                    Set filters on ETF, $ Arbitrage or Over Bought/Sell signals
+                  </li>
+                  <li>Arbitrage, Spread & last ETF Trade Price</li>
+                </ul>  
+              </div>
             </div>
 
-            <div className="col-md-6 col-lg-6 col-xs-12 FeatureBox">
-              <h4>All ETF Live Arbitrage</h4>
-              <ul>
-                <li>Live tracking error on all major ETF above $ 1 Billion</li>
-                <li>Compare arbitrage on ETF universe</li>
-                <li>
-                  Set filters on ETF, $ Arbitrage or Over Bought/Sell signals
-                </li>
-                <li>Arbitrage, Spread & last ETF Trade Price</li>
-              </ul>
-              <Image src={AllETFLiveArbitrage} fluid rounded />
+            <div class="row jumbotron">
+              <div className="col-md-6 col-lg-6 col-xs-12">
+                <h5>ETF Description</h5>
+                <ul>
+                  <li>Look into the fundamentals of an ETF</li>
+                  <li>See Historical Arbitrage for the ETF</li>
+                  <li>Compare ETFs similar ETFs</li>
+                  <li>Compare Buy/Sell Signals for ETFs</li>
+                </ul>
+              </div>
+              <div className="col-md-6 col-lg-6 col-xs-12">
+                <Image src={ETFDescription} fluid rounded />
+              </div>
             </div>
 
-            <div className="col-md-6 col-lg-6 col-xs-12 FeatureBox">
-              <h4>ETF Description</h4>
-              <ul>
-                <li>Look into the fundamentals of an ETF</li>
-                <li>See Historical Arbitrage for the ETF</li>
-                <li>Compare ETFs similar ETFs</li>
-                <li>Compare Buy/Sell Signals for ETFs</li>
-              </ul>
-              <Image src={ETFDescription} fluid rounded />
-            </div>
+            <div class="row mb-2">
+              <div className="col-md-6 col-lg-6 col-xs-12">
+                <Image src={HistoricalArbitrage} fluid rounded />
+              </div>
+              <div className="col-md-6 col-lg-6 col-xs-12">
+                <h5>Historical Arbitrage</h5>
+                <ul>
+                  <li>Quantitaive analysis of Historical Arbitrage for past ETFs</li>
+                  <li>Study ETF arbitrage for past dates</li>
+                  <li>Study stock chart and signals generated at maxima/minima</li>
+                  <li>Compare historical performance of ETFs in the same industry</li>
+                </ul>  
+              </div>
 
-            <div className="col-md-6 col-lg-6 col-xs-12">
-              <h4>Historical Arbitrage</h4>
-              <ul>
-                <li>
-                  Quantitaive analysis of Historical Arbitrage for past ETFs
-                </li>
-                <li>Study ETF arbitrage for past dates</li>
-                <li>
-                  Study stock chart and signals generated at maxima/minima
-                </li>
-                <li>
-                  Compare historical performance of ETFs in the same industry
-                </li>
-              </ul>
-              <Image src={HistoricalArbitrage} fluid rounded />
+            </div>
+            
             </div>
           </div>
         </div>
 
-        <div className="jumbotron">
-          <div className="container">
-            <h5>
+        
+          <div className="container jumbotron">
+            
+              <h3><center className="text-dark">How big is ETF arbitrage issue?</center></h3>
+              <h5>
               <i>
                 "ETF managers are supposed to keep their funds’ investment
                 performance in line with the indexes they track. That mission is
@@ -135,9 +143,7 @@ const LandingPage = (props) => {
                 - <Image src={Fidelity} fluid style={{ height: "30px" }} />{" "}
               </a>
             </h5>
-
-            <br />
-
+            <br/>
             <h5>
               <i>
                 "Such deviations can make it hard to build a portfolio.
@@ -154,9 +160,7 @@ const LandingPage = (props) => {
                 - <Image src={NYTimes} fluid style={{ height: "30px" }} />
               </a>
             </h5>
-
-            <br />
-
+            <br/>
             <h5>
               <i>
                 "U.S.-based exchange-traded funds have racked up a record $4
@@ -170,7 +174,7 @@ const LandingPage = (props) => {
                 - <Image src={CNBC} fluid style={{ height: "40px" }} />
               </a>
             </h5>
-            <br />
+            <br/>
             <h5>
               <i>
                 "The booming exchange-traded fund industry could become 10 times
@@ -185,7 +189,7 @@ const LandingPage = (props) => {
               </a>
             </h5>
           </div>
-        </div>
+        
 
         <div className="container mb-3">
           <center>
@@ -210,6 +214,8 @@ const LandingPage = (props) => {
           </div>
         </div>
 
+
+       
         <br />
 
         <div className="container">
@@ -224,13 +230,13 @@ const LandingPage = (props) => {
               >
                 Kshitiz Sharma
               </a>{" "}
-              - Developer & business development
+              - Developer, ETF trader & business development
             </li>
             <li>
               <a href="https://www.linkedin.com/in/piyush888/" target="_blank">
                 Piyush Garg
               </a>{" "}
-              - Lead tech architect & ETF expert
+              - Lead tech architect
             </li>
             <li>
               <a

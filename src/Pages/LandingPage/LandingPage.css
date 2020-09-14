@@ -15,7 +15,6 @@
 
 .custom-bullet li {
     display: block;
-    font-size:20px;
 }
 
 .custom-bullet li:before
@@ -31,4 +30,12 @@
 
 
 .jumbotronBlack{
+}
+
+ul > li{
+    color:grey;
+}
+
+ul{
+    list-style-type:square;
 }
