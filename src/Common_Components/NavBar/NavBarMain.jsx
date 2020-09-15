@@ -189,6 +189,8 @@ const NavBarMain = (props) => {
     history.push(generatePath(location.pathname, ETF[0].element, startDate));
   };
 
+ 
+
   const navbarColor =
     currentUser && currentUser.emailVerified ? "bg-color-dark" : "bg-primary";
 
@@ -231,7 +233,7 @@ const NavBarMain = (props) => {
           <Nav.Link
             style={{ color: "white" }}
             as={Link}
-            to="/live-arbitrage-single"
+            to={isLoggedIn ? "/live-arbitrage-single" : "/live-arbitrage-xlkdefault"}
             eventKey="Live-Arbitrage"
           >
             Live-Arbitrage (Focus)
