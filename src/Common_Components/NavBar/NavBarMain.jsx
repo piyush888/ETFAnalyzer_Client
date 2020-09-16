@@ -11,6 +11,7 @@ import AuthContext from "../../Utilities/AuthContext";
 import Axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import "./nav.css"
 import { getPageName } from "../../Utilities/utilFunc";
 
 const generatePath = (pathname = "/", ETF = "XLK", startDate = "20200608") => {
@@ -192,14 +193,17 @@ const NavBarMain = (props) => {
  
 
   const navbarColor =
-    currentUser && currentUser.emailVerified ? "bg-color-dark" : "bg-primary";
+    currentUser && currentUser.emailVerified ? "bg-color-dark" : "bg-color-white";
+
+  const navbartextColor =
+    currentUser && currentUser.emailVerified ? "textColorCustomWhite" : "textColorCustomGrey";
 
   return (
     <Navbar className={navbarColor} variant="dark" expand="lg">
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link style={{ color: "white" }} as={Link} to="/" eventKey="">
+          <Nav.Link className={navbartextColor} as={Link} to="/" eventKey="">
             Home
           </Nav.Link>
           {generateDateAndEtf(
@@ -215,7 +219,7 @@ const NavBarMain = (props) => {
 
         <Nav className="">
           <Nav.Link
-            style={{ color: "white" }}
+            className={navbartextColor}
             as={Link}
             to="/ETF-Description"
             eventKey="ETF-Description"
@@ -223,7 +227,7 @@ const NavBarMain = (props) => {
             ETF-Description
           </Nav.Link>
           <Nav.Link
-            style={{ color: "white" }}
+            className={navbartextColor}
             as={Link}
             to="/historical-arbitrage"
             eventKey="Historical"
@@ -231,7 +235,7 @@ const NavBarMain = (props) => {
             Historical Arbitrage
           </Nav.Link>
           <Nav.Link
-            style={{ color: "white" }}
+            className={navbartextColor}
             as={Link}
             to={isLoggedIn ? "/live-arbitrage-single" : "/live-arbitrage-xlkdefault"}
             eventKey="Live-Arbitrage"
@@ -239,7 +243,7 @@ const NavBarMain = (props) => {
             Live-Arbitrage (Focus)
           </Nav.Link>
           <Nav.Link
-            style={{ color: "white" }}
+            className={navbartextColor}
             as={Link}
             to="/Live-Arbitrage"
             eventKey="Live-Arbitrage"
@@ -247,7 +251,7 @@ const NavBarMain = (props) => {
             Live-Arbitrage
           </Nav.Link>
           <Nav.Link
-            style={{ color: "white" }}
+            className={navbartextColor}
             as={Link}
             to="/articles"
             eventKey="articles"
@@ -268,19 +272,19 @@ const NavBarMain = (props) => {
           </button>
         ) : (
           <ul className="navbar-nav">
-            <li className="nav-item active">
+            <li className="nav-item {navbartextColor}">
               <a
-                className="nav-link"
+                className="btn btn-warning btn-sm"
                 href="/login"
                 onClick={() => {
                   logout();
                 }}
               >
-                | Sign In
+                Sign In
               </a>
             </li>
-            <li className="nav-item active">
-              <a className="nav-link" href="/signup">
+            <li className="nav-item {navbartextColor}"  style={{paddingLeft:"2px"}}>
+                <a className="btn btn-warning btn-sm" href="/signup">
                 Sign Up
               </a>
             </li>
