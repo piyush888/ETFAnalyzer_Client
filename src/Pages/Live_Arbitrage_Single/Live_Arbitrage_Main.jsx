@@ -15,6 +15,7 @@ import ScatterPlot from "../../Component/ScatterPlott";
 import { CommonNavBar } from "../../Common_Components/NavBar";
 import "./Styles/style.css";
 import { last } from "lodash";
+import moment from "moment";
 
 class Live_Arbitrage_Single extends React.Component {
   state = {
@@ -75,15 +76,22 @@ class Live_Arbitrage_Single extends React.Component {
         .get(`/api/ETfLiveArbitrage/Single/${ETF}`)
         .then((res) => {
           const lastArbitrage = res.data.Arbitrage.slice(-1).pop();
+          const Full_Day_Prices = tsvParse(
+            res.data.Prices,
+            this.parseData(this.parseDate)
+          );
+          
+         const lastPrice = Full_Day_Prices[Full_Day_Prices.length - 1];
+        
           this.intervalId = this.dataFetchInterval();
           this.setState({
             ...this.state,
             Full_Day_Arbitrage_Data: [...res.data.Arbitrage].reverse(),
-            Full_Day_Prices: tsvParse(
-              res.data.Prices,
-              this.parseData(this.parseDate)
-            ),
-
+            Full_Day_Prices: Full_Day_Prices,
+            OpenPrice: lastPrice.open,
+            ClosePrice: lastPrice.close,
+            HighPrice: lastPrice.high,
+            LowPrice: lastPrice.low,
             pnlstatementforday: res.data.pnlstatementforday,
             SignalCategorization: res.data.SignalCategorization,
             scatterPlotData: res.data.scatterPlotData,
@@ -97,7 +105,7 @@ class Live_Arbitrage_Single extends React.Component {
             SignalStrength: res.data.SignalInfo.Strength,
             LiveArbitrage: lastArbitrage["Arbitrage_in_$"],
             LiveSpread: lastArbitrage["ETF_Trading_Spread_in_$"],
-            CurrentTime: last.Time,
+            CurrentTime: moment(lastPrice.date).format("HH:mm:ss"),
             isLoading: false,
           });
         })
