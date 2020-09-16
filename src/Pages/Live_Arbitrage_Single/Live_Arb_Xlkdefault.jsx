@@ -58,7 +58,7 @@ class Live_Arb_Xlkdefault extends React.Component {
         this.UpdateArbitragDataTables();
         this.updateAnotherData();
       }
-    }, 100);
+    }, 1000);
 
   fetchETFLiveData() {
     axios
