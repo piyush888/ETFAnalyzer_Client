@@ -107,6 +107,12 @@ class Live_Arbitrage_Single extends React.Component {
             LiveSpread: lastArbitrage["ETF_Trading_Spread_in_$"],
             CurrentTime: moment(lastPrice.date).format("HH:mm:ss"),
             isLoading: false,
+            LiveColor:
+              lastArbitrage["Arbitrage_in_$"] > 0
+                ? "text-danger"
+                : lastArbitrage["Arbitrage_in_$"] == 0
+                ? "text-muted"
+                : "text-success",
           });
         })
         .catch((err) => console.log(err));
