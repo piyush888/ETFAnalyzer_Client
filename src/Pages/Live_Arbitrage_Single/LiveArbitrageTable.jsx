@@ -36,7 +36,7 @@ const LiveArbitrageTable = ({ data }) => {
                   <td>
                     {(data.Magnitude_of_Arbitrage &&
                       data.Magnitude_of_Arbitrage.toFixed(5)) ||
-                      null}
+                      0}
                   </td>
                   <td>{data["Over_Bought/Sold"]}</td>
                   <td>{data.ETF_Price}</td>
