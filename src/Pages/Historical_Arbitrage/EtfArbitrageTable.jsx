@@ -46,9 +46,9 @@ console.log(data)
             return (
               <tr key={index}>
                 <td className={cls}>{data["Time"] || ""}</td>
-                <td className={cls}>{data["Arbitrage in $"] || ""}</td>
+                <td className={cls}>{data["Arbitrage in $"] || 0}</td>
                 <td className={cls}>{data["$Spread"] || ""}</td>
-                <td className={cls}>{data["Absolute Arbitrage"] || ""}</td>
+                <td className={cls}>{data["Absolute Arbitrage"] || 0}</td>
                 <td className={cls}>{data["Over Bought/Sold"] || ""}</td>
                 <td>{data["ETF Price"] || ""}</td>
                 <td>{data["T"] || ""}</td>
