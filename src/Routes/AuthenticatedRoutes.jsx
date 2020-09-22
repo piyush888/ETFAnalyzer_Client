@@ -9,10 +9,14 @@ import {
   useParams,
 } from "react-router-dom";
 import { useEffect } from "react";
-import { changeNavbarStartDate } from "../Common_Components/NavBar/NavBarActions";
+import {
+  changeHolidayList,
+  changeNavbarStartDate,
+} from "../Common_Components/NavBar/NavBarActions";
 import { useDispatch, useSelector } from "react-redux";
 import Axios from "axios";
 import ArticlesRoutes from "./ArticlesRoutes";
+import moment from "moment";
 const EtfDescRoutes = React.lazy(() => import("./EtfDescRoutes"));
 const LiveArbitrageSingleRoutes = React.lazy(() =>
   import("./LiveArbitrageSingleRoutes")
@@ -31,10 +35,23 @@ const AuthenticatedRoutes = () => {
     history.push(generatePath(location.pathname, ETF, value));
   };
   useEffect(() => {
-    isLoggedIn &&
-      Axios.get("/api/LastWorkingDate")
+    if (isLoggedIn) {
+      Axios.get("/api/LastWorkingDate/")
         .then((res) => handleDateChange(res.data))
         .catch((err) => console.log(err));
+
+      Axios.get("/api/ListOfHolidays")
+        .then((res) => {
+          const tempX = [];
+          res.data.HolidayList.forEach((data) =>
+            tempX.push(moment(data, "YYYY-MM-DD").toDate())
+          );
+          dispatch({ type: changeHolidayList, payload: { value: tempX } });
+          // setholidaysList(tempX);
+          console.log(tempX);
+        })
+        .catch((err) => console.log(err));
+    }
   }, []);
   return (
     <>

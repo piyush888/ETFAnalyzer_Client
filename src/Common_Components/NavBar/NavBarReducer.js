@@ -1,8 +1,13 @@
-import { changeNavbarStartDate, changeNavbarEtfName } from "./NavBarActions";
+import {
+  changeNavbarStartDate,
+  changeNavbarEtfName,
+  changeHolidayList,
+} from "./NavBarActions";
 
 const initialState = {
   startDate: "20200608",
   ETF: "XLK",
+  holidayList: [],
 };
 
 const NavBarReducer = (state = initialState, action) => {
@@ -13,6 +18,9 @@ const NavBarReducer = (state = initialState, action) => {
 
     case changeNavbarEtfName: {
       return { ...state, ETF: action.payload.value };
+    }
+    case changeHolidayList: {
+      return { ...state, holidayList: action.payload.value };
     }
 
     default: {

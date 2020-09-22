@@ -11,7 +11,7 @@ import AuthContext from "../../Utilities/AuthContext";
 import Axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import "./nav.css"
+import "./nav.css";
 import { getPageName } from "../../Utilities/utilFunc";
 
 const generatePath = (pathname = "/", ETF = "XLK", startDate = "20200608") => {
@@ -40,9 +40,10 @@ const generateDateAndEtf = (
   etfSelectOptions,
   handleEtfChange,
   handleDateChange,
-  holidaysList,
+  holidayList,
   startDate
 ) => {
+  console.log(holidayList);
   const page = getPageName(pathName);
   switch (page) {
     case "ETF-Description": {
@@ -73,7 +74,7 @@ const generateDateAndEtf = (
               minDate={new Date("06-05-2020")}
               maxDate={new Date()}
               onChange={(e) => handleDateChange(moment(e).format("YYYYMMDD"))}
-              excludeDates={holidaysList}
+              excludeDates={holidayList}
               filterDate={(date) => {
                 const day = new Date(date).getDay();
                 return day !== 0 && day !== 6;
@@ -112,7 +113,7 @@ const generateDateAndEtf = (
               minDate={new Date("06-05-2020")}
               maxDate={new Date()}
               onChange={(e) => handleDateChange(moment(e).format("YYYYMMDD"))}
-              excludeDates={holidaysList}
+              excludeDates={holidayList}
               filterDate={(date) => {
                 const day = new Date(date).getDay();
                 return day !== 0 && day !== 6;
@@ -154,11 +155,12 @@ const generateDateAndEtf = (
 const NavBarMain = (props) => {
   const { logout, currentUser } = useContext(AuthContext);
   const { isLoggedIn } = useSelector((state) => state.auth);
+  const { holidayList } = useSelector((state) => state.navbar);
   const history = useHistory();
   const location = useLocation();
   const { ETF, startDate } = useParams();
   const dispatch = useDispatch();
-  const [holidaysList, setholidaysList] = useState([]);
+  // const [holidayList, setholidaysList] = useState([]);
 
   useEffect(() => {
     if (ETF) {
@@ -168,15 +170,6 @@ const NavBarMain = (props) => {
       dispatch({ type: changeNavbarStartDate, payload: { value: startDate } });
     }
     if (!startDate && isLoggedIn) {
-      Axios.get("/api/ListOfHolidays")
-        .then((res) => {
-          const tempX = [];
-          res.data.HolidayList.forEach((data) =>
-            tempX.push(moment(data, "YYYY-MM-DD").toDate())
-          );
-          setholidaysList(tempX);
-        })
-        .catch((err) => console.log(err));
     }
   }, []);
 
@@ -190,13 +183,15 @@ const NavBarMain = (props) => {
     history.push(generatePath(location.pathname, ETF[0].element, startDate));
   };
 
- 
-
   const navbarColor =
-    currentUser && currentUser.emailVerified ? "bg-color-dark" : "bg-color-white";
+    currentUser && currentUser.emailVerified
+      ? "bg-color-dark"
+      : "bg-color-white";
 
   const navbartextColor =
-    currentUser && currentUser.emailVerified ? "textColorCustomWhite" : "textColorCustomGrey";
+    currentUser && currentUser.emailVerified
+      ? "textColorCustomWhite"
+      : "textColorCustomGrey";
 
   return (
     <Navbar className={navbarColor} variant="dark" expand="lg">
@@ -212,7 +207,7 @@ const NavBarMain = (props) => {
             etfSelectOptions,
             handleEtfChange,
             handleDateChange,
-            holidaysList,
+            holidayList,
             startDate
           )}
         </Nav>
@@ -237,7 +232,11 @@ const NavBarMain = (props) => {
           <Nav.Link
             className={navbartextColor}
             as={Link}
-            to={isLoggedIn ? "/live-arbitrage-single" : "/live-arbitrage-xlkdefault"}
+            to={
+              isLoggedIn
+                ? "/live-arbitrage-single"
+                : "/live-arbitrage-xlkdefault"
+            }
             eventKey="Live-Arbitrage"
           >
             Live-Arbitrage (Focus)
@@ -283,8 +282,11 @@ const NavBarMain = (props) => {
                 Sign In
               </a>
             </li>
-            <li className="nav-item {navbartextColor}"  style={{paddingLeft:"2px"}}>
-                <a className="btn btn-warning btn-sm" href="/signup">
+            <li
+              className="nav-item {navbartextColor}"
+              style={{ paddingLeft: "2px" }}
+            >
+              <a className="btn btn-warning btn-sm" href="/signup">
                 Sign Up
               </a>
             </li>
