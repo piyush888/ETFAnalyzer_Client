@@ -52,7 +52,7 @@ const AuthenticatedRoutes = () => {
         })
         .catch((err) => console.log(err));
     }
-  }, []);
+  }, [isLoggedIn]);
   return (
     <>
       <React.Suspense fallback={<div>Loading...</div>}>
