@@ -2,17 +2,15 @@ import React, { useEffect } from "react";
 import { Nav, Navbar, Form } from "react-bootstrap";
 import { Link, useLocation, useHistory, useParams } from "react-router-dom";
 import moment from "moment";
-import { useContext, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { changeNavbarStartDate, changeNavbarEtfName } from "./NavBarActions";
 import Select from "react-dropdown-select";
 import { etfSelectOptions } from "./etfSelectOptions";
-import AuthContext from "../../Utilities/AuthContext";
-import Axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./nav.css";
 import { getPageName } from "../../Utilities/utilFunc";
+import { logOutAction } from "../../Redux/actions";
 
 const generatePath = (pathname = "/", ETF = "XLK", startDate = "20200608") => {
   const page = getPageName(pathname);
@@ -43,7 +41,6 @@ const generateDateAndEtf = (
   holidayList,
   startDate
 ) => {
-  console.log(holidayList);
   const page = getPageName(pathName);
   switch (page) {
     case "ETF-Description": {
@@ -153,14 +150,16 @@ const generateDateAndEtf = (
 };
 
 const NavBarMain = (props) => {
-  const { logout, currentUser } = useContext(AuthContext);
-  const { isLoggedIn } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const { currentUser, isLoggedIn } = useSelector((state) => state.auth);
   const { holidayList } = useSelector((state) => state.navbar);
   const history = useHistory();
   const location = useLocation();
   const { ETF, startDate } = useParams();
-  const dispatch = useDispatch();
-  // const [holidayList, setholidaysList] = useState([]);
+
+  const logOut = () => {
+    dispatch(logOutAction());
+  };
 
   useEffect(() => {
     if (ETF) {
@@ -264,7 +263,7 @@ const NavBarMain = (props) => {
             type="button"
             className="btn btn-link"
             onClick={() => {
-              logout();
+              logOut();
             }}
           >
             | Log Out
@@ -276,7 +275,7 @@ const NavBarMain = (props) => {
                 className="btn btn-warning btn-sm"
                 href="/login"
                 onClick={() => {
-                  logout();
+                  logOut();
                 }}
               >
                 Sign In

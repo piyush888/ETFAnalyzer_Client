@@ -1,10 +1,14 @@
 const initialState = {
   isLoggedIn: false,
+  currentUser: null,
 };
 
 const authReducer = (state = initialState, action) => {
   if (action.type === "LOGIN_SUCCESS") {
-    state = { ...initialState, ...action.payload, isLoggedIn: true };
+    state = {
+      currentUser: action.payload.currentUser,
+      isLoggedIn: true,
+    };
     return state;
   }
   if (action.type === "LOGOUT_SUCCESS") {

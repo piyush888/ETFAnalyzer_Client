@@ -18,12 +18,13 @@ const AuthProvider = (props) => {
 
   useEffect(() => {
     firebaseAuth.onAuthStateChanged((user) => {
+      console.log(user)
       setCurrentUser(user);
 
 
       if (user && user.emailVerified) {
         user.getIdToken().then((token) => setAxiosDefaultToken(token));
-        dispatch({type:"LOGIN_SUCCESS", payload: {}})
+        dispatch({type:"LOGIN_SUCCESS", payload: user})
         setPending(false);
        
       } else {
@@ -43,6 +44,7 @@ const AuthProvider = (props) => {
         logout,
       }}
     >
+      {console.log(currentUser)}
       {props.children}
     </AuthContextProvider>
   );

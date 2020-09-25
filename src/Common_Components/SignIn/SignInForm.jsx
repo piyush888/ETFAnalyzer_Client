@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { Form, Button, Col } from "react-bootstrap";
-import { useContext } from "react";
-import AuthContext from "../../Utilities/AuthContext";
-import { Redirect, NavLink } from "react-router-dom";
-import { firebaseAuth } from "../../Utilities/firebase";
+import { Redirect } from "react-router-dom";
 import { CommonNavBar } from "../NavBar";
+import { firebaseAuth } from "../..";
+import { useSelector } from "react-redux";
 
 const SignInForm = (props) => {
-  const { currentUser, logout } = useContext(AuthContext);
+  const { currentUser } = useSelector((state) => state.auth);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -28,7 +27,7 @@ const SignInForm = (props) => {
         .sendEmailVerification()
         .then((res) => {
           alert("Verification Link Sent");
-          logout();
+          // logout();
         })
         .catch((err) => alert(err.message));
     }
