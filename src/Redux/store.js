@@ -1,5 +1,4 @@
 import { createStore, applyMiddleware } from "redux";
-import { getFirebase } from "react-redux-firebase";
 
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";

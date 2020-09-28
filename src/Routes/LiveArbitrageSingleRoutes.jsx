@@ -8,14 +8,16 @@ const LiveArbitrageSingleRoutes = () => {
   const { ETF } = useSelector((state) => state.navbar);
   return (
     <Switch>
+        <Redirect
+      exact
+        from="/live-arbitrage-single"
+        to={`/live-arbitrage-single/${ETF}`}
+      />
       <ProtectedRoute
         path="/live-arbitrage-single/:ETF"
         component={Live_Arbitrage_Single}
       />
-      <Redirect
-        from="/live-arbitrage-single"
-        to={`/live-arbitrage-single/${ETF}`}
-      />
+    
     </Switch>
   );
 };

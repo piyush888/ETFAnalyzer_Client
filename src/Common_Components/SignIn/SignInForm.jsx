@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Button, Col } from "react-bootstrap";
+import { Form, Button, Col, Toast } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
 import { CommonNavBar } from "../NavBar";
 import { firebaseAuth } from "../..";
@@ -100,9 +100,19 @@ const SignInForm = (props) => {
               </Form.Group>
 
               <Form.Row>
-                <Col>
+                <Col xs="auto">
                   <Button variant="primary" type="submit">
                     Login
+                  </Button>
+                </Col>
+
+                <Col xs="auto">
+                  <Button
+                    variant="primary"
+                    type="button"
+                    onClick={() => props.history.push("/forgetpassword")}
+                  >
+                    Forget Password
                   </Button>
                 </Col>
               </Form.Row>

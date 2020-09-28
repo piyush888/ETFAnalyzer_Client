@@ -14,7 +14,6 @@ import { Loader } from "../../Common_Components/Loader";
 import ScatterPlot from "../../Component/ScatterPlott";
 import { CommonNavBar } from "../../Common_Components/NavBar";
 import "./Styles/style.css";
-import { last } from "lodash";
 import moment from "moment";
 
 class Live_Arbitrage_Single extends React.Component {

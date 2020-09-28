@@ -9,6 +9,8 @@ import { firebaseAuth } from "..";
 import setAxiosDefaultToken from "../Utilities/setAxiosDefaultToken";
 import { connect } from "react-redux";
 import { logInAction, logOutAction } from "../Redux/actions";
+import { ForgetPassword } from "../Common_Components/ForgetPassword";
+import 'react-toastify/dist/ReactToastify.css';
 
 class App extends React.Component {
   state = {
@@ -17,7 +19,7 @@ class App extends React.Component {
 
   componentDidMount() {
     firebaseAuth.onAuthStateChanged((user) => {
-      this.setState({isReady:true})
+      this.setState({ isReady: true });
       if (user) {
         user.getIdToken().then((token) => setAxiosDefaultToken(token));
         this.props.logIn(user);
@@ -37,6 +39,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/signup" component={SignUpForm} />
           <Route exact path="/login" component={SignInForm} />
+          <Route exact path="/forgetpassword" component={ForgetPassword} />
           <Route
             exact
             path="/live-arbitrage-xlkdefault"
