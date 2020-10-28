@@ -36,6 +36,10 @@ const LandingPage = (props) => {
           <div className="container">
               <section id="hero">
                 <div className="container">
+                  <br/>
+                  <div class="row jumbotron" style={{backgrounColor:"#F6BB42"}}>
+                  <h5><b> ETF Trace is for academic research purpose only, webapp is not updated with data and is for idea demonstration to highlight issue in etf market !!! - Kshitiz Sharma.</b></h5>
+                  </div>
                   <div className="row">
                     <div className="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center aos-init aos-animate" data-aos="fade-up">
                         <h2><b>ETF Trace solves arbitrage in etf industry</b></h2>

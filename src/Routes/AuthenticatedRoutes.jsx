@@ -13,7 +13,7 @@ import { changeNavbarStartDate } from "../Common_Components/NavBar/NavBarActions
 import { useDispatch, useSelector } from "react-redux";
 import Axios from "axios";
 import ArticlesRoutes from "./ArticlesRoutes";
-const EtfDescRoutes = React.lazy(() => import("./EtfDescRoutes"));
+
 const LiveArbitrageSingleRoutes = React.lazy(() =>
   import("./LiveArbitrageSingleRoutes")
 );
@@ -40,7 +40,7 @@ const AuthenticatedRoutes = () => {
     <>
       <React.Suspense fallback={<div>Loading...</div>}>
         <Route exact path={"/"} component={LandingPage} />
-        <ProtectedRoute path="/ETF-Description" component={EtfDescRoutes} />
+        
         <ProtectedRoute
           path="/live-arbitrage-single"
           component={LiveArbitrageSingleRoutes}

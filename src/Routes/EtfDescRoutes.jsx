@@ -7,22 +7,7 @@ import { useSelector } from "react-redux";
 const EtfDescRoutes = () => {
   const { ETF, startDate } = useSelector((state) => state.navbar);
   return (
-    <Switch>
-      <ProtectedRoute
-        path="/ETF-Description/:ETF/:startDate"
-        component={ETF_Description}
-      />
-      <Redirect
-      
-      from="/ETF-Description/:ETF"
-      to={`/ETF-Description/:ETF/${startDate}`}
-    />
-      <Redirect
-      
-        from="/ETF-Description"
-        to={`/ETF-Description/${ETF}/${startDate}`}
-      />
-    </Switch>
+    
   );
 };
 

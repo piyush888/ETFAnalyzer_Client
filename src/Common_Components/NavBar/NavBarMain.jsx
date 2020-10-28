@@ -216,14 +216,7 @@ const NavBarMain = (props) => {
         </Nav>
 
         <Nav className="">
-          <Nav.Link
-            className={navbartextColor}
-            as={Link}
-            to="/ETF-Description"
-            eventKey="ETF-Description"
-          >
-            ETF-Description
-          </Nav.Link>
+          
           <Nav.Link
             className={navbartextColor}
             as={Link}
