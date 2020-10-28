@@ -236,7 +236,7 @@ class Live_Arbitrage_Single extends React.Component {
                   <div className="FullPageDiv" style={{ height: "92vh" }}>
                     <Card bg="dark" text="white">
                       <Card.Header className="flex-row">
-                        <span>Live Arbitrage {ETF}</span>
+                        <span>Live Arbitrage {ETF} 27th October 2020</span>
                         <div className="margin-left-auto">
                           <CombinedPieCharts
                             etfmoversDictCount={etfmoversDictCount}

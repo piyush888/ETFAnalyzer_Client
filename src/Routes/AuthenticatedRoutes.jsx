@@ -31,8 +31,8 @@ const AuthenticatedRoutes = () => {
   const location = useLocation();
   const { ETF } = useParams();
   const handleDateChange = (value) => {
-    dispatch({ type: changeNavbarStartDate, payload: { value } });
-    history.push(generatePath(location.pathname, ETF, value));
+    // dispatch({ type: changeNavbarStartDate, payload: { value } });
+    // history.push(generatePath(location.pathname, ETF, value));
   };
   useEffect(() => {
     if (isLoggedIn) {

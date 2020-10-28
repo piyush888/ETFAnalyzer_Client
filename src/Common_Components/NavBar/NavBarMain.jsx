@@ -72,7 +72,7 @@ const generateDateAndEtf = (
               utcOffset={0}
               selected={moment(startDate, "YYYYMMDD").toDate()}
               minDate={new Date("06-05-2020")}
-              maxDate={new Date()}
+              maxDate={new Date("10-26-2020")}
               onChange={(e) => handleDateChange(moment(e).format("YYYYMMDD"))}
               excludeDates={holidayList}
               filterDate={(date) => {
@@ -111,7 +111,7 @@ const generateDateAndEtf = (
               utcOffset={0}
               selected={moment(startDate, "YYYYMMDD").toDate()}
               minDate={new Date("06-05-2020")}
-              maxDate={new Date()}
+              maxDate={new Date("10-26-2020")}
               onChange={(e) => handleDateChange(moment(e).format("YYYYMMDD"))}
               excludeDates={holidayList}
               filterDate={(date) => {
