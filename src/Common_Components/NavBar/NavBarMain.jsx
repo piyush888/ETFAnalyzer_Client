@@ -14,7 +14,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./nav.css";
 import { getPageName } from "../../Utilities/utilFunc";
 
-const generatePath = (pathname = "/", ETF = "XLK", startDate = "20200608") => {
+const generatePath = (pathname = "/", ETF = "XLK", startDate = "20210903") => {
   const page = getPageName(pathname);
   switch (page) {
     case "ETF-Description": {
@@ -71,8 +71,8 @@ const generateDateAndEtf = (
             <DatePicker
               utcOffset={0}
               selected={moment(startDate, "YYYYMMDD").toDate()}
-              minDate={new Date("06-05-2020")}
-              maxDate={new Date("10-26-2020")}
+              minDate={new Date("03-09-2021")}
+              maxDate={new Date("14-09-2021")}
               onChange={(e) => handleDateChange(moment(e).format("YYYYMMDD"))}
               excludeDates={holidayList}
               filterDate={(date) => {
@@ -110,8 +110,8 @@ const generateDateAndEtf = (
             <DatePicker
               utcOffset={0}
               selected={moment(startDate, "YYYYMMDD").toDate()}
-              minDate={new Date("06-05-2020")}
-              maxDate={new Date("10-26-2020")}
+              minDate={new Date("03-09-2021")}
+              maxDate={new Date("14-09-2021")}
               onChange={(e) => handleDateChange(moment(e).format("YYYYMMDD"))}
               excludeDates={holidayList}
               filterDate={(date) => {

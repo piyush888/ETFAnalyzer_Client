@@ -93,7 +93,7 @@ class ETF_Description extends React.Component {
               <PNL ETF={ETF} />
             </div>
             
-            <div className="col-md-4 col-lg-4 col-sm-12 padding-0">
+            {/* <div className="col-md-4 col-lg-4 col-sm-12 padding-0">
               <EtfSameIssuer IssuerName={IssuerName} />
             </div>
 
@@ -107,7 +107,7 @@ class ETF_Description extends React.Component {
 
             <div className="col-md-4 col-lg-4 col-sm-12 padding-0">
               {EtfDbCategory && <EtfSameIndustry EtfDbCategory={EtfDbCategory} />}
-            </div>
+            </div> */}
           </div>
         </div>
       </>

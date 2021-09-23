@@ -35,7 +35,7 @@ const DescriptionTable = (props) => {
       <Card.Header>
         ETF Description
       </Card.Header>
-      <Card.Body className="padding-0 overflow-auto half-height">
+      <Card.Body className="padding-0 overflow-auto">
         <Table size="sm" striped bordered hover variant="dark">
           <thead>
             <tr>

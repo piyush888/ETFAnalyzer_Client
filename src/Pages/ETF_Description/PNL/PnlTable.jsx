@@ -20,7 +20,7 @@ const PnlTable = (props) => {
   return (
     <Card style={{width:"100%"}} bg="dark" text="light">
       <Card.Header>PNL Table</Card.Header>
-      <Card.Body className="padding-0 overflow-auto half-height">
+      <Card.Body className="padding-0 overflow-auto" style={{"height": "78vh"}}>
         <Table size="sm" striped bordered hover variant="dark">
           <thead>
             <tr>

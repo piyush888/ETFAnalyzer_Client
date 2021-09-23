@@ -1,4 +1,4 @@
-export const etfSelectOptions = [
+/* export const etfSelectOptions = [
     {'element': 'AMLP', 'index': 0},
     {'element': 'ARKG', 'index': 1},
     {'element': 'BBH', 'index': 2},
@@ -184,4 +184,16 @@ export const etfSelectOptions = [
     {'element': 'XRT', 'index': 182},
     {'element': 'XSD', 'index': 183},
     {'element': 'XSLV', 'index': 184},
+]; */
+export const etfSelectOptions = [
+    {'element': 'IJR', 'index': 0},
+    {'element': 'IVV', 'index': 1},
+    {'element': 'QQQ', 'index': 2},
+    {'element': 'SCHX', 'index': 3},
+    {'element': 'SPY', 'index': 4},
+    {'element': 'VGT', 'index': 5},
+    {'element': 'VO', 'index': 6},
+    {'element': 'VOO', 'index': 7},
+    {'element': 'XLF', 'index': 8},
+    {'element': 'XLK', 'index': 9}
 ];
